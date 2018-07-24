@@ -1,0 +1,14 @@
+\beamer@endinputifotherversion {3.33pt}
+\select@language {ngerman}
+\beamer@sectionintoc {1}{Exercise and Homework: Repetition}{2}{0}{1}
+\beamer@sectionintoc {2}{DSGE framework}{3}{0}{2}
+\beamer@sectionintoc {3}{DSGE solution}{4}{0}{3}
+\beamer@subsectionintoc {3}{1}{First-order approximation}{8}{0}{3}
+\beamer@sectionintoc {4}{Aside: Matrix theory}{13}{0}{4}
+\beamer@sectionintoc {5}{DSGE solution}{19}{0}{5}
+\beamer@subsectionintoc {5}{1}{First-order approximation, continued}{19}{0}{5}
+\beamer@subsectionintoc {5}{2}{Second-order approximation, Gomme and Klein (2011)}{27}{0}{5}
+\beamer@sectionintoc {6}{Unconditional Moments}{32}{0}{6}
+\beamer@sectionintoc {7}{Further Topic: Indeterminacy}{35}{0}{7}
+\beamer@subsectionintoc {7}{1}{Sunspots idea}{37}{0}{7}
+\beamer@subsectionintoc {7}{2}{Progress and Challenges}{38}{0}{7}

@@ -1,0 +1,195 @@
+all estimations with an acceptance rate of 0.2
+
+version 1: true parameters as priors
+
+% Define Priors and observable variables
+	estimated_params;
+	alpha, beta_pdf, .45, .05;
+	theta, beta_pdf, .35, .05;
+	tau, gamma_pdf, mode_and_variance_to_mean(2.0,.5^2,1,1),.5, 1;
+	end;
+	varobs y;
+
+ESTIMATION RESULTS
+ 
+Log data density is -353.365064.
+ 
+parameters
+        prior mean post. mean   conf. interval  prior     pstdev
+
+alpha      0.450     0.2800     0.2453   0.3132  beta      0.0500
+theta      0.350     0.2511     0.1950   0.3017  beta      0.0500
+tau        2.207     3.0503     2.0087   4.0917  gamma     0.5000
+Total computing time : 0h05m48s
+
+
+version 2: priors lying under true parameters
+
+% Define Priors and observable variables
+	estimated_params;
+	alpha, beta_pdf, .2, .05;
+	theta, beta_pdf, .2, .05;
+	tau, gamma_pdf, mode_and_variance_to_mean(2.0,.5^2,1,1),.5, 1;
+	end;
+	varobs y;
+
+ESTIMATION RESULTS
+ 
+Log data density is -345.076460.
+ 
+parameters
+        prior mean post. mean   conf. interval  prior     pstdev
+
+alpha      0.200     0.2547     0.2104   0.3055  beta      0.0500
+theta      0.200     0.2458     0.1794   0.3034  beta      0.0500
+tau        2.207     2.4239     1.6074   3.3043  gamma     0.5000
+Total computing time : 0h05m27s
+
+version 3: priors lying greater than true parameters
+
+% Define Priors and observable variables
+	estimated_params;
+	alpha, beta_pdf, .5, .05;
+	theta, beta_pdf, .4, .05;
+	tau, gamma_pdf, mode_and_variance_to_mean(2.3,.5^2,1,1),.5, 1;
+	end;
+	varobs y;
+
+ESTIMATION RESULTS
+ 
+Log data density is -359.813436.
+ 
+parameters
+        prior mean post. mean   conf. interval  prior     pstdev
+
+alpha      0.500     0.2746     0.2421   0.3057  beta      0.0500
+theta      0.400     0.2768     0.2215   0.3359  beta      0.0500
+tau        2.470     3.3464     2.4368   4.4464  gamma     0.5000
+Total computing time : 0h05m12s
+
+version 4: alpha, tau greater than true and theta smaller than true, 
+
+% Define Priors and observable variables
+	estimated_params;
+	alpha, beta_pdf, .6, .05;
+	theta, beta_pdf, .15, .05;
+	tau, gamma_pdf, mode_and_variance_to_mean(2.3,.5^2,1,1),.5, 1;
+	end;
+	varobs y;
+
+ESTIMATION RESULTS
+ 
+Log data density is -350.829202.
+ 
+parameters
+        prior mean post. mean   conf. interval  prior     pstdev
+
+alpha      0.600     0.4774     0.4306   0.5200  beta      0.0500
+theta      0.150     0.0515     0.0302   0.0739  beta      0.0500
+tau        2.470     2.7743     1.8473   3.6631  gamma     0.5000
+Total computing time : 0h05m16s
+
+
+version 5: alpha, tau smaller than true and theta greater than true, 
+
+% Define Priors and observable variables
+	estimated_params;
+	alpha, beta_pdf, .15, .05;
+	theta, beta_pdf, .60, .05;
+	tau, gamma_pdf, mode_and_variance_to_mean(1.7,.5^2,1,1),.5, 1;
+	end;
+	varobs y;
+
+ESTIMATION RESULTS
+ 
+Log data density is -343.025727.
+ 
+parameters
+        prior mean post. mean   conf. interval  prior     pstdev
+
+alpha      0.150     0.1303     0.1022   0.1570  beta      0.0500
+theta      0.600     0.6097     0.5413   0.6867  beta      0.0500
+tau        1.960     2.2615     1.4199   3.1594  gamma     0.5000
+Total computing time : 0h04m27s
+
+
+#--------------------------------------------------------------------------------------
+applying estimation with the true parameters and different acceptance rates: 
+
+acc.rate: 0.2: 
+
+ESTIMATION RESULTS
+ 
+Log data density is -353.365064.
+ 
+parameters
+        prior mean post. mean   conf. interval  prior     pstdev
+
+alpha      0.450     0.2800     0.2453   0.3132  beta      0.0500
+theta      0.350     0.2511     0.1950   0.3017  beta      0.0500
+tau        2.207     3.0503     2.0087   4.0917  gamma     0.5000
+Total computing time : 0h05m48s
+
+acc.rate: 0.9: 
+
+ESTIMATION RESULTS
+ 
+Log data density is -352.897863.
+ 
+parameters
+        prior mean post. mean   conf. interval  prior     pstdev
+
+alpha      0.450     0.2807     0.2416   0.3219  beta      0.0500
+theta      0.350     0.2485     0.1880   0.3142  beta      0.0500
+tau        2.207     2.7754     1.9052   3.7753  gamma     0.5000
+Total computing time : 0h04m55s
+
+
+acc.rate: 1.8: 
+
+ESTIMATION RESULTS
+ 
+Log data density is -352.965123.
+ 
+parameters
+        prior mean post. mean   conf. interval  prior     pstdev
+
+alpha      0.450     0.2795     0.2384   0.3173  beta      0.0500
+theta      0.350     0.2513     0.1843   0.3107  beta      0.0500
+tau        2.207     2.7775     1.8598   3.7350  gamma     0.5000
+Total computing time : 0h04m36s
+
+
+#--------------------------------------------------------------------------------------
+Applying estiamtion using more chains and more iteration: while using still the true 
+parameter as priors: chains: 5 and itertaions: 10000
+
+ESTIMATION RESULTS
+ 
+Log data density is -352.904103.
+ 
+parameters
+        prior mean post. mean   conf. interval  prior     pstdev
+
+alpha      0.450     0.2795     0.2393   0.3210  beta      0.0500
+theta      0.350     0.2494     0.1808   0.3120  beta      0.0500
+tau        2.207     2.7281     1.7856   3.6059  gamma     0.5000
+Total computing time : 0h14m28s
+
+
+#--------------------------------------------------------------------------------------
+applying estimation with greater variances in distribution while still using 
+the true parameters: 
+
+ESTIMATION RESULTS
+ 
+Log data density is -344.914980.
+ 
+parameters
+        prior mean post. mean   conf. interval  prior     pstdev
+
+alpha      0.450     0.1858     0.0836   0.3213  beta      0.2500
+theta      0.350     0.4969     0.1635   0.7815  beta      0.2000
+tau        2.207     2.1870     1.5120   2.8657  gamma     0.5000
+Total computing time : 0h02m27s
+

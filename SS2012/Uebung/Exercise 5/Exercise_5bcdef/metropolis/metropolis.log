@@ -1,0 +1,282 @@
+% MH log file (Dynare).
+% 12-Jul-2012 14:02:31.
+ 
+
+% Session 1.
+ 
+  Number of blocks...............: 3
+  Number of simulations per block: 5000
+ 
+  Initial values of the parameters:
+    Blck 1:
+      params:1: 0.46758
+      params:2: 0.35851
+      params:3: 1.7549
+      logpo2: -342.1598
+    Blck 2:
+      params:1: 0.47137
+      params:2: 0.33983
+      params:3: 1.83
+      logpo2: -341.6485
+    Blck 3:
+      params:1: 0.45623
+      params:2: 0.35918
+      params:3: 2.6298
+      logpo2: -342.1715
+ 
+ 
+  CREATION OF THE MH HISTORY FILE!
+
+    Expected number of files per block.......: 1.
+    Expected number of lines in the last file: 5000.
+
+    Initial seed (randn) for chain number 1:
+      362436069
+      207863
+    Initial seed (rand) for chain number 1:
+      0.3545
+      0.11053
+      0.86569
+      0.21656
+      0.56309
+      0.52024
+      0.0037072
+      0.81457
+      0.57787
+      0.91911
+      0.20779
+      0.71133
+      0.68535
+      0.16037
+      0.7858
+      0.14559
+      0.24827
+      0.92855
+      0.69492
+      0.016661
+      0.51674
+      0.77539
+      0.21117
+      0.25257
+      0.32063
+      0.022415
+      0.07824
+      0.93755
+      0.42705
+      0.059794
+      0.054399
+      0.95854
+      0
+      0
+      4.6155e-11
+    Initial seed (randn) for chain number 2:
+      362436069
+      415727
+    Initial seed (rand) for chain number 2:
+      0.30735
+      0.36961
+      0.3111
+      0.16417
+      0.075444
+      0.81859
+      0.59945
+      0.22145
+      0.97545
+      0.66069
+      0.86833
+      0.72822
+      0.89218
+      0.256
+      0.16139
+      0.85238
+      0.66599
+      0.54828
+      0.2934
+      0.19146
+      0.41428
+      0.1843
+      0.19041
+      0.14464
+      0.34537
+      0.44331
+      0.098895
+      0.40808
+      0.09602
+      0.26816
+      0.11009
+      0.21289
+      0
+      0
+      9.231e-11
+    Initial seed (randn) for chain number 3:
+      362436069
+      623591
+    Initial seed (rand) for chain number 3:
+      0.63523
+      0.42913
+      0.19729
+      0.88104
+      0.53953
+      0.39394
+      0.20741
+      0.75185
+      0.62629
+      0.85506
+      0.16557
+      0.71542
+      0.81585
+      0.30026
+      0.99069
+      0.74277
+      0.60442
+      0.98596
+      0.47332
+      0.23572
+      0.48081
+      0.69062
+      0.5855
+      0.31163
+      0.1151
+      0.03443
+      0.082414
+      0.95249
+      0.7745
+      0.66746
+      0.77233
+      0.093395
+      0
+      0
+      1.3847e-10
+ 
+
+% Mh1Blck1 (12-Jul-2012 14:03:20)
+ 
+  Number of simulations.: 5000
+  Acceptation rate......: 0.241
+  Posterior mean........:
+    params:1: 0.45927
+    params:2: 0.35778
+    params:3: 2.2107
+    log2po:-343.0179
+  Minimum value.........:
+    params:1: 0.37856
+    params:2: 0.23367
+    params:3: 1.219
+    log2po:-350.9344
+  Maximum value.........:
+    params:1: 0.55761
+    params:2: 0.49799
+    params:3: 4.2751
+    log2po:-341.4395
+ 
+
+% Mh1Blck2 (12-Jul-2012 14:04:09)
+ 
+  Number of simulations.: 5000
+  Acceptation rate......: 0.2382
+  Posterior mean........:
+    params:1: 0.46106
+    params:2: 0.35418
+    params:3: 2.175
+    log2po:-342.9824
+  Minimum value.........:
+    params:1: 0.37259
+    params:2: 0.21769
+    params:3: 1.1596
+    log2po:-350.0222
+  Maximum value.........:
+    params:1: 0.56357
+    params:2: 0.49629
+    params:3: 5.0399
+    log2po:-341.4467
+ 
+
+% Mh1Blck3 (12-Jul-2012 14:04:56)
+ 
+  Number of simulations.: 5000
+  Acceptation rate......: 0.2378
+  Posterior mean........:
+    params:1: 0.46085
+    params:2: 0.35344
+    params:3: 2.1729
+    log2po:-342.8815
+  Minimum value.........:
+    params:1: 0.35541
+    params:2: 0.23173
+    params:3: 1.0791
+    log2po:-350.9152
+  Maximum value.........:
+    params:1: 0.54715
+    params:2: 0.49342
+    params:3: 3.9442
+    log2po:-341.4462
+ 
+
+% Session 2.
+ 
+  Number of blocks...............: 3
+  Number of simulations per block: 1000
+ 
+
+% Mh1Blck1 (12-Jul-2012 14:05:12)
+ 
+  Number of simulations.: 6000
+  Acceptation rate......: 0.041333
+  Posterior mean........:
+    params:1: 0.45908
+    params:2: 0.35783
+    params:3: 2.2015
+    log2po:-343.0249
+  Minimum value.........:
+    params:1: 0.37492
+    params:2: 0.23335
+    params:3: 1.212
+    log2po:-350.9344
+  Maximum value.........:
+    params:1: 0.55761
+    params:2: 0.49799
+    params:3: 4.2751
+    log2po:-341.4395
+ 
+
+% Mh1Blck2 (12-Jul-2012 14:05:23)
+ 
+  Number of simulations.: 6000
+  Acceptation rate......: 0.035833
+  Posterior mean........:
+    params:1: 0.45978
+    params:2: 0.3551
+    params:3: 2.1756
+    log2po:-342.9635
+  Minimum value.........:
+    params:1: 0.37259
+    params:2: 0.21769
+    params:3: 1.1596
+    log2po:-350.0222
+  Maximum value.........:
+    params:1: 0.56357
+    params:2: 0.49629
+    params:3: 5.0399
+    log2po:-341.4467
+ 
+
+% Mh1Blck3 (12-Jul-2012 14:05:34)
+ 
+  Number of simulations.: 6000
+  Acceptation rate......: 0.038333
+  Posterior mean........:
+    params:1: 0.461
+    params:2: 0.35305
+    params:3: 2.1762
+    log2po:-342.8807
+  Minimum value.........:
+    params:1: 0.35541
+    params:2: 0.22876
+    params:3: 1.0791
+    log2po:-350.9152
+  Maximum value.........:
+    params:1: 0.54715
+    params:2: 0.49342
+    params:3: 4.7307
+    log2po:-341.4462
+ 

@@ -1,0 +1,407 @@
+%Erstellt mit WinEdt 6
+\documentclass{beamer} %%% F\"{U}R VORTRAG MIT PAUSEN
+%\documentclass[handout]{beamer}  %%% F\"{U}R HANDOUT ALS PDF
+
+\setbeamertemplate{navigation symbols}{}
+\usetheme{Madrid}
+\usecolortheme{seagull}
+\beamersetuncovermixins{\opaqueness<1>{25}}{\opaqueness<2->{15}}
+\usepackage[T1]{fontenc}
+\usepackage{ae,aecompl}
+\usepackage[ansinew]{inputenc}
+\usepackage[ngerman]{babel}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage[babel,german=quotes]{csquotes} %im deutschen \"{u}bliche Anf\"{u}hrungszeichen
+\usepackage{verbatim}
+\usepackage{graphicx,pstricks,beamerprosper}
+\newcounter{saveenumi}
+\newcommand{\seti}{\setcounter{saveenumi}{\value{enumi}}}
+\newcommand{\conti}{\setcounter{enumi}{\value{saveenumi}}}
+
+
+\begin{document}
+\author[Willi Mutschler]{Dr. Andrea Beccarini $\qquad$ Willi Mutschler, M.Sc.}
+\date{Summer 2012}
+\institute[Institute of Econometrics]{Institute of Econometrics and Economic
+Statistics\\willi.mutschler@uni-muenster.de}
+\title{DSGE-Models}
+\subtitle{Calibration and Introduction to Dynare}
+
+\begin{frame}
+\titlepage
+\end{frame}
+
+\begin{frame}\frametitle{Calibration and Introduction to Dynare}
+\tableofcontents
+\end{frame}
+
+\section{Overview Estimation-Methods}
+\begin{frame}\frametitle{Overview Estimation-Methods}\framesubtitle{}
+\begin{itemize}
+    \item Econometrically, a DSGE-Model is a state-space model of which
+        one has to determine the parameters.
+      \item Three concepts:
+      \begin{enumerate}
+        \item \textbf{Calibration}: The parameters are set in such a
+            way, that they closely correspond to some theoretical
+            moment or stylized fact of data.
+        \item \textbf{Methods of limited information} or weak
+            econometric interpretation: Minimize the distance between
+            theoretical and empirical moments, i.e.
+            \emph{General-Method-of-Moments} or \emph{Indirect
+            Inference}.
+        \item \textbf{Methods of full information} or strong
+            econometric interpretation: The goal is an exact
+            characterization of observed data, i.e.
+            \emph{Maximum-Likelihood} or \emph{bayesian methods}.
+      \end{enumerate}
+\end{itemize}
+\end{frame}
+
+\section{Calibration}
+\begin{frame}\frametitle{Calibration}\framesubtitle{}
+\begin{itemize}
+   \item Goal: To answer a specific quantitative research question using
+       a structural model.
+   \item Construct and parameterize the model such, that it corresponds
+       to certain properties of the true economy.
+   \item Use steady-state-characteristics for choosing the parameters in
+       accordance with observed data.
+   \item Often: stable long-run averages (wages, working-hours, interest
+       rates, inflation, consumption-shares, government-spending-ratios,
+       etc.).
+   \item You can use micro-studies as well, however, one has to be
+       careful about the aggregation!
+\end{itemize}
+\end{frame}
+
+\subsection{Hints for calibrating a model}
+\begin{frame}\frametitle{Calibration}\framesubtitle{Hints for calibrating a model}
+
+\begin{itemize}
+   \item Use long-term averages of interest rates, inflation, average
+       growth of productivity, etc. for \emph{steady-state} values.
+   \item BUT: Weil (1989) shows, that in models with representative
+       agents there is an overestimation of \emph{steady-state} interest
+       rates (\emph{risk-free rate puzzle}). It is possible that you get
+       absurd constellation of parameters, like a discount-factor of
+       $\beta>1$.
+   \item Usual mark-up on prices is around 1.15 (Corsetti et al (2012)).
+   \item Intertemporal elasticity of substitution  $1/\sigma$ somewhere
+       between $\sigma=1$ and $\sigma=3$ (King, Plosser and Rebelo
+       (1988), Rotemberg and Woodford (1992), Lucas (2003)).
+\end{itemize}
+\end{frame}
+
+\begin{frame}\frametitle{Calibration}\framesubtitle{Hints for calibrating a model}
+\begin{itemize}
+   \item Rigidity of prices: For an average price adjustment of 12-15
+       months see Keen and Wang (2007).
+   \item Coefficients of monetary policy: Often Taylor-Rule, you can use
+       the relative coefficients to put more emphasize/weight on the
+       stability of prices or on smoothing the business cycle.
+   \item Parameters of stochastic processes: Often persistent, small
+       standard-deviations, otherwise you get high oscillations. You can
+       also estimate the production function via OLS (Solow-residual).
+   \item How to choose shocks: Look at similar studies: Christiano,
+       Eichenbaum and Evans (2005), Smets and Wouters (2003), etc..
+   \item Ultimately: Try \& Error!
+\end{itemize}
+\end{frame}
+
+\section{Exercise 2: Calibration of a RBC-model with monopolistic competition}
+\begin{frame}\frametitle{Exercise 2:}\framesubtitle{Calibration of a RBC-model with monopolistic competition}
+Households maximize expected utility over consumption $c_t$ and leisure
+$f_t=1-l_t$, where $l_t$ denotes labor:
+\begin{align*}
+  E_t \sum_{t=0}^\infty \beta [log(c_t) + \psi log(1-l_t)],
+\end{align*}
+taking account of the following budget constraint:
+\begin{align*}
+  c_t + k_{t+1} = \underbrace{w_t l_t + r_t k_t}_{=y_t} + (1-\delta)k_t.
+\end{align*}
+$k_t$ ist the capital stock of the economy, $w_t$ the real wage, $r_t$ the
+real interest rate and $\delta$ the rate of depreciation. Further, investment
+is given by:
+\begin{align*}i_t=y_t-c_t. \end{align*}
+\end{frame}
+
+\begin{frame}\frametitle{Exercise 2:}\framesubtitle{Calibration of a RBC-model with monopolistic competition}
+In the market for intermediate goods there is monopolistic competition,
+whereas perfect competition applies to the market for final goods. The
+production-function of a firm $i\in[0;1]$, that sells intermediate goods, is
+given by:
+\begin{align*}
+  y_{it}&=A_t k_{it}^\alpha l_{it}^{1-\alpha}, \qquad \qquad ~~0<\alpha<1,\\
+  log(A_t) &= \rho log(A_{t-1}) + \epsilon_t, \qquad \epsilon_t \sim N(0,\sigma^2),
+\end{align*}
+with $A_t$ denoting the level of technology. Firms cannot influence the real
+wage $w_t$ or the real interest rate $r_t$. However, they have market power
+over their price $p_{it}$ for their good $y_{it}$. The intermediate goods are
+combined into a final good by a Dixit/Stiglitz-type aggregator:
+\begin{align*}
+  y_t = \left(\int_0^1 (y_{it})^{\frac{\varepsilon}{\varepsilon-1}}\right)^{\frac{\varepsilon-1}{\varepsilon}},
+\end{align*}
+with $\varepsilon$ being the elasticity of substitution.
+\end{frame}
+
+\begin{frame}\frametitle{Exercise 2:}\framesubtitle{Calibration of a RBC-model with monopolistic competition}
+\begin{enumerate}[(a)]
+   \item Show that, the structural form of the DSGE-model is given by the
+       following equations and interpret these.
+       \begin{align}
+         \frac{1}{c_t} &= \beta E_t \left[\frac{1}{c_{t+1}} (1+r_{t+1}-\delta)\right]\\
+         w_t &= \psi \frac{c_t}{1-l_t}\\
+         y_t &= c_t + i_t\\
+         y_t &= A_t k_{t}^\alpha l_t^{1-\alpha}\\
+         w_t & = (1-\alpha) \frac{y_t}{l_t} \frac{\varepsilon -1}{\varepsilon}\\
+         r_t & = \alpha \frac{y_t}{k_t} \frac{\varepsilon -1}{\varepsilon}\\
+         i_t &= k_{t+1} - (1-\delta) k_t\\
+         log(A_t) &= \rho log(A_{t-1}) + \epsilon_t
+       \end{align}\seti
+\end{enumerate}
+
+\end{frame}
+
+
+\begin{frame}\frametitle{Exercise 2:}\framesubtitle{Calibration of a RBC-model with monopolistic competition}
+\begin{enumerate}[(a)]\conti
+   \item What are the parameters of the model?
+   \item Write a mod-file for the model and calibrate the vector of
+       parameters $\boldsymbol{\mu}$. Simulate the model for 1000 periods
+       with Dynare. Save the middle 100 observations of $c_t, y_t, i_t,
+       w_t$ and $r_t$ into an Excel-file as well as into a mat-file. Plot
+       the path of consumption.
+   \item Reformulate the structural equations such that variables are
+       expressed as percentage deviations from \emph{steady-state}: $x_t=
+       e^{log(x_t)-log(x)+log(x)}=x e^{\widehat{x}_t}$. Write a mod-file
+       for this model. What has changed?
+\end{enumerate}
+\end{frame}
+
+\section{Calibration - Pros \& Cons}
+\begin{frame}\frametitle{Calibration}\framesubtitle{Pros}
+\begin{itemize}
+   \item Calibration is commonly used in the literature. It gives a first
+       impression, a flavor of the strengths and weaknesses of a model.
+   \item A good calibration can provide a valuable and precise image of
+       data.
+   \item Using different calibrations, one can asses interesting
+       implications of different policies:
+       \begin{itemize}
+       \item How does the economy react, if the central bank focuses
+           more on smoothing the business cycle than on price
+           stability?
+           \item What happens to consumption, if the households have
+               a strong intertemporal elasticity of substitution?
+               What if it is low?
+       \end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}\frametitle{Calibration}\framesubtitle{Cons}
+\begin{itemize}
+   \item This Ad-hoc-approach is at the center of criticism of
+       DSGE-models.
+   \item There is no statistical foundation, it is based upon subjective
+       views, assessments and opinions.
+   \item Many parameter, such as those of the exogenous processes, leave
+       room for different values and interpretations (intertemporal
+       elasticity of substitution, monetary and fiscal parameters,
+       coefficients of rigidity, standard deviations, etc.).
+\end{itemize}
+\begin{block}{Prescott (1986, S.~10) regarding RBC-models:} The models constructed within this theoretical framework are
+necessarily \textbf{highly abstract}. Consequently, they are necessarily
+false, and statistical hypothesis testing will reject them. This does not
+imply, however, that nothing can be learned from such a \textbf{quantitative
+theoretical exercise}.\end{block}
+\end{frame}
+
+\section{Exercise 3: A simple RBC model - Practicing Dynare}
+\begin{frame}
+  \frametitle{Exercise 3: A simple RBC model}
+  Consider the following model of an economy.
+\begin{itemize}
+
+\item Representative agent preferences
+\begin{equation*}
+U=\sum_{t=1}^{\infty }\left( \frac{1}{1+\rho }\right) ^{t-1}E_{t}\left[ \log
+\left( C_{t}\right) -\frac{L_{t}^{1+\gamma }}{1+\gamma }\right] .
+\end{equation*}%
+The household supplies labor and rents capital to the corporate sector.
+\begin{itemize}
+\item $L_{t}$ is labor services.
+\item $\rho \in \left( 0,\infty \right) $
+is the rate of time preference.
+\item $\gamma \in \left( 0,\infty \right) $ is a
+labor supply parameter.
+\item $C_{t}$ is consumption.
+\item $w_{t}$ is the real wage.
+\item $r_{t}$ is the real rental rate.
+\end{itemize}
+\end{itemize}
+\end{frame}
+
+
+
+\begin{frame}
+  \frametitle{Exercise 3: A simple RBC model}
+
+\begin{itemize}
+\item The household faces the sequence of budget constraints
+
+\begin{equation*}
+K_t=K_{t-1}\left( 1-\delta \right) +w_{t}L_{t}+r_{t}K_{t-1}-C_{t},
+\end{equation*}%
+where
+\begin{itemize}
+\item $K_{t}$ is capital at the end of period.
+\item $\delta \in \left(
+0,1\right) $ is the rate of depreciation.
+\end{itemize}
+\item The production function is given by the expression%
+\begin{equation*}
+Y_{t}=A_{t}K_{t-1}^{\alpha }\left( \left( 1+g\right) ^{t}L_{t}\right) ^{1-\alpha},
+\end{equation*}%
+where $g\in \left( 0,\infty \right) $ is the growth rate and $\alpha $ and $%
+\beta $ are parameters.
+\item $A_{t}$ is a technology shock that follows the
+process%
+\begin{equation*}
+A_{t}=A_{t-1}^{\lambda }\exp \left( e_{t}\right) ,
+\end{equation*}%
+where $e_{t}$ is an i.i.d. zero mean normally distributed error with
+standard deviation $\sigma$ and $\lambda \in \left( 0,1\right) $ is a
+parameter.
+\end{itemize}
+\end{frame}
+
+\begin{frame}  \frametitle{Exercise 3: A simple RBC model}
+  \framesubtitle{The household problem}
+  Lagrangian
+\begin{multline*}
+L = \max_{C_t,L_t,K_t} \sum_{t=1}^\infty \left( \frac{1}{1+\rho }\right) ^{t-1}E_{t}\Big[ \log
+\left( C_{t}\right) -\frac{L_{t}^{1+\gamma }}{1+\gamma }\\
+-\mu_t\left(K_t-K_{t-1}\left( 1-\delta \right) -w_{t}L_{t}-r_{t}K_{t-1}+C_{t}\right)\Big].
+\end{multline*}
+First order conditions
+\begin{align*}
+  \frac{\partial L}{\partial C_t} &= \left( \frac{1}{1+\rho }\right) ^{t-1}\left(\frac{1}{C_t}-\mu_t\right) = 0,\\
+  \frac{\partial L}{\partial L_t} &= \left( \frac{1}{1+\rho }\right) ^{t-1}\left(L_t^\gamma-\mu_tw_t\right) = 0,\\
+  \frac{\partial L}{\partial K_t} &= -\left( \frac{1}{1+\rho }\right) ^{t-1}\mu_t+\left( \frac{1}{1+\rho }\right) ^tE_t\left(\mu_{t+1}(1-\delta+r_{t+1})\right) = 0.
+\end{align*}
+\end{frame}
+
+\begin{frame}  \frametitle{Exercise 3: A simple RBC model} \framesubtitle{First order conditions}
+Eliminating the Lagrange multiplier, one obtains
+\begin{align*}
+L_t^\gamma&=\frac{w_t}{C_t},\\
+\frac{1}{C_t}&=\frac{1}{1+\rho}E_t\left(\frac{1}{C_{t+1}}(r_{t+1}+1-\delta)\right).
+\end{align*}
+
+\end{frame}
+
+\begin{frame}  \frametitle{Exercise 3: A simple RBC model}
+  \framesubtitle{The firm problem}
+  \[
+  \max_{L_t,K_{t-1}} A_tK_{t-1}^\alpha\left( \left( 1+g\right) ^{t}L_t\right)^{1-\alpha}-r_tK_{t-1}-w_tL_t.
+  \]
+First order conditions:
+\begin{align*}
+  r_t &= \alpha A_tK_{t-1}^{\alpha-1}\left( \left( 1+g\right) ^{t}L_t\right)^{1-\alpha},\\
+  w_t &= (1-\alpha) A_tK_{t-1}^\alpha\left( \left( 1+g\right) ^{t}\right)^{1-\alpha}L_t^{-\alpha}.
+\end{align*}
+\end{frame}
+
+\begin{frame}\frametitle{Exercise 3: A simple RBC model}
+  \framesubtitle{Goods market equilibrium}
+  \[
+  K_t+C_t = K_{t-1}(1-\delta)+\underbrace{A_tK_{t-1}^\alpha\left( \left( 1+g\right) ^{t}L_t\right)^{1-\alpha}}_{w_t L_t + r_t K_t}.
+  \]
+\end{frame}
+
+\begin{frame}\frametitle{Exercise 3: A simple RBC model}
+  \framesubtitle{Dynamic Equilibrium}
+  \begin{align*}
+    \frac{1}{C_t}&=\frac{1}{1+\rho}E_t\left(\frac{1}{C_{t+1}}(r_{t+1}+1-\delta)\right),\\
+    L_t^\gamma&=\frac{w_t}{C_t},\\
+    r_t &= \alpha A_tK_{t-1}^{\alpha-1}\left( \left( 1+g\right) ^{t}L_t\right)^{1-\alpha},\\
+    w_t &= (1-\alpha) A_tK_{t-1}^\alpha\left( \left( 1+g\right) ^{t}\right)^{1-\alpha}L_t^{-\alpha},\\
+    K_t+C_t &= K_{t-1}(1-\delta)+A_tK_{t-1}^\alpha\left( \left( 1+g\right) ^{t}L_t\right)^{1-\alpha},\\
+        log(A_{t})&=\lambda log(A_{t-1}) + e_{t}.
+  \end{align*}
+\end{frame}
+
+\begin{frame}\frametitle{Exercise 3: A simple RBC model}
+  \framesubtitle{Existence of a balanced growth path}
+Good markets equilibrium for each period t: $ K_t+C_t = K_{t-1}(1-\delta)+A_tK_{t-1}^\alpha\left( \left( 1+g\right) ^{t}L_t\right)^{1-\alpha}$.\\
+So, there must exist growth rates $g_c$ and $g_k$ such that
+\begin{multline*}
+(1+g_k)^tK_1 + (1+g_c)^tC_1 =\\
+ \frac{(1+g_k)^t}{1+g_k}K_1(1-\delta) + A_t\left(\frac{(1+g_k)^t}{1+g_k}K_1\right)^\alpha\left( \left( 1+g\right) ^{t}L_t\right)^{1-\alpha}
+\end{multline*}
+\begin{multline*}
+\Leftrightarrow K_1 + \left(\frac{1+g_c}{1+g_k}\right)^tC_1 =\\
+ \underbrace{\frac{K_1}{1+g_k}}_{K_0} (1-\delta) + A_t\left(\frac{K_1}{1+g_k}\right)^\alpha\left( \left( \frac{1+g}{1+g_k}\right) ^{t}L_t\right)^{1-\alpha}.
+\end{multline*}
+
+This is only valid, if $\qquad\qquad g_c=g_k=g$.
+
+\end{frame}
+
+\begin{frame}\frametitle{Exercise 3: A simple RBC model}
+  \framesubtitle{Stationarized model}
+  Let's define
+  \begin{align*}
+    \widehat{C}_t &= C_t/(1+g)^t,\\
+    \widehat{K}_t &= K_t/(1+g)^t,\\
+    \widehat{w}_t &= w_t/(1+g)^t.\\
+  \end{align*}
+\end{frame}
+
+\begin{frame}\frametitle{Exercise 3: A simple RBC model}
+  \framesubtitle{Stationarized model (continued)}
+  \begin{align*}
+    \frac{1}{\widehat{C}_t{\red(1+g)^t}}&=\frac{1}{1+\rho}E_t\left(\frac{1}{\widehat{C}_{t+1}(1+g){\red(1+g)^t}}(r_{t+1}+1-\delta)\right),\\
+    L_t^\gamma&=\frac{\widehat{w}_t{\red(1+g)^t}}{\widehat{C}_t{\red(1+g)^t}},\\
+    r_t &= \alpha A_t\left(\widehat{K}_{t-1}\frac{\red(1+g)^t}{1+g}\right)^{\alpha-1}\left( {\red\left( 1+g\right) ^{t}}L_t\right)^{1-\alpha},\\
+    \widehat{w}_t{\red(1+g)^t} &= (1-\alpha) A_t\left(\widehat{K}_{t-1}\frac{\red(1+g)^t}{1+g}\right)^\alpha\left( {\red\left( 1+g\right) ^{t}}\right)^{1-\alpha}L_t^{-\alpha},\\
+    \left(\widehat{K}_t+\widehat{C}_t\right){\red(1+g)^t} &= \widehat{K}_{t-1}\frac{\red(1+g)^t}{1+g}(1-\delta)\\
+&+A_t\left(\widehat{K}_{t-1}\frac{\red(1+g)^t}{1+g}\right)^\alpha\left( {\red\left( 1+g\right) ^{t}}L_t\right)^{1-\alpha}.
+  \end{align*}
+
+\end{frame}
+
+\begin{frame}\frametitle{Exercise 3: A simple RBC model}
+  \framesubtitle{Stationarized model (continued)}
+  \begin{align*}
+    \frac{1}{\widehat{C}_t}&=\frac{1}{1+\rho}E_t\left(\frac{1}{\widehat{C}_{t+1}(1+g)}(r_{t+1}+1-\delta)\right),\\
+    L_t^\gamma&=\frac{\widehat{w}_t}{\widehat{C}_t},\\
+    r_t &= \alpha A_t\left(\frac{\widehat{K}_{t-1}}{1+g}\right)^{\alpha-1}L_t^{1-\alpha},\\
+    \widehat{w}_t &= (1-\alpha) A_t\left(\frac{\widehat{K}_{t-1}}{1+g}\right)^\alpha L_t^{-\alpha},\\
+    \widehat{K}_t+\widehat{C}_t &= \frac{\widehat{K}_{t-1}}{1+g}(1-\delta)+A_t\left(\frac{\widehat{K}_{t-1}}{1+g}\right)^\alpha L_t^{1-\alpha},\\
+    log(A_{t})&=\lambda log(A_{t-1}) + e_{t}.
+  \end{align*}
+\end{frame}
+
+\begin{frame}\frametitle{Exercise 3: A simple RBC model}\framesubtitle{Practicing Dynare}
+\begin{enumerate}[(a)]
+  \item Write a mod-File for this simple RBC-model and use for calibration:
+$\alpha=0.33, \delta=0.1, \rho = 0.03,\lambda=0.97, \gamma=0, g = 0.015$. \\Use initval with these values:
+$C=1,K=3,L=0.9,w=1,r=0.15,A=1$.
+\item Show that the steady-state implies:
+\begin{align*}
+  A &=1, \qquad \qquad\qquad\qquad \qquad\qquad r =(1+g)(1+\delta) + \delta -1\\
+  L &= \left(\frac{1-\alpha}{\frac{r}{\alpha}-\delta-g}\right) \left(\frac{r}{\alpha}\right),\qquad \qquad\qquad
+  K = (1+g)\left(\frac{r}{\alpha}\right)^{\frac{1}{\alpha-1}} L\\
+  C &= (1-\delta) \frac{K}{1+g} + \left(\frac{K}{1+g}\right)^\alpha L ^{1-\alpha} - K, \qquad \qquad\qquad
+  w = C
+\end{align*}
+\item Use this analytical solution for the mod-file, i.e. use steady\_state\_model instead of initval. Dynare creates a steady-state m-file. Have a look at it.
+\end{enumerate}
+
+\end{frame}
+
+\end{document}
+

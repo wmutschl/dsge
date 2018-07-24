@@ -1,0 +1,54 @@
+ 
+STEADY-STATE RESULTS:
+ 
+pie   		 0
+x     		 0
+r     		 0
+rstar 		 0
+da    		 0
+tau   		 0
+dy    		 0
+a     		 0
+ 
+EIGENVALUES:
+         Modulus             Real        Imaginary
+
+               0                0                0
+        9.89e-32        -9.89e-32                0
+             0.2              0.2                0
+             0.5              0.5                0
+           1.145            1.109           0.2859
+           1.145            1.109          -0.2859
+             Inf              Inf                0
+             Inf             -Inf                0
+
+
+There are 4 eigenvalue(s) larger than 1 in modulus 
+for 4 forward-looking variable(s)
+ 
+The rank condition is verified.
+ 
+ 
+MODEL SUMMARY
+ 
+  Number of variables:         8
+  Number of stochastic shocks: 2
+  Number of state variables:   4
+  Number of jumpers:           4
+  Number of static variables:  2
+
+
+MATRIX OF COVARIANCE OF EXOGENOUS SHOCKS
+
+Variables     eps_a    eps_tau 
+eps_a        1.000000  0.000000
+eps_tau      0.000000  1.000000
+ 
+POLICY AND TRANSITION FUNCTIONS
+                                   pie             x               r               rstar           da              tau             dy              a    
+a(-1)                      -0.032994       -0.146385       -0.049491       -0.160000       -0.800000               0       -0.946385        0.200000
+x(-1)                              0               0               0               0               0               0       -1.000000               0
+tau(-1)                     0.051708        0.146584        0.077562        0.125000               0        0.500000        0.396584               0
+eps_a                      -0.003299       -0.014638       -0.004949       -0.016000        0.020000               0        0.005362        0.020000
+eps_tau                     0.002068        0.005863        0.003102        0.005000               0        0.020000       -0.004137               0
+Total computing time : 0h00m02s

@@ -1,0 +1,23 @@
+ 
+ 
+
+idx =
+
+     []
+
+
+idx =
+
+     []
+
+
+
+Model Comparison
+
+Model                         Exercise_5bcdef    Exercise_5g   
+Priors                                0.500000         0.500000
+Log Marginal Density               -346.836377      -355.234548
+Bayes Ratio                           1.000000         0.000225
+Posterior Model Probability           0.999775         0.000225
+Posterior-Odds are the ratio of the Posterior Model Probabilities
+Total computing time : 0h00m07s

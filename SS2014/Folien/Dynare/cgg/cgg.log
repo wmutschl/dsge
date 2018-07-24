@@ -1,0 +1,174 @@
+Starting Dynare (version 4.4.1).
+Starting preprocessing of the model file ...
+Found 7 equation(s).
+Evaluating expressions...done
+Computing static model derivatives:
+ - order 1
+Computing dynamic model derivatives:
+ - order 1
+ - order 2
+Processing outputs ...done
+Preprocessing completed.
+Starting MATLAB/Octave computing.
+ion(var_list_);
+
+Error in <a href="matlab:helpUtils.errorDocCallback('dynare', 'C:\dynare\4.4.1\matlab\dynare.m', 174)" style="font-weight:bold">dynare</a> (<a href="matlab: opentoline('C:\dynare\4.4.1\matlab\dynare.m',174,0)">line 174</a>)
+evalin('base',fname) ;
+} 
+dynare cgg
+
+Configuring Dynare ...
+[mex] Generalized QZ.
+[mex] Sylvester equation solution.
+[mex] Kronecker products.
+[mex] Sparse kronecker products.
+[mex] Local state space iteration (second order).
+[mex] Bytecode evaluation.
+[mex] k-order perturbation solver.
+[mex] k-order solution simulation.
+[mex] Quasi Monte-Carlo sequence (Sobol).
+[mex] Markov Switching SBVAR.
+
+Starting Dynare (version 4.4.1).
+Starting preprocessing of the model file ...
+Found 7 equation(s).
+Evaluating expressions...done
+Computing static model derivatives:
+ - order 1
+Computing dynamic model derivatives:
+ - order 1
+ - order 2
+Processing outputs ...ERROR: Can't open file cgg_steadystate2.m for writing
+
+{Error using <a href="matlab:helpUtils.errorDocCallback('dynare', 'C:\dynare\4.4.1\matlab\dynare.m', 168)" style="font-weight:bold">dynare</a> (<a href="matlab: opentoline('C:\dynare\4.4.1\matlab\dynare.m',168,0)">line 168</a>)
+DYNARE: preprocessing failed
+} 
+dynare cgg
+
+Configuring Dynare ...
+[mex] Generalized QZ.
+[mex] Sylvester equation solution.
+[mex] Kronecker products.
+[mex] Sparse kronecker products.
+[mex] Local state space iteration (second order).
+[mex] Bytecode evaluation.
+[mex] k-order perturbation solver.
+[mex] k-order solution simulation.
+[mex] Quasi Monte-Carlo sequence (Sobol).
+[mex] Markov Switching SBVAR.
+
+Starting Dynare (version 4.4.1).
+Starting preprocessing of the model file ...
+Found 7 equation(s).
+Evaluating expressions...done
+Computing static model derivatives:
+ - order 1
+Computing dynamic model derivatives:
+ - order 1
+ - order 2
+Processing outputs ...done
+Preprocessing completed.
+Starting MATLAB/Octave computing.
+
+
+STEADY-STATE RESULTS:
+
+pie   		 0
+x     		 0
+r     		 0
+rstar 		 0
+da    		 0
+tau   		 0
+dy    		 0
+
+EIGENVALUES:
+         Modulus             Real        Imaginary
+
+               0                0                0
+       6.525e-17       -6.525e-17                0
+             0.2              0.2                0
+             0.5              0.5                0
+           1.145            1.109           0.2859
+           1.145            1.109          -0.2859
+
+
+There are 2 eigenvalue(s) larger than 1 in modulus 
+for 2 forward-looking variable(s)
+
+The rank condition is verified.
+
+
+MODEL SUMMARY
+
+  Number of variables:         7
+  Number of stochastic shocks: 2
+  Number of state variables:   4
+  Number of jumpers:           2
+  Number of static variables:  2
+
+
+MATRIX OF COVARIANCE OF EXOGENOUS SHOCKS
+
+Variables     eps_a    eps_tau 
+eps_a        1.000000  0.000000
+eps_tau      0.000000  1.000000
+
+POLICY AND TRANSITION FUNCTIONS
+                                   pie             x               r               rstar           da              tau             dy   
+da(-1)                      0.008249        0.036596        0.012373        0.040000        0.200000               0        0.236596
+tau(-1)                     0.051708        0.146584        0.077562        0.125000               0        0.500000        0.396584
+x(-1)                              0               0               0               0               0               0       -1.000000
+eps_a                       0.000825        0.003660        0.001237        0.004000        0.020000               0        0.023660
+eps_tau                     0.002068        0.005863        0.003102        0.005000               0        0.020000       -0.004137
+
+
+APROXIMATED THEORETICAL MOMENTS
+
+VARIABLE      MEAN    STD. DEV.   VARIANCE 
+pie            0.0000     0.0025     0.0000
+x              0.0000     0.0077     0.0001
+r              0.0000     0.0038     0.0000
+rstar          0.0000     0.0071     0.0001
+da             0.0000     0.0204     0.0004
+tau            0.0000     0.0231     0.0005
+dy             0.0000     0.0242     0.0006
+
+
+
+APPROXIMATED VARIANCE DECOMPOSITION (in percent)
+
+         eps_a   eps_tau 
+pie        11.05    88.95
+x          23.33    76.67
+r          11.05    88.95
+rstar      33.33    66.67
+da        100.00     0.00
+tau         0.00   100.00
+dy         96.09     3.91
+
+
+
+APPROXIMATED MATRIX OF CORRELATIONS
+
+Variables     pie      x       r     rstar    da      tau     dy   
+pie          1.0000  0.9864  1.0000  0.9620  0.3324  0.9431  0.2287
+x            0.9864  1.0000  0.9864  0.9938  0.4830  0.8756  0.3813
+r            1.0000  0.9864  1.0000  0.9620  0.3324  0.9431  0.2287
+rstar        0.9620  0.9938  0.9620  1.0000  0.5774  0.8165  0.4785
+da           0.3324  0.4830  0.3324  0.5774  1.0000  0.0000  0.9685
+tau          0.9431  0.8756  0.9431  0.8165  0.0000  1.0000 -0.0988
+dy           0.2287  0.3813  0.2287  0.4785  0.9685 -0.0988  1.0000
+
+
+
+APPROXIMATED COEFFICIENTS OF AUTOCORRELATION
+
+Order      1       2       3       4       5   
+pie      0.4668  0.2268  0.1121  0.0558  0.0278
+x        0.4300  0.2010  0.0977  0.0483  0.0240
+r        0.4668  0.2268  0.1121  0.0558  0.0278
+rstar    0.4000  0.1800  0.0860  0.0422  0.0209
+da       0.2000  0.0400  0.0080  0.0016  0.0003
+tau      0.5000  0.2500  0.1250  0.0625  0.0313
+dy       0.0341  0.0039 -0.0007 -0.0009 -0.0005
+Total computing time : 0h00m03s

@@ -1,0 +1,28 @@
+ 
+STEADY-STATE RESULTS:
+ 
+l 		 0.472796
+c 		 0.787653
+k 		 3.98308
+y 		 0.907146
+A 		 1
+a 		 0
+ 
+EIGENVALUES:
+         Modulus             Real        Imaginary
+
+             0.8              0.8                0
+            0.92             0.92                0
+           1.109            1.109                0
+             Inf              Inf                0
+             Inf              Inf                0
+
+
+There are 3 eigenvalue(s) larger than 1 in modulus 
+for 3 forward-looking variable(s)
+ 
+The rank condition is verified.
+ 
+THE SHARE OF CAPITAL IS: 0.22133
+If it is not between 0.2 and 0.3, try to change parameters.
+Total computing time : 0h00m07s

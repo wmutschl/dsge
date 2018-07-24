@@ -1,0 +1,90 @@
+ 
+STEADY-STATE RESULTS:
+ 
+pie       		 0
+x         		 0
+r         		 0
+rstar     		 0
+da        		 0
+tau       		 0
+dy        		 0
+lagsignal 		 0
+ 
+EIGENVALUES:
+         Modulus             Real        Imaginary
+
+               0                0                0
+               0               -0                0
+       1.754e-17        1.754e-17                0
+             0.2              0.2                0
+             0.5              0.5                0
+           1.145            1.109           0.2859
+           1.145            1.109          -0.2859
+
+
+There are 2 eigenvalue(s) larger than 1 in modulus 
+for 2 forward-looking variable(s)
+ 
+The rank condition is verified.
+ 
+ 
+MODEL SUMMARY
+ 
+  Number of variables:         8
+  Number of stochastic shocks: 3
+  Number of state variables:   5
+  Number of jumpers:           2
+  Number of static variables:  2
+
+
+MATRIX OF COVARIANCE OF EXOGENOUS SHOCKS
+
+Variables     eps_a    eps_tau  signal_a 
+eps_a        0.000000  0.000000  0.000000
+eps_tau      0.000000  1.000000  0.000000
+signal_a     0.000000  0.000000  1.000000
+ 
+POLICY AND TRANSITION FUNCTIONS
+                               pie             x               r               rstar           da              tau             dy              lagsignal
+da(-1)                     -0.032994       -0.146385       -0.049491       -0.160000        0.200000               0        0.053615               0
+tau(-1)                     0.051708        0.146584        0.077562        0.125000               0        0.500000        0.396584               0
+lagsignal(-1)              -0.164970       -0.731923       -0.247455       -0.800000        1.000000               0        0.268077               0
+x(-1)                              0               0               0               0               0               0       -1.000000               0
+eps_a                      -0.164970       -0.731923       -0.247455       -0.800000        1.000000               0        0.268077               0
+eps_tau                     0.103416        0.293169        0.155123        0.250000               0        1.000000       -0.206831               0
+signal_a                   -0.111034        0.269657       -0.166550        1.000000               0               0        0.269657        1.000000
+{Undefined function or variable 'plots_3'.
+
+Error in <a href="matlab:helpUtils.errorDocCallback('cggexam', 'E:\Wuala\Work\SS2013\PhD Macroeconomics\DSGE methods\Exams\Möller, Rauven\cggexam.m', 150)" style="font-weight:bold">cggexam</a> (<a href="matlab: opentoline('E:\Wuala\Work\SS2013\PhD Macroeconomics\DSGE methods\Exams\Möller, Rauven\cggexam.m',150,0)">line 150</a>)
+plots_3;
+
+Error in <a href="matlab:helpUtils.errorDocCallback('dynare', 'C:\dynare\4.3.3\matlab\dynare.m', 120)" style="font-weight:bold">dynare</a> (<a href="matlab: opentoline('C:\dynare\4.3.3\matlab\dynare.m',120,0)">line 120</a>)
+evalin('base',fname) ;
+} 
+dynare rbcexam1
+ 
+Configuring Dynare ...
+[mex] Generalized QZ.
+[mex] Sylvester equation solution.
+[mex] Kronecker products.
+[mex] Sparse kronecker products.
+[mex] Local state space iteration (second order).
+[mex] Bytecode evaluation.
+[mex] k-order perturbation solver.
+[mex] k-order solution simulation.
+[mex] Quasi Monte-Carlo sequence (Sobol).
+[mex] Markov Switching SBVAR.
+ 
+Starting Dynare (version 4.3.3).
+Starting preprocessing of the model file ...
+Found 6 equation(s).
+Evaluating expressions...done
+Computing static model derivatives:
+ - order 1
+Computing dynamic model derivatives:
+ - order 1
+ - order 2
+Processing outputs ...done
+Preprocessing completed.
+Starting MATLAB/Octave computing.
+

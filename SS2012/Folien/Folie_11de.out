@@ -1,0 +1,16 @@
+\BOOKMARK [2][]{Outline0.1}{Idee}{}% 1
+\BOOKMARK [2][]{Outline0.2}{Kalman-Filter}{}% 2
+\BOOKMARK [3][]{Outline0.2.1.6}{Notation}{Outline0.2}% 3
+\BOOKMARK [3][]{Outline0.2.2.7}{Initialisierung}{Outline0.2}% 4
+\BOOKMARK [3][]{Outline0.2.3.9}{Rekursion}{Outline0.2}% 5
+\BOOKMARK [3][]{Outline0.2.4.11}{Zusammenfassung und Likelihood}{Outline0.2}% 6
+\BOOKMARK [2][]{Outline0.3}{Maximum-Likelihood}{}% 7
+\BOOKMARK [3][]{Outline0.3.1.14}{Idee}{Outline0.3}% 8
+\BOOKMARK [3][]{Outline0.3.2.15}{Aufgabe 4: An und Schorfheide \(2007\) mit Maximum-Likelihood}{Outline0.3}% 9
+\BOOKMARK [2][]{Outline0.4}{Bayesianische Sch\344tzung}{}% 10
+\BOOKMARK [3][]{Outline0.4.1.20}{Idee}{Outline0.4}% 11
+\BOOKMARK [3][]{Outline0.4.2.24}{Metropolis-Hastings-Algorithmus}{Outline0.4}% 12
+\BOOKMARK [3][]{Outline0.4.3.29}{Hinweise}{Outline0.4}% 13
+\BOOKMARK [3][]{Outline0.4.4.30}{Aufgabe 5: Sch\344tzung mit Bayesianischen Methoden}{Outline0.4}% 14
+\BOOKMARK [3][]{Outline0.4.5.33}{Inferenz, Prognose, Modellvergleich und Identifikation}{Outline0.4}% 15
+\BOOKMARK [2][]{Outline0.5}{Diskussion}{}% 16

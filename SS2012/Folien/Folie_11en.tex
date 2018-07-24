@@ -1,0 +1,651 @@
+%Erstellt mit WinEdt 6
+\documentclass{beamer} %%% F\"{U}R VORTRAG MIT PAUSEN
+%\documentclass[handout]{beamer} %%% F\"{U}R HANDOUT ALS PDF
+
+\setbeamertemplate{navigation symbols}{}
+\usetheme{Madrid}
+\usecolortheme{seagull}
+\beamersetuncovermixins{\opaqueness<1>{25}}{\opaqueness<2->{15}}
+\usepackage[ngerman]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{ae,aecompl}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage[babel,german=quotes]{csquotes} %im deutschen \"{u}bliche Anf\"{u}hrungszeichen
+\usepackage{verbatim}
+\newcounter{saveenumi}
+\newcommand{\seti}{\setcounter{saveenumi}{\value{enumi}}}
+\newcommand{\conti}{\setcounter{enumi}{\value{saveenumi}}}
+
+
+\begin{document}
+\author[Willi Mutschler]{Dr. Andrea Beccarini $\qquad$ Willi Mutschler, M.Sc.}
+\date{Summer 2012}
+\institute[Institute of Econometrics]{Institute of Econometrics and Economic
+Statistics\\University of Münster\\willi.mutschler@uni-muenster.de}
+\title{DSGE-Models}
+\subtitle{Full information estimation\\Kalman-filter, Maximum-Likelihood and Bayesian methods}
+
+\begin{frame}
+\titlepage
+\end{frame}
+
+\begin{frame}\frametitle{Full information estimation}
+\tableofcontents
+\end{frame}
+
+\section{Idea}
+
+\begin{frame}\frametitle{Full information estimation}\framesubtitle{Idea}
+    \begin{itemize}
+      \item Full information estimation requires a complete characterization of the data-generating-process (not only specific moments).
+      \item Consider the linear \emph{state-space} representation of the model:
+        \begin{align}
+        \mathbf{x_t} &= \mathbf{F}(\boldsymbol{\mu}) \mathbf{x_{t-1}} + \mathbf{G}(\boldsymbol{\mu}) \boldsymbol{\upsilon_{t}},  &\text{with }&E[\boldsymbol{\upsilon_t} \boldsymbol{\upsilon_t}']=\mathbf{V},\quad E[\boldsymbol{\upsilon_t} \boldsymbol{\upsilon_s}']=0 \label{transition}\\
+        \mathbf{X_t} &= \mathbf{H}(\boldsymbol{\mu})' \mathbf{x_t }+ \mathbf{e_t},& \text{with }& E[\mathbf{e_t} \mathbf{e_t}']= \boldsymbol{\Sigma_e}, \quad E[\mathbf{e_t} \mathbf{e_s}']=0. \label{observer}
+        \end{align}
+    \item Matrix $\mathbf{H}$ combines the model variables $\mathbf{x_t}$ with observable data variables $\mathbf{X_t}$
+    \item Equation \eqref{transition}: \emph{state-} or \emph{transition-equation}
+    \begin{itemize}
+      \item Corresponds to the solution of the model.
+      \item $\boldsymbol{\upsilon_t}$ are the stochastic innovations.
+    \end{itemize}
+    \item Equation \eqref{observer}: \emph{observation-equation}
+    \begin{itemize}
+      \item Corresponds to the measurement equations,
+      \item subject to possible measurement errors $\mathbf{e_t}$ in the data.
+    \end{itemize}
+    \end{itemize}
+\end{frame}
+
+\begin{frame}\frametitle{Full information estimation}\framesubtitle{Idea}
+  \begin{itemize}
+    \item Given distributional assumptions about $\boldsymbol{\upsilon_t}$ and $\mathbf{e_t}$, one can derive the log-likelihood-function, $\log{L(\mathbf{X}|\boldsymbol{\mu})}$, analytically or numerically.
+    \item In the linear case and considering normally distributed variables, the Kalman-filter is used to calculate the likelihood analytically.
+    \item In the nonlinear case $\mathbf{s_t}=s(\mathbf{s_{t-1}},\boldsymbol{\upsilon_t}), \mathbf{c_t} = c(\mathbf{s_t})$ and $\mathbf{X_t} =\widetilde{h}(\mathbf{s_t},\mathbf{c_t},\boldsymbol{\upsilon_t}, \mathbf{e_t})\equiv h(\mathbf{s_t},\mathbf{e_t})$ are considered, provided that $c$,$s$ and $h$ are functions of the vector of parameters $\boldsymbol{\mu}$. The particle-filter or the \emph{efficient importance sampling} is then used to derive the likelihood numerically.
+    \item There two approaches for analyzing and evaluating the log-likelihood:
+    \begin{enumerate}
+      \item \textbf{the classic (frequentist) \emph{Maximum-Likelihood}-method},
+      \item \textbf{the bayesian method}.
+    \end{enumerate}
+  \end{itemize}
+\end{frame}
+
+\section{Kalman-filter}
+\begin{frame}\frametitle{Full information estimation}
+  \tableofcontents[currentsection]
+\end{frame}
+\subsection{Notation}
+\begin{frame}\frametitle{Kalman-filter}\framesubtitle{Notation}
+We simplify and consider only the linear case and ignore possible measurement errors in the data:
+\begin{itemize}
+    \item $\mathbf{X_t} = \mathbf{H}'\mathbf{x_t}$
+    \item $    \mathbf{x_{t+1}} = \mathbf{F} \mathbf{x_t} + \mathbf{G}\boldsymbol{\upsilon_{t+1}}$
+    \item $\boldsymbol{\upsilon_{i}} \overset{iid}{\sim} \mathcal{N}(\mathbf{0},\mathbf{V}),~ \mathbf{V} = E(\boldsymbol{\upsilon_{i}} \boldsymbol{\upsilon_{i}}'), ~ E(\boldsymbol{\upsilon_{i}} \boldsymbol{\upsilon_{j}}')=0$
+  \end{itemize}
+\scriptsize
+\begin{block}{Notation for the linear projection}
+\begin{align*}
+\mathbf{\widehat{x}_{t|t-j}} &= E(\mathbf{x_t}|\mathbf{X_{t-j}},\mathbf{X_{t-j-1}},\dots \mathbf{X_{1}})\\
+\boldsymbol{\Sigma_{t|t-j}} &= E(\mathbf{x_t}-\mathbf{\widehat{x}_{t|t-j}})(\mathbf{x_t}-\mathbf{\widehat{x}_{t|t-j}})'\\
+\mathbf{\widehat{X}_{t|t-j}} &= E(\mathbf{X_t|X_{t-j}},\mathbf{X_{t-j-1}},\dots,\mathbf{X_1})\\
+\mathbf{u_t} &= \mathbf{X_t} - \mathbf{\widehat{X}_{t|t-1}} = \mathbf{H'} (\mathbf{x_t} - \mathbf{\widehat{x}_{t|t-1}})\\
+E(\mathbf{u_t}\mathbf{u_t}')&= \mathbf{H'} \boldsymbol{\Sigma_{t|t-1}} \mathbf{H}
+\end{align*}
+for $t=1,2,\dots,T$ and $j=0,1,\dots T$.
+\end{block}
+
+\end{frame}
+
+\subsection{Initialization}
+\begin{frame}\frametitle{Kalman-filter}\framesubtitle{Initialization}
+  \begin{itemize}
+    \item Since $\mathbf{x_t}$ is covariance-stationary, the variance is given by:
+\begin{align*}
+    \underbrace{E(\mathbf{x_t} \mathbf{x_t}')}_{\equiv \boldsymbol{\Sigma}}&=E\left[(\mathbf{F} \mathbf{x_{t-1}} + \mathbf{G} \boldsymbol{\upsilon_t})(\mathbf{F} \mathbf{x_{t-1}} + \mathbf{G} \boldsymbol{\upsilon_t})'\right] \\
+    &= \mathbf{F} \underbrace{E(\mathbf{x_{t-1}}\mathbf{x_{t-1}}')}_{\equiv \boldsymbol{\Sigma}}\mathbf{F}' + \mathbf{G} \underbrace{E(\boldsymbol{\upsilon_t} \boldsymbol{\upsilon_t}')}_{=\mathbf{V}} \mathbf{G}'\\
+\Leftrightarrow \boldsymbol{\Sigma} &= \mathbf{F} \boldsymbol{\Sigma} \mathbf{F'} + \mathbf{G} \mathbf{V} \mathbf{G}'\\
+\end{align*}
+\item \begin{block}{Vectorization}
+    The $vec$-operation stacks the rows of a $m\times n$ Matrix $\mathbf{M}$ into a $mn\times 1$ vector $vec(\mathbf{M})$. Then for arbitrary Matrices $\underset{m\times n}{A}$,$\underset{n\times p}{B}$ and $\underset{p \times k}{C}$:
+    \begin{align*}
+        vec(ABC) = (C' \otimes A)vec(B), \quad \text{with } \otimes: \text{Kronecker-product.}
+    \end{align*}
+\end{block}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}\frametitle{Kalman-filter}\framesubtitle{Initialization}
+  \begin{itemize}
+        \item Applying this formula for $\boldsymbol{\Sigma}$:
+\begin{align*}
+    vec(\boldsymbol{\Sigma}) &= (\mathbf{F} \otimes \mathbf{F} ) vec(\boldsymbol{\Sigma}) + vec(\mathbf{G} \mathbf{V} \mathbf{G}')\\
+\Leftrightarrow    vec(\boldsymbol{\Sigma}) &= (\mathbf{I}-\mathbf{F} \otimes \mathbf{F})^{-1} vec(\mathbf{G} \mathbf{V} \mathbf{G}')
+\end{align*}
+\item The unconditional expectation of $\mathbf{x_1}$ is used for the initialization of the Kalman-filter, since there are is no additional information yet:
+\begin{align*}
+\mathbf{\widehat{x}_1} &= \underbrace{E(\mathbf{x_1})}_{=E(\mathbf{x})} = \mathbf{F }\underbrace{E(\mathbf{x_0})}_{=E(\mathbf{x})} + \mathbf{G}\underbrace{E(\boldsymbol{\upsilon_1})}_{=0} \Leftrightarrow \mathbf{\widehat{x}_1} = \mathbf{0},\\
+vec(\boldsymbol{\Sigma_{1|0}}) & = E(\mathbf{x_1}-\textbf{0})(\mathbf{x_1}-\textbf{0})'=(\mathbf{I}-\mathbf{F} \otimes \mathbf{F})^{-1} vec(\mathbf{G} \mathbf{V} \mathbf{G}').
+\end{align*}
+
+  \end{itemize}
+\end{frame}
+
+\subsection{Recursion}
+\begin{frame}\frametitle{Kalman-filter}\framesubtitle{Recursion}
+The recursion is then given by:
+\begin{align*} \mathbf{\widehat{x}_{t+1|t}} = \mathbf{F} \mathbf{\widehat{x}_{t|t}} \end{align*}
+\begin{block}{\scriptsize Formula for updating a linear projection (Hamilton (1994,~S.99 und S.379))}
+\scriptsize\begin{align*}
+  \mathbf{\widehat{x}_{t|t}} &= \mathbf{\widehat{x}_{t|t-1}}  +\left[E(\mathbf{x_t}-\mathbf{\widehat{x}_{t|t-1}})(\mathbf{X_t}-\mathbf{\widehat{X}_{t|t-1}})'\right] \left[E(\mathbf{X_t}-\mathbf{\widehat{X}_{t|t-1}})(\mathbf{X_t}-\mathbf{\widehat{X}_{t|t-1}})'\right]^{-1} \mathbf{u_t}\\
+ \Leftrightarrow \mathbf{\widehat{x}_{t|t}}&= \mathbf{\widehat{x}_{t|t-1}}+ \boldsymbol{\Sigma_{t|t-1}} \mathbf{H} \left(\mathbf{H}'\boldsymbol{\Sigma_{t|t-1}}\mathbf{H}\right)^{-1} \mathbf{u_t}\\
+  \Rightarrow \mathbf{\widehat{x}_{t+1|t}} = \mathbf{F} \mathbf{\widehat{x}_{t|t}} &=\mathbf{F} \mathbf{\widehat{x}_{t|t-1}}+ \mathbf{F}\boldsymbol{\Sigma_{t|t-1}} \mathbf{H} \left(\mathbf{H}'\boldsymbol{\Sigma_{t|t-1}}\mathbf{H}\right)^{-1} \mathbf{u_t}, \\
+  &\qquad\qquad\qquad\qquad\qquad\qquad\qquad~~~ \text{with } \mathbf{u_t} = \mathbf{X_t} - \mathbf{\widehat{X}_{t|t-1}} = \mathbf{H'} (\mathbf{x_t} - \mathbf{\widehat{x}_{t|t-1}}).
+\end{align*}
+\end{block}
+\end{frame}
+
+\begin{frame}\frametitle{Kalman-filter}\framesubtitle{Recursion}
+\begin{itemize}
+\item $\mathbf{x_{t+1}} - \mathbf{\widehat{x}_{t+1|t}} = \mathbf{F}\left(\mathbf{x_{t}} - \mathbf{\widehat{x}_{t|t-1}}\right) + \mathbf{G} \boldsymbol{\upsilon_{t+1}} - \mathbf{F}\boldsymbol{\Sigma_{t|t-1}} \mathbf{H} \left(\mathbf{H}'\boldsymbol{\Sigma_{t|t-1}}\mathbf{H}\right)^{-1} \mathbf{u_t}$
+\item The \emph{MSE: } $\boldsymbol{\Sigma_{t+1|t} }= E\left(\mathbf{x_{t+1}} - \mathbf{\widehat{x}_{t+1|t}}\right)\left(\mathbf{x_{t+1}} - \mathbf{\widehat{x}_{t+1|t}}\right)'$ is given by:
+\scriptsize\begin{align*}
+    &\boldsymbol{\Sigma_{t+1|t} }=\\
+    & \mathbf{F} \boldsymbol{\Sigma_{t|t-1}} \mathbf{F'} + \mathbf{G} \mathbf{V} \mathbf{G}' - \mathbf{F}\boldsymbol{\Sigma_{t|t-1}} \mathbf{H} \underbrace{\left(\mathbf{H}'\boldsymbol{\Sigma_{t|t-1}}\mathbf{H}\right)^{-1} \underbrace{E(\mathbf{u_t} \mathbf{u_t'})}_{=\mathbf{H'} \boldsymbol{\Sigma_{t|t-1}} \mathbf{H}}}_{=\mathbf{I}}
+    \left(\mathbf{H}'\boldsymbol{\Sigma_{t|t-1}}\mathbf{H}\right)^{-1} \mathbf{H}' \boldsymbol{\Sigma_{t|t-1}} \mathbf{F}'
+\end{align*}
+\end{itemize}
+\scriptsize\begin{block}{Mean-Sqared-Error (MSE)}\centering
+$
+\boldsymbol{\Sigma_{t+1} } \equiv \boldsymbol{\Sigma_{t+1|t} }      = \mathbf{F} \boldsymbol{\Sigma_{t|t-1}} \mathbf{F'} + \mathbf{G} \mathbf{V} \mathbf{G}' - \mathbf{F}\boldsymbol{\Sigma_{t|t-1}} \mathbf{H} \left(\mathbf{H}'\boldsymbol{\Sigma_{t|t-1}}\mathbf{H}\right)^{-1} \mathbf{H}' \boldsymbol{\Sigma_{t|t-1}}\mathbf{F}'
+$
+\end{block}
+\end{frame}
+
+\subsection{Summary and Likelihood}
+\begin{frame}\frametitle{Kalman-filter}\framesubtitle{Summary}
+Let:
+\begin{itemize}
+\item $\mathbf{K_t}=\mathbf{F}\boldsymbol{\Sigma_{t}} \mathbf{H} \left(\mathbf{H}'\boldsymbol{\Sigma_{t}}\mathbf{H}\right)^{-1}$ be the so-called gain-matrix,
+\item $\mathbf{\widehat{x}_t}=\mathbf{\widehat{x}_{t|t-1}}$ the linear projection,
+\item with $\boldsymbol{\Sigma_t}=\boldsymbol{\Sigma_{t|t-1}}$ being the \emph{mean-squared-error}.
+\end{itemize}
+Then the Kalman-filter can be summarized as follows:
+\begin{enumerate}
+  \item Initialization with
+  \begin{itemize}
+  \item $\mathbf{\widehat{x}_1} = \mathbf{0}$,
+  \item $vec(\boldsymbol{\Sigma_{1|0}}) = (\mathbf{I}-\mathbf{F}
+      \otimes \mathbf{F})^{-1} vec(\mathbf{G} \mathbf{V}
+      \mathbf{G}')$.
+  \end{itemize}
+  \item Recursion with
+   \begin{itemize}
+   \item $\mathbf{u_t} = \mathbf{X_t} -\mathbf{\widehat{X}_t}
+       =\mathbf{X_t} - \mathbf{H}' \mathbf{\widehat{x}_t}$,~~~
+       $E(\mathbf{u_t}
+       \mathbf{u_t'})=\mathbf{H}'\boldsymbol{\Sigma_t}
+       \mathbf{H}\equiv \boldsymbol{\Omega_t}$,
+    \item $\mathbf{\widehat{x}_{t+1}}=\mathbf{F}
+        \mathbf{\widehat{x}_{t}} + \mathbf{K_t} \mathbf{u_t}$,
+    \item $\boldsymbol{\Sigma_{t+1}} = \mathbf{F}
+        \boldsymbol{\Sigma_{t}} \mathbf{F'} + \mathbf{G} \mathbf{V}
+        \mathbf{G}' - \mathbf{K_t} \mathbf{H}'
+        \boldsymbol{\Sigma_{t}}\mathbf{F}'$.
+    \end{itemize}
+\end{enumerate}
+\end{frame}
+
+\begin{frame}\frametitle{Log-Likelihood}
+  Given the gaussian assumption about the forecast error $\mathbf{u_t}$ one can derive the distribution of the data $\underset{n \times 1}{\mathbf{X_t}}$ conditional on
+$(\mathbf{x_t},\mathbf{X_{t-1}},\mathbf{X_{t-2}},\dots)$ and set up the log-likelihood function:
+
+\begin{block}{Log-likelihood}
+\begin{align*}
+\log{ \mathcal{L}(\mathbf{X}|\boldsymbol{\mu})} &= \sum_{t=1}^T \log{\mathcal{L}(\mathbf{X_t}|\boldsymbol{\mu})}\\ &=-\frac{nT}{2} \log(2\pi) - \frac{1}{2}\sum_{t=1}^{T} \log{|\boldsymbol{\Omega_t}|}- \frac{1}{2} \sum_{t=1}^T \mathbf{u_t}' \boldsymbol{\Omega_t}^{-1} \mathbf{u_t}.
+\end{align*}
+\end{block}
+\end{frame}
+
+\section{Maximum-Likelihood}
+\begin{frame}\frametitle{Full information estimation}
+  \tableofcontents[currentsection]
+\end{frame}
+\subsection{Idea}
+\begin{frame}\frametitle{Maximum-Likelihood}\framesubtitle{Idea}
+  \begin{itemize}
+    \item \textbf{Approach:} The parameters $\boldsymbol{\mu}$ are fixed and the data is a random realization of this specific parametrization.
+    \item  The \emph{Maximum-Likelihood}-estimator $\boldsymbol{\widehat{\mu}_{ML}}$ is then defined as
+    \begin{align*}
+    \boldsymbol{\widehat{\mu}_{ML}} = \underset{\mu}{\text{argmax}}\left\{ \sum_{t=1}^T \log{\mathcal{L}(\mathbf{X_t}|\boldsymbol{\mu})} \right\}.
+    \end{align*}
+    \item Given some regularity conditions the \emph{ML}-estimator is consistent, asymptotically efficient and asymptotically gaussian.
+    \item Uncertainty and inference are based upon the assumptions that \textbf{to each realization of data there corresponds a different vector of parameters that maximizes the Likelihood}.
+    \item Hint for the estimation of the parameters of a DSGE-model:
+    \begin{itemize} \item The dimension of $\mathbf{X_t}$ must be greater or equal to the dimension of the structural shocks $\boldsymbol{\upsilon_t}$, or otherwise the residual term has a singular variance-covariance-matrix.
+    \item If not: Add measurement errors or additional shocks.
+  \end{itemize}
+  \end{itemize}
+\end{frame}
+
+\subsection{Exercise 4: An and Schorfheide (2007) via Maximum-Likelihood}
+\begin{frame}\frametitle{Exercise 4: An and Schorfheide (2007) via ML}
+Consider the following new-keynesian model:
+    \begin{align*}
+  \widehat{y}_t &= E_t[\widehat{y}_{t+1}] + \widehat{g}_t - E_t[\widehat{g}_{t+1}] - \frac{1}{\tau} (\widehat{R}_t - E_t[\widehat{\pi}_{t+1}] - E_t[\widehat{z}_{t+1}]),\\
+  \widehat{\pi}_t &= \beta E_t[\widehat{\pi}_{t+1}]+\kappa(\widehat{y}_t-\widehat{g}_t),\\
+    \widehat{c_t} &= \widehat{y_t }- \widehat{g_t},\\
+  \widehat{R}_{t} &= \rho_R \widehat{R}_{t-1} + (1-\rho_R)\psi_1 \widehat{\pi}_{t} + (1-\rho_R)\psi_2 \left(\widehat{y}_{t}-\widehat{g}_{t}\right) + \epsilon_{R,t}\\
+ \widehat{g}_{t} &= \rho_g \widehat{g}_{t-1} + \epsilon_{g,{t}},\\
+ \widehat{z}_{t} &= \rho_z \widehat{z}_{t-1} + \epsilon_{z,{t}}.
+\end{align*}
+All variables with a $\widehat{~}$ denote the logarithmic deviation from the steady-state, i.e. $\widehat{x_t}=log(x_t)-log(x)$. \\The stochastic shocks are normally distributed with $E[\epsilon_{i,t}]=0$ and $E[\epsilon_{i,t}^2]=\sigma_i^2$.
+\end{frame}
+
+\begin{frame}\frametitle{Exercise 4: An and Schorfheide (2007) via ML}
+\begin{itemize}
+\item Assume you have \textbf{quarterly} data to estimate the parameters:
+\begin{itemize}
+  \item quarterly growth of GDP per capita in percent $(YGR_t)$,
+  \item annualized inflation rates in percent $(INFL_t)$,
+  \item annualized nominal interest rates in percent $(INT_t)$.
+\end{itemize}
+\item Model variables and observed data are linked by the following equations:
+\begin{align*}
+  YGR_t &= \gamma^{(Q)} + 100(\widehat{y}_t-\widehat{y}_{t-1}+\widehat{z}_t),\\
+  INFL_t &= \pi^{(A)} + 400 \widehat{\pi}_t,\\
+  INT_t &= \pi^{(A)} + r^{(A)} + 4 \gamma^{(Q)} + 400 \widehat{R}_t.
+\end{align*}
+\item The parameter $\gamma^{(Q)}, \pi^{(A)}$ and $r^{(A)}$ are linked to the \emph{steady-state} values of the model:
+\scriptsize\begin{align*}
+  \gamma &=\frac{A_{t+1}}{A_t}= e^{\frac{\gamma_Q}{100}} \approx 1+\frac{\gamma^{(Q)}}{100}, \qquad   \pi = e^{\frac{\pi^{(A)}}{400}} \approx 1+\frac{\pi^{(A)}}{400},\qquad r = e^{\frac{r^{(A)}}{400}} \approx 1+\frac{r^{(A)}}{400},\\
+  \beta&=e^{-\frac{r^{(A)}}{400}} \approx \frac{1}{1+r^{(A)}/400}.
+\end{align*}
+\end{itemize}
+\end{frame}
+
+\begin{frame}\frametitle{Exercise 4: An and Schorfheide (2007) via ML}
+Write a mod-file for the model in order to estimate it via Maximum-Likelihood.
+  \begin{enumerate}[(a)]
+    \item Use the simulated dataset \texttt{simdat1.mat} for the estimation. The true values are
+   \begin{align*}
+          \tau&=2.000,&	\kappa&=0.150, &\psi_1 &=1.500,	&\psi_2=1.000,\\
+          \rho_R&=0.600,	&\rho_z &=0.650,& \rho_g&=0.950, \\
+          \sigma_R&=0.2/100, &\sigma_g&=0.8/100 ,&	\sigma_z&=0.45/100 ,\\
+           \pi^{(A)}&=4.000, &\gamma^{(Q)}&=0.500, &r^{(A)}&=0.400.
+    \end{align*}
+    \begin{enumerate}
+    \item Estimate all parameters via ML. Why does it not work? \\Hint: The nonlinear model implies that $\beta=\frac{\gamma}{r}=\frac{e^{\frac{\gamma^{(Q)}}{100}}}{e^{\frac{r^{(A)}}{400}}}$.
+    \item Calibrate the parameters $\psi_1$ and $r^{(A)}$ to their true values and estimate the other parameters. Why does it work now?
+  \end{enumerate}\seti
+  \end{enumerate}
+\end{frame}
+
+\begin{frame}\frametitle{Exercise 4: An and Schorfheide (2007) via ML}
+    \begin{enumerate}[(a)]\conti
+    \item Use the simulated dataset \texttt{simdat2.mat} for the estimation. The true parameters are the same except now $r^{(A)}=4$.
+    \begin{enumerate}
+      \item Estimate all parameters via ML. Why does it still not work?
+      \item Calibrate $\psi_1$ to its true value and estimate all other parameters. Discuss your results.
+    \end{enumerate}
+    \end{enumerate}
+\end{frame}
+
+\section{Bayesian methods}
+\begin{frame}\frametitle{Full information estimation}
+  \tableofcontents[currentsection]
+\end{frame}
+
+\subsection{Idea}
+\begin{frame}\frametitle{Bayesian methods}\framesubtitle{Idea}
+\begin{itemize}
+  \item Experience shows that it can be pretty hard and tricky to estimate a DSGE-model via Maximum-Likelihood.
+  \item Data is often not sufficiently informative, i.e. the likelihood is flat in some directions (identification).
+  \item DSGE-models are always misspecified. This can lead to absurd parameter values.
+\end{itemize}
+\end{frame}
+
+\begin{frame}\frametitle{Bayesian methods}\framesubtitle{Idea}
+\begin{itemize}
+  \item Based upon the likelihood as well: the complete characterization of the data generating process.
+  \item \textbf{Approach:} The parameters $\boldsymbol{\mu}$ are random and the data $\mathbf{X}$ are fixed.
+  \item The idea is to combine known information (data) with additional believes (\emph{prior-believes}) about the parameters and to get an expression for the conditional probability of the parameters.
+  \item Hence, one is able to put more weight on a suspected span of the parameter space.
+  \item Bayesian methods are a bridge between calibration and the \emph{Maximum-Likelihood}-method:
+\end{itemize}
+\textbf{\enquote{Bayesian Inference is a Way of Thinking, Not a Basket of Methods}}
+\end{frame}
+
+\begin{frame}\frametitle{Bayesian methods}\framesubtitle{Idea}
+  \begin{itemize}
+     \item Likelihood-funktion $\mathcal{L}(\mathbf{X}|\boldsymbol{\mu})$ is a conditional density of observed data given the parameters:
+$\wp(\mathbf{X}|\boldsymbol{\mu})=\mathcal{L}(\mathbf{X}|\boldsymbol{\mu})$.
+     \item Denote $\wp(\boldsymbol{\mu})$ as the known prior density of the vector of parameters, then using Bayes-rule:
+\begin{align*}
+    \wp(\boldsymbol{\mu}|\mathbf{X}) = \frac{\mathcal{L}(\mathbf{X}|\boldsymbol{\mu})\wp(\boldsymbol{\mu})}{\wp(\mathbf{X})} =  \frac{\mathcal{L}(\mathbf{X}|\boldsymbol{\mu})\wp(\boldsymbol{\mu})}{\int \wp(\boldsymbol{\mu}) \mathcal{L}(\mathbf{X|\boldsymbol{\mu}}) ~d\boldsymbol{\mu}} \propto \mathcal{L}(\mathbf{X}|\boldsymbol{\mu})\wp(\boldsymbol{\mu}),
+\end{align*}
+with $\propto$ meaning \enquote{proportional to}.
+
+     \item $\wp(\mathbf{X})$ is the \emph{marginal likelihood} of the data and ultimately only a constant that normalizes the expression to unity. It is independent of the parameters.
+    \item Removing it doesn't change the form of the posterior density $\wp(\boldsymbol{\mu}|\mathbf{X})$, it merely doesn't integrate to one.
+     \item This non-normalized density is called \emph{posterior-kernel} or, in logs, \emph{log-posterior-kernel}.
+   \end{itemize}
+\end{frame}
+
+\begin{frame}\frametitle{Bayesian methods}\framesubtitle{Idea}
+  \begin{itemize}
+    \item The mode is the Bayesian estimator $\boldsymbol{\widehat{\mu}_B}$ of the true parameter vector:
+\begin{align*}
+    \boldsymbol{\widehat{\mu}_B} = \underset{\mu}{\text{argmax}}\left\{\log{\wp(\boldsymbol{\mu}|\mathbf{X})}\right\} = \underset{\mu}{\text{argmax}}\left\{ \log{\mathcal{L}(\mathbf{X}|\boldsymbol{\mu})} + \log{\wp(\boldsymbol{\mu})} \right\}
+\end{align*}
+    \item Procedure: Calculate the log-likelihood with the Kalman-filter and simulate the \emph{log-posterior-kernel} through \emph{sampling-} or \emph{Monte-Carlo}-methods.
+    \item  In the literature -- and in Dynare -- the \emph{Metropolis-Hastings-algorithm} is commonly used.
+    \item  Inference can then be conducted via the properties of the posterior-distribution.
+  \end{itemize}
+\end{frame}
+
+\subsection{Metropolis-Hastings-algorithm}
+\begin{frame}\frametitle{Bayesian methods}\framesubtitle{Metropolis-Hastings-algorithm}
+\begin{block}{An and Schorfheide (2007, S.~132)}
+  The algorithm constructs a Gaussian approximation around the posterior mode and
+  uses a scaled version of the asymptotic covariance matrix as the covariance
+  matrix for the proposal distribution. This allows for an efficient
+  exploration of the posterior distribution at least in the neighborhood of
+  the mode.
+\end{block}
+\begin{itemize}
+  \item The algorithm uses the fact that under very general regularity conditions the moments of a distribution are asymptotically normal.
+\item It constructs a sequence of draws (Markov-chains) from a proposal density.
+\item This does not need to be identical with the posterior density. It is only required that the algorithm can draw samples from the whole range of the posterior density.
+\end{itemize}
+\end{frame}
+
+
+\begin{frame}\frametitle{Bayesian methods}\framesubtitle{Metropolis-Hastings-algorithm}
+\begin{itemize}
+  \item The current candidate (draw) $\boldsymbol{\mu^*}$ is dependent on the previous candidate $\boldsymbol{\mu^{(s-1)}}$.
+  \item Weights for all candidates are the same, however, they are only accepted with a certain probability $\alpha$, calculated as the ratio of the \emph{posterior-kernel} of the current to the one of the previous candidate.
+  \item Due to this construct the algorithm tends to shift the draws from areas of low posterior probability to areas of high probability.
+  \begin{itemize}
+    \item If $\boldsymbol{\mu^{(s-1)}}$ is in an area of high posterior probability, it is likely that only candidates in the same area are accepted.
+    \item If $\boldsymbol{\mu^{(s-1)}}$ is in an area of low posterior probability, it is very likely that new candidates are accepted.
+  \end{itemize}
+\item The covariance-matrix of the proposal distribution plays a major role, since it is important to set $\alpha$ neither too large nor to small.
+\item Current practice uses the covariance matrix of the mode $\boldsymbol{\widehat{\mu}_B}$ and scales it with a factor $c$ such that the average acceptance probability is between 20\% and 30\%.
+\end{itemize}
+
+\end{frame}
+
+\begin{frame}\frametitle{Bayesian methods}\framesubtitle{Metropolis-Hastings-algorithm}
+\begin{enumerate}
+\item Specify $c_0,c$ and $S$.
+  \item Maximize $\log{\mathcal{L}(\mathbf{X}|\boldsymbol{\mu})} +
+      \log{\wp(\boldsymbol{\mu})}$ using numerical methods.\\
+      $\boldsymbol{\widehat{\mu}_B}$ denotes the mode.
+  \item Calculate the inverse of the Hessian evaluated at the mode, denote it with $\boldsymbol{\Sigma_B}$.
+  \item Specify an initial value $\boldsymbol{\mu^{(0)}}$ or draw it from
+      $\mathcal{N}(\boldsymbol{\widehat{\mu}_B},c_0^2\boldsymbol{\Sigma_B})$.
+\seti
+\end{enumerate}
+
+\end{frame}
+
+
+\begin{frame}\frametitle{Bayesian methods}\framesubtitle{Metropolis-Hastings-algorithm}
+\begin{enumerate}\conti
+  \item For $\mathbf{s}=1,\dots,S$:
+  \begin{itemize}
+    \item Draw $\boldsymbol{\mu^*}$ from the candidate-generating distribution (proposal density)
+        $\mathcal{N}(\boldsymbol{\mu^{(s-1)}},c^2\boldsymbol{\Sigma_B})$.
+    \item Calculate the acceptance probability $\alpha$:
+        \begin{align*}
+        \alpha \equiv \alpha\left(\boldsymbol{\mu^{(s-1)}},\boldsymbol{\mu^*}\right) = \frac{\mathcal{L}\left(\boldsymbol{\mu^{*}}|\mathbf{X}\right)~\wp\left(\boldsymbol{\mu^*}\right)}{\mathcal{L}\left(\boldsymbol{\mu^{(s-1)}}|\mathbf{X}\right)~\wp\left(\boldsymbol{\mu^{(s-1)}}\right)}
+        \end{align*}
+    \item With probability
+        $\text{min}\left\{\alpha,1\right\}$ accept the jump from $\boldsymbol{\mu^{(s-1)}}$ to $\boldsymbol{\mu^*}$.
+        In other words: If $\alpha\geq1$, set $\boldsymbol{\mu^{(s)}}=\boldsymbol{\mu^*}$.
+    \item With complementary probability don't accept the jump, i.e. draw a uniformly distributed random variable $r$ between $0$ and $1$:
+        \begin{itemize}
+        \item If $r\leq\alpha$ set $\boldsymbol{\mu^{(s)}}=\boldsymbol{\mu^*}$ (jump).
+        \item If $r>\alpha$ set $\boldsymbol{\mu^{(s)}}=\boldsymbol{\mu^{(s-1)}}$ (don't jump).
+         \end{itemize}
+  \end{itemize}
+\seti
+\end{enumerate}
+
+\end{frame}
+
+\begin{frame}\frametitle{Bayesian methods}\framesubtitle{Metropolis-Hastings-algorithm}
+\begin{enumerate}\conti
+  \item Estimate the posterior expectation of a function
+      $\hbar(\boldsymbol{\mu})$ with $\frac{1}{S}\sum_{s=1}^S
+      \hbar\left(\boldsymbol{\mu^{(s)}}\right)$.
+  \item If the average acceptance probability does not yield a desirable value (typically between $20\%-30\%$) or the algorithm does not converge, change $c_0,c$ or $S$.
+\end{enumerate}
+
+\end{frame}
+
+\subsection{Remarks}
+\begin{frame}\frametitle{Bayesian methods}\framesubtitle{Remarks}
+  \begin{itemize}
+    \item Bayesian estimation of a DSGE-model requires that the number of shocks is equivalent to the numbers of observable variables.
+    \item Common choice for priors: gaussian, (normal, shifted or inverse) Gamma, Beta or the uniform distribution.
+    \item Choosing a proper prior one has to consider lower and upper bounds as well as the skewness and kurtosis of the distribution.
+    \item The results can vary due to the choice of priors and their parametrization.
+    \item Therefore one has to check the robustness of the results:
+    \begin{itemize}
+      \item Try a different parametrization.
+      \item Try more general priors.
+      \item Noninformative priors.
+      \item Sensitivity analysis.
+    \end{itemize}
+  \end{itemize}
+\end{frame}
+
+\subsection{Exercise 5: Estimation with Bayesian methods}
+
+\begin{frame}\frametitle{Exercise 5: Estimation with Bayesian methods}
+Consider the following simplified RBC-model (social planer problem);
+\begin{align*}
+  \underset{\{c_{t+j},l_{t+j},k_{t+j}\}_{j=0}^\infty}{max} W_t &= \sum_{j=0}^\infty \beta^j u(c_{t+j},l_{t+j})\\
+  s.t.\quad y_t &= c_t + i_t, & A_t &= A e^{a_t}, \\
+  y_t &= A_t f(k_{t-1},l_t), & a_t &= \rho a_{t-1} + \varepsilon_t,\\
+  k_t &= i_t +(1-\delta)k_{t-1}, &  \varepsilon_t &\sim N(0,\sigma_{\varepsilon}^2),
+\end{align*}
+where preferences and technology follow:
+\begin{align*}
+  u(c_t,l_t)= \frac{\left[c_t^\theta (1-l_t)^{1-\theta}\right]^{1-\tau}}{1-\tau}, \qquad f(k_{t-1},l_t)=\left[\alpha k_{t-1}^\psi + (1-\alpha)l_t^\psi\right]^{1/\psi}.
+\end{align*}
+Optimality is given by:
+\begin{eqnarray*}
+ &u_c(c_t,l_t) - \beta E_t \left\{u_c(c_{t+1},l_{t+1}) \left[A_{t+1} f_k(k_t, l_{t+1})+1-\delta \right]\right\} = 0,\\
+ & -\frac{u_l(c_t,l_t)}{u_c(c_t,l_t)}-A_t f_l(k_{t-1},l_t)=0,\\
+ & c_t + k_t -A_t f(k_{t-1},l_t) -(1-\delta)k_{t-1}=0.
+\end{eqnarray*}
+\end{frame}
+
+\begin{frame}\frametitle{Exercise 5: Estimation with Bayesian methods}
+\begin{enumerate}[(a)]
+  \item Write a mod-file for this model (with a sensible calibration and a steady-state block).
+  \item Simulate a sample of 10000 observations for $c_t,l_t$ and $y_t$ using \texttt{stoch\_simul} and save it in a mat-file.
+  \item Define priors for $\alpha,\theta$ and $\tau$ (or a different set of parameters).
+  \item Estimate the posterior mode using the \texttt{estimation} command and a limited sample with 100 observations. How man observable variables do you need? Check the posterior mode using \texttt{mode\_check}. If you get errors due to a non-positive definite Hessian, try a different optimization algorithm or change the initial values.
+\seti
+\end{enumerate}
+\end{frame}
+
+\begin{frame}\frametitle{Exercise 5: Estimation with Bayesian methods}
+  \begin{enumerate}[(a)]\conti
+      \item If you are satisfied with the posterior mode, approximate the posterior distribution using the the Metropolis- Hastings-Algorithmus with $3\times 5000$ iterations. If it does not converge to the (ergodic) posterior-distribution, repeat the algorithm without discarding the previous draws.
+  \item How robust are the results regarding the specification of the priors? Repeat the estimation of the posterior-mode for different priors.
+\seti\end{enumerate}
+\end{frame}
+
+
+\subsection{Inference, forecast, model comparison and identification}
+\begin{frame}\frametitle{Full information estimation}
+  \tableofcontents[currentsection]
+\end{frame}
+
+\begin{frame}\frametitle{Inference, forecast, model comparison and identification}\framesubtitle{Properties of the Posterior-distribution}
+\begin{itemize}
+  \item The posterior density combines all information about $\mathbf{\mu}$: information after the data is observed as well as information prior to the data.
+  \item Bayesian estimation works for every sample size, however, it has also the following asymptotic properties:
+    \begin{enumerate}
+      \item The priors become irrelevant for the determination of the posterior.
+      \item The posterior converges to a degenerate distribution around the true value.
+      \item The posterior is approximately gaussian.
+    \end{enumerate}
+  \item Using the posterior distribution one can
+  \begin{itemize}
+  \item set up Bayesian confidence intervals (credibility sets),
+  \item calculate forecasts using the predictive-density: $\mathcal{L}(\mathbf{X_f}|\mathbf{X})= \int \mathcal{L}(\mathbf{X_f}|(\boldsymbol{\mu}|\mathbf{X}))d \boldsymbol{\mu} = \int \mathcal{L}(\mathbf{X_f}|\boldsymbol{\mu},\mathbf{X})\wp(\boldsymbol{\mu}|\mathbf{X})d\boldsymbol{\mu}$
+  \item compare models.
+\end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}\frametitle{Inference, forecast, model comparison and identification}\framesubtitle{Model comparison}
+  \begin{itemize}
+    \item Models can differ in their prior distribution, the likelihood and the parameters.
+    \item Bayesian approach: Calculate the probability that model $i$ is the true model, given the data.
+    \item Suppose there are $i=1,2$ models $M_i$ with prior probability $p_i=P(M_i)$ that Modell $M_i$ is the true model.
+    \item Each model has a set of parameters $\boldsymbol{\mu_i}$ with a prior distribution $\wp_i(\boldsymbol{\mu_i})$ and a likelihood $\mathcal{L}_i(\mathbf{X}|\boldsymbol{\mu})$.
+    \item Then the probability of model 1 being the true model given the data, is given by:
+    \scriptsize\begin{align*}
+      P(M_1|X) &= \frac{P(M_1)\mathcal{L}_1(\mathbf{X}|M_1)}{\mathcal{L}(\mathbf{X})} = \frac{p_1 \int \mathcal{L}_1(\mathbf{X},\mathbf{\boldsymbol{\mu_1}}|M_1)d \boldsymbol{\mu_1}}{\mathcal{L}(\mathbf{X})}\\
+      &= \frac{p_1 \int \mathcal{L}_1(\mathbf{X}|\boldsymbol{\mu_1},M_1) \wp_1(\boldsymbol{\mu_1}|M_1) d \boldsymbol{\mu_1}}{\mathcal{L}(\mathbf{X})}\\
+      \text{mit }& \mathcal{L}(\mathbf{X}) = p_1 \int \mathcal{L}_1(\mathbf{X}|\boldsymbol{\mu_1},M_1)\wp_1(\boldsymbol{\mu_1}|M_1)d\boldsymbol{\mu_1} + p_2 \int \mathcal{L}_2(\mathbf{X}|\boldsymbol{\mu_2},M_2)\wp_2(\boldsymbol{\mu_2}|M_2)d\boldsymbol{\mu_2}
+    \end{align*}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}\frametitle{Inference, forecast, model comparison and identification}\framesubtitle{Model comparison}
+  \begin{itemize}
+      \item The expected value of the likelihood given the prior distribution is the so-called \emph{marginal-likelihood} for model i:
+    \begin{align*}
+      m_i(\mathbf{X}) = \int \mathcal{L}_i(\mathbf{X}|\boldsymbol{\mu_i},M_i)\wp_i(\boldsymbol{\mu_i}|M_i)d\boldsymbol{\mu_i}
+    \end{align*}
+    \item Using this, one can calculate the \emph{posterior-odds}:
+    \begin{align*}
+      PO_{12} = \frac{P(M_1|\mathbf{X})}{P(M_2|\mathbf{X})} = \underbrace{\frac{p_1}{p_2}}_{\text{Prior-Odds-Ratio}}\cdot \underbrace{\frac{m_1(\mathbf{X})}{m_2(\mathbf{X})}}_{Bayes-Faktor}
+    \end{align*}
+    \item Together with $P(M_1|\mathbf{X}) + P(M_2|\mathbf{X}) =1$ one gets the \emph{posterior-model-probabilities}:
+    \begin{align*}
+      P(M_1|\mathbf{X}) = \frac{PO_{12}}{1+PO_{12}}, \qquad P(M_2|\mathbf{X}) = 1-P(M_1|\mathbf{X}).
+    \end{align*}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}\frametitle{Inference, forecast, model comparison and identification}\framesubtitle{Model comparison}
+  \begin{itemize}
+    \item The \emph{marginal likelihood} measures the quality of a model to characterize data.
+    \item The \emph{Posterior-Odds} don't hint to the true model. They solely describe which model, compared to the other, has the highest conditional probability.
+    \item A $PO_{12}>>1$ is an indication that the data as well as the priors prefer model 1.
+    \item Guidelines of Jeffrey (1961):
+    \begin{itemize}
+      \item $1:1 - 3:1\quad~~$ weak evidence for model 1,
+      \item $10:1 - 100:1~$ strong evidence for model 1,
+      \item $> 100:1\qquad~~$ decisive evidence for model 1.
+    \end{itemize}
+    \item Implementation and calculation of the integrals is done by numerical MCMC- and sampling-methods, as well as Laplace- or Harmonic-Mean-approximation.
+  \end{itemize}
+\end{frame}
+
+
+\begin{frame}\frametitle{Exercise 5: Estimation with Bayesian methods}
+  \begin{enumerate}[(a)]\conti
+  \item Use the same dataset to estimate the parameters of a misspecified model. Use the same model, however, with a small difference:
+      \begin{itemize}
+      \item \textbf{a Cobb-Douglas production function $\Leftarrow$}
+      \item or a separable utility function,
+      \item or a model in which the household supplies inelastically one unit of labor.
+      \end{itemize}\emph{\textbf{Hint}: Don't forget to adjust the model equations as well as the steady-state block.}
+      \item Compare the estimation of the common parameters as well as the marginal densities of the different models. Calculate the \emph{posterior-odds} and the \emph{posterior-model-probabilities}.
+
+\end{enumerate}
+\end{frame}
+
+
+\begin{frame}\frametitle{Inference, forecast, model comparison and identification}\framesubtitle{Identification}
+  \begin{itemize}
+    \item Consider two vectors of parameters $\boldsymbol{\mu_1}$ and $\boldsymbol{\mu_2}$ for which
+    \begin{align*}
+    \mathcal{L}(\mathbf{X}|\boldsymbol{\mu_1}) = \mathcal{L}(\mathbf{X}|\boldsymbol{\mu_2}).
+    \end{align*}
+    \item If $\boldsymbol{\mu_1} = \boldsymbol{\mu_2}$, then there is identification. If, however, $\boldsymbol{\mu_1} \neq \boldsymbol{\mu_2}$, then one does not know which vector of parameters has generated the data.
+    \item Special case: $\mathcal{L}(\mathbf{X}|\boldsymbol{\mu_1},\boldsymbol{\mu_2}) = \mathcal{L}(\mathbf{X}|\boldsymbol{\mu_1})$.
+    \begin{itemize}
+    \item $\boldsymbol{\mu_2}$ is not identifiable through the data.
+    \item What are the implications for the posterior-distribution $\wp(\boldsymbol{\mu_2}|\mathbf{X})$?
+    \scriptsize\begin{align*}
+  \wp(\boldsymbol{\mu_2}|\mathbf{X}) &= \int \wp(\boldsymbol{\mu_1},\boldsymbol{\mu_2}|\mathbf{X}) d \boldsymbol{\mu_1}\\
+  &=  \left[\int\mathcal{L}(\mathbf{X}|\boldsymbol{\mu_1},\boldsymbol{\mu_2})\wp(\boldsymbol{\mu_1})\wp(\boldsymbol{\mu_2}|\boldsymbol{\mu_1}) d \boldsymbol{\mu_1}\right] \cdot [\mathcal{L}(\mathbf{X})]^{-1}\\
+  &=  \left[\int\mathcal{L}(\mathbf{X}|\boldsymbol{\mu_1})\wp(\boldsymbol{\mu_1})\wp(\boldsymbol{\mu_2}|\boldsymbol{\mu_1}) d \boldsymbol{\mu_1}\right] \cdot [\mathcal{L}(\mathbf{X})]^{-1}\\
+  &= \int \wp(\boldsymbol{\mu_1}|X)\wp(\boldsymbol{\mu_2}|\boldsymbol{\mu_1})d \boldsymbol{\mu_1}
+    \end{align*}
+    \end{itemize}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}\frametitle{Inference, forecast, model comparison and identification}\framesubtitle{Identification}
+\begin{itemize}
+  \item If the prior distribution of $\boldsymbol{\mu_2}$ is independent of $\boldsymbol{\mu_1}$, i.e. $\wp (\boldsymbol{\mu_2}|\boldsymbol{\mu_1})=\wp(\boldsymbol{\mu_2})$, then $\wp(\boldsymbol{\mu_2}|\mathbf{X})=\wp(\boldsymbol{\mu_2})$. Beliefs about $\boldsymbol{\mu_2}$ don't change after observing the data.
+  \item If the independence of the priors ist not given, then the information in the data has an effect on the beliefs about $\boldsymbol{\mu_2}$ over the effect on $\boldsymbol{\mu_1}$.
+  \item If an identification through data is not possible, then the difference between prior and posterior is due to the prior.
+  \item In practice on has to take a stand, if parameters are identified through data or through the prior.
+\end{itemize}
+\end{frame}
+
+
+\section{Discussion}
+\begin{frame}\frametitle{Full information estimation}
+  \tableofcontents[currentsection]
+\end{frame}
+
+\begin{frame}\frametitle{Discussion}
+  \begin{itemize}
+       \item More restrictive assumptions are needed compared to the limited information estimation: specification of the distribution of the schocks, i.e. the likelihood.
+    \item Advantages of a \emph{Maximum-Likelihood}-estimation lie in the full characterization of the data-generating-process and the exact, consistent and efficient estimation of the parameters.
+    \item \enquote{Dilemma of absurd parameter estimates}: Problem of the ML-estimation due to wrong distributional assumptions, problems in the optimization algorithm or non-separable identifiable parameters.
+    \item Even transformations, upper and lower bounds, etc. are only limited to help overcome this problem, when the likelihood is flat.
+  \end{itemize}
+  \begin{block}{General problem} For a mathematical expression with many conditions and parameters, but only a limited sample, there can exist different combinations of parameters that yield the same result and a similar dataset.\end{block}
+
+\end{frame}
+
+\begin{frame}\frametitle{Discussion}
+  \begin{itemize}
+    \item This is where Bayesian methods come in and bridge the gap between calibration and the \emph{ML-principle}.
+    \item Considering priors one can incorporate additional information into a model.
+    \item \enquote{Dilemma of absurd parameter estimates}: Even with Bayesian means it is not possible to estimate these parameters (the posterior looks almost the same as the prior), but one can assign probability such that these parameters are very unlikely.
+    \item[$\Rightarrow$] Using priors one can exclude these absurd parameter estimates.
+    \item Nevertheless the point of robustness and identification of the parameters remains a critical topic.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}\frametitle{Discussion}
+
+\begin{block}{An und Schorfheide (2006, S.124)}
+Once one acknowledges that the DSGE model provides merely an approximation to
+the law of motion of the time series (\dots), then it seems reasonable to
+assume that there need not exist a single parameter vector (\dots), that
+delivers, say, the \enquote{true} intertemporal substitution elasticity or
+price adjustment costs and, simultaneously, the most precise impulse
+responses to a technology or monetary policy shock. Each estimation method is
+associated with a particular measure of discrepancy between the
+\enquote{true} law of motion and the class of approximating models.
+\end{block}
+\end{frame}
+
+
+
+\end{document}
+
+
+
+
+
+
+

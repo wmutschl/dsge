@@ -1,0 +1,16 @@
+\frametitle{Exercise: Write your own MOD file}\framesubtitle{Steady-state}
+Note that we could either compute the steady-state analytically and then use steady\_state\_model in our mod-file or good guesses for an initval block. If you want to use intival, you can use these values
+\begin{verbatim}
+k    = 20;
+y    = 1;
+l    = 0.5;
+c    = 1.5;
+A    = 1;
+a    = 0;
+i    = 0.5;
+uc   = 0.5;
+ul   = -1;
+fk   = 0.1;
+fl   = 3;
+f    = 2;
+\end{verbatim}

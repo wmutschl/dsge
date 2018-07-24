@@ -1,0 +1,296 @@
+The share of capital is: 0.20778
+ 
+ 
+You did not declare endogenous variables after the estimation/calib_smoother command.
+Loading 10000 observations from artificial_sample.mat
+
+Initial value of the log posterior (or likelihood): -341.9399
+-----------------
+-----------------
+f at the beginning of new iteration,       341.9399114394
+Predicted improvement:        0.286347456
+lambda =          1; f =          341.5613193
+Norm of dx  0.0075677
+----
+Improvement on iteration 1 =        0.378592145
+-----------------
+-----------------
+f at the beginning of new iteration,       341.5613192945
+Predicted improvement:        0.045332691
+lambda =          1; f =          341.5148523
+Norm of dx  0.0036713
+----
+Improvement on iteration 2 =        0.046467026
+-----------------
+-----------------
+f at the beginning of new iteration,       341.5148522682
+Predicted improvement:        0.000307538
+lambda =          1; f =          341.5142800
+lambda =     1.9332; f =          341.5138237
+lambda =     3.7372; f =          341.5131548
+lambda =     7.2247; f =          341.5126591
+Norm of dx 0.00026415
+----
+Improvement on iteration 3 =        0.002193168
+-----------------
+-----------------
+f at the beginning of new iteration,       341.5126590999
+Predicted improvement:        0.001417732
+lambda =          1; f =          341.5101650
+lambda =     1.9332; f =          341.5084571
+lambda =     3.7372; f =          341.5068705
+Norm of dx  0.0012291
+----
+Improvement on iteration 4 =        0.005788560
+-----------------
+-----------------
+f at the beginning of new iteration,       341.5068705396
+Predicted improvement:        0.000085822
+lambda =          1; f =          341.5067506
+Norm of dx 0.00057826
+----
+Improvement on iteration 5 =        0.000119938
+-----------------
+-----------------
+f at the beginning of new iteration,       341.5067506015
+Predicted improvement:        0.000080185
+lambda =          1; f =          341.5066125
+lambda =     1.9332; f =          341.5065240
+lambda =     3.7372; f =          341.5064633
+Norm of dx    0.00047
+----
+Improvement on iteration 6 =        0.000287313
+-----------------
+-----------------
+f at the beginning of new iteration,       341.5064632884
+Predicted improvement:        0.000207922
+lambda =          1; f =          341.5060485
+lambda =     1.9332; f =          341.5056633
+lambda =     3.7372; f =          341.5049236
+lambda =     7.2247; f =          341.5035127
+lambda =     13.967; f =          341.5008558
+lambda =         27; f =          341.4959847
+lambda =     52.196; f =          341.4875617
+lambda =      100.9; f =          341.4750172
+lambda =     195.07; f =          341.4649351
+Norm of dx   0.000483
+----
+Improvement on iteration 7 =        0.041528212
+-----------------
+-----------------
+f at the beginning of new iteration,       341.4649350762
+Predicted improvement:        0.020059369
+lambda =          1; f =          341.4354143
+lambda =     1.9332; f =          341.4279093
+Norm of dx   0.058065
+----
+Improvement on iteration 8 =        0.037025729
+-----------------
+-----------------
+f at the beginning of new iteration,       341.4279093477
+Predicted improvement:        0.000815028
+lambda =          1; f =          341.4272068
+Norm of dx   0.016029
+----
+Improvement on iteration 9 =        0.000702592
+-----------------
+-----------------
+f at the beginning of new iteration,       341.4272067562
+Predicted improvement:        0.000013682
+lambda =          1; f =          341.4271930
+Norm of dx  0.0020419
+----
+Improvement on iteration 10 =        0.000013786
+-----------------
+-----------------
+f at the beginning of new iteration,       341.4271929702
+Predicted improvement:        0.000000003
+lambda =          1; f =          341.4271930
+Norm of dx 3.5706e-05
+----
+Improvement on iteration 11 =        0.000000002
+improvement < crit termination
+Objective function at mode: 341.427193
+ 
+MODE CHECK
+ 
+Fval obtained by the minimization routine: 341.427193
+ 
+ 
+RESULTS FROM POSTERIOR MAXIMIZATION
+parameters
+    prior mean     mode    s.d. t-stat prior pstdev
+
+alpha   0.450   0.4613  0.0292 15.7943 beta  0.0500
+theta   0.350   0.3496  0.0435  8.0449 beta  0.0500
+tau     2.207   2.0115  0.4559  4.4124 gamm  0.5000
+ 
+Log data density [Laplace approximation] is -346.836377.
+ 
+ 
+STEADY-STATE RESULTS:
+ 
+l 		 0.330303
+c 		 0.735849
+k 		 6.01544
+y 		 0.856158
+A 		 1
+a 		 0
+ 
+EIGENVALUES:
+         Modulus             Real        Imaginary
+
+             0.8              0.8                0
+          0.9418           0.9418                0
+           1.072            1.072                0
+             Inf              Inf                0
+             Inf              Inf                0
+
+
+There are 3 eigenvalue(s) larger than 1 in modulus 
+for 3 forward-looking variable(s)
+ 
+The rank condition is verified.
+ 
+ 
+You did not declare endogenous variables after the estimation/calib_smoother command.
+Loading 10000 observations from artificial_sample.mat
+
+Initial value of the log posterior (or likelihood): -341.4272
+ 
+MODE CHECK
+ 
+Fval obtained by the minimization routine: 341.427193
+ 
+ 
+RESULTS FROM POSTERIOR MAXIMIZATION
+parameters
+    prior mean     mode    s.d. t-stat prior pstdev
+
+alpha   0.450   0.4613  0.0292 15.7943 beta  0.0500
+theta   0.350   0.3496  0.0435  8.0449 beta  0.0500
+tau     2.207   2.0115  0.4559  4.4124 gamm  0.5000
+ 
+Log data density [Laplace approximation] is -346.836377.
+ 
+MH: Multiple chains mode.
+MH: Old _mh files successfully erased!
+MH: Old metropolis.log file successfully erased!
+MH: Creation of a new metropolis.log file.
+MH: Searching for initial values...
+MH: Initial values found!
+ 
+MH: Old mh_history file successfully erased!
+MH: Number of mh files                   : 1 per block.
+MH: Total number of generated files      : 3.
+MH: Total number of iterations           : 5000.
+MH: average acceptation rate per chain   : 
+    0.2410    0.2382    0.2378
+
+ 
+MCMC Diagnostics: Univariate convergence diagnostic, Brooks and Gelman (1998):
+    Parameter 1...  Done! 
+    Parameter 2...  Done! 
+    Parameter 3...  Done! 
+ 
+MH: Total number of Mh draws: 5000.
+MH: Total number of generated Mh files: 1.
+MH: I'll use mh-files 1 to 1.
+MH: In mh-file number 1 i'll start at line 2500.
+MH: Finally I keep 2500 draws.
+ 
+MH: I'm computing the posterior mean and covariance...  Done!
+ 
+MH: I'm computing the posterior log marginale density (modified harmonic mean)... 
+MH: Modified harmonic mean estimator, done!
+ 
+ 
+ESTIMATION RESULTS
+ 
+Log data density is -346.771714.
+ 
+parameters
+        prior mean post. mean   conf. interval  prior     pstdev
+
+alpha      0.450     0.4599     0.4156   0.5087  beta      0.0500
+theta      0.350     0.3561     0.2861   0.4254  beta      0.0500
+tau        2.207     2.1787     1.4701   2.9478  gamma     0.5000
+ 
+You did not declare endogenous variables after the estimation/calib_smoother command.
+Loading 10000 observations from artificial_sample.mat
+
+Initial value of the log posterior (or likelihood): -341.4272
+ 
+MODE CHECK
+ 
+Fval obtained by the minimization routine: 341.427193
+ 
+ 
+RESULTS FROM POSTERIOR MAXIMIZATION
+parameters
+    prior mean     mode    s.d. t-stat prior pstdev
+
+alpha   0.450   0.4613  0.0292 15.7943 beta  0.0500
+theta   0.350   0.3496  0.0435  8.0449 beta  0.0500
+tau     2.207   2.0115  0.4559  4.4124 gamm  0.5000
+ 
+Log data density [Laplace approximation] is -346.836377.
+ 
+MH: I'm loading past metropolis-hastings simulations...
+MH: ... It's done. I've loaded 5000 simulations.
+ 
+MH: Number of mh files                   : 1 per block.
+MH: Total number of generated files      : 3.
+MH: Total number of iterations           : 6000.
+MH: average acceptation rate per chain   : 
+    0.2478    0.2148    0.2298
+
+ 
+MH: Total number of Mh draws: 6000.
+MH: Total number of generated Mh files: 1.
+MH: I'll use mh-files 1 to 1.
+MH: In mh-file number 1 i'll start at line 3000.
+MH: Finally I keep 3000 draws.
+ 
+MH: I'm computing the posterior mean and covariance...  Done!
+ 
+MH: I'm computing the posterior log marginale density (modified harmonic mean)... 
+MH: Modified harmonic mean estimator, done!
+ 
+ 
+ESTIMATION RESULTS
+ 
+Log data density is -346.760783.
+ 
+parameters
+        prior mean post. mean   conf. interval  prior     pstdev
+
+alpha      0.450     0.4599     0.4113   0.5043  beta      0.0500
+theta      0.350     0.3548     0.2909   0.4316  beta      0.0500
+tau        2.207     2.1726     1.4294   2.9384  gamma     0.5000
+ 
+STEADY-STATE RESULTS:
+ 
+l 		 0.330303
+c 		 0.735849
+k 		 6.01544
+y 		 0.856158
+A 		 1
+a 		 0
+ 
+EIGENVALUES:
+         Modulus             Real        Imaginary
+
+             0.8              0.8                0
+          0.9418           0.9418                0
+           1.072            1.072                0
+             Inf              Inf                0
+             Inf              Inf                0
+
+
+There are 3 eigenvalue(s) larger than 1 in modulus 
+for 3 forward-looking variable(s)
+ 
+The rank condition is verified.
+ 
+Total computing time : 0h03m18s

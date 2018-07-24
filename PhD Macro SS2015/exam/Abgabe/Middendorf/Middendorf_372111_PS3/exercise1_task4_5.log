@@ -1,0 +1,119 @@
+Starting Dynare (version 4.4.3).
+Starting preprocessing of the model file ...
+Found 23 equation(s).
+Evaluating expressions...done
+Computing static model derivatives:
+ - order 1
+Computing dynamic model derivatives:
+ - order 1
+Processing outputs ...done
+Preprocessing completed.
+Starting MATLAB/Octave computing.
+
+STEADY-STATE RESULTS:
+
+tau    		 0.22
+w      		 2
+c      		 0.59482
+n      		 0.333333
+k      		 7.40719
+i      		 0.18518
+k_b    		 0.8
+i_b    		 0.02
+y      		 1
+z      		 1.09116
+r      		 0.0450013
+g_b    		 0.2
+tr     		 0
+dy     		 0
+dc     		 0
+di     		 0
+dn     		 0
+dw     		 0
+dr     		 0
+dtr    		 0
+dg_b   		 0
+di_b   		 0
+lambda 		 1.68118
+
+EIGENVALUES:
+         Modulus             Real        Imaginary
+
+            0.75             0.75                0
+            0.75             0.75                0
+            0.75             0.75                0
+            0.75             0.75                0
+          0.9501           0.9501                0
+           0.975            0.975                0
+           1.081            1.081                0
+       2.047e+17       -2.047e+17                0
+       3.938e+20        3.938e+20                0
+
+
+There are 3 eigenvalue(s) larger than 1 in modulus 
+for 3 forward-looking variable(s)
+
+The rank condition is verified.
+
+
+
+
+
+Residuals of the static equations:
+
+Equation number 1 : 0
+Equation number 2 : 0
+Equation number 3 : 0
+Equation number 4 : 0
+Equation number 5 : 0
+Equation number 6 : 0
+Equation number 7 : 0
+Equation number 8 : 0
+Equation number 9 : 0
+Equation number 10 : 0
+Equation number 11 : 0
+Equation number 12 : 0
+Equation number 13 : 0
+Equation number 14 : 0
+Equation number 15 : 0
+Equation number 16 : 0
+Equation number 17 : 0
+Equation number 18 : 0
+Equation number 19 : 0
+Equation number 20 : 0
+Equation number 21 : 0
+Equation number 22 : 0
+Equation number 23 : 0
+
+
+
+MODEL SUMMARY
+
+  Number of variables:         23
+  Number of stochastic shocks: 4
+  Number of state variables:   6
+  Number of jumpers:           3
+  Number of static variables:  15
+
+
+MATRIX OF COVARIANCE OF EXOGENOUS SHOCKS
+
+Variables     eps_z    eps_g_b   eps_i_b   eps_tau 
+eps_z        0.000000  0.000000  0.000000  0.000000
+eps_g_b      0.000000  1.000000  0.000000  0.000000
+eps_i_b      0.000000  0.000000  1.000000  0.000000
+eps_tau      0.000000  0.000000  0.000000  0.000000
+
+POLICY AND TRANSITION FUNCTIONS
+                                  dy              dc              di              dn              dw              dr              dtr             dg_b            di_b  
+k(-1)                       2.026414        7.592274      -13.444358       -1.236858        5.736987       -0.516344        0.445811       -0.405283       -0.040528
+k_b(-1)                    14.923606        9.470492       50.169423        1.211803       11.288197        0.671582        3.283193       -2.984721       -0.298472
+i_b(-1)                    -1.692672        2.115840     -420.948684       -0.846336        0.846336       -0.076172      -75.372388        0.338534       75.033853
+z(-1)                     108.074405       19.559343      520.791605       19.670014       49.064363        4.863488       23.776369      -21.614881       -2.161488
+g_b(-1)                    14.076501      -17.595626     -272.477080        7.038250       -7.038250        0.633461      -71.903170       72.184700       -0.281530
+tau(-1)                   -73.080320       -4.803447     -379.215830      -36.540160       36.540160       -3.288709       58.922330       14.616064        1.461606
+eps_z                     157.234865       28.456419      757.687236       28.617432       71.382568        7.075773       34.591670      -31.446973       -3.144697
+eps_g_b                    18.768668      -23.460835     -363.302773        9.384334       -9.384334        0.844614      -95.870893       96.246266       -0.375373
+eps_i_b                    -2.256896        2.821120     -561.264912       -1.128448        1.128448       -0.101563     -100.496517        0.451379      100.045138
+eps_tau                   -21.436894       -1.409011     -111.236643      -10.718447       10.718447       -0.964688       17.283883        4.287379        0.428738
+Total computing time : 0h00m03s

@@ -1,0 +1,48 @@
+ 
+STEADY-STATE RESULTS:
+ 
+y_hat 		 -0.00551259
+c_hat 		 -0.00921547
+k_hat 		 0.00916332
+i_hat 		 0.00916332
+l_hat 		 -0.012741
+w_hat 		 -0.0146759
+r_hat 		 -0.0146759
+A_hat 		 0
+ 
+EIGENVALUES:
+         Modulus             Real        Imaginary
+
+          0.9134          -0.9134                0
+            0.95             0.95                0
+           1.318            1.318                0
+             Inf              Inf                0
+
+
+There are 2 eigenvalue(s) larger than 1 in modulus 
+for 2 forward-looking variable(s)
+ 
+The rank condition is verified.
+ 
+ 
+MODEL SUMMARY
+ 
+  Number of variables:         8
+  Number of stochastic shocks: 1
+  Number of state variables:   2
+  Number of jumpers:           2
+  Number of static variables:  4
+
+
+MATRIX OF COVARIANCE OF EXOGENOUS SHOCKS
+
+Variables       e    
+e            0.000001
+ 
+POLICY AND TRANSITION FUNCTIONS
+                                   y_hat           c_hat           k_hat           i_hat           l_hat           w_hat           r_hat           A_hat
+Constant                   -0.005513       -0.009215        0.009163        0.009163       -0.012741       -0.014676       -0.014676               0
+k_hat(-1)                 -22.145396       -6.855404       -0.913407      -82.191587      -33.545368      -21.231990      -23.145396               0
+A_hat(-1)                  15.920182        4.991038        1.353335       58.840638       22.343555       14.566847       15.920182        0.950000
+e                          16.758086        5.253724        1.424563       61.937513       23.519531       15.333523       16.758086        1.000000
+Total computing time : 0h00m08s

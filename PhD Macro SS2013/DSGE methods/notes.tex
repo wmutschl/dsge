@@ -1,0 +1,218 @@
+\documentclass{article}
+\usepackage{enumerate}
+\usepackage{amsmath}
+\usepackage[a4paper]{geometry}
+\begin{document}
+\section*{Exercise 1: }
+
+\begin{enumerate}[(a)]
+  \item $log(z_t)$ follows a stationary AR(1)-process, since $0<\rho<1$.
+      Hence, $log(z_t)$ has a time independent expectation and variance.
+ \begin{align*}
+\text{Erwartungswert: } E[log(z_t)] &= \rho \underbrace{E[log(z_{t-1})]}_{=E[log(z_t)]} + \underbrace{E[\varepsilon_t]}_{=0}\\
+\Leftrightarrow E[log(z_t)] &= 0\\
+\Leftrightarrow log(E[z_t]) &= 0 \\
+\Leftrightarrow E(z_t) &= 1 = z\\
+\end{align*}
+\begin{align*}
+\text{Varianz: } var(z_t) &= \rho^2 \underbrace{var(z_{t-1})}_{=var(z_{t})} + \underbrace{var(\varepsilon_t)}_{=\sigma_\varepsilon^2}\\
+var(z_t) &= \frac{\sigma_\varepsilon^2}{1-\rho^2}
+  \end{align*}
+
+\item States $k_t, z_t$, control $c_t$. Bellmann-Equation:
+    \begin{align*}
+      V(k_t) = \underset{k_{t+1}}{max} \left\{U(\underbrace{c(k_t,k_{t+1})}_{c_t}) + \beta E_t V(k_{t+1})\right\} \quad Nebenbed: c_t = f(k_t) + (1-\delta)k_t - k_{t+1}
+    \end{align*}
+Consider:
+\begin{align*}
+  &\frac{\partial V(k_t)}{\partial k_{t}}=U'(c_t)\frac{\partial c_t}{\partial k_{t}} = U'(c_t)(f'(k_t)+(1-\delta))\\
+\Rightarrow & \frac{\partial V(k_{t+1})}{\partial k_{t+1}}= U'(c_{t+1})(f'(k_{t+1})+(1-\delta))
+\end{align*}
+Thus, we get:
+\begin{align*}
+  \frac{\partial V(k_t)}{\partial k_{t+1}} &= U'(c_t) \frac{\partial c_t}{\partial k_{t+1}} + \beta E_t \frac{\partial V(k_{t+1})}{\partial k_{t+1}}\\
+  &= U'(c_t)(-1) + \beta E_t \left[U'(c_{t+1})(f'(k_{t+1})+(1-\delta))\right]\\
+\Leftrightarrow c_t^{-\sigma} &= \beta E_t \left[ c_{t+1}^{-\sigma} (\alpha z_{t+1} k_{t+1}^{\alpha-1} +(1-\delta)) \right]
+\end{align*}
+This is the Euler-equation.
+
+\item Set up the Lagrangian:
+\begin{align*}
+  L &= E_t \sum_{t=0}^\infty \beta^{t+s} \left[\frac{c_{t+s}^{1-\sigma}-1}{1-\sigma} -\lambda_{t+s} \left(c_{t+s} + k_{t+s+1} - z_{t+s}k_{t+s}^\alpha -(1-\delta)k_{t+s}\right) \right]\\
+  \frac{\partial L}{\partial c_t} &= E_t \left[\beta^t \left(c_t^{-\sigma}-\lambda_t\right)\right]=0 \Leftrightarrow \lambda_t=c_t^{-\sigma}\\
+  \frac{\partial L}{\partial k_{t+1}} &= E_t \left[\beta^t (-\lambda_t) + \beta^{t+1} (-\lambda_{t+1})(-\alpha z_{t+1} k_{t+1}^{\alpha-1}-1+\delta)) \right]=0\\
+  \Leftrightarrow \lambda_t &= E_t \beta \lambda_{t+1}(\alpha z_{t+1}k_{t+1}^{\alpha-1}+1-\delta)\\
+  \Rightarrow c_t^{-\sigma} &= \beta E_t \left[ c_{t+1}^{-\sigma} (\alpha z_{t+1} k_{t+1}^{\alpha-1} +(1-\delta)) \right]
+\end{align*}
+The same Euler-equation.
+\item In \emph{steady-state} there is no uncertainty and all
+    time-subscripts cancel: $c_t = c_{t+1}=c, k_t = k_{t+1}=k, z
+    =E(z_t)=1$. From the Euler equation you get:
+    \begin{align*}
+      c^{-\sigma} &= \beta c^{-\sigma}(\alpha k^{\alpha-1}+1-\delta)\\
+      \frac{1}{\beta} &= \alpha k^{\alpha-1} + 1 -\delta\\
+      \Leftrightarrow \alpha k^{\alpha-1} &= \frac{1}{\beta} -(1-\delta)\\
+      \Rightarrow k =\left(\frac{\alpha \beta}{1-\beta+\beta \delta}\right)^\frac{1}{1-\alpha} &\qquad \Rightarrow c=k^{\alpha} +(1-\delta)k -k= k^\alpha -\delta k
+    \end{align*}
+\textbf{Linearization\\}
+ Linearization of the Euler-equation: \\
+From steady-state you know: $\frac{1}{\beta}=\alpha z k^{\alpha-1} + 1-\delta \Leftrightarrow -\log(\beta)=\log(\alpha z k^{\alpha-1} + 1-\delta)$\\
+There are 2 methods to do this:
+    \begin{enumerate}[(1)]
+    \item Take logs and use Taylor-Approximation:
+    \begin{align*}
+    c_t^{-\sigma} &= \beta E_t \left[ c_{t+1}^{-\sigma} (\alpha z_{t+1} k_{t+1}^{\alpha-1} +1-\delta) \right]\\
+    {-\sigma}log(c_t) &= \log(\beta) {-\sigma}log(E_t c_{t+1}) + log(\alpha E_t z_{t+1} E_t k_{t+1}^{\alpha-1} +1-\delta)\\
+    {\sigma} \left[log(E_tc_{t+1}) - log(c_t)\right] &= \log(\beta) + log(\alpha E_t z_{t+1} E_t k_{t+1}^{\alpha-1} +1-\delta)
+    \end{align*}
+    Approximate the left side:
+    \begin{align*}
+    \sigma \left[\log(c)-\log(c)\right] + \frac{\sigma}{c}\left(E_t c_{t+1}-c\right) - \frac{\sigma}{c}\left(c_{t}-c\right)= \sigma \left( E_t \widehat{c}_{t+1} - \widehat{c}_t\right)
+    \end{align*}
+    Approximate the right side:
+    \begin{align*}
+      &\log(\beta) +\underbrace{\log(\alpha z k^{\alpha-1} + 1 -\delta)}_{-\log(\beta)} & 0\\
+      &+ \frac{\alpha k^{\alpha-1}}{\underbrace{\alpha z k^{\alpha-1} + 1 -\delta}_{=1/\beta}} (E_t z_{t+1}-z) \frac{1}{\underbrace{z}_{=1}} &+\beta \alpha k^{\alpha-1} E_t \widehat{z}_{t+1}\\
+      &+ \beta \alpha (\alpha-1) z k^{\alpha-2} (E_t k_{t+1}-k) & + \beta \alpha (\alpha-1) k^{\alpha-1} E_t \widehat{k}_{t+1}
+    \end{align*}
+    Thus, the approximation yields:
+    \begin{align*}
+      \sigma \left( E_t \widehat{c}_{t+1} - \widehat{c}_t\right) = \beta \alpha k^{\alpha-1} E_t \widehat{z}_{t+1} + \beta \alpha (\alpha-1) k^{\alpha-1} E_t \widehat{k}_{t+1}
+    \end{align*}
+    \item Rewrite the model using $x_t = e^{\log(x_t)-\log(x)+\log(x)} = x e^{\log(x_t)-\log(x)} \approx x e^{\widehat{x}_t}$ and approximate for $\widehat{x}_t$:
+    \begin{align*}
+      c^{-\sigma} e^{-\sigma \widehat{c}_t} = \beta  \left[ c^{-\sigma} e^{-\sigma E_t\widehat{c}_{t+1}}\left(\alpha z k^{\alpha-1}e^{E_t \widehat{z}_{t+1}+(\alpha-1)E_t \widehat{k}_{t+1}} +1 -\delta\right) \right]\\
+       e^{\sigma E_t \widehat{c}_{t+1} -\sigma \widehat{c}_t} = \beta  \left(\alpha z k^{\alpha-1}e^{E_t \widehat{z}_{t+1}+(\alpha-1)E_t \widehat{k}_{t+1}} +1 -\delta\right)
+    \end{align*}
+    Approximation of the LHS:
+    \begin{align*}
+     e^0 + e^0 \sigma (E_t\widehat{c}_{t+1}-0) - e^0 \sigma (\widehat{c}_{t}-0) & = 1 + \sigma (E_t\widehat{c}_{t+1} -\widehat{c}_{t} )
+    \end{align*}
+    Approximation of the RHS:
+    \begin{align*}
+      \underbrace{\beta \left(\alpha z k^{\alpha-1}e^{0} +1 -\delta\right)}_{=1}\\
+      +  \beta \alpha z k^{\alpha-1}e^{0}(E_t \widehat{z}_{t+1}-0)\\
+      +  \beta \alpha z k^{\alpha-1}e^{0}(\alpha-1)(E_t \widehat{k}_{t+1}-0)
+    \end{align*}
+    This is the same linearized Euler-equation.
+    \end{enumerate}
+    For the capital-accumulation-equation you get:
+    \begin{align*}
+      \widehat{k}_{t+1} = k^{\alpha-1} \widehat{z}_t - \frac{c}{k}\widehat{c}_t + \frac{1}{\beta} \widehat{k}_t
+    \end{align*}
+    And the technological process (just take logs and subtract the steady-state):
+    \begin{align*}
+      \widehat{z}_t = \rho z_{t-1} + \varepsilon_t
+    \end{align*}
+
+\item Put all Variables with time-subscript $t+1$ (except shocks) on the left side:
+\begin{align*}
+  -1 E_t\widehat{c}_{t+1} - \frac{\beta\alpha(\alpha-1)k^{\alpha-1}}{\sigma} E_t \widehat{k}_{t+1} - \frac{\beta \alpha k^{\alpha-1}}{\sigma} E_t \widehat{z}_{t+1} &= \widehat{c}_t\\
+  \widehat{k}_{t+1} &= - \frac{c}{k}\widehat{c}_t + \frac{1}{\beta} \widehat{k}_t  + k^{\alpha-1} \widehat{z}_t\\
+\widehat{z}_{t+1} &= \rho z_{t} + \varepsilon_{t+1}
+\end{align*}
+Thus, $\mathbf{x_{t+1}}=\begin{pmatrix} c_{t+1}\\k_{t+1}\\z_{t+1}\end{pmatrix}$, $\boldsymbol{\nu_{t+1}}=(\varepsilon_{t+1})$, $\boldsymbol{\eta_{t+1}}=\begin{pmatrix}E_t c_{t+1} - c_{t+1}\\E_t k_{t+1} - k_{t+1}\\E_t z_{t+1} - z_{t+1} \end{pmatrix}$. The system can then be written as:
+\begin{align*}
+  \underbrace{\begin{pmatrix} -1 & - \frac{\beta\alpha(\alpha-1)k^{\alpha-1}}{\sigma} & - \frac{\beta \alpha k^{\alpha-1}}{\sigma}\\
+            0 &1&0\\
+            0&0&1
+  \end{pmatrix}}_{\mathbf{A}} \underbrace{\begin{pmatrix} c_{t+1}\\k_{t+1}\\z_{t+1}\end{pmatrix}}_{\mathbf{x_{t+1}}}=\\
+  \underbrace{\begin{pmatrix} 1 & 0 & 0\\- \frac{c}{k}& \frac{1}{\beta} & k^{\alpha-1} \\ 0&0&\rho\end{pmatrix}}_{\mathbf{B}} \underbrace{\begin{pmatrix} c_{t}\\k_{t}\\z_{t}\end{pmatrix}}_{\mathbf{x_{t}}} +
+  \underbrace{\begin{pmatrix} 0\\0\\1  \end{pmatrix}}_{\mathbf{C}} \underbrace{\varepsilon_{t+1}}_{\boldsymbol{\nu_{t+1}}} +\underbrace{\begin{pmatrix} 1 & \frac{\beta\alpha(\alpha-1)k^{\alpha-1}}{\sigma} & \frac{\beta \alpha k^{\alpha-1}}{\sigma}\\
+            0 &0&0\\
+            0&0&0
+  \end{pmatrix}}_{\mathbf{D}} \underbrace{\begin{pmatrix} \eta_{1,t+1}\\ \eta_{2,t+1} \\ \eta_{3,t+1}\end{pmatrix}}_{\boldsymbol{\eta_{t+1}}}
+\end{align*}
+\end{enumerate}
+
+\section*{Vectorization and Kroneckerproduct}
+Example for vectorization:
+\begin{align*}
+  vec\begin{pmatrix} 1&3&2\\1&0&0\\1&2&2 \end{pmatrix} = \begin{pmatrix} 1 &1 &1 &3 &0&2&2&0&2\end{pmatrix}'
+\end{align*}
+Example for Kroneckerproduct:
+\begin{align*}
+  \underbrace{\begin{pmatrix} 1&3&2\\1&0&0\\1&2&2 \end{pmatrix}}_{3\times3} \otimes \underbrace{\begin{pmatrix}0&5\\5&0\\1&1 \end{pmatrix}}_{3\times2} =
+  \underbrace{\begin{pmatrix} 1\cdot\begin{pmatrix}0&5\\5&0\\1&1 \end{pmatrix}&3\cdot\begin{pmatrix}0&5\\5&0\\1&1 \end{pmatrix}&2\cdot\begin{pmatrix}0&5\\5&0\\1&1 \end{pmatrix}\\1\cdot\begin{pmatrix}0&5\\5&0\\1&1 \end{pmatrix}&0\cdot\begin{pmatrix}0&5\\5&0\\1&1 \end{pmatrix}&0\cdot\begin{pmatrix}0&5\\5&0\\1&1 \end{pmatrix}\\1\cdot\begin{pmatrix}0&5\\5&0\\1&1 \end{pmatrix}&2\cdot\begin{pmatrix}0&5\\5&0\\1&1 \end{pmatrix}&2\cdot\begin{pmatrix}0&5\\5&0\\1&1 \end{pmatrix}  \end{pmatrix}}_{9\times6}
+\end{align*}
+Consider the matrices A: $m\times n$, B: $n\times p$ and C: $p\times k$. Show that $vec(ABC)=\left(C'\otimes A\right) vec(B)$.
+\begin{align*}
+  ABC &= A \begin{pmatrix} b_1 & b_2 & \dots & b_p \end{pmatrix}
+  \begin{pmatrix}
+  c_{11} &c_{12} &\dots &c_{1k} \\
+  c_{21} &c_{22} &\dots &c_{2k} \\
+  \vdots &\vdots &\vdots &\vdots\\
+  c_{p1} &c_{p2} &\dots &c_{pk}
+  \end{pmatrix}\\
+  &= A \underbrace{\begin{pmatrix} b_1c_{11}+b_2c_{21}+\dots+b_p c_{p1},& b_1c_{12}+b_2c_{22}+\dots+b_p c_{p2}, & \dots ,& b_1c_{1k}+b_2c_{2k}+\dots+b_p c_{pk}\end{pmatrix}}_{n\times k}
+  \end{align*}
+
+\begin{align*}
+  vec(ABC) &= \begin{pmatrix} c_{11}A b_1 +c_{21}A b_2+\dots+ c_{p1}A b_p\\ c_{12}A b_1+c_{22} A b_2 + \dots +  c_{p2} A b_p \\ \vdots \\ c_{1k}A b_1+ c_{2k} A b_2 +\dots+ c_{pk} A b_p  \end{pmatrix}
+  = \begin{pmatrix} c_{11}A &  c_{21}A  & \dots & c_{p1}A \\ c_{12}A  & c_{22} A & \dots & c_{p2} A\\ \vdots & \vdots &\vdots&\vdots \\ c_{1k}A & c_{2k} A &\dots& c_{pk} A  \end{pmatrix} \begin{pmatrix} b_1\\b_2\\ \vdots\\b_p\end{pmatrix}
+  &= \left(C'\otimes A\right) vec(B)
+\end{align*}
+
+\section*{Exercise 5}
+\textbf{Derivation of optimality-conditions:}
+\begin{itemize}
+  \item $u_c(c_t,l_t)=\theta \left[c_t^\theta (1-l_t)^{1-\theta}\right]^{1-\tau}c_t^{-1}$
+  \item $u_l(c_t,l_t)=-(1-\theta) \left[c_t^\theta (1-l_t)^{1-\theta}\right]^{1-\tau}(1-l_t)^{-1}$
+  \item $f_k = \alpha \left[\alpha k_{t-1}^\psi + (1-\alpha)l_t^\psi\right]^\frac{1-\psi}{\psi} k_{t-1}^{\psi-1}=\alpha \left(\frac{f_t}{k_{t-1}}\right)^{1-\psi}=\alpha \left[\alpha + (1-\alpha)\left(\frac{l_t}{k_{t-1}}\right)^\psi\right]^\frac{1-\psi}{\psi}$
+  \item $f_l = (1-\alpha) \left[\alpha k_{t-1}^\psi + (1-\alpha)l_t^\psi\right]^\frac{1-\psi}{\psi} l_{t}^{\psi-1}=(1-\alpha) \left(\frac{f_t}{l_{t}}\right)^{1-\psi}=(1-\alpha) \left[\alpha\left(\frac{k_{t-1}}{l_t}\right)^\psi + (1-\alpha)\right]^\frac{1-\psi}{\psi}$
+  \item Euler:
+  \begin{align*}
+  \left[c_t^\theta (1-l_t)^{1-\theta}\right]^{1-\tau}c_t^{-1} &= \beta E_t \left[c_{t+1}^\theta (1-l_{t+1})^{1-\theta}\right]^{1-\tau}c_{t+1}^{-1}\cdot\left[A_{t+1} \alpha \left(\frac{f_{t+1}}{k_t}\right)^{1-\psi}+1-\delta\right]\\
+      &=\beta E_t \left[c_{t+1}^\theta (1-l_{t+1})^{1-\theta}\right]^{1-\tau}c_{t+1}^{-1}\cdot\left[\alpha A_{t+1}^\psi  \left(\frac{y_{t+1}}{k_t}\right)^{1-\psi}+1-\delta\right]
+  \end{align*}
+  \item Consumption-Leisure:
+  \begin{align*}
+    \frac{1-\theta}{\theta}\frac{c_t}{1-l_t}=A_t (1-\alpha)\left(\frac{f_t}{l_t}\right)^{1-\psi}=A_t^\psi(1-\alpha)\left(\frac{y_t}{l_t}\right)^{1-\psi}
+  \end{align*}
+  \item Resource-constraint:
+  \begin{align*}
+    y_t = c_t + k_t -(1-\delta)k_{t-1}
+  \end{align*}
+  \item Stochastic process: $A_t = e^{a_t}$ and $a_t = \rho a_{t-1}+\sigma \varepsilon_t$ with $\varepsilon_t \sim N(0,1)$.
+ \end{itemize}
+\textbf{Derivation of steady-state:}
+\begin{enumerate}
+  \item $A = A^{ss}$
+  \item From Euler: \begin{align*}
+  \frac{1}{\beta}=A^\psi \alpha \left(\frac{y}{k}\right)^{1-\psi}+1-\delta \\
+  \Leftrightarrow \frac{y}{k}=\left(\frac{\beta^{-1}-1+\delta}{\alpha A^\psi}\right)^\frac{1}{1-\psi}
+  \end{align*}
+  \item From resource-constraint: \begin{align*}\frac{c}{k}= \frac{y}{k}-\delta\end{align*}
+  \item Definition of Production-function:
+  \begin{align*}
+    \frac{y}{k} &= A \left[\alpha + (1-\alpha)\left(\frac{l}{k}\right)^\psi\right]^\frac{1}{\psi}=\left(\frac{\beta^{-1}-1+\delta}{\alpha A^\psi}\right)^\frac{1}{1-\psi} =\frac{y}{k}\\
+    \Leftrightarrow \frac{l}{k} &= \left[\left(\left(\frac{y/k}{A}\right)^\psi -\alpha\right)(1-\alpha)^{-1}\right]^\frac{1}{\psi}
+  \end{align*}
+  \item Identity:
+  \begin{align*}
+  \frac{y}{l}=\frac{y}{k}\frac{k}{l}
+  \end{align*}
+    \item Identity:
+  \begin{align*}
+  \frac{c}{l}=\frac{c}{k}\frac{k}{l}
+  \end{align*}
+  \item From the consumption-leisure decision:
+  \begin{align*}
+    l\frac{c}{l} &= (1-l)\frac{\theta}{1-\theta} A^\psi(1-\alpha)\left(\frac{y}{l}\right)^{1-\psi}\\
+    \Leftrightarrow l &= \left(1+\frac{\frac{c}{l}}{\frac{\theta(1-\alpha)}{1-\theta} A^\psi \left(\frac{y}{l}\right)^{1-\psi}}\right)^{-1}
+  \end{align*}
+    \item Identities:
+  \begin{align*}
+  c=\frac{c}{l}l, \qquad  k=\frac{l}{l/k}, \qquad   y=\frac{y}{k}k.
+  \end{align*}
+\end{enumerate}
+\textbf{How to calibrate?}
+\begin{itemize}
+  \item We have a CES-production-function. One can show that the capital-share in steady-state ist equal to
+  \begin{align*}
+    s(l,k) &= \frac{\alpha k^\psi}{\alpha k^\psi + (1-\alpha) l^\psi}= \frac{\alpha k^\psi}{\left[\alpha + (1-\alpha) \left(\frac{l}{k}\right)^\psi\right] k^\psi}=\frac{\alpha}{\left(\frac{y}{Ak}\right)^\psi}\\
+    &= \frac{\alpha A^\psi}{\left(\frac{\beta^{-1}-1+\delta}{\alpha}\right)^{\frac{\psi}{1-\psi}}} = \frac{\alpha^{\frac{1}{1-\psi}} A^\psi}{\left(\beta^{-1}-1+\delta\right)^\frac{\psi}{1-\psi}}
+  \end{align*}
+  \item So, choose parameters such that this expression is close to 0.2-0.3.
+\end{itemize}
+\end{document}

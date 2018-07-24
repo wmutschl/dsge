@@ -1,0 +1,148 @@
+ 
+You did not declare endogenous variables after the estimation/calib_smoother command.
+Loading 10000 observations from output1.mat
+
+Initial value of the log posterior (or likelihood): -370.9134
+ 
+RESULTS FROM POSTERIOR MAXIMIZATION
+parameters
+      prior mean     mode    s.d. t-stat prior pstdev
+
+h         0.700   0.6302  0.0674  9.3489 beta  0.1000
+sigma_c   1.000   0.8203  0.2027  4.0462 norm  0.3750
+adj       4.000   5.4159  1.2289  4.4070 norm  1.5000
+gamma_p   0.750   0.8348  0.1769  4.7199 beta  0.1500
+xi_p      0.750   0.7755  0.0490 15.8403 beta  0.0500
+gamma_w   0.750   0.8933  0.1145  7.8054 beta  0.1500
+xi_w      0.750   0.8005  0.0447 17.9042 beta  0.0500
+sigma_L   2.000   2.3174  0.6899  3.3592 norm  0.7500
+psi       0.200   0.2558  0.0719  3.5570 norm  0.0750
+phi       1.450   1.2893  0.2271  5.6772 norm  0.2500
+rho       0.800   0.5630  0.0968  5.8181 beta  0.1000
+r_pi      1.700   1.8190  0.0849 21.4290 norm  0.1000
+r_Y       0.125   0.1181  0.0549  2.1488 norm  0.0500
+r_dpi     0.300   0.3849  0.0980  3.9289 norm  0.1000
+r_dY      0.063   0.0863  0.0529  1.6299 norm  0.0500
+r_a       0.063   0.0625  0.0500  1.2500 norm  0.0500
+r_L       0.063   0.0625  0.0500  1.2500 norm  0.0500
+rho_a     0.850   0.9968  0.0023 435.0808 beta  0.1000
+rho_I     0.850   0.9207  0.0869 10.5891 beta  0.1000
+rho_b     0.850   0.9468  0.0205 46.2636 beta  0.1000
+rho_L     0.850   0.9243  0.0847 10.9118 beta  0.1000
+rho_G     0.850   0.9261  0.0986  9.3916 beta  0.1000
+rho_pi    0.850   0.9499  0.0476 19.9451 beta  0.1000
+sd_Q      0.400   0.1867  0.0759  2.4598 invg  2.0000
+sd_p      0.150   0.0692  0.0282  2.4510 invg  2.0000
+sd_w      0.250   0.1158  0.0472  2.4536 invg  2.0000
+sd_R      0.100   0.0461  0.0188  2.4503 invg  2.0000
+ 
+Log data density [Laplace approximation] is -419.606429.
+ 
+MH: One Chain mode.
+MH: Old metropolis.log file successfully erased!
+MH: Creation of a new metropolis.log file.
+MH: Initialization at the posterior mode.
+ 
+MH: Number of mh files                   : 3 per block.
+MH: Total number of generated files      : 3.
+MH: Total number of iterations           : 10000.
+MH: average acceptation rate per chain   : 
+    0.0996
+
+ 
+MH: Total number of Mh draws: 10000.
+MH: Total number of generated Mh files: 3.
+MH: I'll use mh-files 2 to 3.
+MH: In mh-file number 2 i'll start at line 689.
+MH: Finally I keep 5000 draws.
+ 
+MH: I'm computing the posterior mean and covariance...  Done!
+ 
+MH: I'm computing the posterior log marginale density (modified harmonic mean)... 
+MH: Modified harmonic mean estimator, done!
+ 
+ 
+ESTIMATION RESULTS
+ 
+Log data density is -440.318044.
+ 
+parameters
+          prior mean post. mean   conf. interval  prior     pstdev
+
+h            0.700     0.6602     0.5825   0.7133  beta      0.1000
+sigma_c      1.000     0.4804     0.3379   0.5920  norm      0.3750
+adj          4.000     6.7458     5.2675   8.0291  norm      1.5000
+gamma_p      0.750     0.7640     0.5691   0.9440  beta      0.1500
+xi_p         0.750     0.7884     0.7250   0.8714  beta      0.0500
+gamma_w      0.750     0.8234     0.6759   0.9939  beta      0.1500
+xi_w         0.750     0.7817     0.7169   0.8663  beta      0.0500
+sigma_L      2.000     2.3853     1.6217   3.1442  norm      0.7500
+psi          0.200     0.2175     0.1207   0.3037  norm      0.0750
+phi          1.450     1.2353     1.0017   1.5413  norm      0.2500
+rho          0.800     0.6036     0.4795   0.7265  beta      0.1000
+r_pi         1.700     1.8074     1.6972   1.9137  norm      0.1000
+r_Y          0.125     0.1367     0.0562   0.1986  norm      0.0500
+r_dpi        0.300     0.3392     0.1912   0.4860  norm      0.1000
+r_dY         0.063     0.1037     0.0358   0.1743  norm      0.0500
+r_a          0.063     0.0475    -0.0070   0.0911  norm      0.0500
+r_L          0.063     0.0863     0.0081   0.1814  norm      0.0500
+rho_a        0.850     0.9789     0.9690   0.9899  beta      0.1000
+rho_I        0.850     0.8733     0.7831   0.9705  beta      0.1000
+rho_b        0.850     0.8477     0.8123   0.8703  beta      0.1000
+rho_L        0.850     0.8636     0.7682   0.9691  beta      0.1000
+rho_G        0.850     0.9964     0.9933   0.9995  beta      0.1000
+rho_pi       0.850     0.9213     0.8713   0.9736  beta      0.1000
+sd_Q         0.400     0.3249     0.2260   0.4913  invg      2.0000
+sd_p         0.150     0.1039     0.0438   0.1564  invg      2.0000
+sd_w         0.250     0.4454     0.3308   0.5477  invg      2.0000
+sd_R         0.100     0.0549     0.0273   0.0767  invg      2.0000
+ 
+STEADY-STATE RESULTS:
+ 
+pi   		 0
+w    		 0
+K    		 0
+Q    		 0
+I    		 0
+C    		 0
+R    		 0
+r    		 0
+L    		 0
+Y    		 0
+e_a  		 0
+e_I  		 0
+e_b  		 0
+e_L  		 0
+e_G  		 0
+e_pi 		 0
+ 
+EIGENVALUES:
+         Modulus             Real        Imaginary
+
+       2.177e-19       -2.177e-19                0
+          0.4375           0.4375                0
+          0.6194           0.6194                0
+          0.6968           0.6334           0.2903
+          0.6968           0.6334          -0.2903
+          0.7709           0.7709                0
+          0.9207           0.9207                0
+          0.9243           0.9243                0
+          0.9261           0.9261                0
+          0.9381           0.9381                0
+          0.9468           0.9468                0
+          0.9499           0.9499                0
+          0.9968           0.9968                0
+           1.197            1.195          0.05627
+           1.197            1.195         -0.05627
+           1.295            1.226           0.4187
+           1.295            1.226          -0.4187
+           1.349            1.349                0
+             Inf              Inf                0
+
+
+There are 6 eigenvalue(s) larger than 1 in modulus 
+for 6 forward-looking variable(s)
+ 
+The rank condition is verified.
+ 
+Total computing time : 0h01m14s

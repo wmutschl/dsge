@@ -1,0 +1,81 @@
+ 
+STEADY-STATE RESULTS:
+ 
+C 		 1.00304
+K 		 3.1253
+L 		 0.906526
+w 		 1.00304
+r 		 0.14545
+A 		 1
+ 
+EIGENVALUES:
+         Modulus             Real        Imaginary
+
+          0.7797           0.7797                0
+            0.97             0.97                0
+           1.321            1.321                0
+             Inf              Inf                0
+
+
+There are 2 eigenvalue(s) larger than 1 in modulus 
+for 2 forward-looking variable(s)
+ 
+The rank condition is verified.
+ 
+ 
+MODEL SUMMARY
+ 
+  Number of variables:         6
+  Number of stochastic shocks: 1
+  Number of state variables:   2
+  Number of jumpers:           2
+  Number of static variables:  2
+
+
+MATRIX OF COVARIANCE OF EXOGENOUS SHOCKS
+
+Variables       e    
+e            0.000100
+ 
+POLICY AND TRANSITION FUNCTIONS
+                                       C               K               L               w               r               A
+Constant                    1.003043        3.125296        0.906526        1.003043        0.145450        1.000000
+K(-1)                       0.144433        0.779746       -0.105500        0.144433       -0.042523               0
+A(-1)                       0.757723        1.149948        0.589451        0.757723        0.204452        0.970000
+e                           0.781158        1.185514        0.607681        0.781158        0.210776        1.000000
+
+
+THEORETICAL MOMENTS
+
+VARIABLE      MEAN    STD. DEV.   VARIANCE 
+C              1.0030     0.0612     0.0037
+K              3.1253     0.2091     0.0437
+L              0.9065     0.0094     0.0001
+w              1.0030     0.0612     0.0037
+r              0.1455     0.0033     0.0000
+A              1.0000     0.0411     0.0017
+ 
+
+
+MATRIX OF CORRELATIONS
+
+Variables      C       K       L       w       r       A   
+C            1.0000  0.9940  0.3135  1.0000 -0.0596  0.9830
+K            0.9940  1.0000  0.2078  0.9940 -0.1684  0.9571
+L            0.3135  0.2078  1.0000  0.3135  0.9292  0.4823
+w            1.0000  0.9940  0.3135  1.0000 -0.0596  0.9830
+r           -0.0596 -0.1684  0.9292 -0.0596  1.0000  0.1245
+A            0.9830  0.9571  0.4823  0.9830  0.1245  1.0000
+ 
+
+
+COEFFICIENTS OF AUTOCORRELATION
+
+Order      1       2       3       4       5   
+C        0.9910  0.9777  0.9612  0.9423  0.9218
+K        0.9962  0.9868  0.9732  0.9564  0.9374
+L        0.7597  0.5729  0.4279  0.3153  0.2281
+w        0.9910  0.9777  0.9612  0.9423  0.9218
+r        0.7639  0.5803  0.4375  0.3267  0.2407
+A        0.9700  0.9409  0.9127  0.8853  0.8587
+Total computing time : 0h00m08s

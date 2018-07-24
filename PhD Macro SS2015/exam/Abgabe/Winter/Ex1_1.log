@@ -1,0 +1,175 @@
+Starting Dynare (version 4.4.3).
+Starting preprocessing of the model file ...
+Found 23 equation(s).
+Evaluating expressions...done
+Computing static model derivatives:
+ - order 1
+Computing dynamic model derivatives:
+ - order 1
+Processing outputs ...done
+Preprocessing completed.
+Starting MATLAB/Octave computing.
+
+STEADY-STATE RESULTS:
+
+C      		 0.570814
+dC     		 0
+dGB    		 0
+dI     		 0
+dIB    		 0
+dN     		 0
+domega 		 0
+dr     		 0
+dTR    		 0
+dY     		 0
+GB     		 0.2
+I      		 0.209186
+IB     		 0.02
+K      		 4.18371
+KB     		 0.4
+lambda 		 1.75188
+N      		 0.333333
+omega  		 2
+r      		 0.079674
+tau    		 0.22
+TR     		 0
+Y      		 1
+z      		 1.35142
+
+EIGENVALUES:
+         Modulus             Real        Imaginary
+
+            0.75             0.75                0
+            0.75             0.75                0
+            0.75             0.75                0
+            0.75             0.75                0
+          0.9141           0.9141                0
+            0.95             0.95                0
+            1.14             1.14                0
+       4.196e+20       -4.196e+20                0
+             Inf              Inf                0
+
+
+There are 3 eigenvalue(s) larger than 1 in modulus 
+for 3 forward-looking variable(s)
+
+The rank condition is verified.
+
+
+
+
+
+Residuals of the static equations:
+
+Equation number 1 : 0
+Equation number 2 : 0
+Equation number 3 : 0
+Equation number 4 : 0
+Equation number 5 : 0
+Equation number 6 : 0
+Equation number 7 : 0
+Equation number 8 : 0
+Equation number 9 : 0
+Equation number 10 : 0
+Equation number 11 : 0
+Equation number 12 : 0
+Equation number 13 : 0
+Equation number 14 : 0
+Equation number 15 : 0
+Equation number 16 : 0
+Equation number 17 : 0
+Equation number 18 : 0
+Equation number 19 : 0
+Equation number 20 : 0
+Equation number 21 : 0
+Equation number 22 : 0
+Equation number 23 : 0
+
+
+
+STEADY-STATE RESULTS:
+
+C      		 0.562105
+dC     		 -1.52573
+dGB    		 0.291289
+dI     		 -2.69917
+dIB    		 0.0291289
+dN     		 -0.26586
+domega 		 -0.643086
+dr     		 0.103472
+dTR    		 0.669816
+dY     		 -1.43554
+GB     		 0.2
+I      		 0.203539
+IB     		 0.02
+K      		 4.07079
+KB     		 0.4
+lambda 		 1.77903
+N      		 0.330675
+omega  		 1.98714
+r      		 0.0807088
+tau    		 0.23
+TR     		 0.00669816
+Y      		 0.985645
+z      		 1.35142
+
+EIGENVALUES:
+         Modulus             Real        Imaginary
+
+            0.75             0.75                0
+            0.75             0.75                0
+            0.75             0.75                0
+            0.75             0.75                0
+          0.9139           0.9139                0
+            0.95             0.95                0
+           1.142            1.142                0
+       1.603e+21        1.603e+21                0
+             Inf              Inf                0
+
+
+There are 3 eigenvalue(s) larger than 1 in modulus 
+for 3 forward-looking variable(s)
+
+The rank condition is verified.
+
+
+
+
+
+Residuals of the static equations:
+
+Equation number 1 : 0
+Equation number 2 : 0
+Equation number 3 : 0
+Equation number 4 : 0
+Equation number 5 : 0
+Equation number 6 : 0
+Equation number 7 : 0
+Equation number 8 : 0
+Equation number 9 : 0
+Equation number 10 : 0
+Equation number 11 : 0
+Equation number 12 : 0
+Equation number 13 : -1.1504e-07
+Equation number 14 : 0
+Equation number 15 : 0
+Equation number 16 : 0
+Equation number 17 : 0
+Equation number 18 : 0
+Equation number 19 : 0
+Equation number 20 : 0
+Equation number 21 : 0
+Equation number 22 : 0
+Equation number 23 : 0
+
+
+-----------------------------------------------------
+MODEL SIMULATION:
+
+
+Simulation concluded successfully after 3 iterations.
+Total time of simulation        :      0.047
+Convergency obtained.
+-----------------------------------------------------
+
+Total computing time : 0h00m01s

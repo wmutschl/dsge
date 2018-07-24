@@ -1,0 +1,7 @@
+\beamer@endinputifotherversion {3.36pt}
+\select@language {ngerman}
+\beamer@sectionintoc {1}{Allgemeine Darstellung und L\"{o}sung}{3}{0}{1}
+\beamer@sectionintoc {2}{L\"{o}sungsmethoden}{6}{0}{2}
+\beamer@subsectionintoc {2}{1}{Lineare Verfahren: Klein (2000)}{8}{0}{2}
+\beamer@sectionintoc {3}{Aside: Matrix theory}{10}{0}{3}
+\beamer@subsectionintoc {3}{1}{Lineare Verfahren: Sims (2001)}{21}{0}{3}

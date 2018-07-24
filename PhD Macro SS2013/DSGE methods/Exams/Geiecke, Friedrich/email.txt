@@ -1,0 +1,26 @@
+Hi Willi,
+
+als Anlage das Problemset + Dynare- and Matlab-Dateien. Bei g_dd in Aufgabe 2 steht in der angehängten Datei "(g_{d} + 1)" statt "(p \bar + 1)" oben im Zähler. Ich hoffe, das stimmt so und ich habe auch nicht vergessen, irgendwelche Dateien anzuhängen.
+
+Viele Grüße
+Friedrich
+
+
+Hi Willi,
+
+danke für die schnelle Antwort!
+
+Ich war gerade am Lehrstuhl, aber du hast ja gerade Urlaub 
+
+Ich schreibe die zwei Fragen dann einfach kurz hier in eine E-Mail. Wenn du keine Zeit zum Antworten hast, verstehe ich das. Mach dir keine extra Arbeit deswegen.
+
+1. Wenn ich die Differenz im AR-Prozess der Aufgabe 1 herausnehme, soll ich dann im Modell nur die Code-Zeile mit dem AR1-Prozess bearbeiten und alles ausrechnen, um die Frage zu beantworten? Oder potentiell auch andere Stellen der Optimalitätsbedingungen anpassen, an denen delta_a und a stehen können?
+
+2. Bei Aufgabe 3 werden Daten für y, c und l simuliert. Du benutzt in deinem rbcestim aber nur y zur Schätzung. Nun ist im Problem Set eine Frage, ob welche Variablen man selbst zur Schätzung nehmen möchte. Ich habe mich nun auch an nur output/y gehalten, bin mir aber nicht ganz sicher, ob auch noch eine Schätzung mit den anderen Parametern zusätzlich gefragt ist.
+
+Wie gesagt, wenn du gerade auf Reisen vergiss die E-Mail. Viel Spaß!
+
+Viele Grüße
+Friedrich
+
+

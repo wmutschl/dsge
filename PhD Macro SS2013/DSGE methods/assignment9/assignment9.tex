@@ -1,0 +1,581 @@
+%% This document created by Scientific Word (R)
+%% Version 1.1
+
+
+\documentstyle[12pt,thmsa,sw20lart]{article}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%TCIDATA{TCIstyle=Article/ART4.LAT,lart,article}
+
+%TCIDATA{OutputFilter=LATEX.DLL}
+%TCIDATA{Version=5.50.0.2953}
+%TCIDATA{<META NAME="SaveForMode" CONTENT="1">}
+%TCIDATA{BibliographyScheme=Manual}
+%TCIDATA{Created=Thu Oct 14 19:48:26 1999}
+%TCIDATA{LastRevised=Wednesday, March 21, 2012 14:32:54}
+%TCIDATA{<META NAME="GraphicsSave" CONTENT="32">}
+%TCIDATA{Language=American English}
+%TCIDATA{CSTFile=article.cst}
+
+\input tcilatex
+\begin{document}
+
+
+Christiano
+
+\begin{center}
+Tutorial on Forecasting, Output Gap Estimation, DSGE Model Estimation and
+the MCMC Algorithm Using Dynare
+\end{center}
+
+\section{Clarida-Gali-Gertler Model}
+
+Following are the equations of the Clarida-Gali-Gertler model. 
+\begin{eqnarray*}
+\pi _{t} &=&\beta E_{t}\pi _{t+1}+\kappa x_{t}\text{ (Calvo pricing equation)%
+} \\
+&& \\
+x_{t} &=&-\left[ r_{t}-E_{t}\pi _{t+1}-r_{t}^{\ast }\right] +E_{t}x_{t+1}%
+\text{ (intertemporal equation)} \\
+&& \\
+r_{t} &=&\alpha r_{t-1}+(1-\alpha )\left[ \phi _{\pi }\pi _{t}+\phi _{x}x_{t}%
+\right] +u_{t}\text{ (policy rule)} \\
+&& \\
+r_{t}^{\ast } &=&\rho \Delta a_{t}+\frac{1}{1+\varphi }\left( 1-\lambda
+\right) \tau _{t}\text{ (natural rate)} \\
+&& \\
+y_{t}^{\ast } &=&a_{t}-\frac{1}{1+\varphi }\tau _{t}\text{ (natural output)}
+\\
+&& \\
+x_{t} &=&y_{t}-y_{t}^{\ast }\text{ (output gap)} \\
+&&
+\end{eqnarray*}%
+The above equations represent the equilibrium conditions of an economy,
+linearized about its steady state. In the economy, household preferences are
+given by:%
+\[
+E_{0}\sum_{t=0}^{\infty }\left( \log C_{t}-\exp \left( \tau _{t}\right) 
+\frac{N_{t}^{1+\varphi }}{1+\varphi }\right) ,\text{ }\tau _{t}=\lambda \tau
+_{t-1}+\varepsilon _{t}^{\tau },\text{ }\varepsilon _{t}^{\tau }\symbol{126}%
+iid, 
+\]%
+where $C_{t}$ denotes consumption, $\tau _{t}$ is a time $t$ preference
+shock and $N_{t}$ denotes employment. The budget constraint of the household
+is:%
+\[
+P_{t}C_{t}+B_{t+1}\leq W_{t}N_{t}+R_{t-1}B_{t}+T_{t}, 
+\]%
+where $T_{t}$ denotes (lump sum) taxes and profits, $P_{t}$ is the price
+level, $W_{t}$ denotes the nominal wage rate and $B_{t+1}$ denotes bonds
+purchased at time $t$ which deliver a non-state-contingent rate of return, $%
+R_{t}$, in period $t+1.$ Competitive firms produce a homogeneous output
+good, $Y_{t},$ using the following technology:%
+\[
+Y_{t}=\left[ \int_{0}^{1}Y_{i,t}^{\frac{\varepsilon -1}{\varepsilon }}\right]
+^{\frac{\varepsilon }{\varepsilon -1}}di,\text{ }\varepsilon >1, 
+\]%
+where $Y_{i,t}$ denotes the $i^{th}$ intermediate good, $i\in \left(
+0,1\right) .$ The competitive firms takes the price of the final output
+good, $P_{t},$ and the prices of the intermediate goods, $P_{i,t},$ as given
+and chooses $Y_{t}$ and $Y_{it}$ to maximize profits. This results in the
+following first order condition:%
+\[
+Y_{i,t}=Y_{t}\left( \frac{P_{t}}{P_{i,t}}\right) ^{\varepsilon }. 
+\]%
+The producer of $Y_{it}$ is a monopolist which takes the above equation as
+its demand curve. The $i^{th}$ intermediate good firm uses labor, $N_{i,t},$
+to produce output using the following production function:%
+\[
+Y_{i,t}=\exp \left( a_{t}\right) N_{i,t},\text{ }\Delta a_{t}=\rho \Delta
+a_{t-1}+\varepsilon _{t}^{a}, 
+\]%
+where $\Delta $ is the first difference operator and $\varepsilon _{t}^{a}$
+is an iid shock. We refer to the time series representation of $a_{t}$ as a
+`unit root' representation. The $i^{th}$ firm sets prices subject to Calvo
+frictions. In particular,%
+\[
+P_{i,t}=\left\{ 
+\begin{array}{cc}
+\tilde{P}_{t} & \text{with probability }1-\theta \\ 
+P_{i,t} & \text{with probability }\theta%
+\end{array}%
+\right. , 
+\]%
+where $\tilde{P}_{t}$ denotes the price chosen by the $1-\theta $ firms that
+can reoptimize their price at time $t.$ The $i^{th}$ producer is competitive
+in labor markets, where it pays $W_{t}\left( 1-\nu \right) $ for one unit of
+labor. Here, $\nu $ represents a subsidy which has the effect of eliminating
+the monopoly distortion on labor in the steady state. That is, $1-\nu
+=\left( \varepsilon -1\right) /\varepsilon .$
+
+The Ramsey equilibrium for the model is the equilibrium associated with the
+optimal monetary policy. It can be shown that the Ramsey equilibrium is
+characterized by zero inflation, $\pi _{t}=0,$ at each date and for each
+realization of $a_{t}$ and $\tau _{t}$ and that consumption and employment
+in the Ramsey equilibrium corresponds to their first best levels.\footnote{%
+For a discussion, see http://faculty.wcas.northwestern.edu/\symbol{126}%
+lchrist/course/optimalpolicyhandout.pdf} That is, $C_{t}$ and $N_{t}$
+satisfy the resource constraint%
+\[
+C_{t}=\exp \left( a_{t}\right) N_{t}, 
+\]
+and the condition that the marginal rate of substitution between consumption
+and labor equals the marginal product of labor%
+\[
+\frac{\text{marginal utility of leisure}}{\text{marginal utility of
+consumption}}=C_{t}\exp \left( \tau _{t}\right) N_{t}^{\varphi }=\exp \left(
+a_{t}\right) . 
+\]%
+Solving for $N_{t}:$%
+\[
+\log \left( N_{t}^{\ast }\right) =-\frac{\tau _{t}}{1+\varphi },\text{ }\log
+\left( C_{t}^{\ast }\right) =a_{t}-\frac{\tau _{t}}{1+\varphi }, 
+\]%
+where $\ast $ indicates that the variable corresponds to the Ramsey
+equilibrium. In the description of the model above, $y_{t}$ denotes log
+output and $y_{t}^{\ast }$ denotes log output in the Ramsey equilibrium,
+i.e., $\log \left( C_{t}^{\ast }\right) .$ The gross interest rate in the
+Ramsey equilibrium, $R_{t}^{\ast },$ satisfies the intertemporal household
+first order condition, 
+\[
+1=\beta E_{t}\frac{u_{c,t+1}^{\ast }}{u_{c,t}^{\ast }}\frac{R_{t}^{\ast }}{%
+1+\pi _{t+1}^{\ast }}, 
+\]%
+where $u_{c,t}^{\ast }$ indicates the marginal utility of consumption in the
+Ramsey equilibrium. Also, $\pi _{t}^{\ast }=0.$ With our utility function:%
+\[
+1=\beta E_{t}\frac{C_{t}^{\ast }}{C_{t+1}^{\ast }}R_{t}^{\ast }=\beta E_{t}%
+\frac{R_{t}^{\ast }}{\exp \left[ \Delta a_{t+1}-\frac{\tau _{t+1}-\tau _{t}}{%
+1+\varphi }\right] }=\beta E_{t}\exp \left[ \log \left( R_{t}^{\ast }\right)
+-\Delta a_{t+1}+\frac{\tau _{t+1}-\tau _{t}}{1+\varphi }\right] , 
+\]%
+Approximately, one can `push' the expectation operator into the power of the
+exponential. Doing so and taking the log of both sides, one obtains:%
+\[
+0=\log \beta +\log \left( R_{t}^{\ast }\right) -E_{t}\Delta a_{t+1}+E_{t}%
+\frac{\tau _{t+1}-\tau _{t}}{1+\varphi }, 
+\]%
+or,%
+\[
+r_{t}^{\ast }=E_{t}\Delta a_{t+1}-E_{t}\frac{\tau _{t+1}-\tau _{t}}{%
+1+\varphi }, 
+\]%
+where $r_{t}^{\ast }\equiv \log \left( R_{t}^{\ast }\beta \right) ,$ the log
+deviation of $R_{t}^{\ast }$ from its value in the non-stochastic steady
+state. The variable, $r_{t}^{\ast },$ corresponds to the `natural rate of
+interest' and $y_{t}^{\ast }$ corresponds to the `natural rate of output'.
+
+\section{Computer Exercises}
+
+You will need the Dynare files, cggsim.mod and cggest.mod, as well as the
+MATLAB m files, plots.m, analyzegap.m, suptitle.m and HPFAST.m, to do this
+assignment (you can see answers in cggsimans.mod and cggestans.mod).
+
+The HP filter is defined as follows:%
+\[
+\min_{\left\{ y_{t}^{T}\right\} _{t=1}}\sum_{t=1}^{T}\left(
+y_{t}-y_{t}^{T}\right) ^{2}+\lambda \sum_{t=2}^{T-1}\left[ \left(
+y_{t+1}^{T}-y_{t}^{T}\right) -\left( y_{t}^{T}-y_{t-1}^{T}\right) \right]
+^{2} 
+\]%
+The parameter, $\lambda ,$ controls how `smooth' $y_{t}^{T}$ is. If $\lambda
+=0,$ then $y_{t}=y_{t}^{T}.$ If $\lambda =\infty ,$ then $y_{t}^{T}$ is a
+time trend (i.e., a line whose second derivative is zero). In business cycle
+analysis, it is customary to use $\lambda =1600$ in studying quarterly. The
+MATLAB m-file, [y\_hp,y\_hptrend]=HPFAST(y,lambda) takes $y$ as input and
+puts out y\_hp=$y_{t}-y_{t}^{T},$ y\_hptrend=$y_{t}^{T}.$
+
+This assignment explores four things: (i) the estimation of the output gap
+using the HP filter and a model (ii) estimation, by Bayesian and maximum
+likelihood methods, of a model, and (iii) the MCMC algorithm as a device for
+approximating a posterior distribution (iv) basic economic properties of the
+model.
+
+\begin{enumerate}
+\item Before turning to the econometric part of the assignment, it is useful
+to study the economics of the CGG model, by seeing how the CGG economy
+responds to a shock. Consider the following parameterization used:%
+\begin{eqnarray*}
+\beta &=&0.97,\text{ }\phi _{x}=0,\text{ }\phi _{\pi }=1.5,\text{ }\alpha =0,%
+\text{ }\rho =0.2,\text{ }\lambda =0.5,\text{ }\delta =0.2,\text{ } \\
+\varphi &=&1,\text{ }\theta =0.75,\text{ }\sigma _{a}=\sigma _{\tau }=0.02,%
+\text{ }\sigma _{u}=0.
+\end{eqnarray*}
+
+\begin{enumerate}
+\item In the case of the technology and preference shocks, use Dynare to
+compute the impulse response functions of the variables to each shock. The m
+file, plots.m, can be used for this purpose.
+
+\begin{enumerate}
+\item Consider the response of the economy to a technology shock and a
+preference shock. In each case, indicate whether the economy over- or under-
+responds to the shock, relative to their `natural' responses. What is the
+economic intuition in each case?
+
+\item Replace the time series representation of $a_{t}$ with%
+\[
+a_{t}=\rho a_{t-1}+\varepsilon _{t}^{a}. 
+\]%
+How does the response of the economy to $\varepsilon _{t}^{a}$ with this
+representation compare to the response to $\varepsilon _{t}^{a}$ with the
+unit root representation?
+\end{enumerate}
+
+\item Do the calculations with $\phi _{\pi }=0.99.$ What sort of message
+does Dynare generate, and can you provide the economic intuition for it? (In
+this case, there is `indeterminacy', which means a type of multiplicity of
+equilibria...this happens whenever $\phi _{\pi }<1.)$ Provide intuition for
+this result.
+
+\item Return to the parameterization, $\phi _{\pi }=1.5.$ Now, insert $r_{t}$
+into the Cavlo pricing equation. Redo the calculations and note how Dynare
+reports indeterminacy again. Provide economic intuition for your result.
+
+\item Explain why it is that when the monetary policy rule is replaced by
+the $r_{t}=r_{t}^{\ast },$ the natural equilibrium (i.e., Ramsey) is a
+solution to the equilibrium conditions. Explain why the natural equilibrium
+is not the only solution to the equilibrium conditions (i.e., the indicated
+policy rule does not support the natural equilibrium uniquely). Verify this
+result computationally in Dynare.
+
+\item Now replace the monetary policy rule with%
+\[
+r_{t}=r_{t}^{\ast }+\alpha \left( r_{t-1}-r_{t-1}^{\ast }\right) +(1-\alpha
+) \left[ \phi _{\pi }\pi _{t}+\phi _{x}x_{t}\right] . 
+\]%
+Explain why the natural equilibrium is a solution to the equilibrium
+conditions with this policy. Verify computationally that this policy rule
+uniquely supports the natural equilibrium (in the sense of satisfying
+determinacy), as long as $\phi _{\pi }$ is large enough. Provide intuition.
+Conclude that the Taylor rule uniquely supports the natural equilibrium if
+the natural rate of interest is included in the rule.
+
+\item Consider the following alternative representation for the technology
+shock:%
+\[
+a_{t}=\rho a_{t-1}+\xi _{t}^{0}+\xi _{t-1}^{1}, 
+\]%
+where both shocks are iid, so that the sum is iid too. Here, we assume
+agents see $\xi _{t}^{0}$ at time $t$ and they see $\xi _{t-1}^{1}$ at $t-1.$
+Thus, agents have advance information (or, `news') about the future
+realization of a shock. Introduce this change into the code and set $\rho
+=0.2.$ Verify that when there is a shock to $\xi _{t}^{1},$ inflation falls
+contemporaneously and the output gap jumps. Provide intuition for this
+apparently contradictory result. What happens when the natural rate of
+interest is introduced in the policy rule?
+\end{enumerate}
+
+\item We now explore the MCMC algorithm and the Laplace approximation in a
+simple example. Technical details about both these objects are discussed in
+lecture notes.\footnote{%
+See http://faculty.wcas.northwestern.edu/\symbol{126}%
+lchrist/course/estimationhandout.pdf} One practical consideration not
+mentioned in the notes is relevant for the case in which the pdf of interest
+is of a non-negative random variable. Since the jump distribution is Normal,
+a negative $x$ could be drawn (see the notes for a detailed discussion of $x$
+and the `jump distribution'). As a result, we should assign a zero value to
+the density of a Weibull over negative random variables when implementing
+the MCMC algorithm.
+
+Hopefully, it is apparent that the MCMC algorithm is quite simple, and can
+be programmed by anyone with a relatively small exposure to MATLAB. A useful
+exercise to understand how the algorithm works, is to use it to see how well
+it approximates a simple known function. Thus, consider the Weibull
+probability distribution function (pdf), 
+\[
+g\left( \theta \right) =ba^{-b}\theta ^{b-1}e^{-\left( \frac{\theta }{a}%
+\right) ^{2}},\text{ }x\geq 0, 
+\]%
+where $a,b$ are parameters. (For an explanation of this pdf, see the MATLAB
+documentation of $[g]=wblpdf(\theta ,a,b).$) Consider $a=10,$ $b=20.$ Graph
+this pdf over the grid, $\left[ 7,11.5\right] ,$ with intervals $0.001$
+(i.e., graph $g$ on the vertical axis, where $g=wblpdf(x,10,20),$ and $x$ on
+the horizontal axis, where $x=7:.001:11.5$). Compute the mode of this pdf by
+finding the element in your grid with the highest value of $g.$ Compute the
+second derivative of the Weibull at the mode point numerically, using the
+formula,%
+\[
+f^{\prime \prime }\left( x\right) =\frac{f\left( x+2\varepsilon \right)
+-2f\left( x\right) +f\left( x-2\varepsilon \right) }{4\varepsilon ^{2}}, 
+\]%
+for $\varepsilon $ small (for example, you could set $\varepsilon =0.000001$%
+.) Here, $x$ plays the role of $\theta ^{\ast }$ and $f$ plays the role of
+the MATLAB function, $wblpdf.$ Set $V=-f^{\prime \prime }\left( \theta
+^{\ast }\right) ^{-1}.$
+
+Set $M=1,000$ (a very small number!) and try $k=2,4,6.$ Which implies an
+acceptance rate closer to the recommended value of around 0.23? Choose the
+value of $k$ that gets closest to that acceptance rate and note that the
+MCMC estimate of the distribution is quite volatile. Change $M$ to 10,000.
+If you have time (now, the simulations takes time) try $M=100,000.$ Note how
+the MCMC estimate of the distribution is starting to smooth out. When I set $%
+M=100,000$ and $k=4,$ I obtained (see the MATLAB code WeibullMCMC.m) the
+following result:%
+\[
+\]%
+\[
+\FRAME{itbpF}{5.8833in}{2.8988in}{0in}{}{}{weibull.eps}{\special{language
+"Scientific Word";type "GRAPHIC";maintain-aspect-ratio TRUE;display
+"USEDEF";valid_file "F";width 5.8833in;height 2.8988in;depth
+0in;original-width 16.6139in;original-height 8.1448in;cropleft "0";croptop
+"1";cropright "1";cropbottom "0";filename 'weibull.eps';file-properties
+"XNPEU";}}
+\]%
+\[
+\]%
+Note how well the MCMC approximation works. The Laplace approximation
+assigns too much density near the mode, and lacks the skewness of the
+Weibull. Still, for practical purposes the Laplace may be workable, at least
+as a first approximation in the initial stages of a research project. This
+could be verified in the early stages of the project by doing a run using
+the MCMC algorithm and comparing the results with those of the Laplace
+approximation. In practice, posterior distributions may not be as skewed as
+the Weibull is.
+
+\item From here on, consider the following alternative parameterization,
+which is more appealing than the one in question 1 from an empirical point
+of view:%
+\begin{eqnarray*}
+\beta &=&0.97,\text{ }\phi _{x}=0.15,\text{ }\phi _{\pi }=1.5,\text{ }\alpha
+=0.8,\text{ }\rho =0.9,\text{ }\lambda =0.5,\text{ }\delta =0.2,\text{ } \\
+\varphi &=&1,\text{ }\theta =0.75,\text{ }\sigma _{a}=\sigma _{\tau }=0.02,%
+\text{ }\sigma _{u}=0.
+\end{eqnarray*}%
+Generate $T=200$ artificial observations on the `endogenous' (in the sense
+of Dynare) variables of the model. These are the variables in the `var'
+list. The mod file provided, cggsim.mod, has 7 variables. Before doing the
+simulation, you should add the growth rate of output to the equations of the
+model and to the var list (call it `dy'.) That way, Dynare will also
+simulate output growth. The variables simulated by Dynare are placed in the $%
+n\times T$ matrix, oo\_.endo\_simul$.\footnote{%
+Here, endo\_simul is the matrix, which is a `field' in the structure, oo\_.}$
+The $n$ rows of oo\_.endo\_simul correspond to the $n=8$ variables in var, 
+{\it listed in the order in which you have listed them in the var statement}
+from the first to the last row. To verify the order that Dynare puts the
+variables in, see how they are ordered in M\_.endo\_names in the
+Dynare-created file, cggsim.m.
+
+Retrieve output growth from oo\_.endo\_simul and get the log level of
+output, $y,$ using $y=$cumsum($dysim$), where $dysim$ is the name I
+arbitrarily assigned to the row of oo\_.endo\_simul corresponding to output
+growth$.$ Also, retrieve $x$ from the appropriate row of oo\_.endo\_simul
+and create natural output from the relation, $y^{\ast }=y-x.$
+
+\begin{enumerate}
+\item Compute the HP filter of $y$ with $\lambda =1$ and display a graph
+with $y$ and $y^{T}.$ Do this also for $\lambda =1600$ and for $\lambda =$%
+160,000,000. Do the results accord with what you would expect, given the
+formula for the HP filter above?
+
+\item Graph the HP filter trend, $y^{T},$ ($\lambda =1600)$ along with $y$
+and $y^{\ast }.$ Note how actual output is somewhat more volatile than
+potential or natural output (recall, the economy overreacts to technology
+shocks). As a result, the HP filter with $\lambda =1600$ over smooths the
+data. Graph $y_{t}-y_{t}^{T}$ and the true output gap, $x_{t},$ as well as $%
+y,$ $y^{T}$ and $y^{\ast }.$ Compute the correlation between $%
+y_{t}-y_{t}^{T} $ and $x_{t}$. Also compute the correlation for the case
+where technology shocks are dominant (i.e., $\sigma _{a}=2,$ $\sigma _{\tau
+}=0.02)$ and for the case where preference shocks are dominant (i.e., $%
+\sigma _{a}=0.02,$ $\sigma _{\tau }=2).$ Interpret the results. The MATLAB
+command for computing the correlation between two variables, $w_{t}$ and $%
+u_{t},$ is corrcoef(w,u). The result of this calculation is a $2\times 2$
+matrix with unity on the diagonal and the correlation on the off-diagonal.
+\end{enumerate}
+
+The model of this question lies close to the heart of the main paradigm
+underlying the current view about the monetary transmission mechanism. Note
+that in the case of this model, the hp-filter is not terrible as a guide to
+the output gap. This is because the technology shock is the important shock
+in the dynamics of the data, and the actual data overreact to the technology
+shock. That is, the natural rate of output is a smooth version of the data.
+Of course, this is only an example, and is something worth pursuing more
+carefully using a DSGE model that has more solid empirical foundations.
+
+\item Now we will do some estimation. First, we generate artificial data
+from the baseline parameterization of the model. Place the simulated data,
+oo\_.endo\_simul, in the matrix, data. Then, save these data to a MATLAB
+file, data, using the instruction, save data data. Also, set periods = 5000
+in the stoch\_simul command. Run the mod file using Dynare. This saves the
+simulated data. Second, open cggest.mod.
+
+\begin{enumerate}
+\item First, do maximum likelihood estimation. Use 4,000 observations to
+verify that everything is working properly. Consistency of maximum
+likelihood implies that with this many observations, the probability that
+the estimates are far from the true parameter values is low. Try doing the
+estimation when you start far from the true parameter value, say with
+rho=lambda=0.9. Despite the bad initial guess about the parameter values,
+you should end up roughly at the true values.
+
+\item Redo (a), but now with 30 observations, and you should see that
+maximum likelihood still works well. Note that although the point estimates
+look quite good, the standard error on lambda is rather large.
+\end{enumerate}
+
+\item Now do Bayesian estimation, using the inverted gamma distribution as
+the prior on the two standard deviations and the beta distribution as the
+prior on the two autocorrelations.
+
+\begin{enumerate}
+\item Set the mean of the priors over the parameters to the corresponding
+true values. Set the standard deviation of the inverted gamma to 10 and of
+the beta to 0.04. (It's hard to interpret these standard deviations
+directly, but you will see graphs of the priors, which are easier to
+interpret.) Use 30 observations in the estimation. Adjust the value of $k,$
+so that you get a reasonable acceptance rate. I found that $k=1.2$ works
+well. Have a look at the posteriors, and notice how, with one exception,
+they are much tighter than the priors. The exception is lambda, where the
+posterior and prior are very similar. This is evidence that there is little
+information in the data about lambda.
+
+\item Redo (a), but set the mean and standard deviation of the prior on
+lambda equal to 0.95 and 0.04, respectively. Note how the prior and
+posterior are again very similar. There is not much information in the data
+about the value of lambda!
+
+\item Note how the priors on $\sigma _{a}$ and $\rho $ have faint
+`shoulders' on the right side. Redo (a), with $M=4,000$ ($M$ is mh\_replic,
+which controls the number of MCMC replications). Note that the posteriors
+are now smoother. Actually, $M=4,000$ is a small number of replications to
+use in practice.
+
+\item Now set the mean of the priors on the standard deviations to 0.1, far
+from the truth. Set the prior standard deviation on the inverted gamma
+distributions to $1$. Keep the observations at 30, and see how the
+posteriors compare with the priors. (Reset $M=1,000$ so that the
+computations go quickly.) Note that the posteriors move sharply back into
+the neighborhood of 0.02. Evidently, there is a lot of information in the
+data about these parameters.
+
+\item Repeat (a) with 4,000 observations. Compare the priors and posteriors.
+Note how, with one exception, the posteriors are `spikes'. The exception, of
+course, is lambda. Still, the difference between the prior and posterior in
+this case indicates there is information in the data about lambda.
+\end{enumerate}
+
+\item It is of interest to compare the posterior densities approximated by
+the MCMC algorithm with the Laplace approximation. Consider the setup in 5
+(a). You can recover all the information you need for these calculations
+from the structure, oo\_. The posterior distributions of the parameters and
+shock standard errors are in the structure oo\_.posterior\_density.
+Posterior modes are in oo\_.posterior\_mode. Posterior standard deviations
+(taken from the relevant diagonal parts of the inverse of the hessian of the
+log criterion) appear in oo\_.posterior\_variance (my code for recovering
+these objects is compareMCMCLaplace.m. Setting $M=10,000,$ I found%
+\[
+\]%
+\[
+\]%
+\[
+\FRAME{itbpF}{4.6512in}{3.8073in}{0in}{}{}{figcompare.eps}{\special{language
+"Scientific Word";type "GRAPHIC";maintain-aspect-ratio TRUE;display
+"USEDEF";valid_file "F";width 4.6512in;height 3.8073in;depth
+0in;original-width 6.0848in;original-height 4.9741in;cropleft "0";croptop
+"1";cropright "1";cropbottom "0";filename 'figcompare.eps';file-properties
+"XNPEU";}} 
+\]%
+\[
+\]%
+When I set $M=100,000,$ the MCMC posteriors became smoother:%
+\[
+\]%
+\[
+\]%
+\[
+\FRAME{itbpF}{4.6512in}{3.8073in}{0in}{}{}{figcompare1.eps}{\special%
+{language "Scientific Word";type "GRAPHIC";maintain-aspect-ratio
+TRUE;display "USEDEF";valid_file "F";width 4.6512in;height 3.8073in;depth
+0in;original-width 6.0848in;original-height 4.9741in;cropleft "0";croptop
+"1";cropright "1";cropbottom "0";filename 'figcompare1.eps';file-properties
+"XNPEU";}} 
+\]%
+\[
+\]%
+Note how much more similar the MCMC and Laplace posteriors are. The tail
+areas of the MCMC posteriors have thinned out and now resemble more closely
+the Laplace. Next, I set $M=1,000,000$ and obtained virtually the same
+result as with $M=100,000:$%
+\[
+\]%
+\[
+\]%
+\[
+\FRAME{itbpF}{4.6512in}{3.8073in}{0in}{}{}{figcompare2.eps}{\special%
+{language "Scientific Word";type "GRAPHIC";maintain-aspect-ratio
+TRUE;display "USEDEF";valid_file "F";width 4.6512in;height 3.8073in;depth
+0in;original-width 6.0848in;original-height 4.9741in;cropleft "0";croptop
+"1";cropright "1";cropbottom "0";filename 'figcompare2.eps';file-properties
+"XNPEU";}} 
+\]%
+\[
+\]%
+Thus, in this example it seems that the MCMC algorithm has roughly converged
+for $M=100,000.$ In addition the Laplace and MCMC approximations deliver
+very similar results, consistent with the conclusion that the Laplace
+approach can used at the start and middle of a research project, while the
+MCMC can be done later on. Note that in any particular project, you can
+`test' this proposition doing comparison of the posterior distribution
+obtained by the Laplace approximation with the posterior distribution
+obtained by MCMC.
+
+\item The output gap is not in the dataset used in the econometric
+estimation. However, as noted in the handout, it is possible to use the
+Kalman filter to estimate the output gap (actually, everything in the state)
+from the available data. There are two ways to do this: `smoothing' uses the
+entire data set and `filtering' only uses the part of the dataset prior to
+the date for which the estimate of the gap is formed (thus, filtered data
+are one-step-ahead forecasts). To activate the Kalman smoother in Dynare,
+include the argument, smoother, in the estimation argument list. The
+smoothed estimates will then be placed in a MATLAB structure
+oo\_.SmoothedVariables. This structure can be accessed either directly from
+the command line, or by selecting \TEXTsymbol{>}desktop\TEXTsymbol{>}%
+workspace from the pull down menu available in the command window. You will
+see that inside oo\_.SmoothedVariables there are a number of subcategories,
+with output related to the Bayesian estimation (for example,
+oo\_.SmoothedVariables.Median.x displays the median smoothed estimate of the
+output gap, $x$). To see how well the Dynare-estimated version of the model
+does at producing a good guess of the output gap, include the code,
+analyzegap.m, at the end of your mod file. This shows you how to recover the
+smoothed output gap from Dynare, and allows you to compare it with the
+actual output gap, as well as with the hp-filtered estimate of the output
+gap.
+
+\item Dynare also reports confidence intervals for the smoothed variables
+(e.g., oo\_.SmoothedVariables.HPDinf.x contains the upper bound of the 95
+percent confidence interval for $x,$ in case you set conf\_sig =.95 in the
+Dynare estimation command). These reflect parameter uncertainty, as well as
+the difficulty of recovering these variables from the observed data when
+they are not in the data set. If you run analyzegap.m down to line 41, you
+will see what this confidence interval looks like, by comparison with the
+actual gap. Note that occasionally, the actual gap lies outside the
+confidence interval, as is to be expected.
+
+\item The analysis in the previous question suggests that the output gap can
+be estimated reliably using the estimated dsge model. However, in practice
+one needs the output gap in real time. For this, the smoothed estimates of
+the output gap are not a reliable indicator. Instead, it is useful to look
+at the filtered estimates. These are found by running analyzegap.m to line
+56 (the code shows how these are recovered from oo\_.FilteredVariables).
+Note that there is a systematic phase shift between the estimated and actual
+gaps. This is as expected. Turning points are hard to `see' in real time.
+They become evident only after the fact. (Dynare also reports `updated'
+variables. These are forecasts of the data based on current and past
+observations. Not surprisingly, the updated `estimates' of variables that
+happen to be in the econometrician's data set happen to coincide with their
+true values. This is not so for filtered variables.)
+
+\item It is interesting to see how the HP filter works in real time. By
+running analyze.m down to line 75 one obtains an estimate of this. Note that
+the HP filter does not exhibit the same phase shift as the filtered data.
+This is because for date $t$ I have computed the HP filter using data up to
+and including date $t.$
+
+\item Dynare will also do forecasting. For this, one includes the argument,
+forecast=xx, where xx indicates how many periods in the future you want to
+forecast. (Put in xx=12.) To obtain the forecasts, as well as forecast
+uncertainty, execute the rest of analyzegap.m. You can see from the
+analyzegap.m code where in oo\_.PointForecast the forecasts as well as the
+forecast uncertainty is stored.
+\end{enumerate}
+
+\end{document}

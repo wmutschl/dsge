@@ -1,0 +1,28 @@
+ 
+STEADY-STATE RESULTS:
+ 
+pie   		 0
+x     		 0
+r     		 0
+rstar 		 0
+da    		 0
+tau   		 0
+dy    		 0
+ 
+EIGENVALUES:
+         Modulus             Real        Imaginary
+
+               0                0                0
+       1.754e-17        1.754e-17                0
+             0.2              0.2                0
+             0.5              0.5                0
+           1.145            1.109           0.2859
+           1.145            1.109          -0.2859
+
+
+There are 2 eigenvalue(s) larger than 1 in modulus 
+for 2 forward-looking variable(s)
+ 
+The rank condition is verified.
+ 
+Total computing time : 0h00m00s

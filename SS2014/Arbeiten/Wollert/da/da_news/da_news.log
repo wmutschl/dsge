@@ -1,0 +1,63 @@
+Starting Dynare (version 4.4.2).
+Starting preprocessing of the model file ...
+Found 8 equation(s).
+Evaluating expressions...done
+Computing static model derivatives:
+ - order 1
+Computing dynamic model derivatives:
+ - order 1
+Processing outputs ...done
+Preprocessing completed.
+Starting MATLAB/Octave computing.
+
+STEADY-STATE RESULTS:
+
+pie   		 0
+x     		 0
+r     		 0
+rstar 		 0
+da    		 0
+tau   		 0
+dy    		 0
+news  		 0
+
+EIGENVALUES:
+         Modulus             Real        Imaginary
+
+               0                0                0
+               0                0                0
+       7.985e-19       -7.985e-19                0
+             0.2              0.2                0
+               1                1                0
+           1.145            1.109           0.2859
+           1.145            1.109          -0.2859
+
+
+There are 2 eigenvalue(s) larger than 1 in modulus 
+for 2 forward-looking variable(s)
+
+The rank condition is verified.
+
+
+MODEL SUMMARY
+
+  Number of variables:         8
+  Number of stochastic shocks: 1
+  Number of state variables:   5
+  Number of jumpers:           2
+  Number of static variables:  2
+
+
+MATRIX OF COVARIANCE OF EXOGENOUS SHOCKS
+
+Variables     eps_a  
+eps_a        1.000000
+
+POLICY AND TRANSITION FUNCTIONS
+                                   pie             x               r               rstar           da              tau             dy              news 
+da(-1)                      0.008249        0.036596        0.012373        0.040000        0.200000               0        0.236596               0
+tau(-1)                     0.500000        0.082569        0.750000        0.250000               0        1.000000        0.082569               0
+news(-1)                    0.000825        0.003660        0.001237        0.004000        0.020000               0        0.023660               0
+x(-1)                              0               0               0               0               0               0       -1.000000               0
+eps_a                       0.002094        0.006241        0.003141        0.004000        0.020000               0        0.026241        1.000000
+Total computing time : 0h00m02s

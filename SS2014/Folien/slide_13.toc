@@ -1,0 +1,7 @@
+\beamer@endinputifotherversion {3.33pt}
+\select@language {ngerman}
+\beamer@sectionintoc {1}{Overview}{2}{0}{1}
+\beamer@sectionintoc {2}{General Method of Moments}{3}{0}{2}
+\beamer@subsectionintoc {2}{1}{Example: Estimating the Euler-equation with GMM}{6}{0}{2}
+\beamer@subsectionintoc {2}{2}{Impulse-Response-Matching}{9}{0}{2}
+\beamer@sectionintoc {3}{Discussion}{10}{0}{3}

@@ -1,0 +1,175 @@
+Starting Dynare (version 4.4.3).
+Starting preprocessing of the model file ...
+Found 23 equation(s).
+Evaluating expressions...done
+Computing static model derivatives:
+ - order 1
+Computing dynamic model derivatives:
+ - order 1
+Processing outputs ...done
+Preprocessing completed.
+Starting MATLAB/Octave computing.
+[Warning: Some of the parameters have no value (g_bar, k_bar) when using steady. If these parameters are not initialized in a
+steadystate file, Dynare may not be able to solve the model...] 
+[> In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('test_for_deep_parameters_calibration', 'C:\dynare\4.4.3\matlab\test_for_deep_parameters_calibration.m', 46)" style="font-weight:bold">test_for_deep_parameters_calibration</a> (<a href="matlab: opentoline('C:\dynare\4.4.3\matlab\test_for_deep_parameters_calibration.m',46,0)">line 46</a>)
+  In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('steady', 'C:\dynare\4.4.3\matlab\steady.m', 33)" style="font-weight:bold">steady</a> (<a href="matlab: opentoline('C:\dynare\4.4.3\matlab\steady.m',33,0)">line 33</a>)
+  In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('bk_FK', 'E:\Work\SS2015\PhD Macroeconomics\exam\Abgabe\Kuhn\bk_FK.m', 304)" style="font-weight:bold">bk_FK</a> (<a href="matlab: opentoline('E:\Work\SS2015\PhD Macroeconomics\exam\Abgabe\Kuhn\bk_FK.m',304,0)">line 304</a>)
+  In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('dynare', 'C:\dynare\4.4.3\matlab\dynare.m', 180)" style="font-weight:bold">dynare</a> (<a href="matlab: opentoline('C:\dynare\4.4.3\matlab\dynare.m',180,0)">line 180</a>)] 
+
+STEADY-STATE RESULTS:
+
+c      		 0.55901
+dc     		 -7.60365
+di     		 -5.57612
+di_b   		 0.118107
+dg_b   		 1.18107
+dn     		 -1.85869
+dw     		 8.54486e-06
+dr     		 0
+dtr    		 -1.22673
+dy     		 -5.57605
+g_b    		 0.2
+i      		 0.165229
+i_b    		 0.02
+k      		 6.60916
+k_b    		 0.8
+lambda 		 1.78888
+n      		 0.314746
+r      		 0.0476228
+tau    		 0.22
+tr     		 -0.0122673
+w      		 2
+y      		 0.944239
+z      		 1.09961
+
+EIGENVALUES:
+         Modulus             Real        Imaginary
+
+            0.75             0.75                0
+            0.75             0.75                0
+            0.75             0.75                0
+            0.75             0.75                0
+           0.947            0.947                0
+           0.975            0.975                0
+           1.089            1.089                0
+       3.269e+18        3.269e+18                0
+             Inf             -Inf                0
+
+
+There are 3 eigenvalue(s) larger than 1 in modulus 
+for 3 forward-looking variable(s)
+
+The rank condition is verified.
+
+
+
+
+
+Residuals of the static equations:
+
+Equation number 1 : 0
+Equation number 2 : 0
+Equation number 3 : 0
+Equation number 4 : 0
+Equation number 5 : 0
+Equation number 6 : 0
+Equation number 7 : 0
+Equation number 8 : 0
+Equation number 9 : 0
+Equation number 10 : 0
+Equation number 11 : 0
+Equation number 12 : 0
+Equation number 13 : 0
+Equation number 14 : 0
+Equation number 15 : 0
+Equation number 16 : 0
+Equation number 17 : 0
+Equation number 18 : 0
+Equation number 19 : 0
+Equation number 20 : -5.5113e-06
+Equation number 21 : 0
+Equation number 22 : 0
+Equation number 23 : 0
+
+
+[Warning: Some of the parameters have no value (g_bar, k_bar) when using steady. If these parameters are not initialized in a
+steadystate file, Dynare may not be able to solve the model...] 
+[> In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('test_for_deep_parameters_calibration', 'C:\dynare\4.4.3\matlab\test_for_deep_parameters_calibration.m', 46)" style="font-weight:bold">test_for_deep_parameters_calibration</a> (<a href="matlab: opentoline('C:\dynare\4.4.3\matlab\test_for_deep_parameters_calibration.m',46,0)">line 46</a>)
+  In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('steady', 'C:\dynare\4.4.3\matlab\steady.m', 33)" style="font-weight:bold">steady</a> (<a href="matlab: opentoline('C:\dynare\4.4.3\matlab\steady.m',33,0)">line 33</a>)
+  In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('bk_FK', 'E:\Work\SS2015\PhD Macroeconomics\exam\Abgabe\Kuhn\bk_FK.m', 319)" style="font-weight:bold">bk_FK</a> (<a href="matlab: opentoline('E:\Work\SS2015\PhD Macroeconomics\exam\Abgabe\Kuhn\bk_FK.m',319,0)">line 319</a>)
+  In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('dynare', 'C:\dynare\4.4.3\matlab\dynare.m', 180)" style="font-weight:bold">dynare</a> (<a href="matlab: opentoline('C:\dynare\4.4.3\matlab\dynare.m',180,0)">line 180</a>)] 
+
+STEADY-STATE RESULTS:
+
+c      		 0.55901
+dc     		 -7.60365
+di     		 -5.57612
+di_b   		 0.118107
+dg_b   		 1.18107
+dn     		 -1.85869
+dw     		 8.54486e-06
+dr     		 0
+dtr    		 -1.22673
+dy     		 -5.57605
+g_b    		 0.2
+i      		 0.165229
+i_b    		 0.02
+k      		 6.60916
+k_b    		 0.8
+lambda 		 1.78888
+n      		 0.314746
+r      		 0.0476228
+tau    		 0.22
+tr     		 -0.0122673
+w      		 2
+y      		 0.944239
+z      		 1.09961
+[Warning: Some of the parameters have no value (g_bar, k_bar) when using steady. If these parameters are not initialized in a
+steadystate file, Dynare may not be able to solve the model...] 
+[> In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('test_for_deep_parameters_calibration', 'C:\dynare\4.4.3\matlab\test_for_deep_parameters_calibration.m', 46)" style="font-weight:bold">test_for_deep_parameters_calibration</a> (<a href="matlab: opentoline('C:\dynare\4.4.3\matlab\test_for_deep_parameters_calibration.m',46,0)">line 46</a>)
+  In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('steady', 'C:\dynare\4.4.3\matlab\steady.m', 33)" style="font-weight:bold">steady</a> (<a href="matlab: opentoline('C:\dynare\4.4.3\matlab\steady.m',33,0)">line 33</a>)
+  In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('bk_FK', 'E:\Work\SS2015\PhD Macroeconomics\exam\Abgabe\Kuhn\bk_FK.m', 327)" style="font-weight:bold">bk_FK</a> (<a href="matlab: opentoline('E:\Work\SS2015\PhD Macroeconomics\exam\Abgabe\Kuhn\bk_FK.m',327,0)">line 327</a>)
+  In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('dynare', 'C:\dynare\4.4.3\matlab\dynare.m', 180)" style="font-weight:bold">dynare</a> (<a href="matlab: opentoline('C:\dynare\4.4.3\matlab\dynare.m',180,0)">line 180</a>)] 
+
+STEADY-STATE RESULTS:
+
+c      		 0.550208
+dc     		 -9.0585
+di     		 -8.08983
+di_b   		 0.148138
+dg_b   		 1.48138
+dn     		 -2.09784
+dw     		 -0.643082
+dr     		 0.0618524
+dtr    		 -0.586115
+dy     		 -6.89613
+g_b    		 0.2
+i      		 0.16083
+i_b    		 0.02
+k      		 6.43322
+k_b    		 0.8
+lambda 		 1.81749
+n      		 0.312355
+r      		 0.0482412
+tau    		 0.23
+tr     		 -0.00586115
+w      		 1.98714
+y      		 0.931039
+z      		 1.09961
+[Warning: Some of the parameters have no value (g_bar, k_bar) when using simul. If these parameters are not initialized in a
+steadystate file, Dynare may not be able to solve the model...] 
+[> In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('test_for_deep_parameters_calibration', 'C:\dynare\4.4.3\matlab\test_for_deep_parameters_calibration.m', 46)" style="font-weight:bold">test_for_deep_parameters_calibration</a> (<a href="matlab: opentoline('C:\dynare\4.4.3\matlab\test_for_deep_parameters_calibration.m',46,0)">line 46</a>)
+  In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('simul', 'C:\dynare\4.4.3\matlab\simul.m', 34)" style="font-weight:bold">simul</a> (<a href="matlab: opentoline('C:\dynare\4.4.3\matlab\simul.m',34,0)">line 34</a>)
+  In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('bk_FK', 'E:\Work\SS2015\PhD Macroeconomics\exam\Abgabe\Kuhn\bk_FK.m', 329)" style="font-weight:bold">bk_FK</a> (<a href="matlab: opentoline('E:\Work\SS2015\PhD Macroeconomics\exam\Abgabe\Kuhn\bk_FK.m',329,0)">line 329</a>)
+  In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('dynare', 'C:\dynare\4.4.3\matlab\dynare.m', 180)" style="font-weight:bold">dynare</a> (<a href="matlab: opentoline('C:\dynare\4.4.3\matlab\dynare.m',180,0)">line 180</a>)] 
+-----------------------------------------------------
+MODEL SIMULATION:
+
+
+Simulation concluded successfully after 3 iterations.
+Total time of simulation        :      0.046
+Convergency obtained.
+-----------------------------------------------------
+
+Total computing time : 0h00m01s
+Note: warning(s) encountered in MATLAB/Octave code

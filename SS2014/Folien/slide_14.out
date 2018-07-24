@@ -1,0 +1,16 @@
+\BOOKMARK [2][]{Outline0.1}{Idea}{}% 1
+\BOOKMARK [2][]{Outline0.2}{Kalman-filter, no measurement errors}{}% 2
+\BOOKMARK [3][]{Outline0.2.1.4}{Notation}{Outline0.2}% 3
+\BOOKMARK [3][]{Outline0.2.2.5}{Initialization}{Outline0.2}% 4
+\BOOKMARK [3][]{Outline0.2.3.7}{Recursion}{Outline0.2}% 5
+\BOOKMARK [3][]{Outline0.2.4.9}{Summary and Likelihood}{Outline0.2}% 6
+\BOOKMARK [2][]{Outline0.3}{Maximum-Likelihood}{}% 7
+\BOOKMARK [3][]{Outline0.3.1.11}{Idea}{Outline0.3}% 8
+\BOOKMARK [3][]{Outline0.3.2.12}{Exercise 4: An and Schorfheide \(2007\) via Maximum-Likelihood}{Outline0.3}% 9
+\BOOKMARK [3][]{Outline0.3.3.16}{Idea}{Outline0.3}% 10
+\BOOKMARK [2][]{Outline0.4}{Bayesian methods}{}% 11
+\BOOKMARK [3][]{Outline0.4.1.20}{Metropolis-Hastings-algorithm}{Outline0.4}% 12
+\BOOKMARK [3][]{Outline0.4.2.25}{Remarks}{Outline0.4}% 13
+\BOOKMARK [3][]{Outline0.4.3.26}{Inference, forecast, model comparison and identification}{Outline0.4}% 14
+\BOOKMARK [2][]{Outline0.5}{Discussion}{}% 15
+\BOOKMARK [3][]{Outline0.5.1.33}{Exercise 5: Estimation with Bayesian methods}{Outline0.5}% 16

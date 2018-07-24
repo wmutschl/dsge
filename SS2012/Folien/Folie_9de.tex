@@ -1,0 +1,406 @@
+%Erstellt mit WinEdt 6
+\documentclass{beamer} %%% FÜR VORTRAG MIT PAUSEN
+%\documentclass[handout]{beamer}  %%% FÜR HANDOUT ALS PDF
+
+\setbeamertemplate{navigation symbols}{}
+\usetheme{Madrid}
+\usecolortheme{seagull}
+\beamersetuncovermixins{\opaqueness<1>{25}}{\opaqueness<2->{15}}
+\usepackage[T1]{fontenc}
+\usepackage{ae,aecompl}
+\usepackage[ansinew]{inputenc}
+\usepackage[ngerman]{babel}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage[babel,german=quotes]{csquotes} %im deutschen übliche Anführungszeichen
+\usepackage{graphicx,pstricks,beamerprosper}
+\usepackage{verbatim}
+\newcounter{saveenumi}
+\newcommand{\seti}{\setcounter{saveenumi}{\value{enumi}}}
+\newcommand{\conti}{\setcounter{enumi}{\value{saveenumi}}}
+
+
+\begin{document}
+\author[Willi Mutschler]{Dr. Andrea Beccarini $\qquad$ Willi Mutschler, M.Sc.}
+\date{Sommersemester 2012}
+\institute[Institut für Ökonometrie]{Institut für Ökonometrie und
+Wirtschaftsstatistik Münster\\willi.mutschler@uni-muenster.de}
+\title{DSGE-Modelle}
+\subtitle{Kalibrierung und Einführung in Dynare}
+
+\begin{frame}
+\titlepage
+\end{frame}
+
+\begin{frame}\frametitle{Kalibrierung und Einführung in Dynare}
+\tableofcontents
+\end{frame}
+
+\section{Überblick Schätzverfahren}
+\begin{frame}\frametitle{Überblick Schätzverfahren}\framesubtitle{}
+\begin{itemize}
+      \item Die Lösung eines DSGE-Modells lässt sich ökonometrisch in
+          Form eines \emph{state-space}-Modells darstellen, dessen
+          Parameter es zu bestimmen gilt.
+      \item Drei verschieden Ansätze:
+      \begin{enumerate}
+        \item \textbf{Kalibrierung} der Parameter derart, dass sie
+            bestimmte theoretische Momente und stilisierte Fakten der
+            beobachteten Daten so genau wie möglich widerspiegeln.
+        \item \textbf{Verfahren begrenzter Information} bzw.
+            schwacher ökonometrischer Interpretation: Minimierung
+            einer Distanzfunktion zwischen theoretischen und
+            empirischen Momenten mithilfe der
+            \emph{General-Method-of-Moments} oder Methoden der
+            \emph{Indirekten Inferenz}.
+        \item \textbf{Vollständige Informationsschätzung} bzw. starke
+            ökonometrische Interpretation: Ziel ist eine genaue
+          Charakterisierung der beobachteten Datenreihen:
+          \emph{Maximum-Likelihood} oder \emph{bayesianischen
+          Methoden}.
+      \end{enumerate}
+\end{itemize}
+\end{frame}
+
+\section{Kalibrierung}
+\begin{frame}\frametitle{Kalibrierung}\framesubtitle{}
+\begin{itemize}
+   \item Ziel: Bestimmte quantitative Fragestellung mithilfe eines
+       strukturellen Modells zu beantworten.
+   \item Das Modell wird so konstruiert und parametrisiert, dass es
+       bestimmte Eigenschaften der wahren Ökonomie darstellt.
+   \item Bei der Festlegung der Parameter betrachtet man
+       \emph{steady-state} Eigenschaften und wählt die Parameter im
+       Einklang mit den beobachteten Daten.
+   \item Häufig: Stabile langfristige Durchschnitte (Lohneinkommen,
+       Arbeitszeit, Zinsen, Inflationsraten, Konsum- und
+       Staatsausgabenquoten).
+   \item Auch Mikrostudien werden zum Teil verwendet, doch Vorsicht bei
+       der Aggregierung!
+\end{itemize}
+\end{frame}
+
+\subsection{Mögliche Ansätze für die Kalibrierung eines Modells}
+\begin{frame}\frametitle{Kalibrierung}\framesubtitle{Mögliche Ansätze für die Kalibrierung eines Modells}
+
+\begin{itemize}
+   \item \emph{Steady-state Werte} mithilfe langfristige Durchschnitte
+       von Nominalzinsen, Inflationsraten, durchschnittlicher
+       Wachstumsrate der Produktivität.
+   \item Vorsicht: Weil (1989) zeigt, dass in Modellen mit
+       repräsentativen Agenten es zu systematischer Überschätzung der
+       Gleichgewichtszinsen kommen kann (\emph{risk-free rate puzzle}).
+       Es kann somit bei bestimmten Parameterkonstellation zu
+       Widersprüchen kommen (Beispiel: Diskontfaktor $\beta >1$).
+   \item Üblicher Preisaufschlag (mark-up) von 1.15 (Corsetti et al
+       (2012)).
+   \item Intertemporale Substitutionselastizität $1/\sigma$ üblicherweise
+       zwischen $\sigma=1$ und $\sigma=3$ (King, Plosser und Rebelo
+       (1988), Rotemberg und Woodford (1992), Lucas (2003)).
+\end{itemize}
+\end{frame}
+
+\begin{frame}\frametitle{Kalibrierung}\framesubtitle{Mögliche Ansätze für die Kalibrierung eines Modells}
+\begin{itemize}
+   \item Preisstarrheitskoeffizienten: Für durchschnittliche
+       Preisanpassung von 12-15 Monaten siehe Keen und Wang (2007).
+   \item Reaktionskoeffizienten von Geldpolitik: Häufig Taylor-Regel,
+       wobei durch unterschiedliche Gewichtungen entweder mehr Wert auf
+       Preisstabilität oder auf Glättung des Outputs gelegt werden kann.
+   \item Parameter der stochastischen Prozesse: Häufig persistent, kleine
+       Standardabweichungen, sonst Ausschläge recht hoch. OLS-Schätzung
+       der Produktionsfunktion und somit des Solow-Residuums auch
+       möglich.
+   \item Schockparameter: Ähnliche Studien: Christiano, Eichenbaum und
+       Evans (2005), Smets und Wouters (2003).
+   \item Letztlich: Try \& Error-Verfahren!
+\end{itemize}
+\end{frame}
+
+\section{Aufgabe 2: Kalibrierung eines RBC-Modells mit monopolistischer Konkurrenz}
+\begin{frame}\frametitle{Aufgabe 2:}\framesubtitle{Kalibrierung eines RBC-Modells mit monopolistischer Konkurrenz}
+Haushalte maximieren ihren Nutzen über Konsum $c_t$ und Freizeit $1-l_t$,
+wobei $l_t$ den Arbeitseinsatz bezeichnet:
+\begin{align*}
+  E_t \sum_{t=0}^\infty \beta [log(c_t) + \psi log(1-l_t)],
+\end{align*}
+wobei sie folgender Budgetrestriktion unterliegen:
+\begin{align*}
+  c_t + k_{t+1} = \underbrace{w_t l_t + r_t k_t}_{=y_t} + (1-\delta)k_t.
+\end{align*}
+Dabei bezeichnet $k_t$ den Kapitalstock, $w_t$ den Reallohn, $r_t$ den
+Realzins und $\delta$ die Abschreibungsrate. Ferner gilt für die
+Investitionen: \begin{align*}i_t=y_t-c_t. \end{align*}
+\end{frame}
+
+\begin{frame}\frametitle{Aufgabe 2:}\framesubtitle{Kalibrierung eines RBC-Modells mit monopolistischer Konkurrenz}
+Im Zwischengütersektor herrscht monopolistische Konkurrenz, während auf dem
+Endproduktsektor die vollständige Konkurrenz gilt. Die Produktionsfunktion
+eines Unternehmens $i\in[0;1]$, das Zwischengüter produziert, lautet:
+\begin{align*}
+  y_{it}&=A_t k_{it}^\alpha l_{it}^{1-\alpha}, \qquad \qquad ~~0<\alpha<1,\\
+  log(A_t) &= \rho log(A_{t-1}) + \epsilon_t, \qquad \epsilon_t \sim N(0,\sigma^2),
+\end{align*}
+wobei $A_t$ das Technologieniveau bezeichnet. Die Unternehmen legen den Preis
+$p_{it}$ für ihr Gut $y_{it}$ fest, haben jedoch keinen Einfluss auf den
+Reallohn $w_t$ und den Realzins $r_t$. Der Endproduktsektor ist durch eine
+Technologie vom Typ Dixit/Stiglitz gekennzeichnet:
+\begin{align*}
+  y_t = \left(\int_0^1 (y_{it})^{\frac{\varepsilon}{\varepsilon-1}}\right)^{\frac{\varepsilon-1}{\varepsilon}},
+\end{align*}
+wobei $\varepsilon$ die Substitutionselastizität bezeichnet.
+\end{frame}
+
+\begin{frame}\frametitle{Aufgabe 2:}\framesubtitle{Kalibrierung eines RBC-Modells mit monopolistischer Konkurrenz}
+\begin{enumerate}[(a)]
+   \item Zeigen Sie, dass das beschriebene DSGE-Modell folgende
+       strukturelle Form besitzt und interpretieren Sie die Bedingungen:
+       \begin{align}
+         \frac{1}{c_t} &= \beta E_t \left[\frac{1}{c_{t+1}} (1+r_{t+1}-\delta)\right]\\
+         w_t &= \psi \frac{c_t}{1-l_t}\\
+         y_t &= c_t + i_t\\
+         y_t &= A_t k_{t}^\alpha l_t^{1-\alpha}\\
+         w_t & = (1-\alpha) \frac{y_t}{l_t} \frac{\varepsilon -1}{\varepsilon}\\
+         r_t & = \alpha \frac{y_t}{k_t} \frac{\varepsilon -1}{\varepsilon}\\
+         i_t &= k_{t+1} - (1-\delta) k_t\\
+         log(A_t) &= \rho log(A_{t-1}) + \epsilon_t
+       \end{align}\seti
+\end{enumerate}
+
+\end{frame}
+
+
+\begin{frame}\frametitle{Aufgabe 2:}\framesubtitle{Kalibrierung eines RBC-Modells mit monopolistischer Konkurrenz}
+\begin{enumerate}[(a)]\conti
+   \item Welche Parameter gibt es zu bestimmen?
+   \item Schreiben Sie ein mod-File für das beschriebene Modell.
+       Überlegen Sie sich eine Kalibrierung für den Parametervektor
+       $\boldsymbol{\mu}$ und generieren Sie 1000 Datenpunkte mithilfe
+       von Dynare für $c_t, y_t, i_t, w_t$ und $r_t$. Speichern Sie die
+       mittleren 100 sowohl in einer Excel-Datei, als auch in einer
+       mat-Datei. Betrachten Sie den Konsumpfad auch grafisch.
+   \item Formulieren Sie die Strukturgleichungen um, indem Sie Variablen
+       als prozentuale Abweichung von ihrem steady-state betrachten:
+       $x_t= e^{log(x_t)-log(x)+log(x)}=x e^{\widehat{x}_t}$. Schreiben
+       Sie für dieses Modell nun ein mod-File. Was hat sich verändert?
+\end{enumerate}
+\end{frame}
+
+\section{Kalibrierung - Vorteile \& Nachteile}
+\begin{frame}\frametitle{Kalibrierung}\framesubtitle{Vorteile}
+\begin{itemize}
+   \item Die Kalibrierung wird sehr häufig verwendet, gibt einen ersten
+       Eindruck von den Stärken und Schwächen eines Modells.
+   \item Mit einer guten Kalibrierung ist ein präzises Abbild der Daten
+       möglich.
+   \item Mit verschiedenen Kalibrierungen lassen sich die Auswirkungen
+       von unterschiedlichen Politikmaßnahmen vergleichen:
+       \begin{itemize} \item Wie reagiert die Ökonomie, wenn die
+       Zentralbank mehr Gewicht auf die Glättung des Konjunkturzyklus als
+       auf Preisstabilität legt? \item Was passiert beispielsweise mit
+       dem Konsumpfad, falls die Haushalte eine hohe intertemporale
+       Substitutionselastizität haben, was bei einer niedrigen?
+       \end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}\frametitle{Kalibrierung}\framesubtitle{Nachteile}
+\begin{itemize}
+   \item Es ist ein Ad-hoc-Vorgehen und wird häufig als Kritikpunkt von
+       DSGE-Modellen angesehen.
+   \item Bietet keine statistische Fundierung und ist häufig durch
+       subjektive Einschätzungen geprägt.
+   \item Viele Parameter, insbesondere die der exogenen Prozesse,
+       besitzen einen gewissen Spiel- und Interpretationsraum und werden
+       auch unterschiedlich kalibriert (Intertemporale
+       Substitutionselastizität, geld- und fiskalpolitische Parameter,
+       Preisstarrheitskoeffizient, Standardabweichungen etc.).
+\end{itemize}
+\begin{block}{Prescott (1986, S.~10) über RBC-Modelle:} The models constructed within this theoretical framework are
+necessarily \textbf{highly abstract}. Consequently, they are necessarily
+false, and statistical hypothesis testing will reject them. This does not
+imply, however, that nothing can be learned from such a \textbf{quantitative
+theoretical exercise}.\end{block}
+\end{frame}
+
+\section{Aufgabe 3: Ein einfaches RBC-Modell - Übung mit Dynare}
+\begin{frame}
+  \frametitle{Aufgabe 3: Ein einfaches RBC-Modell}
+Betrachten Sie das folgende Modell
+\begin{itemize}
+
+\item Präferenzen des repräsentativen Agenten
+\begin{equation*}
+U=\sum_{t=1}^{\infty }\left( \frac{1}{1+\rho }\right) ^{t-1}E_{t}\left[ \log
+\left( C_{t}\right) -\frac{L_{t}^{1+\gamma }}{1+\gamma }\right] .
+\end{equation*}%
+Der Haushalt bietet Arbeit und Kapital an den Unternehmenssektor an.
+\begin{itemize}
+\item $L_{t}$ ist Arbeit.
+\item $\rho \in \left( 0,\infty \right) $
+ist ein Präferenzparameter.
+\item $\gamma \in \left( 0,\infty \right) $ ist ein Arbeitsangebotsparameter.
+\item $C_{t}$ bezeichnet Konsum.
+\item $w_{t}$ bezeichnet den Reallohn.
+\item $r_{t}$ bezeichnet den Zins.
+\end{itemize}
+\end{itemize}
+\end{frame}
+
+
+
+\begin{frame}
+  \frametitle{Aufgabe 3: Ein einfaches RBC-Modell}
+
+\begin{itemize}
+\item Der Haushalt muss eine Sequenz von Budgetrestriktionen beachten
+\begin{equation*}
+K_t=K_{t-1}\left( 1-\delta \right) +w_{t}L_{t}+r_{t}K_{t-1}-C_{t},
+\end{equation*}%
+wobei
+\begin{itemize}
+\item $K_{t}$ Kapital am Ende der Periode und
+\item $\delta \in \left(
+0,1\right) $ die Abschreibungsrate bezeichnet.
+\end{itemize}
+\item Die Produktionsfunktion ist gegeben durch
+\begin{equation*}
+Y_{t}=A_{t}K_{t-1}^{\alpha }\left( \left( 1+g\right) ^{t}L_{t}\right) ^{1-\alpha},
+\end{equation*}%
+wobei $g\in \left( 0,\infty \right) $ eine Wachstumsrate und $\alpha $ und $%
+\beta $ Parameter sind.
+\item $A_{t}$ bezeichnet das Technologieniveau, welches sich nach folgendem Prozess entwickelt:
+\begin{equation*}
+A_{t}=A_{t-1}^{\lambda }\exp \left( e_{t}\right) ,
+\end{equation*}%
+wobei $e_{t}$ i.i.d. normalverteilt ist (Erwartungswert von Null, Standardabweichung von $\sigma$). $\lambda \in \left( 0,1\right) $ ist ein Parameter.
+\end{itemize}
+\end{frame}
+
+\begin{frame}   \frametitle{Aufgabe 3: Ein einfaches RBC-Modell}
+
+  \framesubtitle{Optimierungsproblem des Haushalts}
+  Lagrangefunktion
+\begin{multline*}
+L = \max_{C_t,L_t,K_t} \sum_{t=1}^\infty \left( \frac{1}{1+\rho }\right) ^{t-1}E_{t}\Big[ \log
+\left( C_{t}\right) -\frac{L_{t}^{1+\gamma }}{1+\gamma }\\
+-\mu_t\left(K_t-K_{t-1}\left( 1-\delta \right) -w_{t}L_{t}-r_{t}K_{t-1}+C_{t}\right)\Big].
+\end{multline*}
+Bedingungen erster Ordnung
+\begin{align*}
+  \frac{\partial L}{\partial C_t} &= \left( \frac{1}{1+\rho }\right) ^{t-1}\left(\frac{1}{C_t}-\mu_t\right) = 0,\\
+  \frac{\partial L}{\partial L_t} &= \left( \frac{1}{1+\rho }\right) ^{t-1}\left(L_t^\gamma-\mu_tw_t\right) = 0,\\
+  \frac{\partial L}{\partial K_t} &= -\left( \frac{1}{1+\rho }\right) ^{t-1}\mu_t+\left( \frac{1}{1+\rho }\right) ^tE_t\left(\mu_{t+1}(1-\delta+r_{t+1})\right) = 0.
+\end{align*}
+\end{frame}
+
+
+\begin{frame}  \frametitle{Aufgabe 3: Ein einfaches RBC-Modell} \framesubtitle{Bedingungen erster Ordnung}
+Eliminierung des Lagrangemultiplikators ergibt:
+\begin{align*}
+L_t^\gamma&=\frac{w_t}{C_t},\\
+\frac{1}{C_t}&=\frac{1}{1+\rho}E_t\left(\frac{1}{C_{t+1}}(r_{t+1}+1-\delta)\right).
+\end{align*}
+
+\end{frame}
+
+\begin{frame}  \frametitle{Aufgabe 3: Ein einfaches RBC-Modell}
+  \framesubtitle{Optimierungsproblem des Unternehmens}
+  \[
+  \max_{L_t,K_{t-1}} A_tK_{t-1}^\alpha\left( \left( 1+g\right) ^{t}L_t\right)^{1-\alpha}-r_tK_{t-1}-w_tL_t.
+  \]
+Bedingungen erster Ordnung:
+\begin{align*}
+  r_t &= \alpha A_tK_{t-1}^{\alpha-1}\left( \left( 1+g\right) ^{t}L_t\right)^{1-\alpha},\\
+  w_t &= (1-\alpha) A_tK_{t-1}^\alpha\left( \left( 1+g\right) ^{t}\right)^{1-\alpha}L_t^{-\alpha}.
+\end{align*}
+\end{frame}
+
+\begin{frame} \frametitle{Aufgabe 3: Ein einfaches RBC-Modell}
+  \framesubtitle{Gleichgewicht auf dem Gütermarkt}
+  \[
+  K_t+C_t = K_{t-1}(1-\delta)+\underbrace{A_tK_{t-1}^\alpha\left( \left( 1+g\right) ^{t}L_t\right)^{1-\alpha}}_{w_t L_t + r_t K_t}.
+  \]
+\end{frame}
+
+\begin{frame} \frametitle{Aufgabe 3: Ein einfaches RBC-Modell}
+  \framesubtitle{Dynamische Gleichgewicht}
+  \begin{align*}
+    \frac{1}{C_t}&=\frac{1}{1+\rho}E_t\left(\frac{1}{C_{t+1}}(r_{t+1}+1-\delta)\right),\\
+    L_t^\gamma&=\frac{w_t}{C_t},\\
+    r_t &= \alpha A_tK_{t-1}^{\alpha-1}\left( \left( 1+g\right) ^{t}L_t\right)^{1-\alpha},\\
+    w_t &= (1-\alpha) A_tK_{t-1}^\alpha\left( \left( 1+g\right) ^{t}\right)^{1-\alpha}L_t^{-\alpha},\\
+    K_t+C_t &= K_{t-1}(1-\delta)+A_tK_{t-1}^\alpha\left( \left( 1+g\right) ^{t}L_t\right)^{1-\alpha},\\
+        log(A_{t})&=\lambda log(A_{t-1}) + e_{t}.
+  \end{align*}
+\end{frame}
+
+\begin{frame}\frametitle{Aufgabe 3: Ein einfaches RBC-Modell}
+  \framesubtitle{Existenz eines gleichgewichtigen Wachstumspfads}
+Gleichgewicht auf dem Gütermarkt für jede Periode t: $ K_t+C_t = K_{t-1}(1-\delta)+A_tK_{t-1}^\alpha\left( \left( 1+g\right) ^{t}L_t\right)^{1-\alpha}$.\\
+Also muss es Wachstumsraten $g_c$ and $g_k$ derart geben, dass
+\begin{multline*}
+(1+g_k)^tK_1 + (1+g_c)^tC_1 =\\
+ \frac{(1+g_k)^t}{1+g_k}K_1(1-\delta) + A_t\left(\frac{(1+g_k)^t}{1+g_k}K_1\right)^\alpha\left( \left( 1+g\right) ^{t}L_t\right)^{1-\alpha}
+\end{multline*}
+\begin{multline*}
+\Leftrightarrow K_1 + \left(\frac{1+g_c}{1+g_k}\right)^tC_1 =\\
+ \underbrace{\frac{K_1}{1+g_k}}_{K_0} (1-\delta) + A_t\left(\frac{K_1}{1+g_k}\right)^\alpha\left( \left( \frac{1+g}{1+g_k}\right) ^{t}L_t\right)^{1-\alpha}.
+\end{multline*}
+
+Dies ist nur gültig, falls $\qquad\qquad g_c=g_k=g$.
+
+\end{frame}
+
+\begin{frame}\frametitle{Aufgabe 3: Ein einfaches RBC-Modell}
+  \framesubtitle{Stationarisiertes Modell}
+  Definiere
+  \begin{align*}
+    \widehat{C}_t &= C_t/(1+g)^t,\\
+    \widehat{K}_t &= K_t/(1+g)^t,\\
+    \widehat{w}_t &= w_t/(1+g)^t.\\
+  \end{align*}
+\end{frame}
+
+\begin{frame}\frametitle{Aufgabe 3: Ein einfaches RBC-Modell}
+  \framesubtitle{Stationarisiertes Modell (Fortsetzung)}
+  \begin{align*}
+    \frac{1}{\widehat{C}_t{\red(1+g)^t}}&=\frac{1}{1+\rho}E_t\left(\frac{1}{\widehat{C}_{t+1}(1+g){\red(1+g)^t}}(r_{t+1}+1-\delta)\right),\\
+    L_t^\gamma&=\frac{\widehat{w}_t{\red(1+g)^t}}{\widehat{C}_t{\red(1+g)^t}},\\
+    r_t &= \alpha A_t\left(\widehat{K}_{t-1}\frac{\red(1+g)^t}{1+g}\right)^{\alpha-1}\left( {\red\left( 1+g\right) ^{t}}L_t\right)^{1-\alpha},\\
+    \widehat{w}_t{\red(1+g)^t} &= (1-\alpha) A_t\left(\widehat{K}_{t-1}\frac{\red(1+g)^t}{1+g}\right)^\alpha\left( {\red\left( 1+g\right) ^{t}}\right)^{1-\alpha}L_t^{-\alpha},\\
+    \left(\widehat{K}_t+\widehat{C}_t\right){\red(1+g)^t} &= \widehat{K}_{t-1}\frac{\red(1+g)^t}{1+g}(1-\delta)\\
+&+A_t\left(\widehat{K}_{t-1}\frac{\red(1+g)^t}{1+g}\right)^\alpha\left( {\red\left( 1+g\right) ^{t}}L_t\right)^{1-\alpha}.
+  \end{align*}
+
+\end{frame}
+
+\begin{frame}\frametitle{Aufgabe 3: Ein einfaches RBC-Modell}
+  \framesubtitle{Stationarisiertes Modell (Fortsetzung)}
+  \begin{align*}
+    \frac{1}{\widehat{C}_t}&=\frac{1}{1+\rho}E_t\left(\frac{1}{\widehat{C}_{t+1}(1+g)}(r_{t+1}+1-\delta)\right),\\
+    L_t^\gamma&=\frac{\widehat{w}_t}{\widehat{C}_t},\\
+    r_t &= \alpha A_t\left(\frac{\widehat{K}_{t-1}}{1+g}\right)^{\alpha-1}L_t^{1-\alpha},\\
+    \widehat{w}_t &= (1-\alpha) A_t\left(\frac{\widehat{K}_{t-1}}{1+g}\right)^\alpha L_t^{-\alpha},\\
+    \widehat{K}_t+\widehat{C}_t &= \frac{\widehat{K}_{t-1}}{1+g}(1-\delta)+A_t\left(\frac{\widehat{K}_{t-1}}{1+g}\right)^\alpha L_t^{1-\alpha},\\
+    log(A_{t})&=\lambda log(A_{t-1}) + e_{t}.
+  \end{align*}
+\end{frame}
+
+\begin{frame}\frametitle{Aufgabe 3: Ein einfaches RBC-Modell}\framesubtitle{Übungen mit Dynare}
+\begin{enumerate}[(a)]
+  \item Schreiben Sie eine mod-Datei für dieses einfache RBC-Modell. Gehen Sie dabei von folgender Kalibrierung aus:
+$\alpha=0.33, \delta=0.1, \rho = 0.03,\lambda=0.97, \gamma=0, g = 0.015$. \\Benutzen Sie für initval folgende Werte:
+$C=1,K=3,L=0.9,w=1,r=0.15,A=1$.
+\item Zeigen Sie, dass der steady-state folgende Bedingungen impliziert:
+\begin{align*}
+  A &=1, \qquad \qquad\qquad\qquad \qquad\qquad r =(1+g)(1+\delta) + \delta -1\\
+  L &= \left(\frac{1-\alpha}{\frac{r}{\alpha}-\delta-g}\right) \left(\frac{r}{\alpha}\right),\qquad \qquad\qquad
+  K = (1+g)\left(\frac{r}{\alpha}\right)^{\frac{1}{\alpha-1}} L\\
+  C &= (1-\delta) \frac{K}{1+g} + \left(\frac{K}{1+g}\right)^\alpha L ^{1-\alpha} - K, \qquad \qquad\qquad
+  w = C
+\end{align*}
+\item Integrieren Sie diese analytische Lösung in ihre mod-Datei, d.h. benutzen Sie steady\_state\_model anstelle von initval. Dynare erstellt automatisch eine steady-state m-Datei, schauen Sie sich diese an.
+\end{enumerate}
+\end{frame}
+\end{document}

@@ -1,0 +1,159 @@
+ 
+STEADY-STATE RESULTS:
+ 
+Y 		 0
+C 		 0
+I 		 0
+H 		 0
+K 		 0
+A 		 0
+ 
+EIGENVALUES:
+         Modulus             Real        Imaginary
+
+       2.743e-16        2.743e-16                0
+          0.1317           0.1317                0
+          0.9987           0.9987                0
+           1.145            1.145                0
+             Inf              Inf                0
+             Inf              Inf                0
+
+
+There are 3 eigenvalue(s) larger than 1 in modulus 
+for 3 forward-looking variable(s)
+ 
+The rank condition is verified.
+ 
+ 
+MODEL SUMMARY
+ 
+  Number of variables:         6
+  Number of stochastic shocks: 1
+  Number of state variables:   3
+  Number of jumpers:           3
+  Number of static variables:  1
+
+
+MATRIX OF COVARIANCE OF EXOGENOUS SHOCKS
+
+Variables       e    
+e            1.000000
+ 
+POLICY AND TRANSITION FUNCTIONS
+                                       Y               C               I               H               K               A
+I(-1)                      -0.109361        0.041424       -0.838347       -0.150785        0.029947               0
+A(-1)                       5.978633       -0.482100       37.213777        6.460734               0        0.998700
+K(-1)                      -3.542423        1.341800      -27.155749       -4.884223        0.970053               0
+e                           5.986416       -0.482728       37.262218        6.469143               0        1.000000
+
+
+MOMENTS OF SIMULATED VARIABLES
+
+VARIABLE       MEAN      STD. DEV.     VARIANCE     SKEWNESS     KURTOSIS  
+Y              0.685087    25.583076   654.493764    -0.133001    -0.903803
+C              0.688111    25.054196   627.712748    -0.142498    -0.990521
+I              0.670467    44.379339  1969.525691    -0.010118    -0.073888
+H             -0.003024     6.482973    42.028937     0.027977     0.029980
+K              0.682757    24.849500   617.497650    -0.142745    -0.993034
+A              0.530930    19.338902   373.993134    -0.142634    -0.992265
+
+
+CORRELATION OF SIMULATED VARIABLES
+
+VARIABLE      Y       C       I       H       K       A   
+Y           1.0000  0.9674  0.7230  0.2074  0.9721  0.9830
+C           0.9674  1.0000  0.5245 -0.0469  0.9998  0.9975
+I           0.7230  0.5245  1.0000  0.8258  0.5409  0.5837
+H           0.2074 -0.0469  0.8258  1.0000 -0.0276  0.0242
+K           0.9721  0.9998  0.5409 -0.0276  1.0000  0.9987
+A           0.9830  0.9975  0.5837  0.0242  0.9987  1.0000
+
+
+AUTOCORRELATION OF SIMULATED VARIABLES
+
+VARIABLE      1       2       3       4       5   
+Y           0.9613  0.9543  0.9520  0.9494  0.9484
+C           0.9978  0.9964  0.9949  0.9935  0.9922
+I           0.4212  0.3325  0.3175  0.2981  0.3021
+H           0.1575  0.0290  0.0078 -0.0199 -0.0134
+K           0.9989  0.9976  0.9962  0.9948  0.9934
+A           0.9986  0.9972  0.9958  0.9944  0.9930
+ 
+You did not declare endogenous variables after the estimation/calib_smoother command.
+Loading 10000 observations from artificial_sample.mat
+
+Initial value of the log posterior (or likelihood): -990.9115
+ 
+========================================================== 
+   Change in the covariance matrix = 0.0098521.
+   Mode improvement = 354.6129
+   New value of jscale = 0.078929
+========================================================== 
+Now I am climbing the hill...
+Change in the covariance matrix = 0.00019205.
+Mode improvement = 0.48727
+ 
+MODE CHECK
+ 
+Fval obtained by the minimization routine: 635.811310
+ 
+ 
+RESULTS FROM POSTERIOR MAXIMIZATION
+parameters
+    prior mean     mode    s.d. t-stat prior pstdev
+
+beta    0.990   1.0000  0.0075 133.1829 beta  0.0100
+theta   0.300   0.3227  0.0449  7.1916 beta  0.0500
+eta     1.100   1.0274  0.0148 69.4818 norm  0.1000
+delta   0.030   0.0261  0.0094  2.7899 beta  0.0100
+rho     0.950   0.9980  0.0032 316.6109 beta  0.0500
+ 
+Log data density [Laplace approximation] is -655.325580.
+ 
+MH: Multiple chains mode.
+MH: Old _mh files successfully erased!
+MH: Old metropolis.log file successfully erased!
+MH: Creation of a new metropolis.log file.
+MH: Searching for initial values...
+MH: Initial values found!
+ 
+MH: Old mh_history file successfully erased!
+MH: Number of mh files                   : 2 per block.
+MH: Total number of generated files      : 4.
+MH: Total number of iterations           : 20000.
+MH: average acceptation rate per chain   : 
+    0.3175    0.3180
+
+ 
+MCMC Diagnostics: Univariate convergence diagnostic, Brooks and Gelman (1998):
+    Parameter 1...  Done! 
+    Parameter 2...  Done! 
+    Parameter 3...  Done! 
+    Parameter 4...  Done! 
+    Parameter 5...  Done! 
+ 
+MH: Total number of Mh draws: 20000.
+MH: Total number of generated Mh files: 2.
+MH: I'll use mh-files 1 to 2.
+MH: In mh-file number 1 i'll start at line 10000.
+MH: Finally I keep 10000 draws.
+ 
+MH: I'm computing the posterior mean and covariance...  Done!
+ 
+MH: I'm computing the posterior log marginale density (modified harmonic mean)... 
+MH: Modified harmonic mean estimator, done!
+ 
+ 
+ESTIMATION RESULTS
+ 
+Log data density is -656.417252.
+ 
+parameters
+        prior mean post. mean   conf. interval  prior     pstdev
+
+beta       0.990     0.9912     0.9799   1.0000  beta      0.0100
+theta      0.300     0.3363     0.2626   0.4092  beta      0.0500
+eta        1.100     1.0155     0.9907   1.0425  norm      0.1000
+delta      0.030     0.0292     0.0133   0.0440  beta      0.0100
+rho        0.950     0.9954     0.9909   0.9999  beta      0.0500
+Total computing time : 0h06m44s

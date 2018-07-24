@@ -1,0 +1,693 @@
+\documentclass{beamer} %%% FÜR VORTRAG MIT PAUSEN
+%\documentclass[handout]{beamer}  %%% FÜR HANDOUT ALS PDF
+
+\setbeamertemplate{navigation symbols}{}
+\usetheme{Madrid}
+\usecolortheme{seagull}
+\beamersetuncovermixins{\opaqueness<1>{25}}{\opaqueness<2->{15}}
+\usepackage[T1]{fontenc}
+\usepackage{ae,aecompl}
+\usepackage[ansinew]{inputenc}
+\usepackage[ngerman]{babel}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage[babel,german=quotes]{csquotes} %im deutschen übliche Anführungszeichen
+\usepackage{verbatim}
+\newcounter{saveenumi}
+\newcommand{\seti}{\setcounter{saveenumi}{\value{enumi}}}
+\newcommand{\conti}{\setcounter{enumi}{\value{saveenumi}}}
+\usepackage{verbatim}
+
+\begin{document}
+\author[Willi Mutschler]{Willi Mutschler, M.Sc.}
+\date{Summer 2014}
+\institute[Institute of Econometrics]{Institute of Econometrics and Economic
+Statistics\\University of Münster\\willi.mutschler@uni-muenster.de}
+\title{DSGE Methods}
+\subtitle{General framework and Solution Methods}
+
+\begin{frame}
+\titlepage
+\end{frame}
+
+
+\section{Exercise and Homework: Repetition}
+\begin{frame}[fragile]\frametitle{Repetition: Exercise}
+Consider the Clarida-Gali-Gertler model from the previous lecture.
+\begin{enumerate}
+   \item Derive the optimality conditions for the nonlinear model with Calvo-price frictions as well as the efficient allocation of the model.
+   \item Write a mod-file for the nonlinear model (do not log-linearize!) and solve it using Dynare's \texttt{stoch\_simul(order=1)}. Interpret Dynare's output.
+   \item Transform the variables in the model to logs. Hint: Use $x_t = log(X_t)$ and $X_t=e^{log(X_t)} = e^{x_t}$ in the equilibrium equations. Interpret Dynare's output. Compare it to the output of the cgg.mod file from the previous lecture given the same parameter values and variables.
+\end{enumerate}
+\end{frame}
+
+\section{DSGE framework}
+
+\begin{frame}
+\frametitle{\secname}\footnotesize
+DSGE model consists of
+\begin{itemize}
+     \item state variables $(x_t)$, control variables $(y_t)$, observable variables $(d_t)$
+     \item set of optimality conditions $f$
+     \item transition equations for structural shocks and measurement errors $(\varepsilon_t)$
+     \item measurement equations with $D$ selecting observable variables $(d_t)$ out of controls and measurement errors
+     \item vector of deep parameters $\theta$
+\end{itemize}
+which can be cast into a nonlinear first-order system of expectational difference equations
+\begin{align*}
+0 &= E_t f \left( x_{t+1},y_{t+1},x_t,y_t|\theta \right)\\
+d_t &= D y_t + \eta_d(\theta) \varepsilon_t
+\end{align*}
+Solution is characterized by
+\begin{itemize}
+  \item transition equations for state and control variables, so-called \emph{policy-functions}, that solve (at least approximately) the system of equations $f$
+  \begin{align*}
+    x_{t+1} &= \tilde{h}(x_t|\theta) + \eta_x(\theta) \varepsilon_{t+1}\\
+    y_{t} &= \tilde{g}(x_{t}|\theta)
+  \end{align*}
+\end{itemize}
+\end{frame}
+
+\section{DSGE solution}
+\begin{frame}
+\frametitle{\secname}
+One distinguishes between linear and non-linear methods:
+    \begin{itemize}
+   \item Linear methods: Anderson/Moore (1983), Binder and Pesaran, Blanchard/Khan (1980),
+       (1997), Christiano (2002), King and Watson (1998), $\boxed{\text{Klein (2000)}}$, Sims (2001) and Uhlig (1999) (See Anderson (2008) for a comparison).
+   \item Nonlinear methods: Projection methods, iteration procedures or perturbation approach (see DeJong/Dave (2011) for a comparison)
+\end{itemize}
+Our Focus will be on perturbation approach in the fashion of Schmitt-Groh\'{e}/Uribe (2004) and \boxed{\text{Gomme and Klein (2011)}}:
+\begin{itemize}
+\item Perturbation approach finds a \underline{local} approximation of the policy functions in a neighborhood of a particular point
+\item Mostly steady-state, since we can solve it analytically or numerically.
+\end{itemize}
+\end{frame}
+
+
+\begin{frame}\frametitle{\secname}
+\begin{block}{Perturbation approach}
+\begin{itemize}
+  \item Problem: Analytical derivation of $g$ and $h$ most of the times impossible
+  \item Solution: Approximate policy functions using a perturbation approach
+  \item Idea: introduce perturbation parameter $\sigma$ that captures stochastic nature of the model
+  \begin{itemize}
+    \item We know $f$ and the steady-state analytically
+    \item Thus, we know $g$ and $h$ at the non-stochastic steady-state $(\sigma=0)$
+    \item How do the functions behave, if we \enquote{switch on stochastics} $(\sigma>0)$
+    \item[$\rightarrow$] Taylor-approximation of $g$ and $h$ around the steady-state!
+  \end{itemize}
+\end{itemize}
+\end{block}
+\end{frame}
+
+\begin{frame}\frametitle{\secname}
+\begin{block}{General perturbation framework (Schmitt-Groh\'{e}/Uribe (2004))}
+\begin{align*}
+   0 &=   E_t f \left( x_{t+1},y_{t+1},x_t,y_t|\theta \right),\\
+ x_{t+1}  &= h(x_{t},\sigma|\theta) + \sigma \eta_x \varepsilon_{t+1},\\
+   y_t &= g(x_t,\sigma|\theta) ,\\
+   d_t &= D y_t+  \eta_d \varepsilon_{t}.
+\end{align*}
+with $E(\varepsilon_t)=0$, $E(\varepsilon_t\varepsilon_t')=\Sigma_\varepsilon$
+\end{block}
+
+\begin{block}{Non-stochastic steady-state}
+\begin{eqnarray*}
+f \left(\bar{x},\bar{y},\bar{x},\bar{y}|\theta \right)=0, ~\bar{x}=h(\bar{x},0|\theta),~ \bar{y}=g(\bar{x},0|\theta),~\bar{d} = D \bar{y}
+\end{eqnarray*}
+\end{block}
+
+\end{frame}
+
+\begin{frame}
+\frametitle{\secname}
+Some remarks
+\begin{itemize}
+\item  DSGE-models can be interpreted as \emph{state-space-models}.
+\item Exogenous shocks and measurement errors are stacked into $\varepsilon_t$ for convenience ($\eta_x$ and $\eta_d$ pick the relevant variables accordingly.
+\item Driving force of the model are exogenous shocks and innovations $\varepsilon_t$.
+\item Innovations can be mutually correlated as well as the conditional variance can change over time, this features are captured by $\Sigma_\varepsilon$.
+\item Flexible framework: you can add auxiliary variables and equations.
+\begin{block}{Equivalence to DYNARE notation}
+\begin{itemize}
+\item SGU-framework (innovations enter linearly) includes Dynare-framework (innovations enter nonlinearly), if we extend the state vector by auxiliary variables for the shocks
+\end{itemize}
+\end{block}
+\end{itemize}
+\end{frame}
+
+
+
+\subsection{First-order approximation}
+\begin{frame}
+\frametitle{\secname}\framesubtitle{\subsecname}
+\begin{itemize}
+\item We are looking for approximations to $g$ and $h$ around the point $(x_t,\sigma)=(\bar{x},0)$ of the form
+\begin{align*}
+  g(x_t,\sigma) &= g(\overline{x},0) + g_x(\overline{x},0)(x_t-\overline{x}) + g_\sigma(\overline{x},0)(\sigma-0)\\
+  h(x_t,\sigma) &= h(\overline{x},0) + h_x(\overline{x},0)(x_t-\overline{x}) + h_\sigma(\overline{x},0)(\sigma-0)
+\end{align*}
+\item We would like to know $g_x,h_x,g_\sigma,h_\sigma$.
+\item Substitute the solution into the model:
+\begin{align*}
+F(x_t,\sigma):=E_t f \left( \underbrace{h(x_{t},\sigma)+\sigma \varepsilon_{t+1}}_{x_{t+1}},\underbrace{g[\overbrace{h(x_{t},\sigma)+\sigma\varepsilon_{t+1}}^{x_{t+1}},\sigma]}_{y_{t+1}},\underbrace{x_t}_{x_t},\underbrace{g(x_t,\sigma)}_{y_t} \right)
+\end{align*}
+\item Insight: $f$ as well as all derivatives of $f$ are $0$ when evaluated at the non-stochastic steady state $(\overline{x},0)$.
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{\secname}\framesubtitle{\subsecname, computing $g_\sigma,h_\sigma$}
+\begin{itemize}
+  \item Take derivative of $F$ w.r.t. $\sigma$ and evaluate at the non-stochastic steady-state
+  \footnotesize\begin{eqnarray*}
+&F_\sigma(\overline{x},0) = E_t f_1[h_\sigma + \varepsilon_{t+1}] + E_t f_2 [g_x(h_\sigma+ \varepsilon_{t+1})+g_\sigma] + f_3\cdot 0 + f_4 g_\sigma = 0\\
+ & \Leftrightarrow \begin{bmatrix} \underset{(n \times n_x)}{f_1 + f_2 g_x} & \underset{(n\times n_y)}{f_2 +f_4}\end{bmatrix} \begin{bmatrix} \underset{(n_x \times 1)}{h_\sigma} \\ \underset{(n_y \times 1)}{g_\sigma} \end{bmatrix} = \underset{n \times 1}{0}
+  \end{eqnarray*}
+with $f_1=\partial f(\overline{z})/\partial x_{t+1}, f_2=\partial f(\overline{z})/\partial y_{t+1}, f_3=\partial f(\overline{z})/\partial x_{t}, f_4=\partial f(\overline{z})/\partial y_{t}$\normalsize
+  \item We have n equations in n unknowns
+  \item Notice that this is a linear and homogenous system, that is, if there is a unique solution, it must be $$h_\sigma=\underset{n_x\times1}{0} \text{ and } g_\sigma=\underset{n_y\times1}{0}$$
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{\secname}\framesubtitle{\subsecname, Certainty-equivalence}
+Important theoretical result:
+\begin{itemize}
+  \item Even though agents take the effect of future shocks into account when optimizing, in a linearization to the first-order they don't matter for the decision rule.
+\begin{block}{\emph{Certainty-equivalence-property}}
+       \begin{itemize}
+         \item In a first-order approximation the constant term needs not to be corrected for uncertainty (i.e. variance of shocks)
+         \item Expectation of $x_t$ and $y_t$ is equal to its non-stochastic steady-state
+       \end{itemize}
+\end{block}
+\item This is problematic when uncertainty does matter: risk premia, welfare evaluation, \dots
+\end{itemize}
+\end{frame}
+
+
+\begin{frame}
+\frametitle{\secname}\framesubtitle{\subsecname, computing $g_x,h_x$}\footnotesize
+\begin{itemize}
+  \item Take derivative of $F$ w.r.t. $x_t$ and evaluate at the non-stochastic steady-state
+  \begin{eqnarray*}
+&    F_x (\overline{x},0) = f_1 h_x + f_2 g_x h_x + f_3 + f_4 g_x = 0\\
+& \underbrace{- \begin{bmatrix} \underset{(n\times n_x)}{f_1} & \underset{(n\times n_y)}{f_2} \end{bmatrix}}_{:=A} \begin{bmatrix} \underset{(n_x\times n_x)}{h_x} \\ \underset{(n_y\times n_x)}{g_x} \underset{(n_x\times n_x)}{h_x} \end{bmatrix}  = \underbrace{\begin{bmatrix} \underset{(n\times n_x)}{f_3} & \underset{(n\times n_y)}{f_4}\end{bmatrix}}_{:=B} \begin{bmatrix} \underset{(n_x\times n_x)}{I} \\\underset{(n_y\times n_x)}{g_x} \end{bmatrix}
+  \end{eqnarray*}
+  \item $n\times n_x$ equations for $n\times n_x$ unknown elements of $h_x$ and $g_x$
+  \item Postmultiply by $\widehat{x}_t := (x_t-\overline{x})$
+  \begin{align*}
+    A \begin{bmatrix} h_x \widehat{x}_t \\ g_x h_x \widehat{x}_t \end{bmatrix} = B \begin{bmatrix} \widehat{x}_t \\ g_x \widehat{x}_t \end{bmatrix}
+  \end{align*}
+  \item Notice that the coefficient matrices are equivalent to the first order approximation
+  \begin{eqnarray*}
+    AE_t\begin{bmatrix} \widehat{x}_{t+1} \\ \widehat{y}_{t+1} \end{bmatrix} = B\begin{bmatrix} \widehat{x}_t\\ \widehat{y}_t \end{bmatrix} + \begin{bmatrix} \sigma \eta_x \varepsilon_{t+1} \\ 0\end{bmatrix}
+  \end{eqnarray*}
+\end{itemize}
+\end{frame}
+
+
+\begin{frame}
+\frametitle{\secname}\framesubtitle{\subsecname, computing $g_x,h_x$}
+\begin{itemize}
+\item $A$ and $B$ are known matrices, inverting A yields solution for $h_x$ and $g_x$
+\item \textbf{BUT:} In general A is singular and non-invertible.
+  \item We follow Klein (2000)'s approach to approximate the first order solution using the generalized Schur decomposition
+  \item Idea:
+  \begin{itemize}
+      \item Uncouple system into a (block) triangular system of equations using a particular matrix decomposition method, and solve system recursively.
+  \end{itemize}
+\item We'll need some matrix theory about decompositions and eigenvalues for that...
+\end{itemize}
+\end{frame}
+
+\section{Aside: Matrix theory}
+
+
+\begin{frame}
+\frametitle{\secname}\framesubtitle{}\footnotesize
+\begin{block}{Matrix pencil}
+  Let $A$ and $B$ be two $n\times n$ matrices. The set of all matrices of the form $A-\lambda B$ with $\lambda \in \mathbb{C}$ is said to be a \emph{pencil}. The eigenvalues of the pencil are elements of the set $\lambda(A,B)$ defined by
+  \begin{align*}
+    \lambda(A,B) =  \left\{z \in \mathbb{C}:det(A-zB)=0\right\}
+  \end{align*}
+\end{block}
+\begin{block}{Generalized Eigenvalue problem}
+  Let $A$ and $B$ be two $n\times n$ matrices. Then $\lambda \in \lambda(A,B)$ is called a generalized Eigenvalue if there exist a nonzero vector $q\in \mathbb{C}^n$ such that $$A q = \lambda B q$$
+\end{block}
+\begin{itemize}
+\item If $B=I$, then this simplifies to the ordinary Eigenvalue problem: $A q = \lambda q$
+\item A always has $n$ eigenvalues, which can be ordered (in more than one way) to form an $n\times n$ diagonal matrix $\Lambda$ and a corresponding matrix of nonzero columns $Q$ that satisfies the eigenvalue equation: $$AQ = Q\Lambda$$
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{\secname}\framesubtitle{}
+\begin{block}{Eigendecomposition (or spectral decomposition) of a matrix}
+  Let $A$ be a squared $(n\times n)$ matrix with $n$ linearly independent columns, then $A$ can be factorized as
+  \begin{align*}
+  AQ = Q \Lambda \Leftrightarrow A = Q \Lambda Q^{-1}
+  \end{align*}
+   $\Lambda$ is a diagonal matrix such that $\lambda_i =\Lambda_{ii}$ is the Eigenvalue of $A$ associated to the eigenvector $q_i$ stored in column $i$ of the square $(n \times n)$ matrix $Q$.
+\end{block}
+\begin{itemize}
+  \item Not every matrix has a Eigendecomposition, since $Q$ might not be invertible (sufficient: Eigenvalues must be distinct).
+  \item Useful for solving differential or difference equations, computing powers of covariance matrices, etc., example: $$x_{t} = A x_{t-1} = A^t x_{0}=Q\Lambda^t Q^{-1} x_{0}$$
+  \item $\Lambda^t$ is very easy to calculate, whereas $A^t$ is computationally very demanding.
+\end{itemize}
+\end{frame}
+
+\begin{frame}[shrink]
+\frametitle{\secname}\framesubtitle{}\scriptsize
+\begin{block}{Jordan decomposition}
+  Let $A$ be an $n \times n$ matrix. Denote by $J_k(\lambda)$ a $k\times k$ matrix of the form (a so-called Jordan-block)
+  \begin{align*}
+    J_k(\lambda) = \begin{bmatrix}
+      \lambda & 1 & 0 & \dots & 0\\
+      0 & \lambda & 1 & \dots & 0\\
+      \vdots & \vdots & \vdots & \dots & \vdots\\
+      0 & 0& 0 & \dots & 1\\
+      0 & 0 &0 & \dots & \lambda
+    \end{bmatrix}
+  \end{align*}
+  where $J_1(\lambda)=\lambda$. Then there exists a non-singular $n\times n$ matrix $T$ such that
+  \begin{align*}
+    T^{-1} A T = \begin{bmatrix}
+      J_{k_1}(\lambda_1) & 0 & \dots & 0 \\
+      0 & J_{k_2}(\lambda_2) & \dots & 0 \\
+      \vdots & \vdots & \dots & \vdots\\
+      0 & 0 & \dots & J_{k_r}(\lambda_r)
+    \end{bmatrix}
+  \end{align*}
+  with $k_1+k_2+\dots+k_r$ = n. The $\lambda_i$ are the eigenvalues of $A$, not necessarily distinct.
+\end{block}
+\begin{itemize}
+  \item $T^{-1} A T$ is structured, i.e. upper triangular and diagonal elements are eigenvalues of $A$
+  \item Special case: If $A$ has distinct eigenvalues, then $T^{-1}AT = \Lambda$, with $\Lambda$ diagonal.
+  \item Useful for proofs due to its block structure, but numerically difficult due to instabilities.
+\end{itemize}
+\end{frame}
+
+\begin{frame}[shrink]
+\frametitle{\secname}\framesubtitle{}\footnotesize
+\begin{block}{Schur decomposition (Complex version)}
+  Let $A$ be an $n \times n$ matrix. Then there exist a \textbf{unitary} $n\times n$ matrix $S$ (that is, $S^*S=SS^*=S^{-1}S=I_n$) and an upper triangular matrix $M$ whose diagonal elements are the eigenvalues of $B$, such that
+  \begin{align*}
+    S^* A S = M \Leftrightarrow A = S M S^*
+  \end{align*}
+\end{block}
+\begin{block}{Schur decomposition (Real version)}
+  Let $A$ be a real symmetric $n \times n$ matrix. Then there exist an \textbf{orthogonal} real $n\times n$ matrix $S$ (that is, $S'S=SS'=S^{-1}S=I_n$), whose columns are eigenvectors of $A$ and a diagonal matrix $\Lambda$ whose diagonal elements are the eigenvalues of $A$, such that
+  \begin{align*}
+    S' A S = \Lambda \Leftrightarrow A = S \Lambda S'
+  \end{align*}
+\end{block}
+\begin{itemize}
+  \item $~^*$ denotes conjugate or Hermitian transpose, $~'$ denotes the ordinary transpose.
+  \item A complex matrix always has a complex Schur decomposition.
+  \item A real matrix has a real Schur decomposition if and only if all eigenvalues are real.
+  \item $S$ is structured, i.e. unitary or orthogonal.
+  \item Useful for proofs (e.g. Eigenvalues of Kronecker products, differentials,\dots) and numerically attractive.
+\end{itemize}
+\end{frame}
+
+\begin{frame}\scriptsize
+\frametitle{\secname}\framesubtitle{}
+\begin{block}{Generalized (complex) Schur decomposition or QZ decomposition}
+Let $A$ and $B$ be $n\times n$ matrices. Then there exist matrices $Q,Z,T$ and $S$ such that
+\begin{align*}
+  Q^* A Z &= S \Leftrightarrow A = Q S Z^*\\
+  Q^* B Z &= T \Leftrightarrow B = Q T Z^*
+\end{align*}
+\begin{enumerate}
+  \item $Q$ and $Z$ are unitary, i.e. $Q^*Q=QQ^*=I_n$ and $Z^*Z=ZZ^*=I_n$.
+  \item $S$ and $T$ are upper triangular.
+ \item pairs $(s_{ii},t_{ii})$ can be arranged in any desired order.
+  \item If for some $i$, $t_{ii}$ and $s_{ii}$ are both zero, then $\lambda(A,B)=\mathbb{C}$. Otherwise:
+$\lambda(A,B) = \left\{\frac{s_{ii}}{t_{ii}}:t_{ii} \neq 0 \right\}$
+\end{enumerate}
+\end{block}
+\begin{itemize}\scriptsize
+  \item There is also a real version.
+  \item We will limit ourselves to the case $\lambda(A,B)\neq \mathbb{C}$ and rule-out unit roots, that is $t_{ii}$ and $s_{ii}$ are not both zero, and $|t_{ii}|\neq |s_{ii}|$.
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{\secname}\framesubtitle{}
+\begin{block}{Singular value decomposition}
+  Let $A$ be a real $m \times n$ matrix with $rank(A)=r>0$. Then there exist an $m\times r$ matrix $S$ such that $S'S=I_r$, an $n \times r$ matrix $T$ such that $T'T=I_r$ and an $r \times r$ diagonal matrix $\Lambda$ with positive diagonal elements, such that
+  \begin{align*}
+    A = S\Lambda^{1/2}T'
+  \end{align*}
+\end{block}
+\begin{itemize}
+  \item There is also a complex version using the conjugate transpose.
+  \item Diagonal elements of $\Lambda^{1/2}$ are called singular values of $A$ and $m$ columns of $S$ and the $n$ columns of $T$ are called left-singular vectors and right-singular vectors of $A$, respectively.
+  \item Convention: List singular values in descending order.
+  \item $\Lambda$ contains the $r$ non-zero eigenvalues of $AA'$ (and of $A'A$) and $S$ and $T$ contain corresponding eigenvectors.
+  \item Applications: Pseudoinverses, least squares, matrix approximations, rank, range, null space,\dots
+\end{itemize}
+\end{frame}
+
+\section{DSGE solution}
+\subsection{First-order approximation, continued}
+\begin{frame}
+\frametitle{\secname}\framesubtitle{\subsecname, computing $g_x$ and $h_x$}
+Going back to our problem of finding $g_x$ and $h_x$:
+  \begin{eqnarray*}
+    A E_t \begin{bmatrix} \widehat{x}_{t+1} \\ \widehat{y}_{t+1} \end{bmatrix} = B\begin{bmatrix} \widehat{x}_t\\ \widehat{y}_t \end{bmatrix}
+  \end{eqnarray*}
+The Schur decomposition of $A$ and $B$ are given by
+\begin{align*}
+  Q^* A = S Z^*,\qquad   Q^* B = T Z^*
+\end{align*}
+where we choose the following order: the stable generalized eigenvalues $(|s_{ii}|>|t_{ii}|)$ come first. Premultiplying by $Q^*$ and using
+$\begin{bmatrix} \underset{n_x \times 1}{s_t} \\ \underset{n_y\times1}{u_t} \end{bmatrix} : = Z^* \begin{bmatrix} \underset{n_x \times 1}{\widehat{x}_t} \\ \underset{n_y \times 1}{\widehat{y}_t} \end{bmatrix}$, we get
+$
+  S  \begin{bmatrix} E_t s_{t+1}\\ E_t u_{t+1} \end{bmatrix} = T \begin{bmatrix} s_t \\ u_t \end{bmatrix}
+$
+\end{frame}
+
+\begin{frame}
+\frametitle{\secname}\framesubtitle{\subsecname, computing $g_x$ and $h_x$}
+$S$ and $T$ are upper triangular:
+\begin{align*}
+\begin{bmatrix} \underset{n_x \times n_x}{S_{11}} & \underset{n_x \times n_y}{S_{12}} \\ \underset{n_y \times n_x}{0} & \underset{n_y \times n_y}{S_{22}}\end{bmatrix} \begin{bmatrix} E_t s_{t+1}\\ E_t u_{t+1} \end{bmatrix} = \begin{bmatrix} \underset{n_x \times n_x}{T_{11}} & \underset{n_x \times n_y}{T_{12}} \\ \underset{n_y \times n_x}{0} & \underset{n_y \times n_y}{T_{22}}\end{bmatrix} \begin{bmatrix} s_t \\ u_t \end{bmatrix}
+\end{align*}
+Let's solve the lower block first, that is
+\begin{align*}
+  S_{22} E_t[u_{t+1}] = T_{22} u_t
+\end{align*}
+and note that due to our ordering we have matrix pairs $|s_{ii}|<|t_{ii}|$ (or $|s_{ii}|\leq|t_{ii}|$ ). Using backward-substitution, it can be shown, that any solution with bounded mean and variance (we want that!) must satisfy $u_t=0$ for all $t$ (unless $\Sigma=0$), otherwise we would have an exploding solution.
+\end{frame}
+
+\begin{frame}
+\frametitle{\secname}\framesubtitle{\subsecname, computing $g_x$ and $h_x$}
+Note: We need as many state variables as there are generalized eigenvalues with $|s_{ii}|>|t_{ii}|$! This property has a name:
+\begin{block}{Blanchard/Khan-conditions}
+The number of generalized Eigenvalues, that are in absolute terms greater than 1, must be equal to the number of state variables, in order to get a stable solution (saddle-path).
+\end{block}
+
+\end{frame}
+
+\begin{frame}
+\frametitle{\secname}\framesubtitle{\subsecname, computing $g_x$ and $h_x$}
+Now given $u_t=0$, let's back out $x_t$ and $y_t$ from the definition of $s_t$ and $u_t$:
+\begin{align*}
+  \begin{bmatrix} x_t \\ y_t \end{bmatrix} = \begin{bmatrix} Z_{11} & Z_{12}\\ Z_{21} & Z_{22} \end{bmatrix} \begin{bmatrix} s_t \\ u_t \end{bmatrix}
+  \Rightarrow
+  \begin{cases}
+    x_t = Z_{11} s_t\\
+    y_t = Z_{21} s_t
+  \end{cases}
+\end{align*}
+If $Z_{11}$ is invertible, then
+\begin{align*}
+  y_t = \underbrace{Z_{21} Z_{11}^{-1}}_{=g_x} x_t
+\end{align*}
+Thus, in order to compute $g_x$ we need a nonsingular $Z_{11}$!
+\end{frame}
+
+\begin{frame}
+\frametitle{\secname}\framesubtitle{\subsecname, computing $g_x$ and $h_x$}
+Now given $u_t=0$ and a nonsingular $Z_{11}$, let's solve the first block
+\begin{align*}
+   E_t[s_{t+1}] &= S_{11}^{-1} T_{11} s_t
+\end{align*}
+assuming $S_{11}$ is invertible. Plugging in $s_t = Z_{11}^{-1} x_t$ we get
+\begin{align*}
+   E_t[ x_{t+1}] = \underbrace{Z_{11} S_{11}^{-1} T_{11} Z_{11}^{-1}}_{=h_x} x_t
+\end{align*}
+Thus, in order to compute $h_x$ we need nonsingular $S_{11}$ and $Z_{11}$. However, $S_{11}$ has full rank by construction.
+\end{frame}
+
+\begin{frame}
+\frametitle{\secname}\framesubtitle{\subsecname, computing $g_x$ and $h_x$}\footnotesize
+\begin{block}{Summary Klein (2000)}
+\begin{itemize}
+  \item Compute generalized Schur decomposition of $A=-\begin{bmatrix} f_1 & f_2\end{bmatrix}$ and $B=\begin{bmatrix} f_3 & f_4\end{bmatrix}$.
+  \item Reorder generalized eigenvalues such that $|s_{ii}|>|t_{ii}|$ in the upper left.
+  \item Check number of stable eigenvalues, i.e. Blanchard-Khan condition.
+  \item Check if $Z_{11}$ is invertible.
+  \item Compute $h_x=Z_{11} S_{11}^{-1} T_{11} Z_{11}^{-1}$ and $g_x=Z_{21} Z_{11}^{-1}$.
+\end{itemize}
+\end{block}
+
+\end{frame}
+
+\begin{frame}\frametitle{\secname}\framesubtitle{\subsecname, example with CGG}\footnotesize
+\begin{block}{Excercise}
+Consider the log-linearized version of the CGG-model:
+\begin{align*}
+  \pi_{t} &=\beta E_{t}\pi _{t+1}+\kappa x_{t} &\text{(Phillips curve)} \\
+x_{t} &= E_{t}x_{t+1}-\left( r_{t}-E_{t}\pi _{t+1}-r_{t}^{**}\right) &\text{(IS equation)} \\
+r_{t} &=\alpha r_{t-1}+(1-\alpha )\left[ \phi _{\pi }\pi _{t}+\phi _{x}x_{t}\right] &\text{(baseline Taylor-rule)} \\
+\Delta a_t &= \rho_a \Delta a_{t-1} + \varepsilon_{t}^a &\text{(technological shock)}\\
+\tau_t &= \rho_\tau \tau_{t-1} + \varepsilon_{t}^\tau &\text{(preference shock)}\\
+r_{t}^{**} &= \rho_a \Delta a_{t}+\frac{1-\rho_\tau}{1+\varphi } \tau_t &\text{(natural interest rate)} \\
+\Delta y_t &= x_{t} - x_{t-1} + \Delta a_t - \frac{\tau_t - \tau_{t-1}}{1+\phi} &\text{(output growth)}
+\end{align*}
+\begin{enumerate}
+  \item What are state variables, what are control variables?
+  \item Solve this model using Klein(2000)'s algorithm with Matlab.
+  \item Compare the solution to Dynare's policy functions.
+\end{enumerate}
+\end{block}
+\end{frame}
+
+\begin{frame}
+\frametitle{\secname}\framesubtitle{First-order approximation}
+\textbf{Pros}:
+\begin{itemize}
+   \item Simple linear state-space representation of the model, which in many cases is sufficiently exact.
+   \item One can use the Kalman-filter to empirically evaluate the system.
+\end{itemize}
+\textbf{Cons}:
+\begin{itemize}
+   \item One looses important information during the linearization.
+   \item Higher moments play an important role for analyzing markets, risk, welfare, etc.
+   \item An approximation to, say, the second order can yield different results, because the variance of future shocks matters (risk premium).
+\end{itemize}
+
+\end{frame}
+
+\subsection{Second-order approximation, Gomme and Klein (2011)}\footnotesize
+\begin{frame}
+\frametitle{\secname}\framesubtitle{Second-order approximation}
+For the second-order approximations to $g$ and $h$ around the point $(\overline{x},0)$ we first need some useful tool in Matrix Calculus:
+\begin{block}{Magnus-Neudercker-definition of the Hessian}
+\begin{align*}
+  \mathcal{D }f(\bar{z}) & := \begin{pmatrix} \frac{\partial f(\overline{z})}{\partial x_{t+1}'} & \frac{\partial f(\overline{z})}{\partial y_{t+1}'} & \frac{\partial f(\overline{z})}{\partial x_{t}'} & \frac{\partial f(\overline{z})}{\partial y_{t}'}\end{pmatrix}:= \begin{pmatrix} f_1 & f_2 & f_3 & f_4  \end{pmatrix},\\
+  \mathcal{H} f(\bar{z}) & := \mathcal{D} vec((\mathcal{D} f(\bar{z}))')
+\end{align*}
+with Jacobian $\mathcal{D}f(\overline{z})$ and Hessian $\mathcal{H}f(\overline{z})$ of $f$ evaluated at steady-state.
+\end{block}
+This definition simplifies the algorithm, since no tensor notation is needed and basic matrix algebra can be used. Main tool:
+\begin{block}{Chain-Rule}
+Let $f:R^n \mapsto R^m$ and $g:R^m \mapsto R^p$ be twice differentiable. Define $h(x)=g(f(x))$. Then letting $y=f(x)$,
+\begin{align*}
+\mathcal{H} h(x) = (I_p \otimes \mathcal{D}f(x))'(\mathcal{H}g(y))*\mathcal{D}f(x) + (\mathcal{D}g(y)\otimes I_n) \mathcal{H} f(x)
+\end{align*}
+\end{block}
+\end{frame}
+
+\begin{frame}
+\frametitle{\secname}\framesubtitle{Second-order approximation}
+The second-order Taylor approximation at the non-stochastic steady-state is given by
+\begin{block}{Second order Taylor approximation}
+\begin{align*}
+    x_{t+1} &= \bar{x}+h_x(\bar{x},0)\cdot(x_t-\bar{x}) + \sigma \eta_x \varepsilon_{t+1}\\
+  &+ \frac{1}{2} \left[I_{n_x}\otimes (x_t-\bar{x})'\right] h_{xx}(\bar{x},0) (x_t-\bar{x})
+  + \frac{1}{2} \sigma^2 h_{\sigma\sigma}(\bar{x},0)\\
+  y_{t} &= \bar{y}+g_x(\bar{x},0)\cdot(x_t-\bar{x})\\
+  &+ \frac{1}{2} \left[I_{n_y}\otimes (x_t-\bar{x})'\right] g_{xx}(\bar{x},0) (x_t-\bar{x})
+  + \frac{1}{2} \sigma^2 g_{\sigma\sigma}(\bar{x},0)
+\end{align*}
+\end{block}
+\begin{itemize}
+\item $g_x$ and $h_x$ are the gradients of $g$ and $h$ with respect to $x$ (using e.g. Klein's algorithm), all evaluated at $(\bar{x},0)$
+\item $g_{xx},h_{xx}$ and $g_{\sigma\sigma},h_{\sigma\sigma}$ the corresponding Magnus-Neudecker-Hessians, all evaluated at $(\bar{x},0)$
+\item Note: No cross terms involving $x$ and $\sigma$, because approximation is around $\sigma=0$
+\end{itemize}
+
+\end{frame}
+
+\begin{frame}
+\frametitle{\secname}\framesubtitle{Second-order approximation}
+\begin{itemize}
+  \item Use an algorithm to obtain $h_x(\bar{x},0)$ and $g_x(\bar{x},0)$, the coefficients of a first order approximation of the model
+  \item The other matrices can be calculated by inserting the policy functions into $f$ and differentiating it twice using the chain-rule of Magnus and Neudecker (1999). 
+  \item Evaluating the Jacobian $\mathcal{D}f=(f_1~f_2~f_3~f_4)$ and Hessian $H$ of $f$ at the non-stochastic steady-state, and setting it to $0$ yields:
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{\secname}\framesubtitle{Second-order approximation}
+\begin{block}{Second order solution matrices}\footnotesize
+\begin{align*}
+  \begin{bmatrix}
+    vec(g_{xx})\\vec(h_{xx})
+  \end{bmatrix}&=-Q^{-1}vec(A), &
+  \begin{bmatrix}
+    h_{ss}\\g_{ss}
+  \end{bmatrix} &=   -B^{-1} C
+\end{align*}
+\begin{eqnarray*}
+ &Q = \begin{bmatrix} h_x' \otimes f_2 \otimes h_x' + I_{n_x} \otimes f_4 \otimes I_{n_x}&  I_{n_x} \otimes (f_1 \otimes I_{n_x}+f_2 g_x \otimes I_{n_x})
+  \end{bmatrix}\\
+ & A = (I_{n_x+n_y}\otimes M')HM,\\
+ & B = \begin{bmatrix} f_1 + f_2 g_x & f_2 + f_4 \end{bmatrix}\\
+ & C = f_2 trm[(I_{n_y}\otimes (\eta_x\eta_x'))g_{xx}]+ trm[(I_{n_x+n_y}\otimes N') H N (\eta_x \eta_x')]\\
+  &  M=\begin{bmatrix}
+    h_x\\ g_x h_x \\ I_{n_x} \\g_x
+  \end{bmatrix},\quad
+  N = \begin{bmatrix}
+    I_{n_x}\\g_x\\ 0_{(n_x+n_y)\times n_x}
+  \end{bmatrix}
+\end{eqnarray*}
+and $trm$ defines the matrix trace of an $nm\times n$ matrix $[Y_1'~Y_2'~\dots~Y_m']'$ as the $m\times1$ vector $[tr(Y_1)~tr(Y_2)~\dots~tr(Y_m)]'$.
+\end{block}
+\end{frame}
+
+\begin{frame}\frametitle{\secname}
+\begin{block}{Excercise}
+Consider the An and Schorfheide (2007) model.
+\begin{enumerate}
+  \item Write a mod-file for the nonlinear model. What are state variables, what are control variables?
+  \item Compare the solution of a first-order and a second-order approximation.
+\end{enumerate}
+\end{block}
+\end{frame}
+
+\section{Unconditional Moments}
+\begin{frame}
+\frametitle{\secname}\framesubtitle{First-order approximation}
+Given stationarity and the approximated solution, we can calculate the unconditional moments
+\begin{block}{Unconditional Moments for first-order approximation}\footnotesize
+\begin{align*}
+E(x_t) &= \overline{x}; E(y_t)= \overline{y}; E(d_t)= \overline{d} = D \overline{y}\\
+  \Sigma_x &:=  E (x_{t}-\bar{x})(x_{t}-\bar{x})' = h_x \Sigma_x h_x' + \sigma^2 \eta_x E(\varepsilon_t \varepsilon_t') \eta_x'\\
+  \Sigma_y &:= E (y_{t}-\bar{y})(y_{t}-\bar{y})'  = g_x \Sigma_x g_x'\\
+  \Sigma_d &:= E (d_{t}-\bar{d})(d_{t}-\bar{d})'  = D \Sigma_y D' + \eta_d E(\varepsilon_t \varepsilon_t') \eta_d'\\
+  \Sigma_x(t) &:= E[(x_t- \bar{x})(x_0- \bar{x})'] = (h_x)^t \Sigma_x\\
+  \Sigma_y(t) &:= E[(y_t- \bar{y})(y_0- \bar{y})'] = g_x (h_x)^t \Sigma_xg_x'\\
+  \Sigma_d(t) &:= E[(d_t- \bar{d})(d_0- \bar{d})'] = D g_x (h_x)^t \Sigma_xg_x' D'
+\end{align*}
+\end{block}
+\end{frame}
+
+\begin{frame}
+\frametitle{\secname}\framesubtitle{Second-order approximation}
+\begin{block}{Unconditional mean for second-order approximation}
+\begin{align*}
+  E(x_t) &:= \bar{x} + \left(I_{n_x}-h_x\right)^{-1} \frac{ \Lambda_x}{2},\\
+  E(y_t) &:= \bar{y} +g_x (\mu_x - \bar{x})+ \frac{ \Lambda_y}{2},\\
+  E(d_t) &:= D\mu_y,\\
+ with \\ \Lambda_x &=  \left[ I_{n_x} \otimes vec(\Sigma_x)'\right] vec(h_{xx}') + \sigma^2 h_{\sigma\sigma},&\\
+  \Lambda_y &=  \left[ I_{n_y} \otimes vec(\Sigma_x)'\right] vec(g_{xx}') + \sigma^2 g_{\sigma\sigma}.
+\end{align*}
+Variances and autocovariances have additional higher order terms.
+\end{block}
+
+\end{frame}
+
+
+\begin{frame}
+\frametitle{\secname}\framesubtitle{Summary}
+\begin{itemize}
+  \item In a first-order approximation the unconditional mean is equal to the steady-state (certainty-equivalence!)
+  \item Up to second order, the presence of uncertainty affects only the constant term of the decision rules
+  \item[$\Rightarrow$] Unconditional mean can be significantly different from non-stochastic steady-state!
+\end{itemize}
+\end{frame}
+
+
+
+
+\section[Indeterminacy]{Further Topic: Indeterminacy}
+\begin{frame}
+\begin{center}\huge\secname\end{center}
+\end{frame}
+
+\begin{frame}\frametitle{\secname}\framesubtitle{Toy model: Lubik and Schorfheide (2004)}
+\begin{block}{Model}\abovedisplayskip=-15pt \belowdisplayskip=-5pt
+\begin{align*}
+  x_t &= E_t[x_{t+1}] - \tau (R_t E_t[\pi_{t+1}]+g_t)\\
+  \pi_t &= \beta E_t [\pi_{t+1}] + \kappa (x_t - z_t)\\
+  R_t &= \rho_R R_{t-1} + (1-\rho_R)(\psi_1 \pi_t + \psi_2 [x_t -z_t]) + e_{R,t}\\
+  e_{R,t} &= \varepsilon_{R,t} \quad g_t = \rho_g g_{t-1} + \varepsilon_{g,t}, \quad z_t = \rho_z z_{t-1} + \varepsilon_{z,t}
+\end{align*}
+\end{block}
+\begin{block}{Definitions}\abovedisplayskip=-15pt \belowdisplayskip=-5pt
+\begin{align*}
+\theta&=[\psi_1,\psi_2,\rho_R,\beta,\kappa,\tau,\rho_g,\rho_z,\rho_{gz},\sigma_r,\sigma_g,\sigma_z]'\\
+s_t &=[x_t,\pi_t,R_t,E_t[x_{t+1}],E_t[\pi_{t+1}],e_{R,t},g_t,z_t]',\\
+  \varepsilon_t &= [\varepsilon_{R,t},\varepsilon_{g,t},\varepsilon_{z,t}]', \quad \varepsilon_{i,t} \sim N(0,\sigma_i),\\
+  \eta_t &= [(x_t -E_{t-1}[x_t]),(\pi_t)-E_{t-1}[\pi_t]]'
+  \end{align*}
+\end{block}
+\begin{block}{Canonical form of Sims (2002)}\abovedisplayskip=-5pt
+\begin{align*}
+\Gamma_0(\theta) s_t &= \Gamma_1(\theta) s_{t-1} + \Psi(\theta) \varepsilon_t + \Pi(\theta) \eta_t\\
+0 &= \Psi^*(\theta) \varepsilon_t + \Pi^*(\theta)\eta_t\\
+s_t &= F(\theta) s_{t-1} + G(\theta) \varepsilon_t
+\end{align*}
+\end{block}
+\end{frame}
+
+\subsection{Sunspots idea}
+\begin{frame}
+\frametitle{\secname}\framesubtitle{\subsecname}
+\begin{block}{Determinacy of DSGE models (usual approach)}
+  \begin{itemize}
+    \item Focus on \textbf{one stable} solution, e.g. Taylor principle, $\eta_t = A_1(\theta) \varepsilon_t$
+    \item Inherent in algorithms, e.g. MH parameter draws that yield indeterminacy are disregarded
+  \end{itemize}
+\end{block}
+\begin{block}{Indeterminacy of DSGE models}
+\begin{itemize}
+  \item \textbf{multiple stable} solutions due to sunspots $\xi_t$
+  \item sunspots can be interpreted as shocks to beliefs: $\eta_t = A_1^* \varepsilon_t + A_2^* \xi_t$
+  \item Solution is now characterized by
+  \begin{itemize}
+    \item No stable solution
+    \item Determinacy: $A_1^* = A_1 (\theta), A_2^* = 0$, sunspot variance not identified
+    \item Indeterminacy: $A_1^*\neq A_1 (\theta)$, $A_2^* \neq 0$
+  \end{itemize}
+  \item Sunspots change propagation of shocks and induce self-fulfilling fluctuations in the economy
+  \abovedisplayskip=-1pt \begin{align*}
+    s_t = F(\theta) s_{t-1} + (G(\theta) + \Delta)\varepsilon_t + \Lambda \xi_t
+  \end{align*}
+\end{itemize}
+\end{block}
+\end{frame}
+\note{Idea: Equilibrium outcomes that depend on extrinsic shocks,i.e.shocks that affect the economy only because the economy’s agents expect them to: these shocks are called sunspots and the associated equilibrium outcomes are called sunspot equilibria. Example: Taylor principle, CB fails to response agressively enought ot variation in inflation, expectations become a function of an external source of fluctuations, unrelated to fundamentals and labeled a sunspot, sunspots induce self-fulfilling fluctuations in the economy.
+ }
+
+\subsection{Progress and Challenges}
+\begin{frame}
+\frametitle{\secname}\framesubtitle{\subsecname}
+\begin{block}{Progress}
+\begin{itemize}
+  \item New explanation of the business cycle: fluctuations in economic activity may be the result of variation in agent's beliefs.
+  \item Sunspots and indeterminacy generate persistence without adding frictions, adjustment costs, indexation, etc.
+  \item Data highly supports sunspots and indeterminacy, since model has more degrees of freedom
+\end{itemize}
+\end{block}
+\begin{block}{Challenges}
+\begin{itemize}
+  \item Mostly theoretical focus, empirical papers don't consider this!
+    \item How do conclusions change if we include full set of solutions?
+\end{itemize}
+\end{block}
+\end{frame}
+\note{Naturally interpreted as self-fulfilling prophecies\\Overparametrization is bad for identification and estimation; \\Taylor rule: Clarida et al. 2000, Lubik and Schorfheide 2004, Treadwell 2010; Great moderation: Benati and Surico 2009\\Indeterminacy literature works mostly with prototypical models, not with empirical DSGE models. Pro: Multiple equlibria and sunspots significantly improve endogenous propagation properties of business cycle models, break of Taylor principle is empirically realistic for e.g. the FED. Fit data without resorting to all kinds of frictions, generate persistence
+Contra: Indeterminacy is not desirable in a world populated by risk averse agents because
+it introduces additional volatility into the economy through agents' beliefs.
+}
+
+
+
+\end{document}

@@ -1,0 +1,343 @@
+\documentclass[handout]{beamer}  %%% FÜR HANDOUT ALS PDF
+
+\setbeamertemplate{navigation symbols}{}
+\usetheme{Madrid}
+\usecolortheme{seagull}
+\beamersetuncovermixins{\opaqueness<1>{10}}{\opaqueness<2->{15}}
+\usepackage[english]{babel}
+\usepackage{csquotes}
+\usepackage{graphicx}
+\usepackage{verbatim}
+\newcounter{saveenumi}
+\newcommand{\seti}{\setcounter{saveenumi}{\value{enumi}}}
+\newcommand{\conti}{\setcounter{enumi}{\value{saveenumi}}}
+\usepackage[hyperref=true,style=authoryear, dashed=false, maxnames=3,backend=bibtex8,doi=false,isbn=false,backref=true]{biblatex}
+\usepackage{amssymb,amsmath}
+%\setlength{\bibitemsep}{\baselineskip}
+\usepackage{xcolor}
+\usepackage{graphicx,pstricks,beamerprosper}
+\usepackage{subfigure}
+\usepackage{verbatim}
+
+
+\begin{document}
+\author[Willi Mutschler]{Willi Mutschler, M.Sc.}
+\date{Summer 2014}
+\institute[Institute of Econometrics]{Institute of Econometrics and Economic
+Statistics\\University of M\"unster\\willi.mutschler@uni-muenster.de}
+\title[DSGE methods]{DSGE methods}
+\subtitle{Introduction to Dynare via Clarida, Gali, and Gertler (1999)}
+
+\begin{frame}
+\titlepage
+\end{frame}
+
+\begin{frame}\frametitle{Previously\dots}
+\begin{itemize}[<+->]
+  \item Theory and intuition behind the Smets/Wouters' model as the workhorse DSGE model.
+  \item Derivation of the structural form and log-linearization.
+\begin{block}{Insight}
+DSGE model consists of
+\begin{itemize}
+     \item set of Euler equations, i.e. first-order optimality conditions,
+     \item transition equations for structural shocks and innovations,
+     \item observable variables and measurement errors
+\end{itemize}
+which can be cast into a nonlinear system of expectational difference equations.
+\end{block}
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Introduction to Dynare}\framesubtitle{}
+Dynare
+\begin{itemize}
+  \item computes the solution of deterministic models (arbitrary accuracy),
+  \item computes first, second and third order approximation to solution of stochastic models,
+  \item estimates (maximum likelihood or Bayesian approach) parameters of DSGE models,
+  \item computes optimal policy (Ramsey-optimal),
+  \item performs global sensitivity analysis and local identification of a model,
+  \item solves problems under partial information,
+  \item estimates BVAR and Markov-Switching Bayesian VAR models
+  \item estimates DSGE-VAR models
+  \item estimates Markov-Switching DSGE models
+  \item \dots
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Simple model: Clarida, Gali, and Gertler (1999)}\framesubtitle{Household}\footnotesize
+Household preferences are given by
+\begin{equation*}
+\underset{C_t,N_t,B_{t+1}}{max} E_{0}\sum_{t=0}^{\infty }\beta^t\left( \log C_{t}-exp(\tau_t)\frac{N_{t}^{1+\phi }}{1+\phi }\right)
+\end{equation*}
+\begin{itemize}
+\item $C_{t}$ denotes consumption, $N_{t}$ denotes employment or market work,
+\item $\phi>0$ denotes a labor supply parameter, $0<\beta<1$ is discount parameter
+\item $\tau_t$ is a preference shock
+\begin{align}
+  \tau_t = \rho_\tau \tau_{t-1} + \varepsilon_t^\tau, \quad \varepsilon_t^\tau \sim iidN(0,{\sigma_\tau}^2)
+\end{align}
+\end{itemize}
+The budget constraint of the household is
+\begin{equation*}
+  P_{t}C_{t}+B_{t+1}\leq W_{t}N_{t}+R_{t-1}B_{t}+T_{t},
+\end{equation*}
+\begin{itemize}
+  \item $T_t$ denotes (lump-sum) taxes and profits,
+  \item $P_t$ denotes price level,
+  \item $W_t$ denotes nominal wage rate
+  \item $B_{t+1}$ denotes bonds purchased at time $t$, which deliver a non-state-contingent rate of return, $R_{t}$, in period $t+1.$
+\end{itemize}
+\end{frame}
+
+\begin{frame}\frametitle{Simple model: Clarida, Gali, and Gertler (1999)}\framesubtitle{Household}
+Optimality yields:
+\begin{itemize}
+  \item Intratemporal optimality: Marginal cost of working (in consumption units) equals marginal benefit (the real wage)
+  \begin{align*}
+    exp(\tau_t)C_t N_t^\phi = \frac{W_t}{P_t}
+  \end{align*}
+  \item Intertemporal Euler equation: Utility costs of consumption foregone with corresponding benefit
+  \begin{align}
+    \frac{1}{C_t} = \beta E_t \frac{1}{C_{t+1}} \frac{R_t}{\Pi_{t+1}}
+  \end{align}
+  $\Pi_{t+1}$ gross inflation from $t$ to $t+1$
+\end{itemize}
+
+\end{frame}
+
+\begin{frame}    \frametitle{Simple model: Clarida, Gali, and Gertler (1999)}\framesubtitle{Competitive firms}
+Represantative, competitive firm produces a homogeneous output good, $Y_{t},$ using the following Dixit-Stiglitz technology:
+\[
+Y_{t}=\left[ \int_{0}^{1}Y_{i,t}^{\frac{\varepsilon-1}{\varepsilon}}\right]
+^\frac{\varepsilon}{\varepsilon-1}di,\text{ }\varepsilon >1,
+\]%
+\begin{itemize}
+\item $Y_{i,t}$ denotes the $i^{th}$ intermediate good, $i\in \left(0,1\right).$
+\item $\varepsilon$ is degree of substitution between inputs (love of variety)
+\end{itemize}
+Competitive firm takes the price of final output good, $P_{t},$ and the prices of intermediate goods, $P_{i,t},$ as given and chooses $Y_t$ and $Y_{i,t}$ to maximize profits. First-order condition:
+\[
+Y_{i,t}=Y_{t}\left( \frac{P_{i,t}}{P_{t}}\right) ^{-\varepsilon} \text{ with } P_t = \left(\int_0^1 P_{i,t}^{1-\varepsilon}di\right)^\frac{1}{1-\varepsilon}
+\]%
+\begin{itemize}
+  \item $Y_{i,t}$ is the demand curve for the producer of $Y_{i,t}$.
+\end{itemize}
+\end{frame}
+
+\begin{frame}    \frametitle{Simple model: Clarida, Gali, and Gertler (1999)}\framesubtitle{Intermediate firms}
+The $i^{th}$ intermediate good firm is a monopolist for $Y_{i,t}$ and uses labor, $N_{i,t},$
+to produce output using the following production function:%
+\begin{align}
+Y_{i,t}&=A_t N_{i,t},\text{ }a_t = log(A_t), A_0=\bar{A}=1\nonumber\\
+\Delta a_{t}&=\rho_a \Delta a_{t-1}+\varepsilon _{t}^{a}, \quad \varepsilon_t^a \sim iidN(0,{\sigma_a}^2)
+\end{align}
+\begin{itemize}
+  \item $\Delta $ is the first difference operator
+  \item $a_{t}$ has a unit root representation, $\varepsilon_t^a$ is thus a shock on the growth rate of technology $A_t$
+\end{itemize}
+The $i^{th}$ firm sets prices subject to Calvo frictions. In particular,%
+\[
+P_{i,t}=\left\{
+\begin{array}{cc}
+\tilde{P}_{t} & \text{with probability }1-\theta \\
+P_{i,t-1} & \text{with probability }\theta%
+\end{array}%
+\right. ,
+\]%
+\begin{itemize}
+  \item $\tilde{P}_{t}$ denotes the price chosen by the $1-\theta $ firms that can reoptimize their price at time $t.$
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Simple model: Clarida, Gali, and Gertler (1999)}\framesubtitle{Intermediate firms}\footnotesize
+\begin{itemize}
+  \item $i^{th}$ producer is competitive in labor markets, pays $W_{t}\left( 1-\nu \right)$ for one unit of labor.
+  \item $\nu $ represents a subsidy which eliminates the monopoly distortion on labor in the steady state:
+  $$1-\nu=\left( \varepsilon -1\right) /\varepsilon .$$
+  \item Define real marginal costs
+  \begin{align*}
+    s_t = \frac{\frac{d Cost}{d Worker}}{\frac{dOutput}{dWorker}} = \frac{(1-\nu)\frac{W_t}{P_t}}{exp(a_t)} = \frac{(1-\nu)C_t exp(\tau_t) N_t^\phi}{exp(a_t)}
+  \end{align*}
+  \item Each of the $1-\theta$ firms that can optimize price, choose $\tilde{P}_t$ to maximize profits:
+  \begin{align*}
+    E_t \sum_{j=0}^\infty \beta^j \theta^j \mu_{t+j} \overbrace{[\underbrace{\tilde{P}_t Y_{i,t+j}}_\text{revenues} - \underbrace{P_{t+j} s_{t+j} Y_{i,t+j}}_\text{cost}]}^\text{period t+j profits sent to household}
+  \end{align*}
+  with:
+  \begin{itemize}
+    \item $\mu_{t+j}$: marginal value of dividends to household= $u_{c,t+j}/P_{t+j}$
+    \item $\theta^j$ firm cares only about states in which it can't reoptimize
+  \end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Simple model: Clarida, Gali, and Gertler (1999)}\framesubtitle{Intermediate firms and aggregate output}\footnotesize
+Optimality (Calvo-Yun algebra) yields:
+\begin{align}
+  \tilde{p}_t &= \frac{\tilde{P}_t}{P_t} = \frac{E_t \sum_{j=0}^\infty (\beta \theta)^j \left(\frac{P_{t+j}}{P_t}\right)^{-\varepsilon} \frac{\varepsilon}{\varepsilon-1} s_{t+j}}{E_t \sum_{j=0}^\infty (\beta \theta)^j \left(\frac{P_{t+j}}{P_t}\right)^{\varepsilon-1}} \equiv \frac{K_t}{F_t} = \left(\frac{1-\theta \Pi_t^{\varepsilon-1}}{1-\theta}\right)^\frac{1}{1-\varepsilon}
+\end{align}
+where
+\begin{align}
+  K_t &= (1-\nu) \frac{\varepsilon}{\varepsilon-1} \frac{exp(\tau_t)N_t^\phi C_t}{exp(a_t)} + \beta \theta E_t \Pi_{t+1}^\varepsilon K_{t+1},\\
+  F_t &= 1+ \beta \theta \Pi_{t+1} ^{\varepsilon-1} F_{t+1}
+\end{align}
+Define $P_t^* = \left[\int_0^1 P_{i,t}^{-\varepsilon}di\right]^{-\frac{1}{\varepsilon}}$, law of motion of price distortion:
+\begin{align}
+  p_t^* := \left(\frac{P_t^*}{P_t} \right)^\varepsilon&= \left[(1-\theta)\left(\frac{1-\theta \Pi_t^{\varepsilon-1}}{1-\theta}\right)^\frac{\varepsilon}{\varepsilon-1} + \frac{\theta \Pi_t^\varepsilon}{p_{t-1}^*}\right]^{-1}
+\end{align}
+Aggregate output:
+\begin{align}
+    Y_t &= p_t^* exp(a_t) N_t = C_t
+\end{align}
+\end{frame}
+
+\begin{frame}\frametitle{Simple model: Clarida, Gali, and Gertler (1999)}\framesubtitle{Steady state}
+  \begin{block}{Steady-State}
+    \begin{align*}
+      \Pi_{ss} &= 1, R_{ss}=\frac{1}{\beta}, p^*_{ss} = 1,\\
+      F_{ss}&=K_{ss}=\frac{1}{1-\beta \theta},\\
+      Y_{ss}&=C_{ss}=N_{ss} = 1,\\
+      \tau_{ss}&=a_{ss}=\Delta a_{ss}=0
+    \end{align*}
+  \end{block}
+\end{frame}
+
+\begin{frame}\frametitle{Simple model: Clarida, Gali, and Gertler (1999)}\framesubtitle{Summary}
+\begin{itemize}
+  \item We have 8 equations for 10 unknowns $(C_t,p_t^*, N_t, \Pi_t, K_t, F_t, R_t, \nu)$
+  \item[$\hookrightarrow$] Need to pin down policy variables $\nu$ and $R_t$!
+  \item Two (in principle equivalent) ways:
+  \begin{itemize}
+    \item Ramsey optimal policy (Solve Lagrangian w.r.t policy variables)
+    \item Taylor rule (no monopoly power, no inflation)
+  \end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}\frametitle{Simple model: Clarida, Gali, and Gertler (1999)}\framesubtitle{Ramsey equilibrium}
+\begin{block}{Ramsey equilibrium (Efficient Allocation)}
+The efficient equilibrium associated with the optimal monetary policy is characterized by
+\begin{itemize}
+  \item zero inflation, $\Pi _{t}=1,$ at each date and for each realization of $a_{t}$ \& $\tau _{t}$
+  \item consumption and employment correspond to their first best levels
+  \item $C_{t}$ and $N_{t}$ satisfy the resource constraint: $C_{t}=\exp \left( a_{t}\right) N_{t}$
+\item marginal rate of substitution between consumption and labor equals the marginal product of labor:
+$C_{t}\exp \left( \tau _{t}\right) N_{t}^{\varphi }=\exp \left(
+a_{t}\right)$
+\end{itemize}
+\end{block}
+\end{frame}
+\begin{frame}\frametitle{Simple model: Clarida, Gali, and Gertler (1999)}\framesubtitle{Ramsey equilibrium}\footnotesize
+\begin{itemize}
+  \item No monopoly power:
+  \begin{align*}
+    1-\nu = \frac{\varepsilon-1}{\varepsilon}  \tag{Eff1}
+  \end{align*}
+  \item No price distortion $(\forall t: p_t^{*}=1)$ yields no inflation
+  \begin{align*}
+    \Pi_t^{**} = \frac{p_t^*}{p_{t-1}^*} =1\tag{Eff2}
+  \end{align*}
+  \item Efficient (first-best) allocations:
+  \begin{align*}
+    N_t^{**} &= exp\left(\frac{-\tau_t}{1+\phi}\right)\tag{Eff3}\\
+    Y_t^{**}=C_t^{**} &= exp(a_t) N_t^{**} = exp\left(a_t - \frac{\tau_t}{1+\phi}\right)\tag{Eff4}\\
+  \end{align*}
+  \item Natural interest rate back out of Euler equation:
+  \begin{align*}
+    R_t^{**} = \frac{1}{\beta}E_t exp\left(\Delta a_{t+1} - \frac{\tau_{t+1}-\tau_t}{1+\phi}\right) \tag{Eff5}
+  \end{align*}
+\end{itemize}
+
+\end{frame}
+
+\begin{frame}\frametitle{Simple model: Clarida, Gali, and Gertler (1999)}\framesubtitle{Ramsey equilibrium}
+Log-linearization around steady-state yields for the efficient allocation:\footnotesize
+\begin{align*}
+\pi_t^{**} &:= log(\Pi_t^{**})-log(\Pi_{ss}) = 0,\\
+n^{**}_t &:= log(N_t^{**})-log(N_{ss}) = -\frac{\tau_t}{1+\phi},\\
+c^{**}_t &:= \log ( C_{t}^{**}) -log(C_{ss}) =a_{t}-\frac{\tau _{t}}{1+\varphi } = \log( Y_{t}^{**})-log(Y_{ss}) =: y^{**}_t,\\
+r_t^{**} &:= log(R_t^{**}) - log(R_{ss}) = E_{t}\Delta a_{t+1}-E_{t}\frac{\tau _{t+1}-\tau _{t}}{1+\varphi },
+\end{align*}\normalsize
+\begin{itemize}
+  \item $\ast\ast $ indicates a variable corresponding to the Ramsey equilibrium, i.e. natural rates,
+  \item lower case letters are log of the corresponding variable minus log of corresponding steady-state, e.g. $x_t = log(X_t) - log(X_{ss})$
+\end{itemize}
+\end{frame}
+
+\begin{frame}\frametitle{Simple model: Clarida, Gali, and Gertler (1999)}\framesubtitle{Closing the model: Taylor rule}\footnotesize
+\begin{itemize}
+\item Most models are extended by a Taylor rule that is designed such that in steady-state inflation is zero, e.g.
+\begin{align*}
+  r_{t} &=\alpha r_{t-1}+(1-\alpha )\left[ \phi _{\pi }\pi _{t}+\phi _{x}x_{t}\right]
+\end{align*}
+\item If the Taylor rule includes the Ramsey equilibrium, we call it optimal monetary policy:
+\begin{align*}
+  r_{t} = r_t^{**} + \alpha (r_{t-1}-r^{**}_{t-1})+(1-\alpha )\left[ \phi _{\pi }\pi _{t}+\phi _{x}x_{t}\right]
+\end{align*}
+\end{itemize}
+\begin{block}{Taylor-principle}
+The monetary authority reacts to a change in inflation by implementing a bigger change in interest rates $((1-\alpha) \phi_\pi>1)$.
+\end{block}
+\begin{itemize}
+  \item Technical requirement for stable and convergent solution (Blanchard-Khan)
+  \item If $(1-\alpha) \phi_\pi \leq 1$: shocks that raise inflation result in lower real interest rates and higher output, which further fuels the initial increase in inflation \\
+  $\hookrightarrow$ unstable explosive spiral\\
+  $\hookrightarrow$ indeterminacy
+\end{itemize}
+\end{frame}
+
+\begin{frame}\frametitle{Simple model: Clarida, Gali, and Gertler (1999)}\framesubtitle{Log-linearized model and Taylor-rule}
+Linearizing about the steady-state the model equations are given by\footnotesize
+\begin{align*}
+\pi_{t} &=\beta E_{t}\pi _{t+1}+\kappa x_{t} &\text{(Phillips curve)} \\
+x_{t} &= E_{t}x_{t+1}-\left( r_{t}-E_{t}\pi _{t+1}-r_{t}^{**}\right) &\text{(IS equation)} \\
+r_{t} &=\alpha r_{t-1}+(1-\alpha )\left[ \phi _{\pi }\pi _{t}+\phi _{x}x_{t}\right] &\text{(baseline Taylor-rule)} \\
+\Delta a_t &= \rho_a \Delta a_{t-1} + \varepsilon_{t}^a &\text{(technological shock)}\\
+\tau_t &= \rho_\tau \tau_{t-1} + \varepsilon_{t}^\tau &\text{(preference shock)}\\
+r_{t}^{**} &= \rho_a \Delta a_{t}+\frac{1-\rho_\tau}{1+\varphi } \tau_t &\text{(natural interest rate)} \\
+\Delta y_t &= x_{t} - x_{t-1} + \Delta a_t - \frac{\tau_t - \tau_{t-1}}{1+\phi} &\text{(output growth)}\\
+\end{align*}
+with
+\begin{align*}
+x_{t} &=y_{t}-y_{t}^{**}&\text{(output gap)}\\
+y_{t}^{**} &=a_{t}-\frac{1}{1+\phi }\tau _{t}&\text{(natural output)}\\
+\kappa &= \frac{(1-\theta)(1-\beta \theta) (1+\varphi)}{\theta} &\text{(auxiliary parameter)}
+\end{align*}
+\end{frame}
+
+\begin{frame}\frametitle{Simple model: Clarida, Gali, and Gertler (1999)}\framesubtitle{Practicing Dynare}
+Exercise: CGG-Model with Dynare
+\begin{enumerate}
+  \item Install Matlab and Dynare, open cgg.mod, try to understand the code, run it. Interpret the Dynare output.
+  \item Compute the impulse response function of the model to a technology shock and a preference shock for the next 7 periods.
+  \item Given the IRF, indicate whether the economy over- or under- responds due to the shocks, relative to their natural response. What is the economic intuition in each case? (Hint: Use plots.m)
+  \item Do the calculations with $\phi_\pi=0.99$. Explain the error message and give economic intuition behind this.
+\seti\end{enumerate}
+\end{frame}
+
+\begin{frame}\frametitle{Simple model: Clarida, Gali, and Gertler (1999)}\framesubtitle{Practicing Dynare}
+Return to $\phi_\pi=1.5$.
+\begin{enumerate}\conti
+  \item Explain why it is that when the monetary policy rule is replaced by the natural equilibrium, i.e. $r_t =r_t^{**}$, the solution is indeterminate.
+  \item Now replace the monetary policy rule by
+  \begin{equation*} r_{t} = r_t^{**} + \alpha (r_{t-1}-r^{**}_{t-1})+(1-\alpha )\left[ \phi _{\pi }\pi _{t}+\phi _{x}x_{t}\right]\end{equation*}
+  Explain why this Taylor rule uniquely supports the natural equilibrium.\seti
+\end{enumerate}
+Calibrate the model to a more empirically relevant parametrization: $\phi_x=0.15,\alpha=0.8,\rho=0.9$
+\begin{enumerate}\conti
+   \item Simulate the model for 1000 periods. Save the middle 100 observations of $\Delta y_t$ and $\pi_t$ into an Excel-file as well as into a mat-file. Plot the path of output growth.
+\seti\end{enumerate}
+\end{frame}
+
+\begin{frame}\frametitle{Simple model: Clarida, Gali, and Gertler (1999)}\framesubtitle{Practicing Dynare}
+Now let's estimate the coefficients as well as the standard errors of the stochastic process ($\rho_a,\rho_\tau,\sigma_a,\sigma_\tau$)
+\begin{enumerate}\conti
+  \item via maximum likelihood: Use 1000 observations to verify that everything works fine and start far from the true values.
+  \item via maximum likelihood: Use only 50 observations and start at the true values. Do the results change?
+  \item via Bayesian methods: Use the inverted gamma distribution (mean to true values, standard deviation 10) as the prior on the two standard errors and the beta distribution (mean to true values, standard deviation to 0.4) as the prior on the two autocorrelations. Use 50 observations for the estimation, 1000 MCMC replications, one MCMC chain, and 1.5 for the scale parameter.
+\end{enumerate}
+\end{frame}
+\end{document}

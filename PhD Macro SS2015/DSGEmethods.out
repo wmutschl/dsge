@@ -1,0 +1,21 @@
+\BOOKMARK [2][]{Outline0.1}{General DSGE framework}{}% 1
+\BOOKMARK [2][]{Outline0.2}{DSGE solution}{}% 2
+\BOOKMARK [2][]{Outline0.3}{Overview Estimation-Methods}{}% 3
+\BOOKMARK [2][]{Outline0.4}{Calibration}{}% 4
+\BOOKMARK [3][]{Outline0.4.1.26}{Hints for calibrating a model}{Outline0.4}% 5
+\BOOKMARK [2][]{Outline0.5}{Calibration - Pros \046 Cons}{}% 6
+\BOOKMARK [2][]{Outline0.6}{Kalman-filter}{}% 7
+\BOOKMARK [3][]{Outline0.6.1.32}{Notation}{Outline0.6}% 8
+\BOOKMARK [3][]{Outline0.6.2.33}{Initialization}{Outline0.6}% 9
+\BOOKMARK [3][]{Outline0.6.3.35}{Recursion}{Outline0.6}% 10
+\BOOKMARK [3][]{Outline0.6.4.37}{Summary and Likelihood}{Outline0.6}% 11
+\BOOKMARK [2][]{Outline0.7}{Maximum-Likelihood}{}% 12
+\BOOKMARK [3][]{Outline0.7.1.39}{Idea}{Outline0.7}% 13
+\BOOKMARK [3][]{Outline0.7.2.40}{Idea}{Outline0.7}% 14
+\BOOKMARK [2][]{Outline0.8}{Bayesian methods}{}% 15
+\BOOKMARK [3][]{Outline0.8.1.46}{Metropolis-Hastings-algorithm}{Outline0.8}% 16
+\BOOKMARK [3][]{Outline0.8.2.51}{Remarks}{Outline0.8}% 17
+\BOOKMARK [3][]{Outline0.8.3.52}{Inference, forecast, model comparison and identification}{Outline0.8}% 18
+\BOOKMARK [3][]{Outline0.8.4.54}{Exercise: Estimation with Bayesian methods}{Outline0.8}% 19
+\BOOKMARK [2][]{Outline0.9}{Discussion}{}% 20
+\BOOKMARK [2][]{Outline0.10}{References}{}% 21

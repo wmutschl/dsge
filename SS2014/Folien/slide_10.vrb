@@ -1,0 +1,7 @@
+\frametitle{Repetition: Exercise}
+Consider the Clarida-Gali-Gertler model from the previous lecture.
+\begin{enumerate}
+   \item Derive the optimality conditions for the nonlinear model with Calvo-price frictions as well as the efficient allocation of the model.
+   \item Write a mod-file for the nonlinear model (do not log-linearize!) and solve it using Dynare's \texttt{stoch\_simul(order=1)}. Interpret Dynare's output.
+   \item Transform the variables in the model to logs. Hint: Use $x_t = log(X_t)$ and $X_t=e^{log(X_t)} = e^{x_t}$ in the equilibrium equations. Interpret Dynare's output. Compare it to the output of the cgg.mod file from the previous lecture given the same parameter values and variables.
+\end{enumerate}

@@ -1,0 +1,8 @@
+\beamer@endinputifotherversion {3.20pt}
+\select@language {ngerman}
+\beamer@sectionintoc {1}{Overview Estimation-Methods}{3}{0}{1}
+\beamer@sectionintoc {2}{Calibration}{4}{0}{2}
+\beamer@subsectionintoc {2}{1}{Hints for calibrating a model}{5}{0}{2}
+\beamer@sectionintoc {3}{Exercise 2: Calibration of a RBC-model with monopolistic competition}{7}{0}{3}
+\beamer@sectionintoc {4}{Calibration - Pros \& Cons}{11}{0}{4}
+\beamer@sectionintoc {5}{Exercise 3: A simple RBC model - Practicing Dynare}{13}{0}{5}

@@ -1,0 +1,897 @@
+\documentclass{beamer}
+\usepackage{times,amsmath,graphicx,pstricks,beamerprosper,pgfpages}
+%\pgfpagesuselayout{4 on 1}[a4paper,landscape]
+\usepackage{times,amsmath,graphicx,pstricks,beamerprosper}
+\usepackage[T1]{fontenc}
+\title{DYNARE SUMMER SCHOOL 2012}
+\subtitle{Optimal policy computation with Dynare}
+\author{Michel Juillard\footnote{Bank of France}}
+\date{June 22, 2012}
+\begin{document}
+
+\begin{frame}
+  \titlepage
+\end{frame}
+
+\begin{frame}
+  \frametitle{Introduction}
+Optimal policy rules are interesting:
+\begin{itemize}
+\item from a positive point of view
+  \begin{itemize}
+  \item to remedy asymmetry with treatment of private agents in most models
+  \end{itemize}
+\item from a normative point of view
+  \begin{itemize}
+  \item a long tradition to approach economic policy as an optimal control problem
+  \item optimal policy rule are not directly implementable, too complex and hard to communicate
+  \item they are useful as benchmark to compare more practicale rules
+  \item they provide the natural framework to discuss how monetary policy should answer different type of structural shocks 
+  \end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Abundant literature}
+  Among which
+  \begin{itemize}
+  \item Benigno and Woodford (2008)
+  \item Levine, Pearlman and Pierse (2008)
+  \item Svensson (2010)
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Dynare implementation}
+Dynare currently implements three manners to compute optimal policy in DSGE models
+\begin{itemize}
+\item optimal rule under commitment (Ramsey policy)
+\item optimal rule under discretion (time consistent)
+\item optimal simple rules
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Outline}
+  \begin{enumerate}
+  \item {\red Introduction}
+  \item Solving for approximated Ramsey policy
+    \begin{enumerate}
+    \item Steady state
+    \item First order approximation
+    \end{enumerate}
+  \item Evaluating welfare under optimal policy
+  \item Optimal policy in a timeless perspective
+  \item Optimal simple rules
+  \end{enumerate}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Time consistency, commitment}
+  \begin{itemize}
+  \item The behavior of private agents and their expectations act as constraints on the choice of the policymaker.
+  \item As private agents anticipate policy, policy announcements (or policy rules) affects the behavior of private agents in previous periods.
+  \item However, this particular constraint for policymaker choices doesn't exist for first period policy decisions (the policymaker has the \emph{benefit of surprise}).
+  \item As a consequence, if the policymaker re--optimize in the future, he will not follow the rule announced at the time of the first optimization. This is \emph{time inconsistency}.
+  \item \emph{Commitment} is the commitment not to re--optimize in the future.
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Equilibrium under discretion, timeless perspective}
+\begin{itemize}
+  \item When the policymaker re--optimizes repeatedly and the private agents start to expect it, the system switches to a Nash equilibrium: the \emph{equilibrium under discretion}.
+  \item Under optimal policy in a \emph{timeless} perspective, the policymaker doesn't exploit the benefit of surprise in the first period.
+  \item Optimal policy in a timeless perspective may or may not achieve an outcome better than the equilibrium under discretion.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Outline}
+  \begin{enumerate}
+  \item Introduction
+  \item {\red Solving for approximated Ramsey policy}
+    \begin{enumerate}
+    \item Steady state
+    \item First order approximation
+    \end{enumerate}
+  \item Evaluating welfare under optimal policy
+  \item Optimal policy in a timeless perspective
+  \item Optimal simple rules
+  \end{enumerate}
+\end{frame}
+
+\section{Optimal policy under commitment}
+
+\begin{frame}
+  \frametitle{Ramsey policy: General nonlinear case}
+\[
+\max_{\left\{y_\tau\right\}_{\tau=0}^\infty}E_t\sum_{\tau=t}^\infty\beta^{\tau-t}U(y_\tau)
+\]
+s.t.
+\[
+E_{\tau}f(y_{\tau+1}, y_{\tau}, y_{\tau-1}, \varepsilon_{\tau})=0
+\]
+  \begin{description}
+  \item[$y_t\in R^n$]: endogenous variables
+  \item[$\varepsilon_t\in R^p$]: stochastic shocks
+  \end{description}
+  and
+  \[
+  f : R^{3n+p}\rightarrow R^m
+  \]
+  There are $n-m$ free policy instruments.
+\end{frame}
+
+\begin{frame}
+  \frametitle{Lagrangian}
+The Lagrangian is written
+\[
+L\left(y_{t-1},\varepsilon_t,\ldots\right) = E_t\sum_{\tau=t}^\infty\beta^{\tau-t}U(y_\tau)-\lambda_\tau'f\left(y_{\tau+1}, y_{\tau}, y_{\tau-1}, \varepsilon_{\tau}\right)
+\]
+where $\lambda_\tau$ is a vector of $m$ Lagrange multipliers.
+
+It turns out that it is the discounted value of the Lagrange
+multipliers that are stationary and not the multipliers themselves. It
+is therefore handy to rewrite the Lagrangian as
+\[
+L\left(y_{t-1},\varepsilon_t,\ldots\right) = E_t\sum_{\tau=t}^\infty\beta^{\tau-t}\left(U(y_\tau)-\mu_\tau'f\left(y_{\tau+1}, y_{\tau}, y_{\tau-1}, \varepsilon_{\tau}\right)\right)
+\]
+whith $\mu_t=\lambda_\tau/\beta^{\tau-t}$.
+
+\end{frame}
+
+\begin{frame}\frametitle{Optimization problem reformulated}
+The optimization problem becomes
+\[
+\max_{\left\{y_\tau\right\}_{\tau=t}^\infty}\min_{\left\{\mu_\tau\right\}_{\tau=t}^\infty} E_t\sum_{\tau=t}^\infty\beta^{\tau-t}\left(U(y_\tau)-\mu_\tau'f\left(y_{\tau+1}, y_{\tau}, y_{\tau-1}, \varepsilon_{\tau}\right)\right)
+\]
+for $y_{t-1}$ given.
+\end{frame}
+
+\begin{frame}
+\frametitle{First order necessary conditions}
+Derivatives of the Lagrangian with respect to endogenous variables:
+\begin{align*}
+  \frac{\partial L}{\partial y_\tau} &=   E_{t}\big\{U_{1}(y_\tau)-\mu_\tau'f_{2}(y_{\tau+1}, y_{\tau}, y_{\tau-1},
+\varepsilon_{\tau})\\
+& -\beta\mu_{\tau+1}'f_{3}( y_{\tau+2},
+y_{\tau+1}, y_{\tau}, \varepsilon_{\tau+1})\big\}\;\;\;\;\;&{\red \tau = t} \\ 
+  \frac{\partial L}{\partial y_\tau} &=   E_{t}\big\{U_{1}(y_{\tau})-\mu_{\tau}'f_{2}(y_{\tau+1}, y_{\tau}, y_{\tau-1},
+\varepsilon_{\tau})\\
+& -\beta\mu_{\tau+1}'f_{3}( y_{\tau+2},
+y_{\tau+1}, y_{\tau}, \varepsilon_{\tau+1}) \\ 
+&-\beta^{-1}\mu_{\tau-1}f_{1}(y_{\tau}, y_{\tau-1}, y_{\tau-2},
+\varepsilon_{\tau-1})\big\}&{\red \tau > t}
+\end{align*}
+\end{frame}
+
+\begin{frame}
+\frametitle{First order conditions}
+The first order conditions of this optimization problem are
+\begin{align*}
+   E_{t}\big\{U_{1}(y_t)-\mu_{t}'f_{2}(y_{t+1}, y_t, y_t,
+\varepsilon_t)&\\
+ -\beta\mu_{t+1}'f_{3}( y_{t+2},
+y_{t+1}, y_t, \varepsilon_{t+1}) &\\ 
+-\beta^{-1}\mu_{t-1}'f_{1}(y_t, y_{t-1}, y_{t-2},
+\varepsilon_{t-1})\big\} &= 0\\
+E_{t}f\left(y_{t+1},y_t,y_{t-1},\varepsilon_t\right)
+  &= 0
+\end{align*}
+with $\mu_{t-1}=0$ and where $U_1()$ is the Jacobian of function $U()$ with respect to $y_\tau$ and $f_i()$ is the first order partial derivative of $f()$ with respect to the $i$th argument.
+\end{frame}
+
+\begin{frame}
+  \frametitle{Cautionary remark}
+The First Order Conditions for optimality are only necessary conditions for a maximum. Levine, Pearlman and Pierse (2008) propose algorithms to check a sufficient condition. 
+\end{frame}
+
+\begin{frame}
+  \frametitle{Nature of the solution}
+The above system of equations is nothing but a larger system of nonlinear rational expectation equations. As such, it can be approximated either to first order or to second order. The solution takes the form
+\[
+\left[
+  \begin{array}{c}
+    y_t\\\mu_t
+  \end{array}\right] = \hat g\left(y_{t-2},y_{t-1},\mu_{t-1},\varepsilon_{t-1},\varepsilon_t\right)
+\]
+The optimal policy is then directly obtained as part of the set of $g()$ functions.
+\end{frame}
+
+\begin{frame}
+  \frametitle{Outline}
+  \begin{enumerate}
+  \item Introduction
+  \item Solving for approximated Ramsey policy
+    \begin{enumerate}
+    \item {\red Steady state}
+    \item First order approximation
+    \end{enumerate}
+  \item Evaluating welfare under optimal policy
+  \item Optimal policy in a timeless perspective
+  \item Optimal simple rules
+  \end{enumerate}
+\end{frame}
+
+\section{Computational issues}
+\subsection{Steady state}
+\begin{frame}
+  \frametitle{The steady state problem}
+The steady state is solution of
+\begin{eqnarray*}
+U_{1}(\bar y)-\bar\mu^{'}\big[f_{2}(\bar y, \bar y, \bar y,
+0) +\beta f_{3}(\bar y,
+\bar y, \bar y, 0) \\ 
++\beta^{-1}f_{1}(\bar y, \bar y, \bar y,
+0)\big]&=&0\\
+f(\bar y, \bar y, \bar y,
+0)&=&0
+\end{eqnarray*}
+
+\end{frame}
+
+\begin{frame}
+  \frametitle{Computing the steady state}
+For a given value  $\tilde y$, it is possible to use the first matrix equation above to obtain the value of $\tilde \mu$ that minimizes the sum of square residuals, $e$:
+\begin{eqnarray*}
+M &=& f_{2}(\tilde y, \tilde y, \tilde y,
+\tilde x, 0) +\beta f_{3}(\tilde y,
+\tilde y, \tilde y, \tilde x, 0)\\
+&& +\beta^{-1}f_{1}(\tilde y, \tilde y, \tilde y,
+0)\\ 
+\tilde\mu' &=& U_1(\tilde y)M'\left(MM'\right)^{-1}\\
+e' &=& U_1(\tilde y) - \tilde\mu'M
+\end{eqnarray*}
+
+Furthermore, $\tilde y$ must satisfy the $m$ equations
+\begin{eqnarray*}
+f(\tilde y, \tilde y, \tilde y, 0)&=&0
+\end{eqnarray*}
+It is possible to build a sytem of equations whith only $n$ unkowns $\tilde y$, but we must provide $n-m$ independent measures of the residuals $e$. Independent in the sense that the derivatives of these measures with respect to $\tilde y$ must be linearly independent.
+\end{frame}
+
+\begin{frame}
+  \frametitle{A QR trick}
+At the steady state, the following must hold  exactly
+\[
+U_1\left(\tilde y\right) = \bar\mu'M
+\]
+This can only be if
+\[
+M^\star = \left[\begin{array}{c}M\\U_1\left(\tilde y\right)\end{array}\right]
+\]
+is of rank $m$
+The reordered QR decomposition of $M^\star$ is such that
+\[
+\begin{array}{ccccc}
+  M^\star & E & = & Q & R\\
+\mbox{\scriptsize $(m+1)\times n$} & \mbox{\scriptsize $n\times n$} && \mbox{\scriptsize $(m+1)\times (m+1)$} & \mbox{\scriptsize $(m+1)\times n$}
+\end{array}
+\]
+where $E$ is a permutation matrix, $Q$ an orthogonal matrix and $R$ a triangular matrix with diagonal elements ordered in decreasing size.
+\end{frame}
+
+\begin{frame}
+  \frametitle{A QR trick (continued)}
+\begin{itemize}
+\item When $U_1\left(\tilde y\right) = \bar\mu'M$ doesn't hold exactly $M^\star$ is full rank ($m+1$) and the $n-m$ last elements of $R$ may be different from zero. 
+\item When $U_1\left(\tilde y\right) = \bar\mu'M$ holds exactly $M^\star$ has rank $m$ and the $n-m$ last elements of $R$
+are zero.
+\item The last $n-m$ elements of the last row of $R$ provide the $n-m$ independent measures of the residuals $e$
+\item In practice, we build a nonlinear function with $\tilde y$ as input and that returns the $n-m$ last elements of the last row of $R$ and $f\left(\tilde y,\tilde y,\tilde y,0\right)$. At the solution, when $\tilde y = \bar y$, this function must return zeros. 
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{When an analytical solution is available}
+Let's write $y_x$ the $n-m$ policy instruments and $y_y$, the $m$ remaining endogenous variables, such that
+\[
+  y^\star = \left[\begin{array}{c}y_x^\star\\y_y^\star\end{array}\right].
+\]
+The analytical solution is given by
+\[
+  y_y^\star = \tilde f\left(y_x^\star\right).
+\]
+We have then
+\begin{align*}
+  f\left(y^\star,y^\star,y^\star,0\right) = 0
+\end{align*}
+
+Combining this analytical solution with the $n-m$ residuals computed above, we can reduce the steady state problem to a system of $n-m$ nonlinear equations that is much easier to solve.
+\end{frame}
+
+\begin{frame}
+  \frametitle{Outline}
+  \begin{enumerate}
+  \item Introduction
+  \item Solving for approximated Ramsey policy
+    \begin{enumerate}
+    \item Steady state
+    \item {\red First order approximation}
+    \end{enumerate}
+  \item Evaluating welfare under optimal policy
+  \item Optimal policy in a timeless perspective
+  \item Optimal simple rules
+  \end{enumerate}
+\end{frame}
+
+\subsection{First order approximation}
+
+\begin{frame}
+\frametitle{First order approximation of the FOCs}
+{\footnotesize
+\begin{align*}
+E_{t}\big\{U_{11}\widehat{y}_{t}-f_2'\widehat{\mu}_{t}-\beta f_3'\widehat{\mu}_{t+1}
+-\beta^{-1}f_1'\widehat{\mu}_{t-1}\\
+ -\bar\mu\big({\red \beta f_{13}\widehat{y}_{t+2}
++\beta^{-1}f_{13}\widehat{y}_{t-2}+ \left(f_{12}+\beta f_{23}\right)\widehat{y}_{t+1}}\\
+{\red +\left(f_{23}+\beta^{-1}f_{12}\right)\widehat{y}_{t-1}
++\left(f_{33}+\beta
+f_{22}+ 
+\beta^{-1}f_{11}\right)\widehat{y}_{t}}\\
+{\red +f_{24}\widehat{\varepsilon}_{t}+\beta f_{34}\widehat{\varepsilon}_{t+1}
++\beta^{-1}f_{14}\widehat{\varepsilon}_{t-1}}\big\}&=0\\
+E_{t}\big\{f_{1}\widehat{y}_{t+1}+f_{2}\widehat{y}_{t}+f_{3}\widehat{y}_{t-1}+f_{4}\widehat{\varepsilon}_{t}\big\}&=0
+\end{align*}
+}
+where $\widehat{y}_t = y_t-\bar y$, $\widehat{\mu}_t = \mu_t-\bar\mu$ and $f_{ij}$ the second order derivatives corresponding to the $i$th and the $j$th argument of the $f()$ function. 
+\end{frame}
+
+
+\begin{frame}
+  \frametitle{Pitfalls}
+\begin{itemize}
+\item A naive approach ot linear-quadratic appoximation that would consider a linear approximation of the dynamics of the system and a second order approximation of the objective function, ignores the second order derivatives $f_{ij}$ that enter in the first order approximation of the dynamics of the model under optimal policy.
+\item If the initial conditions for the system are far away from the steady state under Ramsey policy, a local approximation may not render accurately the transition.
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{The approximated solution function}
+  \begin{eqnarray*}
+    y_t &=& \bar y +g_1\widehat{y}_{t-2}+g_2\widehat{y}_{t-1}+g_3\widehat{\mu}_{t-1}+g_4\varepsilon_{t-1}+g_5\varepsilon_t\\
+    \mu_t &=& \bar \mu +h_1\widehat{y}_{t-2}+h_2\widehat{y}_{t-1}+h_3\widehat{\mu}_{t-1}+h_4\varepsilon_{t-1}+h_5\varepsilon_t
+  \end{eqnarray*}
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{Dynare implementation}
+When the \emph{ramsey\_policy} instruction is given, Dynare derives
+automatically the first order necessary conditions. The resulting
+model can be written in a Latex file, using \verb+write_latex_dynamic_model+.
+\end{frame}
+
+\section{A New Keynesian model}
+
+\begin{frame}\frametitle{A New Keynesian model}
+Sticky prices with price adjustment cost (Rotemberg)\\
+\bigskip
+
+\begin{itemize}
+\item Household $i$ maximizes
+\[
+E_t\sum_{\tau=t}^\infty \beta^{\tau-t}\left(ln C_{i,t}-\phi \frac{N_{i,t}^{1+\gamma }}{1+\gamma }\right)
+\]
+\item Budget constraint:
+\[
+\frac{B_{i,\tau}}{P_\tau} = R_{\tau-1}\frac{B_{i,\tau-1}}{P_{\tau-1}}-C_{i,\tau}+\frac{W_\tau}{P_\tau}N_{i,\tau}
+\]
+\end{itemize}
+
+\end{frame}
+
+\begin{frame}
+  \frametitle{Firms}
+  Firm $j$ maximizes current value of future profits:
+\[
+E_t\sum_{\tau=t}^\infty\beta^{\tau-t}\frac{C_t}{C_\tau} \left\{\frac{P_{j,\tau}}{P_\tau}C_{j,\tau}-MC_\tau C_{j,\tau}-\frac{\omega}{2}\left(\frac{P_{j,\tau}}{P_{j,\tau-1}}-1\right)^2 C_{\tau,j}\right\}
+\]
+Marginal cost is
+\[
+MC_\tau = \frac{W_\tau}{P_\tau A_\tau} = \frac{\phi N_\tau^\gamma}{A_\tau}
+\]
+Demand curve (monopolistic competition among producers of imperfectly substituable goods)
+\[
+C_{j,t} = \left(\frac{P_{j,t}}{P_t}\right)^{-\varepsilon}
+\]
+\end{frame}
+
+\begin{frame}\frametitle{Recursive equilibrium}
+
+\begin{align*}
+\frac{1}{C_{t}} =&\beta E_{t}\left \{ \frac{1}{C_{t+1}}\frac{R_{t}}{\pi
+_{t+1}}\right \}\\
+ \frac{\pi _{t}}{C_{t}}\left( \pi _{t}-1\right)
+=&\beta E_{t}\left \{ \frac{\pi _{t+1}}{C_{t+1}}\left( \pi _{t+1}-1\right)
+\right \} \\
+&+\varepsilon \frac{A_{t}}{\omega }\frac{N_{t}}{C_{t}}\left(
+\frac{\phi C_tN_{t}^{\gamma }}{A_{t}}-\frac{\varepsilon -1}{\varepsilon}\right) \\
+A_{t}N_{t} =& C_{t}+\frac{\omega }{2}\left( \pi _{t}-1\right) ^{2}\\
+\ln A_t =& \rho\ln A_{t-1} + \epsilon_t
+\end{align*}
+\end{frame}
+
+
+\begin{frame}\frametitle{Ramsey problem}
+\begin{align*}
+\max E_{0}\sum_{t=0}^\infty &\beta ^{t}\Bigg\{ \ln C_{t}-\phi \frac{N_{t}^{1+\gamma }}{1+\gamma } \\
+&-\mu_{1,t}\left( \frac{1}{C_{t}}-\beta E_{t}\left \{ \frac{1}{C_{t+1}}%
+\frac{R_{t}}{\pi_{t+1}}\right \} \right) \\
+&-\mu_{2,t}\left( \frac{\pi _{t}}{C_{t}}\left( \pi _{t}-1\right)
+-\beta E_{t}\left \{ \frac{\pi _{t+1}}{C_{t+1}}\left( \pi _{t+1}-1\right)
+\right \} \right.\\
+&\left.-\varepsilon \frac{A_{t}}{\omega }\frac{N_{t}}{C_{t}}\left(
+\frac{\phi C_t N_{t}^{\gamma }}{A_{t}}-\frac{\varepsilon -1}{\varepsilon }%
+\right) \right) \\
+&-\mu _{3,t}\left( A_{t}N_{t}-C_{t}-\frac{\omega }{2}\left( \pi
+_{t}-1\right) ^{2}\right)\\
+&-\mu_{4,t}\left(\ln A_t - \rho\ln A_{t-1} - \epsilon_t\right)\Bigg\}
+\end{align*}%
+$\mu_{i,t} = \lambda_{i,t}\beta^t$ where $\lambda_{i,t}$ is a Lagrange multiplier. 
+\end{frame}
+
+\begin{frame}\frametitle{F.O.C.}
+\begin{align*}
+\mu_{1,t-1}\frac{C_tR_{t-1}}{\pi^2_t}+
+\frac{1}{C_{t}}\left[ 2\pi _{t}-1\right] \left( \mu _{2,t}-\mu
+_{2,t-1}\right) &=\mu _{3,t}\omega \left( \pi _{t}-1\right)\\
+\frac{1}{C_{t}}-\frac{\mu_{1,t}}{C_t^2}+\mu_{1,t-1}\frac{R_{t-1}}{C^2_t\pi_t}-\mu _{2,t}\frac{1}{C_{t}^{2}}\Big[ \pi _{t}\left( \pi
+_{t}-1\right)\\
+ +\frac{A_{t}N_{t}}{\omega }\left( \varepsilon -1\right) \Big]
++\mu _{2,t-1}\frac{1}{C_{t}^{2}}\left[ \pi _{t}\left( \pi _{t}-1\right) %
+\right] &=\mu _{3,t}\\
+\phi N_{t}^{\gamma }+\phi \frac{\varepsilon }{\omega }N_{t}^{\gamma
+}\mu _{2,t}\left( \gamma +1\right) -\mu _{2,t}\frac{A_{t}}{%
+C_{t}\omega }\left( \varepsilon -1\right) &=\mu _{3,t}A_{t}\\
+\frac{\mu_{2,t}}{\omega }\frac{N_{t}}{C_{t}}\left(\varepsilon -1\right)+\mu_{3,t}N_t+\frac{\mu_{4,t}}{A_t}-\frac{\rho\beta\mu_{4,t+1}}{A_t} &= 0\\
+\mu_{1,t}\beta E_{t}\left \{ \frac{1}{C_{t+1}\pi_{t+1}}\right \}&=0
+\end{align*}
+\end{frame}
+
+\begin{frame}[fragile] \frametitle{Dynare code}
+\verb+nk_ramsey_1.mod+
+\begin{verbatim}
+var pie, c, n, r, a;
+varexo u;
+parameters beta, rho, epsilon, omega, phi, gamma;
+
+beta=0.99;
+gamma=3;  
+omega=17; 
+epsilon=8;
+phi=1;   
+rho=0.95;
+\end{verbatim}
+\end{frame}
+
+\begin{frame}[fragile] \frametitle{Dynare code (continued)}
+\begin{verbatim}
+model;
+a = rho*a(-1)+u;
+1/c = beta*r/(c(+1)*pie(+1)); 
+pie*(pie-1)/c = beta*pie(+1)*(pie(+1)-1)/c(+1)
+                +epsilon*phi*n^(gamma+1)/omega
+                -exp(a)*n*(epsilon-1)/(omega*c);
+exp(a)*n = c+(omega/2)*(pie-1)^2;
+end;
+\end{verbatim}
+\end{frame}
+
+\begin{frame}[fragile] \frametitle{Dynare code (continued)}
+\begin{verbatim}
+initval;
+pie=1;
+r=1/beta;
+c=0.96717;
+n=0.96717;
+a=0;
+end;
+
+shocks;
+var u; stderr 0.008;
+end;
+
+planner_objective(ln(c)
+             -phi*((n^(1+gamma))/(1+gamma)));
+
+ramsey_policy(planner_discount=0.99,order=1);
+
+\end{verbatim}
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{Using an analytical steady state (I)}
+\begin{verbatim}
+steady_state_model;
+    a = 0;
+    r = pie/bet;
+    c = f_c(1,pie,omega,bet,epsilon,phi,gamma);
+    n=c+(omega/2)*(pie-1)^2;
+end;
+
+initval;
+pie=1.1;
+end;
+
+.....
+
+ramsey_policy(planner_discount=0.99,order=1,
+              instruments=(pie));
+\end{verbatim}
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{Using an analytical steady state (II)}
+\verb+f_c.m+
+\begin{verbatim}
+function c = f_c(c0,pie,omega,bet,epsilon,phi,...
+                 gamma); 
+    
+    f = @(x) omega*pie*(pie-1)-bet*omega*pie...
+      *(pie-1)-epsilon*(x+(omega/2)*(pie-1)^2)...
+      *(x*phi*(x+(omega/2)*(pie-1)^2)^gamma...
+        -(epsilon-1)/epsilon);
+    
+    c = fzero(f,c0);
+\end{verbatim}
+\end{frame}
+
+
+\begin{frame}
+  \frametitle{Outline}
+  \begin{enumerate}
+  \item Introduction
+  \item Solving for approximated Ramsey policy
+    \begin{enumerate}
+    \item Steady state
+    \item First order approximation
+    \end{enumerate}
+  \item {\red Evaluating welfare under optimal policy}
+  \item Optimal policy in a timeless perspective
+  \item Optimal simple rules
+  \end{enumerate}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Evaluating welfare under optimal policy}
+\begin{itemize}
+\item Dynare computes a second order approximation of
+\[
+W\left(y_{t-1},u_t\right) = U\left(g\left(y_{t-1},u_t\right)\right)+\beta E_t W\left(g\left(y_{t-1},u_t\right),u_{t+1}\right)
+\]
+\item A first order approximation of optimal policy is an exact optimum for the second order approximation of the following objective function:
+\[
+\widetilde W\left(y_{t-1},u_t\right) = E_{t-1}\left\{U\left(g\left(y_{t-1},u_t\right)\right)+\beta W\left(g\left(y_{t-1},u_t\right),u_{t+1}\right)\right\}
+\]
+under the condition that optimal policy was already in place in the previous period.
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Outline}
+  \begin{enumerate}
+  \item Introduction
+  \item Solving for approximated Ramsey policy
+    \begin{enumerate}
+    \item Steady state
+    \item First order approximation
+    \end{enumerate}
+  \item Evaluating welfare under optimal policy
+  \item {\red Optimal policy in a timeless perspective}
+  \item Optimal simple rules
+  \end{enumerate}
+\end{frame}
+
+\section{Optimal policy in a timeless perspective}
+\begin{frame}
+  \frametitle{Timeless perspective}
+{\small
+  \begin{itemize}
+  \item Time inconsistency problem stems from the fact that the initial value of the lagged Lagrange multipliers is set to zero.
+  \item If, later on, the authorities re--optimize, they reset the Lagrange multipliers to zero.
+  \item This  mechanism reflects the fact that authorities make their decision after that private agents have formed their expectations (on the basis of the previous policy).
+  \item When private agents expect the authorities to reoptimize the economy switch to a Nash equilibrium (discretionary solution)
+  \item For optimal policy in a timeless perspective, Svensson and Woodford suggest that authorities relinquish their first period advantage and act as if the Lagrange mulitpliers had been initialized to zero in the far away past.
+  \item What should be the initial value of the Lagrange multipliers for optimal policy in  a timeless perspective?  
+  \end{itemize}
+}
+\end{frame}
+
+\begin{frame}
+\frametitle{Eliminating the Lagrange multipliers}
+A linear approximation of the solution to a Ramsey problem takes the form:
+\begin{eqnarray*}
+\left[
+\begin{array}{c}
+  \widehat y_t\\ \widehat\mu_t
+\end{array}\right]
+&=& \left[
+  \begin{array}{cc}
+    A_{11} & A_{12} \\ A_{21} & A_{22}
+  \end{array}\right]
+\left[
+  \begin{array}{c}
+    \widehat y_{t-1}\\\widehat \mu_{t-1}
+  \end{array}\right]+\left[\begin{array}{c} B_1\\ B_2\end{array}\right]\varepsilon_t\\
+&=& A_1 \widehat y_{t-1}+A_2\widehat\mu_{t-1}+B\varepsilon_t
+\end{eqnarray*}
+where $A_1$ and $A_2$ are the conforming sub-matrices.
+
+The problem is to eliminate $\widehat\mu_{t-1}$ from the expression for $\widehat y_t$ by substituting values of $\widehat y_{t-1}, \widehat y_{t-2}, \varepsilon_{t-1}$.
+\end{frame}
+
+\begin{frame}
+  \frametitle{A QR algolrithm (I)}
+\[
+A_2E = QR = \left[
+\begin{array}{cc}
+  Q_{11} & Q_{12}\\ Q_{21} & Q_{22}
+\end{array}\right]
+\left[\begin{array}{cc}
+  R_{1} & R_{2}\\ 0 & 0
+\end{array}\right]
+\]
+where $E$ is a permutation matrix, $R_1$ is upper triangular and $R_2$ is empty if $A_2$ is full (column) rank.
+
+Replacing $A_2$ by its decomposition, one gets
+\[
+Q'\left[
+\begin{array}{c}
+  \widehat y_t\\ \widehat\mu_t
+\end{array}\right]
+=
+Q'A_1 \widehat y_{t-1}+R E'\widehat\mu_{t-1}+Q'B\varepsilon_t
+\]
+
+The bottom part of the above  system can be written
+\[
+    Q_{12}'\widehat y_t+Q_{22}'\widehat\mu_t = \left[
+      \begin{array}{cc}Q_{12}' & Q_{22}'\end{array}\right]\left(A_1 \widehat y_{t-1}+B\varepsilon_t\right)
+\]
+
+This system in turn contains necessarily more equations than elements in $\widehat\mu_t$.
+\end{frame}
+
+\begin{frame}
+  \frametitle{A QR algolrithm (II)}
+A new application of the $QR$ decomposition to $Q_{22}'$ gives:
+\[
+Q_{22}'\widetilde E = \widetilde Q \widetilde R = \left[
+\begin{array}{cc}
+  \widetilde Q_{11} & \widetilde Q_{12}\\ \widetilde Q_{21} & \widetilde Q_{22}
+\end{array}\right]
+\left[\begin{array}{cc}
+  \widetilde R_{1} & \widetilde R_2\\ 0 & 0
+\end{array}\right]
+\]
+where $\widetilde E$ is a permutation matrix. When $R_2$ isn't empty, the system is undetermined and it is possible to choose some of the multipliers $\mu_t$, the ones corresponding to the columns of $\widetilde R_2$. We set them to zero, following a minimal state space type of arguments. Note however, that the $QR$ decomposition isn't unique. Once the economy is managed according to optimal policy, all choices of decomposition would be equivalent, but the choice may matter for the initial period. This is an issue that deserves further studying.
+\end{frame}
+
+\begin{frame}
+  \frametitle{A QR algolrithm (III)}
+Then, we have
+{\footnotesize
+\[
+\widehat\mu_t = \widetilde E\left[\begin{array}{c}{\widetilde R_1}^{-1}\left[
+  \begin{array}{cc}
+  \widetilde Q_{11}' & \widetilde Q_{21}'  
+  \end{array}\right]\left(\left[
+      \begin{array}{cc}Q_{12}' & Q_{22}'\end{array}\right]\left(A_1 \widehat y_{t-1}+B\varepsilon_t\right)-Q_{12}'\widehat y_t\right)\\0\end{array}\right]
+\]
+}
+and
+{\footnotesize
+\[
+\widehat\mu_{t-1} = \widetilde E\left[\begin{array}{c}{\widetilde R_1}^{-1}\left[
+  \begin{array}{cc}
+  \widetilde Q_{11}' & \widetilde Q_{21}'  
+  \end{array}\right]\left(\left[
+      \begin{array}{cc}Q_{12}' & Q_{22}'\end{array}\right]\left(A_1 \widehat y_{t-2}+B\varepsilon_{t-1}\right)-Q_{12}'\widehat y_{t-1}\right)\\0\end{array}\right]
+\]
+}
+\end{frame}
+
+\begin{frame}
+  \frametitle{A QR algolrithm (IV)}
+
+Replacing, $\widehat\mu_{t-1}$ in the original equation for $\widehat y_{t}$, one obtains finally
+\[
+\widehat y_t = M_1 \widehat y_{t-1} + M_2 \widehat y_{t-2}+M_3\varepsilon_t+M_4\varepsilon_{t-1}
+\]
+where
+\begin{eqnarray*}
+  M_1 &=& A_{11}-A_{12}\widetilde E\left[\begin{array}{c}{\widetilde R_1}^{-1}\left[
+  \begin{array}{cc}
+  \widetilde Q_{11}' & \widetilde Q_{21}'  
+  \end{array}\right]Q_{12}'\\0\end{array}\right]\\
+M_2 &=& A_{12}\widetilde E\left[\begin{array}{c}{\widetilde R_1}^{-1}\left[
+  \begin{array}{cc}
+  \widetilde Q_{11}' & \widetilde Q_{21}'  
+  \end{array}\right]\left[
+      \begin{array}{cc}Q_{12}' & Q_{22}'\end{array}\right]A_1\\0\end{array}\right]\\
+M_3 &=& B_1 \\
+M_4 &=& A_{12}\widetilde E\left[\begin{array}{c}{\widetilde R_1}^{-1}\left[
+  \begin{array}{cc}
+  \widetilde Q_{11}' & \widetilde Q_{21}'  
+  \end{array}\right]\left[
+      \begin{array}{cc}Q_{12}' & Q_{22}'\end{array}\right]B \\0\end{array}\right]
+\end{eqnarray*}
+
+\end{frame}
+
+\begin{frame}
+  \frametitle{Outline}
+  \begin{enumerate}
+  \item Introduction
+  \item Solving for approximated Ramsey policy
+    \begin{enumerate}
+    \item Steady state
+    \item First order approximation
+    \end{enumerate}
+  \item Evaluating welfare under optimal policy
+  \item Optimal policy in a timeless perspective
+  \item {\red Optimal simple rules}
+  \end{enumerate}
+\end{frame}
+
+\begin{slide}{Optimal simple rule}
+Example (Clarida, Gali, Gertler)
+  \begin{eqnarray*}
+    y_t  &=& \delta y_{t-1}  + (1-\delta)E_ty_{t+1}+\sigma (r_t - E_t\pi_{t+1}) + e_{y_t}\\ 
+\pi_t  &=&   \alpha \pi_{-1} + (1-\alpha) E_t \pi_{t+1} + \kappa y_t + e_{\pi_t}\\
+r_t &=& \gamma_1 \pi_t+\gamma_2 y_t
+  \end{eqnarray*}
+Objectif
+\[
+\arg\min_{\gamma_1,\gamma_2}\mbox{var}(y)+\mbox{var}(\pi)   
+\]
+\[
+=\arg\min_{\gamma_1,\gamma_2}\lim_{\beta\rightarrow 1}E_0\sum_{t=1}^\infty (1-\beta)\beta^t(y_t^2+\pi_t^2)
+\]
+\end{slide}
+
+\begin{slide}{DYNARE example cgg\_osr\_1.mod}
+{\small
+\begin{verbatim}
+var y pie r;
+varexo e_y e_pie;
+
+parameters delta sigma alpha kappa gamma1 gamma2;
+
+delta =  0.44;
+kappa =  0.18;
+alpha =  0.48;
+sigma = -0.06;
+\end{verbatim}
+}
+\end{slide}
+
+\begin{slide}{(continued)}
+{\small
+\begin{verbatim}
+model(linear);
+y  = delta*y(-1)+(1-delta)*y(+1)+sigma *(r-pie(+1))+e_y; 
+pie = alpha*pie(-1)+(1-alpha)*pie(+1)+kappa*y+e_pie;
+r = gamma1*pie+gamma2*y;
+end;
+
+shocks;
+var e_y;
+stderr 0.63;
+var e_pie;
+stderr 0.4;
+end;
+\end{verbatim}
+}
+\end{slide}
+
+\begin{slide}{(continued)}
+{\small
+\begin{verbatim}
+optim_weights;
+pie 1;
+y 1;
+end;
+
+gamma1 = 1.1;
+gamma2 = 0;
+
+osr_params gamma1 gamma2;
+
+osr;
+\end{verbatim}
+}  
+\end{slide}
+
+\begin{slide}{Controlling for variance of change in interest rate}
+
+  \begin{eqnarray*}
+    y_t  &=& \delta y_{t-1}  + (1-\delta)E_ty_{t+1}+\sigma (r_t - E_tpie_{t+1}) + e_{y_t}\\ 
+pie_t  &=&   \alpha pie_{-1} + (1-\alpha) E_t pie_{t+1} + \kappa y_t + e_{pie_t}\\
+r_t &=& \gamma_1 pie_t + \gamma_2 y_t\\
+dr_t &=& r_t - r_{t-1}
+  \end{eqnarray*}
+Objectif
+\[
+\min_{\gamma_1,\gamma_2}\mbox{var}(y)+\mbox{var}(pie)+0.2\mbox{var}(dr)   
+\]
+
+See \verb+cgg_osr_2.mod+
+\end{slide}
+
+\begin{frame}[fragile]
+  \frametitle{A grid search for initial values (I)}
+\verb+cgg_osr_3.mod+
+\begin{verbatim}
+gamma1_s = [  1.1 2.5 5];
+gamma2_s = [  0 1 2];
+
+nres = length(gamma1_s)*length(gamma2_s);
+results = zeros(nres,3);
+
+i_y = strmatch('y',M_.endo_names,'exact');
+i_inf = strmatch('pie',M_.endo_names,'exact');
+i_dr = strmatch('dr',M_.endo_names,'exact');
+\end{verbatim}
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{A grid search for initial values (II)}
+\begin{verbatim}
+ires = 1;
+for i2 = 1:length(gamma1_s);
+  gamma1 = gamma1_s(i2);
+  for i3 = 1:length(gamma2_s);
+    gamma2 = gamma2_s(i3);
+
+    stoch_simul(irf=0,noprint);
+
+    results(ires,[1:2]) = [gamma1 gamma2];
+    vv = oo_.var;
+    results(ires,3) = vv(i_y,i_y) ...
+                      + vv(i_inf,i_inf)...
+                      + 0.1*vv(i_dr,i_dr);
+    ires = ires + 1;
+  end;
+end;
+disp(flipud(sortrows(results,3)));
+\end{verbatim}
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{Using low discrepency sequence (I)}
+\verb+cgg_ldseq.mod+
+\begin{verbatim}
+nres = 1000;
+results = zeros(nres,3);
+
+i_y = strmatch('y',M_.endo_names,'exact');
+i_inf = strmatch('pie',M_.endo_names,'exact');
+i_dr = strmatch('dr',M_.endo_names,'exact');
+\end{verbatim}
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{Using low discrepency sequence (II)}
+\begin{verbatim}
+for ires = 1:nres
+  p = LPTAU(ires,2);  
+  gamma1 = 1+10*p(1);  // 1 < gamma1 < 11
+  gamma2 = 2*p(2);     // 0 < gamma2 < 2
+
+  stoch_simul(irf=0,noprint);
+
+  results(ires,[1:2]) = [gamma1 gamma2];
+  vv = oo_.var;
+  results(ires,3) = vv(i_y,i_y) ...
+                    + vv(i_inf,i_inf) ...
+                    + 0.1*vv(i_dr,i_dr);
+end;
+
+disp(flipud(sortrows(results,3)));
+\end{verbatim}
+\end{frame}
+
+\end{document}
+

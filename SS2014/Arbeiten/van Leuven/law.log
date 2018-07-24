@@ -1,0 +1,86 @@
+Starting Dynare (version 4.4.3).
+Starting preprocessing of the model file ...
+Found 5 equation(s).
+Evaluating expressions...done
+Computing static model derivatives:
+ - order 1
+Computing dynamic model derivatives:
+ - order 1
+Processing outputs ...done
+Preprocessing completed.
+Starting MATLAB/Octave computing.
+
+STEADY-STATE RESULTS:
+
+Inflation         		 0
+OutputGap         		 0
+Zins              		 0
+Natuerlicher_Zins 		 0
+z                 		 1
+
+EIGENVALUES:
+         Modulus             Real        Imaginary
+
+             0.9              0.9                0
+           1.021            1.012           0.1382
+           1.021            1.012          -0.1382
+
+
+There are 2 eigenvalue(s) larger than 1 in modulus 
+for 2 forward-looking variable(s)
+
+The rank condition is verified.
+
+
+MODEL SUMMARY
+
+  Number of variables:         5
+  Number of stochastic shocks: 1
+  Number of state variables:   1
+  Number of jumpers:           2
+  Number of static variables:  2
+
+
+MATRIX OF COVARIANCE OF EXOGENOUS SHOCKS
+
+Variables       eps_e     
+eps_e       1000000.000000
+
+POLICY AND TRANSITION FUNCTIONS
+                        Inflation        OutputGap        Zins             Natuerlicher_Zinsz                
+Constant                           0               0               0               0        1.000000
+z(-1)                      -0.278169       -0.274119       -0.402941       -0.180000        0.900000
+eps_e                      -0.006182       -0.006092       -0.008954       -0.004000        0.020000
+
+
+THEORETICAL MOMENTS
+
+VARIABLE               MEAN    STD. DEV.   VARIANCE 
+Inflation               0.0000    14.1814   201.1129
+OutputGap               0.0000    13.9749   195.2987
+Zins                    0.0000    20.5424   421.9911
+Natuerlicher_Zins       0.0000     9.1766    84.2105
+z                       1.0000    45.8831  2105.2632
+
+
+
+MATRIX OF CORRELATIONS
+
+Variables               Inflation          OutputGap             Zins        Natuerlicher_Zins          z         
+Inflation                       1.0000             1.0000             1.0000             1.0000            -1.0000
+OutputGap                       1.0000             1.0000             1.0000             1.0000            -1.0000
+Zins                            1.0000             1.0000             1.0000             1.0000            -1.0000
+Natuerlicher_Zins               1.0000             1.0000             1.0000             1.0000            -1.0000
+z                              -1.0000            -1.0000            -1.0000            -1.0000             1.0000
+
+
+
+COEFFICIENTS OF AUTOCORRELATION
+
+Order                  1       2       3       4       5   
+Inflation            0.9000  0.8100  0.7290  0.6561  0.5905
+OutputGap            0.9000  0.8100  0.7290  0.6561  0.5905
+Zins                 0.9000  0.8100  0.7290  0.6561  0.5905
+Natuerlicher_Zins    0.9000  0.8100  0.7290  0.6561  0.5905
+z                    0.9000  0.8100  0.7290  0.6561  0.5905
+Total computing time : 0h00m02s

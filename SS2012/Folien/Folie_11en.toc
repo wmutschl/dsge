@@ -1,0 +1,18 @@
+\beamer@endinputifotherversion {3.20pt}
+\select@language {ngerman}
+\beamer@sectionintoc {1}{Idea}{3}{0}{1}
+\beamer@sectionintoc {2}{Kalman-filter}{5}{0}{2}
+\beamer@subsectionintoc {2}{1}{Notation}{6}{0}{2}
+\beamer@subsectionintoc {2}{2}{Initialization}{7}{0}{2}
+\beamer@subsectionintoc {2}{3}{Recursion}{9}{0}{2}
+\beamer@subsectionintoc {2}{4}{Summary and Likelihood}{11}{0}{2}
+\beamer@sectionintoc {3}{Maximum-Likelihood}{13}{0}{3}
+\beamer@subsectionintoc {3}{1}{Idea}{14}{0}{3}
+\beamer@subsectionintoc {3}{2}{Exercise 4: An and Schorfheide (2007) via Maximum-Likelihood}{15}{0}{3}
+\beamer@sectionintoc {4}{Bayesian methods}{19}{0}{4}
+\beamer@subsectionintoc {4}{1}{Idea}{20}{0}{4}
+\beamer@subsectionintoc {4}{2}{Metropolis-Hastings-algorithm}{24}{0}{4}
+\beamer@subsectionintoc {4}{3}{Remarks}{29}{0}{4}
+\beamer@subsectionintoc {4}{4}{Exercise 5: Estimation with Bayesian methods}{30}{0}{4}
+\beamer@subsectionintoc {4}{5}{Inference, forecast, model comparison and identification}{33}{0}{4}
+\beamer@sectionintoc {5}{Discussion}{41}{0}{5}

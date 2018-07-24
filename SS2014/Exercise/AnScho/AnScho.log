@@ -1,0 +1,207 @@
+Starting Dynare (version 4.4.2).
+Starting preprocessing of the model file ...
+Found 9 equation(s).
+Evaluating expressions...done
+Computing static model derivatives:
+ - order 1
+ - order 2
+ - derivatives of Jacobian/Hessian w.r. to parameters
+Computing dynamic model derivatives:
+ - order 1
+ - order 2
+ - derivatives of Jacobian/Hessian w.r. to parameters
+Processing outputs ...done
+Preprocessing completed.
+Starting MATLAB/Octave computing.
+
+STEADY-STATE RESULTS:
+
+c    		 0
+R    		 0
+pie  		 0
+y    		 0
+g    		 0
+z    		 0
+YGR  		 0.55
+INFL 		 3.2
+INT  		 6.4
+
+EIGENVALUES:
+         Modulus             Real        Imaginary
+
+               0                0                0
+          0.5143           0.5143                0
+             0.9              0.9                0
+            0.95             0.95                0
+           1.174            1.174                0
+           1.245            1.245                0
+        2.17e+16         2.17e+16                0
+             Inf             -Inf                0
+
+
+There are 4 eigenvalue(s) larger than 1 in modulus 
+for 4 forward-looking variable(s)
+
+The rank condition is verified.
+
+
+==== Identification analysis ====
+
+Testing current parameter values
+The number of moments with non-zero derivative is smaller than the number of parameters
+Try increasing ar = 2
+The number of moments with non-zero derivative is smaller than the number of parameters
+Try increasing ar = 3
+The number of moments with non-zero derivative is smaller than the number of parameters
+Try increasing ar = 4
+The number of moments with non-zero derivative is smaller than the number of parameters
+Try increasing ar = 5
+The number of moments with non-zero derivative is smaller than the number of parameters
+Try increasing ar = 6
+The number of moments with non-zero derivative is smaller than the number of parameters
+Try increasing ar = 7
+The number of moments with non-zero derivative is smaller than the number of parameters
+Try increasing ar = 8
+The number of moments with non-zero derivative is smaller than the number of parameters
+Try increasing ar = 9
+The number of moments with non-zero derivative is smaller than the number of parameters
+Try increasing ar = 10
+The number of moments with non-zero derivative is smaller than the number of parameters
+up to 10 lags: check your model
+Either further increase ar or reduce the list of estimated parameters
+{Error using <a href="matlab:helpUtils.errorDocCallback('identification_analysis', 'C:\dynare\4.4.2\matlab\identification_analysis.m', 102)" style="font-weight:bold">identification_analysis</a> (<a href="matlab: opentoline('C:\dynare\4.4.2\matlab\identification_analysis.m',102,0)">line 102</a>)
+IDETooManyParams
+Error in <a href="matlab:helpUtils.errorDocCallback('dynare_identification', 'C:\dynare\4.4.2\matlab\dynare_identification.m', 280)" style="font-weight:bold">dynare_identification</a> (<a href="matlab: opentoline('C:\dynare\4.4.2\matlab\dynare_identification.m',280,0)">line 280</a>)
+    [idehess_point, idemoments_point, idemodel_point, idelre_point,
+    derivatives_info_point, info] = ...
+Error in <a href="matlab:helpUtils.errorDocCallback('AnScho', 'E:\Work\SS2014\DSGE\Exercise\AnScho\AnScho.m', 210)" style="font-weight:bold">AnScho</a> (<a href="matlab: opentoline('E:\Work\SS2014\DSGE\Exercise\AnScho\AnScho.m',210,0)">line 210</a>)
+dynare_identification(options_ident);
+Error in <a href="matlab:helpUtils.errorDocCallback('dynare', 'C:\dynare\4.4.2\matlab\dynare.m', 180)" style="font-weight:bold">dynare</a> (<a href="matlab: opentoline('C:\dynare\4.4.2\matlab\dynare.m',180,0)">line 180</a>)
+evalin('base',fname) ;} 
+dynare AnSchoLin
+
+Configuring Dynare ...
+[mex] Generalized QZ.
+[mex] Sylvester equation solution.
+[mex] Kronecker products.
+[mex] Sparse kronecker products.
+[mex] Local state space iteration (second order).
+[mex] Bytecode evaluation.
+[mex] k-order perturbation solver.
+[mex] k-order solution simulation.
+[mex] Quasi Monte-Carlo sequence (Sobol).
+[mex] Markov Switching SBVAR.
+
+Starting Dynare (version 4.4.2).
+Starting preprocessing of the model file ...
+ERROR: AnSchoLin.mod: line 17, cols 7-10: Unknown symbol: gamQ
+
+{Error using <a href="matlab:helpUtils.errorDocCallback('dynare', 'C:\dynare\4.4.2\matlab\dynare.m', 174)" style="font-weight:bold">dynare</a> (<a href="matlab: opentoline('C:\dynare\4.4.2\matlab\dynare.m',174,0)">line 174</a>)
+DYNARE: preprocessing failed} 
+dynare AnSchoLin
+
+Configuring Dynare ...
+[mex] Generalized QZ.
+[mex] Sylvester equation solution.
+[mex] Kronecker products.
+[mex] Sparse kronecker products.
+[mex] Local state space iteration (second order).
+[mex] Bytecode evaluation.
+[mex] k-order perturbation solver.
+[mex] k-order solution simulation.
+[mex] Quasi Monte-Carlo sequence (Sobol).
+[mex] Markov Switching SBVAR.
+
+Starting Dynare (version 4.4.2).
+Starting preprocessing of the model file ...
+ERROR: AnSchoLin.mod: line 17, cols 7-10: Unknown symbol: gamQ
+
+{Error using <a href="matlab:helpUtils.errorDocCallback('dynare', 'C:\dynare\4.4.2\matlab\dynare.m', 174)" style="font-weight:bold">dynare</a> (<a href="matlab: opentoline('C:\dynare\4.4.2\matlab\dynare.m',174,0)">line 174</a>)
+DYNARE: preprocessing failed} 
+dynare AnSchoLin
+
+Configuring Dynare ...
+[mex] Generalized QZ.
+[mex] Sylvester equation solution.
+[mex] Kronecker products.
+[mex] Sparse kronecker products.
+[mex] Local state space iteration (second order).
+[mex] Bytecode evaluation.
+[mex] k-order perturbation solver.
+[mex] k-order solution simulation.
+[mex] Quasi Monte-Carlo sequence (Sobol).
+[mex] Markov Switching SBVAR.
+
+Starting Dynare (version 4.4.2).
+Starting preprocessing of the model file ...
+ERROR: AnSchoLin.mod: line 17, cols 7-10: Unknown symbol: gamQ
+
+{Error using <a href="matlab:helpUtils.errorDocCallback('dynare', 'C:\dynare\4.4.2\matlab\dynare.m', 174)" style="font-weight:bold">dynare</a> (<a href="matlab: opentoline('C:\dynare\4.4.2\matlab\dynare.m',174,0)">line 174</a>)
+DYNARE: preprocessing failed} 
+dynare AnSchoLin
+
+Configuring Dynare ...
+[mex] Generalized QZ.
+[mex] Sylvester equation solution.
+[mex] Kronecker products.
+[mex] Sparse kronecker products.
+[mex] Local state space iteration (second order).
+[mex] Bytecode evaluation.
+[mex] k-order perturbation solver.
+[mex] k-order solution simulation.
+[mex] Quasi Monte-Carlo sequence (Sobol).
+[mex] Markov Switching SBVAR.
+
+Starting Dynare (version 4.4.2).
+Starting preprocessing of the model file ...
+ERROR: AnSchoLin.mod: line 18, cols 8-10: Unknown symbol: piA
+
+{Error using <a href="matlab:helpUtils.errorDocCallback('dynare', 'C:\dynare\4.4.2\matlab\dynare.m', 174)" style="font-weight:bold">dynare</a> (<a href="matlab: opentoline('C:\dynare\4.4.2\matlab\dynare.m',174,0)">line 174</a>)
+DYNARE: preprocessing failed} 
+dynare AnSchoLin
+
+Configuring Dynare ...
+[mex] Generalized QZ.
+[mex] Sylvester equation solution.
+[mex] Kronecker products.
+[mex] Sparse kronecker products.
+[mex] Local state space iteration (second order).
+[mex] Bytecode evaluation.
+[mex] k-order perturbation solver.
+[mex] k-order solution simulation.
+[mex] Quasi Monte-Carlo sequence (Sobol).
+[mex] Markov Switching SBVAR.
+
+Starting Dynare (version 4.4.2).
+Starting preprocessing of the model file ...
+ERROR: AnSchoLin.mod: line 18, cols 18-20: Unknown symbol: pie
+
+{Error using <a href="matlab:helpUtils.errorDocCallback('dynare', 'C:\dynare\4.4.2\matlab\dynare.m', 174)" style="font-weight:bold">dynare</a> (<a href="matlab: opentoline('C:\dynare\4.4.2\matlab\dynare.m',174,0)">line 174</a>)
+DYNARE: preprocessing failed} 
+dynare AnSchoLin
+
+Configuring Dynare ...
+[mex] Generalized QZ.
+[mex] Sylvester equation solution.
+[mex] Kronecker products.
+[mex] Sparse kronecker products.
+[mex] Local state space iteration (second order).
+[mex] Bytecode evaluation.
+[mex] k-order perturbation solver.
+[mex] k-order solution simulation.
+[mex] Quasi Monte-Carlo sequence (Sobol).
+[mex] Markov Switching SBVAR.
+
+Starting Dynare (version 4.4.2).
+Starting preprocessing of the model file ...
+Found 9 equation(s).
+Evaluating expressions...done
+Computing static model derivatives:
+ - order 1
+Computing dynamic model derivatives:
+ - order 1
+ - order 2
+Processing outputs ...done
+Preprocessing completed.
+Starting MATLAB/Octave computing.
+

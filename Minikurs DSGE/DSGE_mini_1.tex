@@ -1,0 +1,176 @@
+\documentclass[10pt]{beamer}  %%% F\"{U}R HANDOUT ALS PDF
+\usetheme{metropolis}
+\usepackage{iftex}
+\ifPDFTeX
+    \usepackage[T1]{fontenc}
+    \usepackage[utf8]{inputenc}
+\fi
+\ifXeTeX
+\fi
+\ifLuaTeX
+\fi
+\usepackage[ngerman]{babel}
+\usepackage{amsmath,amsfonts,amssymb}
+\usepackage{cancel}
+\usepackage[]{hyperref}
+\usepackage{xcolor,pstricks,beamerprosper}
+\title{DSGE Mini Kurs - Teil 1 (Einf\"{u}hrung)}
+\author{Willi Mutschler}
+\date{Dezember 2015}
+
+
+\begin{document}
+
+\begin{frame}
+\titlepage
+\end{frame}
+
+\begin{frame}\frametitle{Inhaltsverzeichnis}
+\setbeamertemplate{section in toc}[sections numbered]
+    \tableofcontents
+\end{frame}
+
+\section{Was sind Dynamic Stochastic General Equilibrium Modelle?}\small
+\begin{frame}
+\frametitle{Was sind Dynamic Stochastic General Equilibrium Modelle?}
+\begin{itemize}
+\item Ansammlung von Gleichungen, die eine \"{O}konomie beschreiben
+\item DSGE Modelle sind mikrofundiert:
+\begin{itemize}\footnotesize
+\item Akteure bilden Erwartungen und optimieren ihr Verhalten \textbf{vorausschauend}
+\item antizipieren und reagieren auf Politik\"{a}nderungen
+\end{itemize}
+\item \textbf{General Equilibrium}: Gleichungen m\"{u}ssen IMMER erf\"{u}llt sein
+\begin{itemize}\footnotesize
+\item Kurzfristiges Gleichgewicht: Entscheidungen, Mengen und Preise passen sich so an, dass Gleichungen immer erf\"{u}llt sind
+\item Langfristiges Gleichgewicht: Zustand mit Beharrungsverm\"{o}gen (steady-state)
+    \begin{itemize}\scriptsize
+    \item z.B. Wachstumsgleichgewicht: Gleichgewichtsgr\"{o}{\ss}en ver\"{a}ndern sich im Zeitablauf, aber Rate der Ver\"{a}nderung ist im Zeitablauf stabil
+    \end{itemize}
+\end{itemize}
+\item \textbf{Stochastic}: Schocks k\"{o}nnen daf\"{u}r sorgen, dass das Gleichgewicht vom steady-state tempor\"{a}r abweicht und somit Konjunkturzyklen, oder allgemeiner einen Daten-generierenden Prozess beschreiben
+\item \textbf{Dynamic}: Akteure, die intertemporal optimieren. System erlaubt es uns zudem die dynamischen Effekte
+    \begin{itemize}\footnotesize
+    \item nach einem tempor\"{a}ren Schock zum alten steady-state oder
+    \item nach einer permanenten \"{A}nderungen zum neuen steady-state
+    \end{itemize}
+    zu analysieren und quantifizieren
+\end{itemize}
+\end{frame}
+
+\section{Wof\"{u}r sind DSGE Modelle n\"{u}tzlich?}
+\begin{frame}
+\frametitle{Wof\"{u}r sind DSGE Modelle n\"{u}tzlich?}
+\begin{itemize}
+\item Analyse von
+\begin{itemize}
+\item dynamischen Verhaltens auf tempor\"{a}re oder permanente \"{A}nderungen
+\item Konjunkturzyklen
+\item verschiedenen kurzfristiger sowie langfristiger Politikma{\ss}nahmen
+\item Wohlfahrtswirkungen (z.B. verschiedener Politikma{\ss}nahmen)
+\end{itemize}
+\item Kontrafaktische Analyse: Was w\"{a}re wenn, \"{o}konomische Struktur oder Parameter oder.... anders gewesen w\"{a}re?
+\item Prognosen (wenn man DSGE Modelle sch\"{a}tzt)
+\item Berechnung von Multiplikatoren und anderen Kennzahlen
+\end{itemize}
+\end{frame}
+
+\section{Grunds\"{a}tzliche Struktur von DSGE Modellen}
+\begin{frame}
+\frametitle{Grunds\"{a}tzliche Struktur von DSGE Modellen (I)}
+\begin{itemize}
+\item \"{O}konomie wird in Sektoren eingeteilt, typischerweise
+\begin{itemize}
+\item Haushaltssektor
+\item Unternehmenssektor
+\item Regierungssektor (Geld- und Fiskalpolitik)monetary and fiscal policy), if applicable
+\item weitere Sektoren: Banken, Immobilien, internationale Verflechtungen,...
+\end{itemize}
+\item Grob zwei Klassen von DSGE Modellen
+\begin{itemize}
+\item ohne Preisfriktionen $\hookrightarrow$ Real-Business-Cycle (RBC) Modelle
+\item mit Marktunvollkommenheiten und Preisfriktionen $\hookrightarrow$ New-Keynesian Modelle
+\end{itemize}
+\end{itemize}
+\end{frame}
+
+
+\begin{frame}
+\frametitle{Grunds\"{a}tzliche Struktur von DSGE Modellen (II)}\footnotesize
+Die Sektoren folgen \"{u}blicherweise folgendem Kalk\"{u}l
+\begin{itemize}
+  \item Haushalte erhalten Nutzen aus privatem Konsum und staatlichen Leistungen; sie unterliegen dabei einer Budget Restriktion, in der sie ihre Ausgaben \"{u}ber (nutzenschm\"{a}hlernde) Arbeit, Vermietung von Kapital,  Bonds und Staatsanleihen finanzieren m\"{u}ssen $\hookrightarrow$ Nutzenmaximierung
+  \item Unternehmen produzieren eine Vielfalt von Produkten mithilfe von gemieteten Kapital und Arbeit. Sie verf\"{u}gen \"{u}ber Marktmacht \"{u}ber ihr Produkt und legen den Preis hierf\"{u}r fest. Alle Zwischeng\"{u}ter werden zur Herstellung des Konsum- und Investitionsguts ben\"{o}tigt. $\hookrightarrow$ Kostenminimierung und Gewinnmaximierung
+  \item Geldpolitik folgt einer Feedbackregel: Nominalzins reagiert auf Abweichungen der Inflationsrate vom Inflationsziel und des Outputs vom potential Output
+  \item Fiskalpolitik erhebt Steuern (Haushalte und Unternehmen) um seine Staatsausgaben (potentiell Nutzen-stiftend) und Staatsinvestitionen (potentiell Produktivit\"{a}tssteigernd)zu finanzieren. Zus\"{a}tzlich kann sich der Staat verschulden und emittiert Schuldtitel.
+  \item Beziehung zum Ausland zum Handel von G\"{u}tern und Kapital
+  \item und beliebige Erweiterungen...
+\end{itemize}
+\end{frame}
+
+\section{Deterministische vs. Stochastische Modelle}
+\begin{frame}\frametitle{Deterministische vs. Stochastische Modelle}
+	\begin{itemize}
+		\item Grundlegende Unterscheidung: Sind zuk\"{u}nftige Schocks bekannt?
+		\begin{itemize}
+			\item Deterministisches Modell: Auftreten aller zuk\"{u}nftiger Schocks ist genau bekannt (Zeitpunkt und Auspr\"{a}gung); n\"{u}tzlich:
+            \begin{itemize}
+			\item f\"{u}r Modelle mit vollen Informationen, perfekter Voraussicht und keiner Unsicherheit gegen\"{u}ber Schocks.
+			\item f\"{u}r Modelle mit Fokus auf Wechsel in Regimes, z.B. Einf\"{u}hrung einer neuen Steuer.
+			\item bei Schocks, die irgendwann in der Zukunft, in einer oder mehrerer Perioden auftreten.
+			\item da L\"{o}sung exakt und nichtlinear mithilfe numerischer Techniken berechnet werden kann.
+			\item im praktischen Gebrauch, um einen ersten Eindruck des Modells zu bekommen.		
+            \end{itemize}
+			\item Stochastisches Modell: Nur die Verteilung von zuk\"{u}nftigen Schocks ist bekannt; n\"{u}tzlich:
+            \begin{itemize}
+            \item da sch\"{a}tzbar!
+            \item bei Schocks, die \"{u}berraschend auftreten sollen.
+            \item da beliebter in der Literatur: RBC Modelle oder Neu-Keynesianische Modelle
+            \end{itemize}
+		\end{itemize}
+	\end{itemize}
+\end{frame}
+\note{Let's consider a shock to a model's innovation only in period 1. In a deterministic context, agents will take their decisions knowing that future values of the innovations will be zero in all periods to come. In a stochastic context, agents will take their decisions knowing that the future value of innovations are random but will have zero mean. This isn't the same thing because of Jensen's inequality.\\
+A second order approximation will instead lead to very different results, as the variance of shocks will matter.}
+
+
+\section{Arbeitspferde}
+\begin{frame}
+\frametitle{Arbeitspferde}\footnotesize
+\begin{itemize}
+  \item Smets/Wouters (2007, AER)
+  \begin{itemize}\tiny
+  \item Grundmodell mit vielen Friktionen, gesch\"{a}tzt
+  \end{itemize}
+  \item Global Integrated Monetary and Fiscal Model (GIMF) vom IWF
+  \begin{itemize}\tiny
+    \item Gro{\ss}es Model mit nicht-Ricardianischen,  Generationen\"{u}bergreifenden Haushalten mit endlichem Planungshorizont, detaillierte Fiskalpolitik, viele L\"{a}nder und Blocks; kalibriert
+  \end{itemize}
+\item SIGMA von der FED
+\begin{itemize}\tiny
+\item Sieben L\"{a}nder Modell zur Analyse US spezifischier Fragestellungen (insbesondere \"{O}lpreis); kalibriert
+\end{itemize}
+\item New Area Wide Model (NAWM) von der EZB:
+\begin{itemize}\tiny
+\item Zwei L\"{a}nder Modell, beides Mitglieder der EWU, sehr detailierte Fiskalpolitik; gesch\"{a}tzt
+\end{itemize}
+\item Euro Area Global Economy Model (EAGLE) von der EZB:
+    \begin{itemize}\tiny
+    \item Vier L\"{a}nder Model: Zwei L\"{a}nder Mitglied der EWU, USA und Rest der Welt, verschiedene Versionen (detaillierte Arbeitsmarktstruktur, Bankensektor, Fiskalpolitik); kalibriert
+    \end{itemize}
+\item Quest von der Europ\"{a}ischen Kommission
+\begin{itemize}\tiny
+    \item Mehrl\"{a}nder-Modell mit Wachstum und Generationen\"{u}bergreifenden Haushalten; gesch\"{a}tzt
+\end{itemize}
+\item GEAR von der Bundesbank:
+\begin{itemize}\tiny
+\item Drei Regionen Modell (Deutschland, Europa, Rest der Welt) mit detailiertem Fiskalpolitischen Block, Arbeitslosigkeit; gesch\"{a}tzt
+\end{itemize}
+\item Weitere
+\begin{itemize}\tiny
+\item PESSOA (Bank of Spain); ToTEM (Bank of Canada), BEQM (Bank of England), Aino (Bank of Finland), RAMSES (Riksbank), NEMO (Norges Bank), MAS (Bank of Chile),...
+\end{itemize}
+\end{itemize}
+\end{frame}
+
+\end{document} 

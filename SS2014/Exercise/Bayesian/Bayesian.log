@@ -1,0 +1,72 @@
+Starting Dynare (version 4.4.2).
+Starting preprocessing of the model file ...
+Found 7 equation(s).
+Evaluating expressions...done
+Computing static model derivatives:
+ - order 1
+Computing dynamic model derivatives:
+ - order 1
+ - order 2
+Processing outputs ...done
+Preprocessing completed.
+Starting MATLAB/Octave computing.
+The share of capital is: 0.20778
+ 
+
+You did not declare endogenous variables after the estimation/calib_smoother command.
+
+
+Loading 10000 observations from artificial_sample.mat
+
+Restricting the sample to observations 8000 to 8199. Using in total 200 observations. 
+Initial value of the log posterior (or likelihood): -345.8822
+
+RESULTS FROM POSTERIOR ESTIMATION
+parameters
+    prior mean     mode    s.d. prior pstdev
+
+alpha   0.400   0.4090  0.0503 beta  0.0500 
+theta   0.500   0.3838  0.1249 norm  1.0000 
+tau     2.000   0.8097  0.8401 gamm  2.0000 
+
+
+Log data density [Laplace approximation] is -349.778433.
+
+Estimation::mcmc: I am loading past metropolis-hastings simulations...
+Estimation::mcmc: I am writting a new mh-history file... Done.
+Estimation::mcmc: Ok. I have loaded 5000 simulations.
+
+
+Estimation::mcmc: Number of mh files: 1 per block.
+Estimation::mcmc: Total number of generated files: 3.
+Estimation::mcmc: Total number of iterations: 6000.
+Estimation::mcmc: Current acceptance ratio per chain: 
+                                                       Chain  1: 22.4775%
+                                                       Chain  2: 24.0759%
+                                                       Chain  3: 24.8751%
+Estimation::mcmc::diagnostics: Univariate convergence diagnostic, Brooks and Gelman (1998):
+    Parameter 1...  Done! 
+    Parameter 2...  Done! 
+    Parameter 3...  Done! 
+
+Estimation::mcmc: Total number of MH draws: 6000.
+Estimation::mcmc: Total number of generated MH files: 1.
+Estimation::mcmc: I'll use mh-files 1 to 1.
+Estimation::mcmc: In MH-file number 1 I'll start at line 3000.
+Estimation::mcmc: Finally I keep 3000 draws.
+
+Estimation::marginal density: I'm computing the posterior mean and covariance...  Done!
+Estimation::marginal density: I'm computing the posterior log marginal density (modified harmonic mean)... Done!
+
+
+ESTIMATION RESULTS
+
+Log data density is -349.460458.
+
+parameters
+        prior mean   post. mean        90% HPD interval    prior       pstdev
+
+alpha        0.400       0.3951      0.3116      0.4684   beta        0.0500
+theta        0.500       0.4692      0.3011      0.6543   norm        1.0000
+tau          2.000       2.4221      0.2913      5.1306   gamma       2.0000
+Total computing time : 0h00m34s

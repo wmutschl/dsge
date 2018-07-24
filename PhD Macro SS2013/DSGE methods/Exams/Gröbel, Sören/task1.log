@@ -1,0 +1,55 @@
+ 
+MODEL SUMMARY
+ 
+  Number of variables:         8
+  Number of stochastic shocks: 3
+  Number of state variables:   6
+  Number of jumpers:           2
+  Number of static variables:  1
+
+
+MATRIX OF COVARIANCE OF EXOGENOUS SHOCKS
+
+Variables    eps_a0     eps_a    eps_tau 
+eps_a0       1.000000  0.000000  0.000000
+eps_a        0.000000  1.000000  0.000000
+eps_tau      0.000000  0.000000  1.000000
+ 
+POLICY AND TRANSITION FUNCTIONS
+                         pie             x               r               rstar           tau             dy              da             
+tau(-1)                            0               0        0.125000        0.125000        0.500000        0.250000               0
+da(-1)                             0               0        0.040000        0.040000               0       -0.800000        0.200000
+eps_a(-1)                          0               0        0.004000        0.004000               0        0.020000        0.020000
+x(-1)                              0               0               0               0               0       -1.000000               0
+eps_a0                             0               0        0.004000        0.004000               0        0.020000        0.020000
+eps_tau                            0               0        0.005000        0.005000        0.020000       -0.010000               0
+ 
+STEADY-STATE RESULTS:
+ 
+pie             		 0
+x               		 0
+r               		 0
+rstar           		 0
+tau             		 0
+dy              		 0
+da              		 0
+ 
+EIGENVALUES:
+         Modulus             Real        Imaginary
+
+               0                0                0
+               0               -0                0
+               0               -0                0
+       1.862e-18        1.862e-18                0
+             0.2              0.2                0
+             0.5              0.5                0
+           1.145            1.109           0.2859
+           1.145            1.109          -0.2859
+
+
+There are 2 eigenvalue(s) larger than 1 in modulus 
+for 2 forward-looking variable(s)
+ 
+The rank condition is verified.
+ 
+Total computing time : 0h00m01s

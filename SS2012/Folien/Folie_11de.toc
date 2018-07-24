@@ -1,0 +1,18 @@
+\beamer@endinputifotherversion {3.20pt}
+\select@language {ngerman}
+\beamer@sectionintoc {1}{Idee}{3}{0}{1}
+\beamer@sectionintoc {2}{Kalman-Filter}{5}{0}{2}
+\beamer@subsectionintoc {2}{1}{Notation}{6}{0}{2}
+\beamer@subsectionintoc {2}{2}{Initialisierung}{7}{0}{2}
+\beamer@subsectionintoc {2}{3}{Rekursion}{9}{0}{2}
+\beamer@subsectionintoc {2}{4}{Zusammenfassung und Likelihood}{11}{0}{2}
+\beamer@sectionintoc {3}{Maximum-Likelihood}{13}{0}{3}
+\beamer@subsectionintoc {3}{1}{Idee}{14}{0}{3}
+\beamer@subsectionintoc {3}{2}{Aufgabe 4: An und Schorfheide (2007) mit Maximum-Likelihood}{15}{0}{3}
+\beamer@sectionintoc {4}{Bayesianische Sch\"{a}tzung}{19}{0}{4}
+\beamer@subsectionintoc {4}{1}{Idee}{20}{0}{4}
+\beamer@subsectionintoc {4}{2}{Metropolis-Hastings-Algorithmus}{24}{0}{4}
+\beamer@subsectionintoc {4}{3}{Hinweise}{29}{0}{4}
+\beamer@subsectionintoc {4}{4}{Aufgabe 5: Sch\"{a}tzung mit Bayesianischen Methoden}{30}{0}{4}
+\beamer@subsectionintoc {4}{5}{Inferenz, Prognose, Modellvergleich und Identifikation}{33}{0}{4}
+\beamer@sectionintoc {5}{Diskussion}{41}{0}{5}

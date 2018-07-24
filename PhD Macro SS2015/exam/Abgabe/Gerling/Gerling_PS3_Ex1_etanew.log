@@ -1,0 +1,118 @@
+Starting Dynare (version 4.4.3).
+Starting preprocessing of the model file ...
+Found 22 equation(s).
+Evaluating expressions...done
+Computing static model derivatives:
+ - order 1
+Computing dynamic model derivatives:
+ - order 1
+Processing outputs ...done
+Preprocessing completed.
+Starting MATLAB/Octave computing.
+
+STEADY-STATE RESULTS:
+
+y   		 1.02348
+dy  		 2.34801
+gb  		 0.2
+dgb 		 0
+ib  		 0.02
+dib 		 0
+tr  		 0.00516536
+dtr 		 0.516536
+w   		 2.04815
+dw  		 2.40729
+n   		 0.33314
+dn  		 -0.0578649
+c   		 0.626673
+dc  		 2.73328
+i   		 0.176807
+di  		 4.00415
+r   		 0.0385911
+dr  		 -0.140893
+k   		 8.84035
+kb  		 1
+tau 		 0.22
+z   		 1.03
+
+EIGENVALUES:
+         Modulus             Real        Imaginary
+
+            0.75             0.75                0
+            0.75             0.75                0
+            0.75             0.75        1.657e-14
+            0.75             0.75       -1.657e-14
+           0.957            0.957                0
+            0.98             0.98                0
+           1.071            1.071                0
+       2.087e+20       -2.087e+20                0
+             Inf             -Inf                0
+
+
+There are 3 eigenvalue(s) larger than 1 in modulus 
+for 3 forward-looking variable(s)
+
+The rank condition is verified.
+
+
+
+
+
+Residuals of the static equations:
+
+Equation number 1 : -2.2392e-07
+Equation number 2 : 0
+Equation number 3 : 0
+Equation number 4 : 0
+Equation number 5 : 1.7223e-06
+Equation number 6 : 1.8914e-07
+Equation number 7 : -1.3815e-06
+Equation number 8 : 0
+Equation number 9 : 0
+Equation number 10 : 0
+Equation number 11 : 0
+Equation number 12 : 0
+Equation number 13 : 0
+Equation number 14 : 0
+Equation number 15 : 0
+Equation number 16 : 0
+Equation number 17 : 0
+Equation number 18 : 0
+Equation number 19 : 0
+Equation number 20 : 0
+Equation number 21 : 0
+Equation number 22 : 0
+
+
+
+MODEL SUMMARY
+
+  Number of variables:         22
+  Number of stochastic shocks: 4
+  Number of state variables:   6
+  Number of jumpers:           3
+  Number of static variables:  14
+
+
+MATRIX OF COVARIANCE OF EXOGENOUS SHOCKS
+
+Variables      ez        egb       eib      etau   
+ez           0.000000  0.000000  0.000000  0.000000
+egb          0.000000  0.000000  0.000000  0.000000
+eib          0.000000  0.000000  0.000100  0.000000
+etau         0.000000  0.000000  0.000000  0.000000
+
+POLICY AND TRANSITION FUNCTIONS
+                                     y               dy              gb              dgb             ib              dib             tr              dtr             w               dw              n               dn              c               dc              i               di              r               dr              k               kb              tau             z  
+Constant                    1.023480        2.348009        0.200000               0        0.020000               0        0.005165        0.516536        2.048146        2.407295        0.333140       -0.057865        0.626673        2.733284        0.176807        4.004149        0.038591       -0.140893        8.840353        1.000000        0.220000        1.030000
+gb(-1)                      0.124906       12.490568        0.750000      375.000000               0               0       -0.722521      -72.252075       -0.124979       -6.248937        0.060985       18.295463       -0.095550      -15.663874       -0.529545     -311.496876        0.004710        0.470968       -0.529545               0               0               0
+ib(-1)                     -0.548986      -54.898646               0               0        0.750000     3750.000000       -0.870777      -87.077702        0.549308       27.465377       -0.268041      -80.412368        0.419961       68.845989       -1.718947    -1011.145294       -0.020700       -2.070002       -1.718947        0.750000               0               0
+k(-1)                       0.017085        1.708521               0               0               0               0        0.003759        0.375875        0.098746        4.937277       -0.010500       -3.150068        0.040081        6.570609       -0.022996      -13.526767       -0.003721       -0.372112        0.957004               0               0               0
+kb(-1)                      0.611378       61.137825               0               0               0               0        0.134503       13.450322        0.924374       46.218680        0.048649       14.594556        0.237115       38.871235        0.374264      220.155131        0.023053        2.305256        0.374264        0.980000               0               0
+z(-1)                       1.191318      119.131822               0               0               0               0        0.262090       26.209001        1.045038       52.251879        0.217791       65.337317        0.115085       18.866325        1.076234      633.078610        0.044920        4.491971        1.076234               0               0        0.750000
+tau(-1)                    -0.752934      -75.293362               0               0               0               0        0.601964       60.196378        0.753374       37.668699       -0.367618     -110.285370       -0.026595       -4.359881       -0.726338     -427.257847       -0.028390       -2.839003       -0.726338               0        0.750000               0
+ez                          1.636077      163.607702               0               0               0               0        0.359937       35.993694        1.435185       71.759247        0.299100       89.729915        0.158049       25.909753        1.478028      869.427958        0.061690        6.168973        1.478028               0               0        1.030000
+egb                         0.166541       16.654090        1.000000      500.000000               0               0       -0.963361      -96.336100       -0.166638       -8.331915        0.081313       24.393950       -0.127400      -20.885166       -0.706060     -415.329168        0.006280        0.627957       -0.706060               0               0               0
+eib                        -0.731982      -73.198195               0               0        1.000000     5000.000000       -1.161036     -116.103603        0.732410       36.620503       -0.357388     -107.216491        0.559947       91.794653       -2.291929    -1348.193726       -0.027600       -2.760003       -2.291929        1.000000               0               0
+etau                       -0.220861      -22.086053               0               0               0               0        0.176576       17.657604        0.220990       11.049485       -0.107835      -32.350375       -0.007801       -1.278899       -0.213059     -125.328968       -0.008328       -0.832774       -0.213059               0        0.220000               0
+Total computing time : 0h00m04s

@@ -1,0 +1,279 @@
+%Erstellt mit WinEdt 6
+\documentclass{beamer} %%% FÜR VORTRAG MIT PAUSEN
+%\documentclass[handout]{beamer}  %%% FÜR HANDOUT ALS PDF
+
+\setbeamertemplate{navigation symbols}{}
+\usetheme{Madrid}
+\usecolortheme{seagull}
+\beamersetuncovermixins{\opaqueness<1>{25}}{\opaqueness<2->{15}}
+\usepackage[T1]{fontenc}
+\usepackage{ae,aecompl}
+\usepackage[ansinew]{inputenc}
+\usepackage[ngerman]{babel}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage[babel,german=quotes]{csquotes} %im deutschen übliche Anführungszeichen
+\usepackage{verbatim}
+\newcounter{saveenumi}
+\newcommand{\seti}{\setcounter{saveenumi}{\value{enumi}}}
+\newcommand{\conti}{\setcounter{enumi}{\value{saveenumi}}}
+
+
+\begin{document}
+\author[Willi Mutschler]{Dr. Andrea Beccarini $\qquad$ Willi Mutschler, M.Sc.}
+\date{Sommersemester 2012}
+\institute[Institut für Ökonometrie]{Institut für Ökonometrie und
+Wirtschaftsstatistik Münster\\willi.mutschler@uni-muenster.de}
+\title{DSGE-Modelle}
+\subtitle{Verfahren begrenzter Information\\General Method of Moments und
+Indirekte Inferenz}
+
+\begin{frame}
+\titlepage
+\end{frame}
+
+\begin{frame}\frametitle{Verfahren begrenzter Information}
+\tableofcontents
+\end{frame}
+
+\section{Überblick}
+\begin{frame}\frametitle{Verfahren begrenzter Information}\framesubtitle{}
+\begin{itemize}
+   \item Bei der Schätzung der Parameter eines DSGE-Modells gilt es
+       einige Herausforderungen zu bewältigen: Erwartungen über
+       zukünftige Variablen, Nichtlinearitäten, stochastische
+       Prozesse\dots
+   \item Für solche Fälle gibt es jedoch allgemeine ökonometrische
+       Verfahren wie die \emph{General Method of Moments (GMM)} und die
+       Methode der \emph{Indirekten Inferenz}.
+   \item Klasse der \emph{Limited-information-estimators}, da keine
+       Likelihood, sondern nur bestimmte Momente betrachtet und an die
+       Daten angepasst werden \emph{(Matching-Moments)}.
+\end{itemize}
+\end{frame}
+
+\section{General Method of Moments}
+\begin{frame}\frametitle{Verfahren begrenzter Information}
+\tableofcontents[currentsection]
+\end{frame}
+
+\begin{frame}\frametitle{General Method of Moments}\framesubtitle{}
+\begin{itemize}
+   \item Entwickelt von Hansen (1982), zuerst auf DSGE-Modelle angewandt:
+       Christiano und Eichenbaum (1992) und Burnside, Eichenbaum und
+       Rebelo (1993).
+   \item Idee: DSGE-Modelle in Form von sogenannten \emph{Momenten-} bzw.
+       \emph{Orthogonalitätsbedingungen} darzustellen:
+\begin{align*}
+E\left[\mathfrak{g}(\underset{k \times 1}{\boldsymbol{\mu}},\underset{a \times 1}{\boldsymbol{\Upsilon_t}}\right]
+= E\begin{bmatrix} \mathfrak{f_1}(\underset{d\times1}{\mathbf{w_t}},\underset{k\times1}{\boldsymbol{\mu}})\underset{l\times1}{\mathbf{u_t}}\\
+\vdots\\
+\mathfrak{f_m}\left(\mathbf{w_t},\boldsymbol{\mu}\right)\mathbf{u_t}
+ \end{bmatrix}=\mathbf{0},
+\end{align*}
+\item $\boldsymbol{\mu}$ ist wahrer Parametervektor, $\mathbf{w_t}$ eine
+    Matrix erklärender Variablen, $\mathbf{u_t}$ eine Matrix von
+    Instrumentenvariablen und
+    $\boldsymbol{\Upsilon_t}=(\mathbf{w_t}',\mathbf{u_t}')'$.
+\item Vektorwertige Funktionen: $\mathfrak{g}: r\times 1$ und
+    $\mathfrak{f_i} :l\times 1$.
+\item Die Anzahl der Orthogonalitätsbedingungen ist dann gleich $r=ml$.
+\end{itemize}
+\end{frame}
+
+
+\begin{frame}\frametitle{General Method of Moments}\framesubtitle{}
+\begin{itemize}
+   \item  Orthogonalitätsbedingungen stammen aus den Bedingungen erster
+       Ordnung, den \emph{steady-state} Bedingungen und den
+       stochastischen Eigenschaften der exogenen Prozesse.
+   \item Finde denjenigen Schätzer $\boldsymbol{\widehat{\mu}_G}$, der
+       die empirische Version der Orthogonalitätsbedingungen so
+       \enquote{gut} wie möglich erfüllt, wobei eine Gewichtungsmatrix
+       $\boldsymbol{\Omega}$ definiert, was \enquote{gut} bedeutet.
+       \begin{block}{GMM-Schätzer}
+\begin{align*}
+  \boldsymbol{\widehat{\mu}_G} = \underset{\mu}{\text{min}} \left\{\left(\frac{1}{T} \sum_{t=0}^T \mathfrak{g}(\boldsymbol{\mu},\boldsymbol{\Upsilon})\right)'\times \boldsymbol{\Omega} \times \left(\frac{1}{T} \sum_{t=0}^T \mathfrak{g}(\boldsymbol{\mu},\boldsymbol{\Upsilon})\right) \right\}.
+\end{align*}
+\end{block}
+\end{itemize}
+\end{frame}
+
+\begin{frame}\frametitle{General Method of Moments}\framesubtitle{}
+\begin{itemize}
+   \item Falls $r<k$ ist das Modell unter-identifiziert $\Rightarrow$
+       weitere Instrumente finden: verzögerte Variablen oder die Tatsache
+       ausnutzen, dass Störterme unkorreliert sind.
+   \item Falls $r=k$ ist das Modell genau-identifiziert:
+       Gewichtungsmatrix spielt keine Rolle, da eine eindeutige Lösung,
+       bei der die quadratische Form genau gleich Null ist, existiert.
+   \item Falls $r>k$ ist das Modell über-identifiziert $\Rightarrow$
+       mehrere Lösungen, die analytisch bzw. mit numerischen Verfahren
+       berechnet werden können, Gewichtungsmatrix wählt diejenigen
+       Momentenbedingungen aus, die eine präzisere Schätzung ermöglichen.
+\begin{itemize}
+   \item Hansen (1982) zeigt, dass die optimale Gewichtungsmatrix gleich
+       der Inversen der Varianz-Kovarianz-Matrix des empirischen
+       Analogons ist.
+   \item Unter einigen Regularitätsbedingungen folgt zudem, dass
+       $\sqrt{T}(\widehat{\boldsymbol{\mu}}-\boldsymbol{\mu})$
+       normalverteilt ist. \item Dies ermöglicht für den
+       über-identifizierten Fall einen formalen Test (\emph{J-Test})
+       der Hypothese, dass das Modell in der Lage ist, den Daten
+       generierenden Prozess zu beschreiben.
+\end{itemize}
+\end{itemize}
+\end{frame}
+
+\subsection{Beispiel: Schätzung der Eulergleichung mit GMM}
+\begin{frame}\frametitle{General Method of Moments}\framesubtitle{Beispiel: Schätzung der Eulergleichung mit GMM}
+Einfache Euler-Gleichung:
+\begin{align*}
+\beta E_t \left[c_{t+1}^{-\tau} (1+r_{t+1}-\delta)\right] &= c_t^{-\tau}\\
+\Leftrightarrow E_t\left[ \beta \left(\frac{c_{t+1}}{c_{t}}\right)^{-\tau} (1+r_{t+1}-\delta)\right] &=1\\
+\Leftrightarrow E_t\left[ \beta \left(\frac{c_{t+1}}{c_{t}}\right)^{-\tau} (1+r_{t+1}-\delta)-1\right] &= 0\\
+ \Rightarrow E_t\left\{ \left[ \beta \left(\frac{c_{t+1}}{c_{t}}\right)^{-\tau} (1+r_{t+1}-\delta)-1\right]\begin{pmatrix}1 \\\frac{c_{t}}{c_{t-1}}\\r_t \end{pmatrix} \right\}&= \mathbf{0}\\
+\end{align*}
+mit zu schätzende Parameter $\boldsymbol{\mu} = (\beta,\delta,\tau)'$, exogenen Variablen (Daten) $\mathbf{w_t}=\left(\frac{c_{t+1}}{c_{t}}, r_{t+1}\right)'$ und Instrumenten z.B. $\mathbf{u_t}=(1,\frac{c_{t}}{c_{t-1}},r_t)'$.
+\end{frame}
+
+\section{Indirekte Inferenz}
+\begin{frame}\frametitle{Verfahren begrenzter Information}
+\tableofcontents[currentsection]
+\end{frame}
+
+\begin{frame}\frametitle{Indirekte Inferenz}\framesubtitle{}
+\begin{itemize}
+   \item Eingeführt von Gourieroux, Monfort und Renault (1993) und Smith
+       (1993) für nichtlineare Zeitreihenmodelle.
+   \item Indirekte, auf der Simulation von Daten beruhende Schätzmethode.
+   \item Wichtige Voraussetzung: Daten für verschiedene Parameter aus dem
+       zu schätzenden ökonomischen Modell simulieren zu können.
+   \item Diese werden mit einem Hilfsmodell geschätzt und mit der
+       Schätzung der wahren Daten verglichen.
+   \item Idee der \emph{Indirekten Inferenz}: Wähle denjenigen
+       Parametervektor, bei dem die Schätzung der simulierten Daten mit
+       derjenigen der wahren Daten so \enquote{gut} wie möglich
+       übereinstimmt.
+
+\end{itemize}
+\end{frame}
+
+\begin{frame}\frametitle{Indirekte Inferenz}\framesubtitle{}
+\begin{itemize}
+      \item Häufig verwendetes Hilfsmodell: VAR-Modelle.
+       \item Hervorragende empirische Vorhersagekraft
+           (\enquote{\emph{work-horse}}).
+   \item Lösung eines DSGE-Modells hat in seiner \emph{state-space}
+       Repräsentation die Form eines VAR-Modells.
+   \item Grundsätzlich zwei Möglichkeiten der Schätzung:
+       \begin{enumerate}
+       \item Parameter des VAR-Modells: Ruge-Marcia (2007).
+       \item Impuls-Antwort-Matching: Christiano, Eichenbaum und
+           Evans (2005).
+       \end{enumerate}
+   \item Sehr ähnlich: Impuls-Antworten sind Funktionen der Parameter.
+   \item Zweite Verfahren bietet den Vorteil, die dynamischen
+       Eigenschaften des VAR-Modells in das DSGE-Modell einfließen lassen
+       zu können.
+   \item Jedoch Identifizierbarkeitsprobleme: verschiedene
+       Parametervektoren können die gleichen Impuls-Antworten generieren.
+\end{itemize}
+\end{frame}
+
+\subsection{Impuls-Antwort-Matching}
+\begin{frame}\frametitle{Indirekte Inferenz}\framesubtitle{Impuls-Antwort-Matching}
+\begin{itemize}
+   \item
+\begin{block}{Indirekte Inferenz-Schätzer}
+\begin{align*}
+  \boldsymbol{\widehat{\mu}_{I}} = \underset{\mu}{\text{min}} \left\{ (\boldsymbol{\Xi}-\boldsymbol{\Xi}(\boldsymbol{\mu}))'\times \boldsymbol{\Omega}\times (\boldsymbol{\Xi}-\boldsymbol{\Xi}(\boldsymbol{\mu}))\right\}.
+\end{align*}
+\end{block}
+$\boldsymbol{\Xi}$: die mit den wahren Daten geschätzte
+Impuls-Antwort-Funktion des VAR-Modells,
+$\boldsymbol{\Xi}(\boldsymbol{\mu})$ das analoge Gegenstück mit den
+simulierten Daten, $\boldsymbol{\Omega}$ eine Gewichtungsmatrix.
+\item Smith (1993) zeigt, dass unter Verwendung der Inversen der
+    Varianz-Kovarianz-Matrix von $\boldsymbol{\Xi}$ für die Gewichtungsmatrix,
+    $\sqrt{T}(\boldsymbol{\widehat{\mu}}-\boldsymbol{\mu})$
+    normalverteilt ist.
+\item \emph{Method-of-Moments}-Interpretation, da die Impuls-Antworten
+    Funktionen der Kovarianzen und Autokovarianzen der Variablen des
+    VAR-Modells sind.
+\item \emph{Indirekte Inferenz}-Interpretation, da das Hilfsmodell eine
+    fehlspezifizierte Version der wahren state-space Repräsentation ist.
+\end{itemize}
+\end{frame}
+
+\subsection{Beispiel: Schätzung eines einfachen DSGE-Modells mit den Impuls-Antworten eines VAR(1)}
+\begin{frame}\frametitle{Indirekte Inferenz}\framesubtitle{Beispiel: Schätzung eines einfachen DSGE-Modells mit den Impuls-Antworten eines VAR(1)}
+\end{frame}
+
+\section{Diskussion}
+\begin{frame}\frametitle{Verfahren begrenzter Information}
+\tableofcontents[currentsection]
+\end{frame}
+\begin{frame}\frametitle{Verfahren begrenzter Information}\framesubtitle{Diskussion}
+\begin{itemize}
+   \item Verfahren gerade dann hilfreich, wenn die Bestimmung eines
+       bestimmten Kriteriums, beispielsweise der Likelihood-Funktion,
+       analytisch nicht machbar bzw. die Evaluation sehr schwierig ist.
+   \item Nur wenige Annahmen nötig: Erste bzw. zweite Momente der Schocks
+       (keine Verteilung).
+   \item Großer Vorteil gegenüber der Kalibrierung: Standardfehler
+       $\Rightarrow$ Statistische Inferenz möglich!
+   \item Beschränkung auf relevante Charakteristiken (Distanzfunktion
+       zwischen dem theoretischen und dem empirischen Moment) führt zu
+       robusten Schätzern.
+   \item J-Test der Überidentifizierung ist formaler statistischer Test
+       der Validität des Modells.
+   \item Ablehnung des Tests gibt jedoch keinen Anhaltspunkt dafür, wie
+       das Modell anders spezifiziert werden sollte.
+\end{itemize}
+\end{frame}
+
+\begin{frame}\frametitle{Verfahren begrenzter Information}\framesubtitle{Diskussion}
+\begin{itemize}
+\item GMM-Schätzung robust gegenüber Missspezifikationen, insbesondere
+    bei der Betrachtung einzelner Bedingungen.
+\item Eine explizite Lösung und Approximation ist für GMM nicht nötig.
+\item GMM-Schätzer sind zuverlässig, jedoch weniger effizient als die
+    Schätzer der Verfahren vollständiger Information.
+\item Häufig Effizienzverlust und Identifkationsprobleme bei Ausnutzung
+    von Abhängigkeitsstrukturen zwischen den Blöcken.
+\item Wahl der richtigen Momentenbedingungen, Instrumente und Algorithmen
+    für die Gewichtungsmatrix sowie die numerische Optimierung sind ein
+    eigener sehr komplexer Forschungszweig.
+\end{itemize}
+\end{frame}
+
+\begin{frame}\frametitle{Verfahren begrenzter Information}\framesubtitle{Diskussion}
+\begin{itemize}
+\item \emph{Small-Sample-Bias}: Wünschenswerte Eigenschaften von
+    \emph{GMM} greifen nur asymptotisch.
+\item Monte-Carlo-Experimente zeigen, dass im Rahmen von DSGE-Modellen
+    die Asymptotik erst ab einem Beobachtungszeitraum von $T=300$ greift.
+\item Bei Quartalsdaten also etwa 75 Jahren!
+\item Der für DSGE-Modelle interessante Zeitraum umfasst jedoch nur die
+    letzten 30-40 Jahre.
+\item Weitere Fehlerquelle: Gutes und \textbf{Zeit-homogenes}
+    Datenmaterial für Output-Gap, Technologieniveau, \dots?
+\end{itemize}
+\end{frame}
+
+\begin{frame}\frametitle{Verfahren begrenzter Information}\framesubtitle{Diskussion}
+\begin{itemize}
+   \item Stärken und Schwächen von \emph{GMM} gelten auch für das
+       \emph{Impuls-Antwort-Matching}.
+   \item Vorteil dieser Art der \emph{Indirekten Inferenz}: Beschränkung
+       auf wenige relevante Zeitreihen.
+   \item Weiterer Vorteil: Hilfsmodell muss nicht korrekt spezifiziert
+       sein, sondern lediglich in Beziehung zum wahren Modell stehen.
+   \item Im Gegensatz zu GMM muss das DSGE-Modell jedoch explizit gelöst
+       werden, da sonst die Simulation der Daten und Impuls-Antworten
+       nicht möglich ist.
+\end{itemize}
+\end{frame}
+
+\end{document}

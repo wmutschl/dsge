@@ -1,0 +1,405 @@
+Starting Dynare (version 4.4.3).
+Starting preprocessing of the model file ...
+Found 7 equation(s).
+Evaluating expressions...done
+Computing static model derivatives:
+ - order 1
+Computing dynamic model derivatives:
+ - order 1
+ - order 2
+Processing outputs ...done
+Preprocessing completed.
+Starting MATLAB/Octave computing.
+
+cgg/Output
+
+FileName = M_.fname
+
+FileName =
+
+cgg
+
+load_last_mh_history_file(MetropolisFolder,FileName);
+FirstMhFile = record.KeepedDraws.FirstMhFile
+
+FirstMhFile =
+
+     1
+
+FirstLine = record.KeepedDraws.FirstLine
+
+FirstLine =
+
+   750
+
+TotalNumberOfMhFiles = sum(record.MhDraws(:,2))
+
+TotalNumberOfMhFiles =
+
+     1
+
+TotalNumberOfMhDraws = sum(record.MhDraws(:,1))
+
+TotalNumberOfMhDraws =
+
+        1500
+
+FirstMhFile = record.KeepedDraws.FirstMhFile
+
+FirstMhFile =
+
+     1
+
+NumberOfDraws = TotalNumberOfMhDraws-floor(options_.mh_drop*TotalNumberOfMhDraws)
+
+NumberOfDraws =
+
+   750
+
+clear record;
+pnames=['     ';'beta ';'gamma';'norm ';'invg ';'unif ';'invg2']
+
+pnames =
+
+     
+beta 
+gamma
+norm 
+invg 
+unif 
+invg2
+
+header_width = row_header_width(M_,estim_params_,bayestopt_)
+
+header_width =
+
+     6
+
+hpd_interval=[num2str(options_.mh_conf_sig*100), '% HPD interval']
+
+hpd_interval =
+
+90% HPD interval
+
+tit2 = sprintf('%-*s %12s %12s %23s %8s %12s\n',header_width,' ','prior mean','post. mean',hpd_interval,'prior','pstdev')
+
+tit2 =
+
+         prior mean   post. mean        90% HPD interval    prior       pstdev
+
+
+pformat =      '%-*s %12.3f % 12.4f %11.4f %11.4f %7s %12.4f'
+
+pformat =
+
+%-*s %12.3f % 12.4f %11.4f %11.4f %7s %12.4f
+
+skipline(2)
+
+
+disp('ESTIMATION RESULTS')
+ESTIMATION RESULTS
+skipline()
+
+disp(sprintf('Log data density is %f.',oo_.MarginalDensity.ModifiedHarmonicMean))
+Log data density is 520.431284.
+[marginal,oo_] = marginal_density(M_, options_, estim_params_, oo_);
+Estimation::marginal density: I'm computing the posterior mean and covariance...  Done!
+Estimation::marginal density: I'm computing the posterior log marginal density (modified harmonic mean)... Done!
+disp(sprintf('Log data density is %f.',oo_.MarginalDensity.ModifiedHarmonicMean))
+Log data density is 520.431284.
+num_draws=length(NumberOfDraws*options_.mh_nblck)
+
+num_draws =
+
+     1
+
+options_.mh_nblck
+
+ans =
+
+     2
+
+hpd_draws = round((1-options_.mh_conf_sig)*num_draws)
+
+hpd_draws =
+
+     0
+
+if hpd_draws<2
+    fprintf('posterior_moments: There are not enough draws computes to compute HPD Intervals. Skipping their computation.\n')
+end
+posterior_moments: There are not enough draws computes to compute HPD Intervals. Skipping their computation.
+num_draws<9
+
+ans =
+
+     1
+
+if num_draws<9
+    fprintf('posterior_moments: There are not enough draws computes to compute deciles. Skipping their computation.\n')
+end
+posterior_moments: There are not enough draws computes to compute deciles. Skipping their computation.
+options_.mh_conf_sig
+
+ans =
+
+   0.900000000000000
+
+if num_draws<9
+    fprintf('posterior_moments: There are not enough draws computes to compute deciles. Skipping their computation.\n')
+end
+posterior_moments: There are not enough draws computes to compute deciles. Skipping their computation.
+dynare cgg
+
+Configuring Dynare ...
+[mex] Generalized QZ.
+[mex] Sylvester equation solution.
+[mex] Kronecker products.
+[mex] Sparse kronecker products.
+[mex] Local state space iteration (second order).
+[mex] Bytecode evaluation.
+[mex] k-order perturbation solver.
+[mex] k-order solution simulation.
+[mex] Quasi Monte-Carlo sequence (Sobol).
+[mex] Markov Switching SBVAR.
+
+Starting Dynare (version 4.4.3).
+Starting preprocessing of the model file ...
+Found 7 equation(s).
+Evaluating expressions...done
+Computing static model derivatives:
+ - order 1
+Computing dynamic model derivatives:
+ - order 1
+ - order 2
+Processing outputs ...done
+Preprocessing completed.
+Starting MATLAB/Octave computing.
+
+
+STEADY-STATE RESULTS:
+
+pie   		 0
+x     		 0
+r     		 0
+rstar 		 0
+da    		 0
+tau   		 0
+dy    		 0
+
+EIGENVALUES:
+         Modulus             Real        Imaginary
+
+               0                0                0
+             0.5              0.5                0
+          0.5501           0.5501                0
+             0.9              0.9                0
+           1.002            1.002                0
+           1.496            1.496                0
+
+
+There are 2 eigenvalue(s) larger than 1 in modulus 
+for 2 forward-looking variable(s)
+
+The rank condition is verified.
+
+
+
+
+
+Residuals of the static equations:
+
+Equation number 1 : 0
+Equation number 2 : 0
+Equation number 3 : 0
+Equation number 4 : 0
+Equation number 5 : 0
+Equation number 6 : 0
+Equation number 7 : 0
+
+
+
+You did not declare endogenous variables after the estimation/calib_smoother command.
+
+Loading 1000 observations from simdat.mat
+
+Restricting the sample to observations 51 to 150. Using in total 100 observations. 
+Initial value of the log posterior (or likelihood): -6708.1906
+-----------------
+-----------------
+f at the beginning of new iteration,      6708.1906171534
+Predicted improvement:  7089380.924312739
+lambda =          1; f =         8074.6923192
+lambda =    0.33333; f =         6853.6241049
+lambda =    0.11111; f =         6722.3084194
+lambda =   0.037037; f =         6709.1706411
+lambda =   0.012346; f =         6708.1951725
+lambda =  0.0041152; f =         8832.7714517
+lambda =  0.0013717; f =         -504.6454827
+Norm of dx     37.655
+----
+Improvement on iteration 1 =     7212.836099896
+-----------------
+-----------------
+f at the beginning of new iteration,      -504.6454827429
+Predicted improvement:      135.217573206
+lambda =          1; f =         -314.7442552
+lambda =    0.33333; f =         -508.0128131
+lambda =    0.11111; f =         -523.2645086
+Norm of dx    0.15935
+----
+Improvement on iteration 2 =       18.619025816
+-----------------
+-----------------
+f at the beginning of new iteration,      -523.2645085584
+Predicted improvement:        1.538893666
+lambda =          1; f =         -525.0852873
+Norm of dx  0.0071567
+----
+Improvement on iteration 3 =        1.820778700
+-----------------
+-----------------
+f at the beginning of new iteration,      -525.0852872586
+Predicted improvement:        0.123551862
+lambda =          1; f =         -525.2639871
+lambda =     1.9332; f =         -525.3104399
+Norm of dx  0.0026491
+----
+Improvement on iteration 4 =        0.225152653
+-----------------
+-----------------
+f at the beginning of new iteration,      -525.3104399111
+Predicted improvement:        0.083162118
+lambda =          1; f =         -525.4744308
+lambda =     1.9332; f =         -525.6233381
+lambda =     3.7372; f =         -525.9000534
+lambda =     7.2247; f =         -526.3942031
+lambda =     13.967; f =         -527.2031199
+lambda =         27; f =         -528.2605460
+Norm of dx  0.0013075
+----
+Improvement on iteration 5 =        2.950106108
+-----------------
+-----------------
+f at the beginning of new iteration,      -528.2605460189
+Predicted improvement:        0.871972986
+lambda =          1; f =         -529.2664228
+Norm of dx    0.03308
+----
+Improvement on iteration 6 =        1.005876753
+-----------------
+-----------------
+f at the beginning of new iteration,      -529.2664227722
+Predicted improvement:        0.037243483
+lambda =          1; f =         -529.3098550
+Norm of dx  0.0060714
+----
+Improvement on iteration 7 =        0.043432195
+-----------------
+-----------------
+f at the beginning of new iteration,      -529.3098549675
+Predicted improvement:        0.003110222
+lambda =          1; f =         -529.3136702
+Norm of dx 0.00056862
+----
+Improvement on iteration 8 =        0.003815193
+-----------------
+-----------------
+f at the beginning of new iteration,      -529.3136701603
+Predicted improvement:        0.000276008
+lambda =          1; f =         -529.3139747
+Norm of dx 0.00019091
+----
+Improvement on iteration 9 =        0.000304537
+-----------------
+-----------------
+f at the beginning of new iteration,      -529.3139746971
+Predicted improvement:        0.000002254
+lambda =          1; f =         -529.3139774
+Norm of dx  5.365e-05
+----
+Improvement on iteration 10 =        0.000002671
+-----------------
+-----------------
+f at the beginning of new iteration,      -529.3139773683
+Predicted improvement:        0.000000022
+lambda =          1; f =         -529.3139773
+lambda =    0.33333; f =         -529.3139774
+lambda =    0.11111; f =         -529.3139774
+lambda =   0.037037; f =         -529.3139774
+lambda =   0.012346; f =         -529.3139774
+lambda =  0.0041152; f =         -529.3139774
+lambda =  0.0013717; f =         -529.3139774
+lambda = 0.00045725; f =         -529.3139774
+lambda = 0.00015242; f =         -529.3139774
+lambda = 5.0805e-05; f =         -529.3139774
+lambda = 1.6935e-05; f =         -529.3139774
+lambda = 3.2739e-05; f =         -529.3139774
+lambda =  6.329e-05; f =         -529.3139774
+lambda = 0.00012235; f =         -529.3139774
+lambda = 0.00023653; f =         -529.3139774
+Norm of dx 5.5035e-06
+----
+Improvement on iteration 11 =        0.000000000
+improvement < crit termination
+Objective function at mode: -529.313977
+
+MODE CHECK
+
+Fval obtained by the minimization routine: -529.313977
+
+
+RESULTS FROM POSTERIOR ESTIMATION
+parameters
+     prior mean     mode    s.d. prior pstdev
+
+rho      0.900   0.8521  0.0007 beta  0.0400 
+lambda   0.500   0.6110  0.0280 norm  0.0400 
+
+
+Log data density [Laplace approximation] is 520.355131.
+
+Estimation::mcmc: Multiple chains mode.
+Estimation::mcmc: Old mh-files successfully erased!
+Estimation::mcmc: Old metropolis.log file successfully erased!
+Estimation::mcmc: Creation of a new metropolis.log file.
+Estimation::mcmc: Searching for initial values...
+Estimation::mcmc: Initial values found!
+
+Estimation::mcmc: Write details about the MCMC... Ok!
+Estimation::mcmc: Details about the MCMC are available in cgg/metropolis\cgg_mh_history_0.mat
+
+
+Estimation::mcmc: Number of mh files: 1 per block.
+Estimation::mcmc: Total number of generated files: 2.
+Estimation::mcmc: Total number of iterations: 15000.
+Estimation::mcmc: Current acceptance ratio per chain: 
+                                                       Chain  1: 21.8319%
+                                                       Chain  2: 22.5852%
+Estimation::mcmc::diagnostics: Univariate convergence diagnostic, Brooks and Gelman (1998):
+    Parameter 1...  Done! 
+    Parameter 2...  Done! 
+
+Estimation::mcmc: Total number of MH draws: 15000.
+Estimation::mcmc: Total number of generated MH files: 1.
+Estimation::mcmc: I'll use mh-files 1 to 1.
+Estimation::mcmc: In MH-file number 1 I'll start at line 7500.
+Estimation::mcmc: Finally I keep 7500 draws.
+
+Estimation::marginal density: I'm computing the posterior mean and covariance...  Done!
+Estimation::marginal density: I'm computing the posterior log marginal density (modified harmonic mean)... Done!
+
+
+ESTIMATION RESULTS
+
+Log data density is 520.348512.
+posterior_moments: There are not enough draws computes to compute HPD Intervals. Skipping their computation.
+posterior_moments: There are not enough draws computes to compute deciles. Skipping their computation.
+
+parameters
+         prior mean   post. mean        90% HPD interval    prior       pstdev
+
+rho           0.900       0.8521      0.8507      0.8532   beta        0.0400
+lambda        0.500       0.6135      0.5687      0.6595   norm        0.0400
+Total computing time : 0h02m59s

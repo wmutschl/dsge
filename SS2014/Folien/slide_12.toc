@@ -1,0 +1,6 @@
+\beamer@endinputifotherversion {3.33pt}
+\select@language {ngerman}
+\beamer@sectionintoc {1}{Overview Estimation-Methods}{2}{0}{1}
+\beamer@sectionintoc {2}{Calibration}{3}{0}{2}
+\beamer@subsectionintoc {2}{1}{Hints for calibrating a model}{4}{0}{2}
+\beamer@sectionintoc {3}{Calibration - Pros \& Cons}{8}{0}{3}

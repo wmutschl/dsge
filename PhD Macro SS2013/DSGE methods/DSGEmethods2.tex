@@ -1,0 +1,565 @@
+\documentclass[handout]{beamer}  %%% FÜR HANDOUT ALS PDF
+
+\setbeamertemplate{navigation symbols}{}
+\usetheme{Madrid}
+\usecolortheme{seagull}
+\beamersetuncovermixins{\opaqueness<1>{10}}{\opaqueness<2->{15}}
+\usepackage[english]{babel}
+\usepackage{csquotes}
+\usepackage{graphicx}
+\usepackage{verbatim}
+\newcounter{saveenumi}
+\newcommand{\seti}{\setcounter{saveenumi}{\value{enumi}}}
+\newcommand{\conti}{\setcounter{enumi}{\value{saveenumi}}}
+\usepackage[hyperref=true,style=authoryear, dashed=false, maxnames=3,backend=bibtex8,doi=false,isbn=false,backref=true]{biblatex}
+\usepackage{amssymb,amsmath}
+%\setlength{\bibitemsep}{\baselineskip}
+\usepackage{xcolor}
+\usepackage{graphicx,pstricks,beamerprosper}
+\usepackage{subfigure}
+\usepackage{verbatim}
+\usepackage{cancel}
+\renewcommand{\CancelColor}{\red}
+\begin{document}
+\author[Willi Mutschler]{Willi Mutschler, M.Sc.}
+\date{Summer 2013}
+\institute[Institute of Econometrics]{Institute of Econometrics and Economic
+Statistics\\University of M\"unster\\willi.mutschler@uni-muenster.de}
+\title[DSGE methods]{Advanced Macroeconomics (PhD) - DSGE methods}
+\subtitle{Solution methods}
+
+\begin{frame}
+\titlepage
+\end{frame}
+
+\section{DSGE framework}
+
+\begin{frame}
+\frametitle{\secname}\footnotesize
+DSGE model consists of
+\begin{itemize}[<+->]
+     \item set of Euler equations, i.e. first-order optimality conditions,
+     \item transition equations for state $(x_t)$ and control variables $(y_t)$,
+     \item transition equations for structural shocks and innovations $(\varepsilon_t)$,
+     \item measurement equation with $D$ selecting observable variables $(d_t)$  out of controls and measurement errors $\mu_t$,
+     \item vector of deep parameters $\theta$,
+\end{itemize}\pause
+which can be cast into a nonlinear first-order system of expectational difference equations $$E_t f \left( x_{t+1},y_{t+1},x_t,y_t|\theta \right)= 0.$$
+\begin{block}{Perturbation approach}
+\begin{itemize}
+  \item introduce perturbation parameter $\sigma$ that captures stochastic nature of the model
+  \item solution is characterized by \emph{policy-functions}, $g$ and $h$, that solve (at least approximately) the system of equations $f$.
+\end{itemize}
+\end{block}
+\end{frame}
+
+
+\begin{frame}
+\frametitle{\secname}
+\begin{block}{General DSGE model, perturbation approach}
+\begin{align*}
+   0 &=   E_t f \left( x_{t+1},y_{t+1},x_t,y_t|\theta \right),\\
+ x_{t+1}  &= h(x_{t},\sigma|\theta) + \sigma \varepsilon_{t+1},\\
+   y_t &= g(x_t,\sigma|\theta) ,\\
+   d_t &= D y_t+  \mu_{t}.
+\end{align*}
+with $E(\varepsilon_t)=0$, $E(\varepsilon_t\varepsilon_t')=\Sigma_\varepsilon$ and $E(\mu_t)=0$, $E(\mu_t\mu_t')=\Sigma_\mu$.
+\end{block}
+
+\begin{block}{Non-stochastic steady-state}
+\begin{eqnarray*}
+&\overline{z}:=(\bar{x}',\bar{y}')',~ \bar{x}=h(\bar{x},0|\theta),~ \bar{y}=g(\bar{x},0|\theta),~\bar{d} = D \bar{y}
+\end{eqnarray*}
+\end{block}
+\end{frame}
+
+\begin{frame}
+\frametitle{\secname}
+Some remarks
+\begin{itemize}
+   \item  DSGE-models can be interpreted as \emph{state-space-models}.
+\item Driving force of the model are exogenous shocks and innovations $\varepsilon_t$.
+\item Innovations can be mutually correlated as well as the conditional variance can change over time, this features are captured by $\Sigma_\varepsilon$.
+\item State vector $x_t$ consists of $n_{x_1}$ endogenous predetermined states and $n_{x_2}$ exogenous predetermined states
+ \begin{align*}
+   x_{2,t+1} = h^2(x_{2,t},\sigma|\theta) + \sigma \varepsilon_{t+1}, \qquad x_{1,t+1} = h^1(x_{2,t},\sigma|\theta)
+ \end{align*}
+ \item Stability: Eigenvalues of Jacobian of $h^2(\cdot)$ w.r.t. $x_{2,t}$ lie inside the unit circle
+\item Flexible framework: you can add auxiliary variables and equations.
+ \item Important property: $x_t,y_t,d_t$ are weakly stationary (or $\varepsilon_t$ is $i.i.d$).
+\end{itemize}
+\end{frame}
+
+\section{DSGE solution}
+\begin{frame}
+\frametitle{\secname}
+One distinguishes between linear and non-linear methods:
+    \begin{itemize}
+   \item Linear methods: Anderson/Moore (1983), Binder and Pesaran, Blanchard/Khan (1980),
+       (1997), Christiano (2002), King and Watson (1998), $\boxed{\text{Klein (2000)}}$, Sims (2001) and Uhlig (1999) (See Anderson (2008) for a comparison).
+   \item Nonlinear methods: Projection methods, iteration procedures or perturbation approach (see DeJong/Dave (2011) for a comparison)
+\end{itemize}
+Our Focus will be on perturbation approach in the fashion of Schmitt-Groh\'{e}/Uribe (2004):
+\begin{itemize}
+\item Perturbation approach finds a \underline{local} approximation of the policy functions in a neighborhood of a particular point
+\item Mostly steady-state, since we can solve it analytically or numerically.
+\end{itemize}
+\end{frame}
+
+\subsection{First-order approximation}
+\begin{frame}
+\frametitle{\secname}\framesubtitle{\subsecname}
+\begin{itemize}
+\item We are looking for approximations to $g$ and $h$ around the point $(x,\sigma)=(\bar{x},0)$ of the form
+\begin{align*}
+  g(x,\sigma) &= g(\overline{x},0) + g_x(\overline{x},0)(x-\overline{x}) + g_\sigma(\overline{x},0)(\sigma-0)\\
+  h(x,\sigma) &= h(\overline{x},0) + h_x(\overline{x},0)(x-\overline{x}) + h_\sigma(\overline{x},0)(\sigma-0)
+\end{align*}
+\item We would like to know $g_x,h_x,g_\sigma,h_\sigma$.
+\item Idea:
+\begin{itemize}
+\item Substitute the solution into the model,
+\begin{align*}
+F(x,\sigma):=E_t f \left( \underbrace{h(x_{t},\sigma)+\sigma \varepsilon_{t+1}}_{x_{t+1}},\underbrace{g[h(x_{t},\sigma)+\sigma \varepsilon_{t+1},\sigma]}_{y_{t+1}},\underbrace{x_t}_{x_t},\underbrace{g(x_t,\sigma)}_{y_t} \right)
+\end{align*}
+\item Insight: $f$ as well as all derivatives of $f$ are $0$ when evaluated at the non-stochastic steady state $(\overline{x},0)$.
+\end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{\secname}\framesubtitle{\subsecname, computing $g_\sigma,h_\sigma$}
+\begin{itemize}
+  \item Take derivative of $F$ w.r.t. $\sigma$ and evaluate at the non-stochastic steady-state
+  \footnotesize\begin{eqnarray*}
+&F_\sigma(\overline{x},0) = E_t f_1[h_\sigma + \varepsilon_{t+1}] + E_t f_2 [g_x(h_\sigma+ \varepsilon_{t+1})+g_\sigma] + f_3\cdot 0 + f_4 g_\sigma = 0\\
+ & \Leftrightarrow \begin{bmatrix} \underset{(n \times n_x)}{f_1 + f_2 g_x} & \underset{(n\times n_y)}{f_2 +f_4}\end{bmatrix} \begin{bmatrix} \underset{(n_x \times 1)}{h_\sigma} \\ \underset{(n_y \times 1)}{g_\sigma} \end{bmatrix} = \underset{n \times 1}{0}
+  \end{eqnarray*}
+with $f_1=\partial f(\overline{z})/\partial x_{t+1}, f_2=\partial f(\overline{z})/\partial y_{t+1}, f_3=\partial f(\overline{z})/\partial x_{t}, f_4=\partial f(\overline{z})/\partial y_{t}$\normalsize
+  \item We have n equations in n unknowns
+  \item Notice that this is a linear and homogenous system, that is, if there is a unique solution, it must be $$h_\sigma=g_\sigma=0$$
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{\secname}\framesubtitle{\subsecname, Certainty-equivalence}
+Important theoretical result:
+\begin{itemize}
+  \item Even though agents take the effect of future shocks into account when optimizing, in a linearization to the first-order they don't matter for the decision rule.
+\begin{block}{\emph{Certainty-equivalence-property}}
+       \begin{itemize}
+         \item In a first-order approximation the constant term needs not to be corrected for uncertainty (i.e. variance of shocks)
+         \item Expectation of $x_t$ and $y_t$ is equal to its non-stochastic steady-state
+       \end{itemize}
+\end{block}
+\item This is problematic when uncertainty does matter: risk premia, welfare evaluation, \dots
+\end{itemize}
+\end{frame}
+
+
+\begin{frame}
+\frametitle{\secname}\framesubtitle{\subsecname, computing $g_x,h_x$}\footnotesize
+\begin{itemize}
+  \item Take derivative of $F$ w.r.t. $x_t$ and evaluate at the non-stochastic steady-state
+  \begin{eqnarray*}
+&    F_x (\overline{x},0) = f_1 h_x + f_2 g_x h_x + f_3 + f_4 g_x = 0\\
+& \underbrace{- \begin{bmatrix} \underset{(n\times n_x)}{f_1} & \underset{(n\times n_y)}{f_2} \end{bmatrix}}_{:=A} \begin{bmatrix} \underset{(n_x\times n_x)}{h_x} \\ \underset{(n_y\times n_x)}{g_x} \underset{(n_x\times n_x)}{h_x} \end{bmatrix}  = \underbrace{\begin{bmatrix} \underset{(n\times n_x)}{f_3} & \underset{(n\times n_y)}{f_4}\end{bmatrix}}_{:=B} \begin{bmatrix} \underset{(n_x\times n_x)}{I} \\\underset{(n_y\times n_x)}{g_x} \end{bmatrix}
+  \end{eqnarray*}
+  \item $n\times n_x$ equations for $n\times n_x$ unknown elements of $h_x$ and $g_x$
+  \item Postmultiply by $\widehat{x}_t := (x_t-\overline{x})$
+  \begin{align*}
+    A \begin{bmatrix} h_x \widehat{x}_t \\ g_x h_x \widehat{x}_t \end{bmatrix} = B \begin{bmatrix} \widehat{x}_t \\ g_x \widehat{x}_t \end{bmatrix}
+  \end{align*}
+  \item Notice that this is equivalent to the first order approximation of the model
+  \begin{eqnarray*}
+    A\begin{bmatrix} \widehat{x}_{t+1} \\ E_t \widehat{y}_{t+1} \end{bmatrix} = B\begin{bmatrix} \widehat{x}_t\\ \widehat{y}_t \end{bmatrix} + \begin{bmatrix} \sigma \varepsilon_{t+1} \\ 0\end{bmatrix}
+  \end{eqnarray*}
+\end{itemize}
+\end{frame}
+
+
+\begin{frame}
+\frametitle{\secname}\framesubtitle{\subsecname, computing $g_x,h_x$}
+\begin{itemize}
+\item $A$ and $B$ are known matrices, inverting A yields solution for $h_x$ and $g_x$
+\item \textbf{BUT:} In general A is singular and non-invertible.
+  \item We follow Klein (2000)'s approach to approximate the first order solution using the generalized Schur decomposition
+  \item Idea:
+  \begin{itemize}
+      \item Uncouple system into a (block) triangular system of equations using a particular matrix decomposition method, and solve system recursively.
+  \end{itemize}
+\item We'll need some matrix theory about decompositions and eigenvalues for that...
+\end{itemize}
+\end{frame}
+
+\section{Aside: Matrix theory}
+
+
+\begin{frame}
+\frametitle{\secname}\framesubtitle{}\footnotesize
+\begin{block}{Matrix pencil}
+  Let $A$ and $B$ be two $n\times n$ matrices. The set of all matrices of the form $A-\lambda B$ with $\lambda \in \mathbb{C}$ is said to be a \emph{pencil}. The eigenvalues of the pencil are elements of the set $\lambda(A,B)$ defined by
+  \begin{align*}
+    \lambda(A,B) =  \left\{z \in \mathbb{C}:det(A-zB)=0\right\}
+  \end{align*}
+\end{block}
+\begin{block}{Generalized Eigenvalue problem}
+  Let $A$ and $B$ be two $n\times n$ matrices. Then $\lambda \in \lambda(A,B)$ is called a generalized Eigenvalue if there exist a nonzero vector $q\in \mathbb{C}^n$ such that $$A q = \lambda B q$$
+\end{block}
+\begin{itemize}
+\item If $B=I$, then this simplifies to the ordinary Eigenvalue problem: $A q = \lambda q$
+\item A always has $n$ eigenvalues, which can be ordered (in more than one way) to form an $n\times n$ diagonal matrix $\Lambda$ and a corresponding matrix of nonzero columns $Q$ that satisfies the eigenvalue equation: $$AQ = Q\Lambda$$
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{\secname}\framesubtitle{}
+\begin{block}{Eigendecomposition (or spectral decomposition) of a matrix}
+  Let $A$ be a squared $(n\times n)$ matrix with $n$ linearly independent columns, then $A$ can be factorized as
+  \begin{align*}
+  AQ = Q \Lambda \Leftrightarrow A = Q \Lambda Q^{-1}
+  \end{align*}
+   $\Lambda$ is a diagonal matrix such that $\lambda_i =\Lambda_{ii}$ is the Eigenvalue of $A$ associated to the eigenvector $q_i$ stored in column $i$ of the square $(n \times n)$ matrix $Q$.
+\end{block}
+\begin{itemize}
+  \item Not every matrix has a Eigendecomposition, since $Q$ might not be invertible (sufficient: Eigenvalues must be distinct).
+  \item Useful for solving differential or difference equations, computing powers of covariance matrices, etc., example: $$x_{t} = A x_{t-1} = A^t x_{0}=Q\Lambda^t Q^{-1} x_{0}$$
+  \item $\Lambda^t$ is very easy to calculate, whereas $A^t$ is computationally very demanding.
+\end{itemize}
+\end{frame}
+
+\begin{frame}[shrink]
+\frametitle{\secname}\framesubtitle{}\scriptsize
+\begin{block}{Jordan decomposition}
+  Let $A$ be an $n \times n$ matrix. Denote by $J_k(\lambda)$ a $k\times k$ matrix of the form (a so-called Jordan-block)
+  \begin{align*}
+    J_k(\lambda) = \begin{bmatrix}
+      \lambda & 1 & 0 & \dots & 0\\
+      0 & \lambda & 1 & \dots & 0\\
+      \vdots & \vdots & \vdots & \dots & \vdots\\
+      0 & 0& 0 & \dots & 1\\
+      0 & 0 &0 & \dots & \lambda
+    \end{bmatrix}
+  \end{align*}
+  where $J_1(\lambda)=\lambda$. Then there exists a non-singular $n\times n$ matrix $T$ such that
+  \begin{align*}
+    T^{-1} A T = \begin{bmatrix}
+      J_{k_1}(\lambda_1) & 0 & \dots & 0 \\
+      0 & J_{k_2}(\lambda_2) & \dots & 0 \\
+      \vdots & \vdots & \dots & \vdots\\
+      0 & 0 & \dots & J_{k_r}(\lambda_r)
+    \end{bmatrix}
+  \end{align*}
+  with $k_1+k_2+\dots+k_r$ = n. The $\lambda_i$ are the eigenvalues of $A$, not necessarily distinct.
+\end{block}
+\begin{itemize}
+  \item $T^{-1} A T$ is structured, i.e. upper triangular and diagonal elements are eigenvalues of $A$
+  \item Special case: If $A$ has distinct eigenvalues, then $T^{-1}AT = \Lambda$, with $\Lambda$ diagonal.
+  \item Useful for proofs due to its block structure, but numerically difficult due to instabilities.
+\end{itemize}
+\end{frame}
+
+\begin{frame}[shrink]
+\frametitle{\secname}\framesubtitle{}\footnotesize
+\begin{block}{Schur decomposition (Complex version)}
+  Let $A$ be an $n \times n$ matrix. Then there exist a \textbf{unitary} $n\times n$ matrix $S$ (that is, $S^*S=SS^*=S^{-1}S=I_n$) and an upper triangular matrix $M$ whose diagonal elements are the eigenvalues of $B$, such that
+  \begin{align*}
+    S^* A S = M \Leftrightarrow A = S M S^*
+  \end{align*}
+\end{block}
+\begin{block}{Schur decomposition (Real version)}
+  Let $A$ be a real symmetric $n \times n$ matrix. Then there exist an \textbf{orthogonal} real $n\times n$ matrix $S$ (that is, $S'S=SS'=S^{-1}S=I_n$), whose columns are eigenvectors of $A$ and a diagonal matrix $\Lambda$ whose diagonal elements are the eigenvalues of $A$, such that
+  \begin{align*}
+    S' A S = \Lambda \Leftrightarrow A = S \Lambda S'
+  \end{align*}
+\end{block}
+\begin{itemize}
+  \item $~^*$ denotes conjugate or Hermitian transpose, $~'$ denotes the ordinary transpose.
+  \item A complex matrix always has a complex Schur decomposition.
+  \item A real matrix has a real Schur decomposition if and only if all eigenvalues are real.
+  \item $S$ is structured, i.e. unitary or orthogonal.
+  \item Useful for proofs (e.g. Eigenvalues of Kronecker products, differentials,\dots) and numerically attractive.
+\end{itemize}
+\end{frame}
+
+\begin{frame}[shrink]\scriptsize
+\frametitle{\secname}\framesubtitle{}
+\begin{block}{Generalized (complex) Schur decomposition or QZ decomposition}
+Let $A$ and $B$ be $n\times n$ matrices. Then there exist matrices $Q,Z,T$ and $S$ such that
+\begin{align*}
+  Q^* A Z &= S \Leftrightarrow A = Q S Z^*\\
+  Q^* B Z &= T \Leftrightarrow B = Q T Z^*
+\end{align*}
+\begin{enumerate}
+  \item $Q$ and $Z$ are unitary, i.e. $Q^*Q=QQ^*=I_n$ and $Z^*Z=ZZ^*=I_n$.
+  \item $S$ and $T$ are upper triangular.
+ \item pairs $(s_{ii},t_{ii})$ can be arranged in any desired order.
+  \item If for some $i$, $t_{ii}$ and $s_{ii}$ are both zero, then $\lambda(A,B)=\mathbb{C}$. Otherwise:
+$\lambda(A,B) = \left\{\frac{t_{ii}}{s_{ii}}:s_{ii} \neq 0 \right\}$
+\end{enumerate}
+\end{block}
+\begin{itemize}\scriptsize
+  \item There is also a real version.
+  \item We will limit ourselves to the case $\lambda(A,B)\neq \mathbb{C}$ and rule-out unit roots, that is $t_{ii}$ and $s_{ii}$ are not both zero, and $|t_{ii}|\neq |s_{ii}|$.
+  \item Eigenvalues
+  \begin{itemize}\scriptsize
+  \item If A is singular, then there are some generalized eigenvalues missing, i.e. $s_{ii}=0$ for some $i$ $\Rightarrow$ call these \emph{infinite},
+  \item If $|\lambda_i|>1 \Leftrightarrow |s_{ii}|<|t_{ii}|$ $\Rightarrow$ call these finite and unstable,
+  \item If $|\lambda_i|<1 \Leftrightarrow |s_{ii}|>|t_{ii}|$ $\Rightarrow$ call these finite and stable.
+  \end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{\secname}\framesubtitle{}
+\begin{block}{Singular value decomposition}
+  Let $A$ be a real $m \times n$ matrix with $rank(A)=r>0$. Then there exist an $m\times r$ matrix $S$ such that $S'S=I_r$, an $n \times r$ matrix $T$ such that $T'T=I_r$ and an $r \times r$ diagonal matrix $\Lambda$ with positive diagonal elements, such that
+  \begin{align*}
+    A = S\Lambda^{1/2}T'
+  \end{align*}
+\end{block}
+\begin{itemize}
+  \item There is also a complex version using the conjugate transpose.
+  \item Diagonal elements of $\Lambda^{1/2}$ are called singular values of $A$ and $m$ columns of $S$ and the $n$ columns of $T$ are called left-singular vectors and right-singular vectors of $A$, respectively.
+  \item Convention: List singular values in descending order.
+  \item $\Lambda$ contains the $r$ non-zero eigenvalues of $AA'$ (and of $A'A$) and $S$ and $T$ contain corresponding eigenvectors.
+  \item Applications: Pseudoinverses, least squares, matrix approximations, rank, range, null space,\dots
+\end{itemize}
+\end{frame}
+
+\section{DSGE solution}
+\subsection{First-order approximation, continued}
+\begin{frame}
+\frametitle{\secname}\framesubtitle{\subsecname, computing $g_x$ and $h_x$}
+Going back to our problem of finding $g_x$ and $h_x$:
+  \begin{eqnarray*}
+    A E_t \begin{bmatrix} \widehat{x}_{t+1} \\ \widehat{y}_{t+1} \end{bmatrix} = B\begin{bmatrix} \widehat{x}_t\\ \widehat{y}_t \end{bmatrix}
+  \end{eqnarray*}
+The Schur decomposition of $A$ and $B$ are given by
+\begin{align*}
+  Q^* A = S Z^*,\qquad   Q^* B = T Z^*
+\end{align*}
+where we choose the following order: the stable generalized eigenvalues $(|s_{ii}|>|t_{ii}|)$ come first (ascending order of $\lambda_i$). Premultiplying by $Q^*$ and using
+$\begin{bmatrix} \underset{n_x \times 1}{s_t} \\ \underset{n_y\times1}{u_t} \end{bmatrix} : = Z^* \begin{bmatrix} \underset{n_x \times 1}{x_t} \\ \underset{n_y \times 1}{y_t} \end{bmatrix}$, we get
+\begin{align*}
+  S E_t \begin{bmatrix} s_{t+1}\\ u_{t+1} \end{bmatrix} = T \begin{bmatrix} s_t \\ u_t \end{bmatrix}
+\end{align*}
+\end{frame}
+
+\begin{frame}
+\frametitle{\secname}\framesubtitle{\subsecname, computing $g_x$ and $h_x$}
+$S$ and $T$ are upper triangular:
+\begin{align*}
+\begin{bmatrix} \underset{n_x \times n_x}{S_{11}} & \underset{n_x \times n_y}{S_{12}} \\ \underset{n_y \times n_x}{0} & \underset{n_y \times n_y}{S_{22}}\end{bmatrix} E_t \begin{bmatrix} s_{t+1}\\ u_{t+1} \end{bmatrix} = \begin{bmatrix} \underset{n_x \times n_x}{T_{11}} & \underset{n_x \times n_y}{T_{12}} \\ \underset{n_y \times n_x}{0} & \underset{n_y \times n_y}{T_{22}}\end{bmatrix} \begin{bmatrix} s_t \\ u_t \end{bmatrix}
+\end{align*}
+Let's solve the lower block first, that is
+\begin{align*}
+  S_{22} E_t[u_{t+1}] = T_{22} u_t
+\end{align*}
+and note that due to our ordering we have unstable matrix pairs $|s_{ii}|<|t_{ii}|$ (or $|s_{ii}|\leq|t_{ii}|$ ). It can be shown that any solution with bounded mean and variance (we want that!) must satisfy $u_t=0$ for all $t$ (unless $\Sigma=0$), otherwise we would have an exploding solution.\\
+Note: We need as many state variables as there are stable generalized eigenvalues!
+\end{frame}
+
+\begin{frame}
+\frametitle{\secname}\framesubtitle{\subsecname, computing $g_x$ and $h_x$}
+Now given $u_t=0$, let's back out $x_t$ and $y_t$ from the definition of $s_t$ and $u_t$:
+\begin{align*}
+  \begin{bmatrix} x_t \\ y_t \end{bmatrix} = \begin{bmatrix} Z_{11} & Z_{12}\\ Z_{21} & Z_{22} \end{bmatrix} \begin{bmatrix} s_t \\ u_t \end{bmatrix}
+  \Rightarrow
+  \begin{cases}
+    x_t = Z_{11} s_t\\
+    y_t = Z_{21} s_t
+  \end{cases}
+\end{align*}
+If $Z_{11}$ is invertible, then
+\begin{align*}
+  y_t = \underbrace{Z_{21} Z_{11}^{-1}}_{=g_x} x_t
+\end{align*}
+Thus, in order to compute $g_x$ we need a nonsingular $Z_{11}$!
+\end{frame}
+
+\begin{frame}
+\frametitle{\secname}\framesubtitle{\subsecname, computing $g_x$ and $h_x$}
+Now given $u_t=0$ and a nonsingular $Z_{11}$, let's solve the first block
+\begin{align*}
+   E_t[s_{t+1}] &= S_{11}^{-1} T_{11} s_t
+\end{align*}
+assuming $S_{11}$ is invertible. Plugging in $s_t = Z_{11}^{-1} x_t$ we get
+\begin{align*}
+   E_t[ x_{t+1}] = \underbrace{Z_{11} S_{11}^{-1} T_{11} Z_{11}^{-1}}_{=h_x} x_t
+\end{align*}
+Thus, in order to compute $h_x$ we need nonsingular $S_{11}$ and $Z_{11}$. However, $S_{11}$ has full rank by construction.
+\end{frame}
+
+\begin{frame}
+\frametitle{\secname}\framesubtitle{\subsecname, computing $g_x$ and $h_x$}\footnotesize
+\begin{block}{Summary Klein (2000)}
+\begin{itemize}
+  \item Compute generalized Schur decomposition of $A=-\begin{bmatrix} f_1 & f_2\end{bmatrix}$ and $B=\begin{bmatrix} f_3 & f_4\end{bmatrix}$.
+  \item Reorder generalized eigenvalues with the block inside the unit circle in the upper left.
+  \item Check if $Z_{11}$ is invertible.
+  \item Check number of stable eigenvalues, i.e. Blanchard-Khan condition.
+  \item Compute $h_x=Z_{11} S_{11}^{-1} T_{11} Z_{11}^{-1}$ and $g_x=Z_{21} Z_{11}^{-1}$.
+\end{itemize}
+\end{block}
+\begin{block}{Blanchard/Khan-conditions}
+The number of Eigenvalues, that are in absolute terms greater than 1, must be equal to the number of state variables, in order to get a stable solution (saddle-path).
+\end{block}
+\end{frame}
+
+\begin{frame}
+\frametitle{\secname}\framesubtitle{First-order approximation}
+\textbf{Pros}:
+\begin{itemize}
+   \item Simple linear state-space representation of the model, which in many cases is sufficiently exact.
+   \item One can use the Kalman-filter to empirically evaluate the system.
+\end{itemize}
+\textbf{Cons}:
+\begin{itemize}
+   \item One looses important information during the linearization.
+   \item Higher moments play an important role for analyzing markets, risk, welfare, etc.
+   \item An approximation to, say, the second order can yield different results, because the variance of future shocks matters (risk premium).
+\end{itemize}
+
+\end{frame}
+
+\subsection{Second-order approximation, Schmitt-Groh\'{e}/Uribe (2004)}
+\begin{frame}
+\frametitle{\secname}\framesubtitle{\subsecname}\footnotesize
+The second-order approximations to $g$ and $h$ around the point $(\overline{x},0)$ are of the form
+\begin{align*}
+  [g(x,\sigma)]^i &= [g(\overline{x},0)]^i + [g_x(\overline{x},0)]^i_a [(x-\overline{x})]_a + [g_\sigma(\overline{x},0)]^i [\sigma-0]\\
+  & + \frac{1}{2} [g_{xx}(\overline{x},0)]^i_{ab} [(x-\overline{x})]_a [(x-\overline{x})]_b\\
+  & + \frac{1}{2} [g_{x\sigma}(\overline{x},0)]^i_{a} [(x-\overline{x})]_a [\sigma-0]\\
+  & + \frac{1}{2} [g_{\sigma x}(\overline{x},0)]^i_{a} [(x-\overline{x})]_a [\sigma-0]\\
+  & + \frac{1}{2} [g_{\sigma\sigma}(\overline{x},0)]^i [\sigma-0][\sigma-0]\\
+  [h(x,\sigma)]^j &= [h(\overline{x},0)]^j + [h_x(\overline{x},0)]^j_a [(x-\overline{x})]_a + [h_\sigma(\overline{x},0)]^j [\sigma-0]\\
+  & + \frac{1}{2} [h_{xx}(\overline{x},0)]^j_{ab} [(x-\overline{x})]_a [(x-\overline{x})]_b\\
+  & + \frac{1}{2} [h_{x\sigma}(\overline{x},0)]^j_{a} [(x-\overline{x})]_a [\sigma-0]\\
+  & + \frac{1}{2} [h_{\sigma x}(\overline{x},0)]^j_{a} [(x-\overline{x})]_a [\sigma-0]\\
+  & + \frac{1}{2} [h_{\sigma\sigma}(\overline{x},0)]^j [\sigma-0][\sigma-0]
+\end{align*}
+where $i=1,\dots,n_y$; $a,b, = 1,\dots,n_x$; and $j=1,\dots n_x$.
+\end{frame}
+
+\begin{frame}
+\frametitle{\secname}\framesubtitle{\subsecname}
+This is so-called tensor notation:
+\begin{itemize}
+  \item $[f_2]_\alpha^i$ is the $(i,\alpha)$ element of the derivative of $f$ with respect to $y_{t+1}$. It is of dimension $n\times n_y$.
+  \item $[f_2]_\alpha^i [g_x]_\beta^\alpha [h_x]_j^\beta=\sum_{\alpha=1}^{n_y}\sum_{\beta=1}^{n_x} \frac{\partial f^i}{\partial y_{t+1}^\alpha} \frac{\partial g^\alpha}{\partial x_{t}^\beta} \frac{\partial h^\beta}{\partial x_{t}^j}$
+  \item $f_{11}$ is a three-dimensional array with $n$-rows, $n_y$ columns and $n_y$ pages. $[f_{11}]^i_{\alpha\gamma}$ denotes the element of $f_{11}$ located at the intersection of row $i$, column $\alpha$ and page $\gamma$.
+  \item Aside note: There is also a different (prettier) way to do this using the Magnus/Neudecker definition of the Hessian, see Gomme/Klein (2011).
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{\secname}\framesubtitle{\subsecname, computing $g_{xx}$ and $h_{xx}$}\scriptsize
+We can use the derivative of $F_x = f_1 h_x + f_2 g_x h_x + f_3 + f_4 g_x$ w.r.t. $x$ to identify $g_{xx}$ and $h_{xx}$:
+\begin{align*}
+  [F_{xx}(\overline{x},0)]^i_{jk} = &\left([f_{11}]^i_{\beta \delta} [h_x]_k^\delta + [f_{12}]^i_{\beta \gamma} [g_x]_\delta^\gamma [h_x]_k^\delta + [f_{13}]^i_{\beta k} + [f_{14}]^i_{\beta \gamma} [g_x]_k^\gamma\right)[h_x]_j^\beta\\
+  &+[f_1]_\beta^i[h_{xx}]_{jk}^\beta\\
+  &+\left([f_{21}]_{\alpha\delta}^i[h_x]_k^\delta + [f_{22}]_{\alpha\gamma}^i[g_x]_\delta^\gamma[h_x]_k^\delta + [f_{23}]_{\alpha k}^i + [f_{24}]_{\alpha \gamma}^i[g_x]_k^\gamma \right)[g_x]_\beta^\alpha[h_x]_j^\beta\\
+  &+[f_2]_\alpha^i[g_{xx}]_{\beta\delta}^\alpha [h_x]_k^\delta [h_x]_j^\beta\\
+  &+[f_2]_\alpha^i[g_x]_\beta^\alpha[h_{xx}]_{jk}^\beta\\
+  &+[f_{31}]_{j\delta}^i[h_x]_k^\delta + [f_{32}]_{j\gamma}^i[g_x]_\delta^\gamma[h_x]_k^\delta + [f_{33}]_{jk}^i + [f_{34}]_{j\gamma}^i[g_x]_k^\gamma\\
+  &+\left([f_{41}]_{\alpha\delta}^i[h_x]_k^\delta +[f_{42}]_{\alpha\gamma}^i[g_x]_\delta^\gamma[h_x]_k^\delta + [f_{43}]_{\alpha k}^i + [f_{44}]_{\alpha \gamma}^i [g_x]_k^\gamma \right)[g_x]_j^\alpha\\
+  &+[f_4]_\alpha^i[g_{xx}]_{jk}^\alpha\\
+  &= 0, \qquad i=1,\dots n,\qquad j,k,\beta,\delta = 1,\dots n_x, \qquad \alpha,\gamma=1,\dots n_y
+\end{align*}
+This is a linear system of $n\times n_x\times n_x$ equations in $n\times n_x\times n_x$ unknowns given by the elements of $g_{xx}$ and $h_{xx}$ $\Rightarrow$ easy to solve using matrix algebra (and a computer).
+\end{frame}
+
+\begin{frame}
+  \frametitle{\secname}\framesubtitle{\subsecname, computing $g_{xx}$ and $h_{xx}$}
+Similarly, we can use the derivative of $$F_\sigma = E_t f_1[h_\sigma + \varepsilon_{t+1}] + E_t f_2 [g_x(h_\sigma+\sigma \varepsilon_{t+1})+g_\sigma] + f_4 g_\sigma = 0$$ w.r.t. $\sigma$ to identify $g_{\sigma\sigma}$ and $h_{\sigma\sigma}$, we omit the expression here.\\ $\Rightarrow$ This yields a system of $n$ linear equations in the $n$ unknowns given by the elements of $g_{\sigma\sigma}$ and $h_{\sigma\sigma}$.
+\end{frame}
+
+\begin{frame}
+\frametitle{\secname}\framesubtitle{\subsecname, computing $g_{\sigma x}$ and $h_{\sigma x}$}
+Let's have a look at the cross-derivatives, i.e. $F_{\sigma,x}(\overline{x},0)=0$ using the fact that $g_\sigma=h_\sigma=0$:
+\begin{align*}
+  [F_{\sigma_x}]^i_j = [f_1]^i_\beta[h_{\sigma x}]_j^\beta + [f_{2}]_\alpha^i[g_x]_\beta^\alpha[h_{\sigma x}]_j^\beta + [f_2]_\alpha^i [g_{\sigma x}]_\gamma^\alpha [h_x]_j^\gamma + [f_4]_\alpha^i[g_{\sigma x}]_j^\alpha = 0
+\end{align*}
+$i=1,\dots, n; \alpha=1,\dots, n_y; \beta,\gamma,j=1,\dots,n_x$\\~\\
+This is a system of $n\times n_x$ equations in $n\times n_x$ unknowns given by the elements of $g_{\sigma x}$ and $h_{\sigma x}$. Obviously, this is a linear \textbf{homogenous} system of equations, thus a unique solution implies $g_{\sigma x}=h_{\sigma x}=0$
+\end{frame}
+\subsection{Unconditional moments}
+\begin{frame}
+\frametitle{\secname}\framesubtitle{\subsecname}
+\begin{itemize}
+  \item Given stationary and the approximated solution, we can calculate the unconditional moments.
+  \item Note: we focus on second order accurate moments, that is to keep only first and second order terms in the formula to compute moments.
+  \item Compute variance from first order approximation alone, since all other cross-product terms result in something of order higher than two.
+\end{itemize}
+\begin{block}{Unconditional autocovariogram}\footnotesize
+\begin{align*}
+  \Sigma_x :=  E (x_{t}-\bar{x})(x_{t}-\bar{x})' &= h_x \Sigma_x h_x' + \sigma^2 \Sigma_\varepsilon\\
+  \Sigma_y := E (y_{t}-\bar{y})(y_{t}-\bar{y})' & = g_x \Sigma_x g_x'\\
+  \Sigma_d := E (d_{t}-\bar{d})(d_{t}-\bar{d})' & = D \Sigma_y D' + \Sigma_\mu\\
+  \Sigma_x(t) := E[(x_t- \bar{x})(x_0- \bar{x})'] &= (h_x)^t \Sigma_x\\
+  \Sigma_y(t) := E[(y_t- \bar{y})(y_0- \bar{y})'] &= g_x (h_x)^t \Sigma_xg_x'\\
+  \Sigma_d(t) := E[(d_t- \bar{d})(d_0- \bar{d})'] &= D g_x (h_x)^t \Sigma_xg_x' D'
+\end{align*}
+\end{block}
+\end{frame}
+
+\begin{frame}
+\frametitle{\secname}\framesubtitle{\subsecname}\footnotesize
+Regarding the mean, we have
+\begin{align*}
+  x_{t+1}^i \approx \overline{x}^i + h_{x}^i (x_t - \overline{x}) + \frac{1}{2} \underbrace{(x_t - \overline{x})' h_{xx}^i (x_t - \overline{x})}_{(x_t-\bar{x})'\otimes(x_t-\bar{x})' vec(h_{xx}^i)}  + \frac{1}{2} h_{\sigma\sigma}^i + \sigma \varepsilon_{t+1}
+\end{align*}
+
+Notice that $E\left[(x_t-\bar{x})'\otimes(x_t-\bar{x})'\right]=vec(\Sigma_x)'$
+\begin{block}{Unconditional mean}\footnotesize
+\begin{align*}
+  \mu_x &:= E (x_t) = \bar{x} + \left(I_{n_x}-h_x\right)^{-1} \frac{ \Lambda_x}{2},\quad
+  \mu_y :=   E (y_t) = \bar{y} +g_x (\mu_x - \bar{x})+ \frac{ \Lambda_y}{2},\\
+ with \\ \Lambda_x &=  \begin{bmatrix} vec(h_{xx}^1)'\\vec(h_{xx}^2)'\\ \dots \\ vec(h_{xx}^{n_x})'\end{bmatrix}  vec(\Sigma_x)  + \sigma^2 h_{\sigma\sigma},\quad
+  \Lambda_y =  \begin{bmatrix} vec(g_{xx}^1)'\\vec(g_{xx}^2)'\\ \dots \\ vec(g_{xx}^{n_y})'\end{bmatrix} vec(\Sigma_x) + \sigma^2 g_{\sigma\sigma}.
+\end{align*}
+\end{block}
+First order approximation: $\Lambda_x=\Lambda_y=0 \Rightarrow \mu_x = \bar{x}, \mu_y = \bar{y}$.
+\end{frame}
+
+\section{Summary}
+\begin{frame}
+\frametitle{\secname}
+\begin{itemize}
+  \item In a first-order approximation the unconditional mean is equal to the steady-state.
+  \item Up to second order, the presence of uncertainty affects only the constant term of the decision rules
+  \item[$\Rightarrow$] Unconditional mean can be significantly different from non-stochastic steady-state!
+\end{itemize}
+\end{frame}
+
+\section{Further topic: Indeterminacy}
+\begin{frame}
+\frametitle{\secname}\framesubtitle{Lubik \& Schorfheide (2004)}
+\begin{itemize}
+  \item Consider a different log-linear (first-order) canonical form of the DSGE model (e.g. Sims (2002))
+  \begin{align*}
+    \Gamma_0(\theta) z_t = \Gamma_1(\theta) z_{t-1} + \Psi(\theta) \varepsilon_t + \Pi(\theta)\eta_t
+  \end{align*}
+  \item $z_t$ are all model variables, $\varepsilon_t$ are model shocks and $\eta_t=\widetilde{x}_t-E_{t-1}[\widetilde{x}_{t-1}]$ are expectational errors for the non-predetermined variables $\widetilde{x}$.
+  \item $\Gamma_0,\Gamma_1, \Psi, \Pi$ are parameter matrices dependent on deep parameters $\theta$.
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{\secname}\framesubtitle{Lubik \& Schorfheide (2004)}
+\begin{itemize}
+  \item Assume that there is a sunspot shock $\zeta_t$, i.e. the expectational errors are driven by
+  \begin{align*}
+    \eta_t = A_1 \varepsilon_t + A_2 \zeta_t
+  \end{align*}
+  \item Solution algorithms construct a mapping from the shocks to the expectation errors:
+  \begin{enumerate}
+    \item nonexistence of a stable solution
+    \item existence of a unique stable solution (determinacy), i.e. $A_1=A_1(\theta)$ and $A_2=0$
+    \item existence of multiple stable solutions (indeterminacy), i.e. $A_1$ is not uniquely determined by $\theta$ and $A_2\neq0$.
+  \end{enumerate}
+ \item Loosely speaking: there exists a unique stable solution, if the Taylor principle, that is the central bank raises the real interest rate in response to inflation more than one-to-one, and has multiple stable solutions otherwise (interesting in its own right)
+\end{itemize}
+\end{frame}
+\end{document}

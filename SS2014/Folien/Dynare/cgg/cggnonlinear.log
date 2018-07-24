@@ -1,0 +1,188 @@
+Starting Dynare (version 4.4.1).
+Starting preprocessing of the model file ...
+Found 13 equation(s).
+Evaluating expressions...done
+Computing static model derivatives:
+ - order 1
+ - order 2
+ - derivatives of Jacobian/Hessian w.r. to parameters
+Computing dynamic model derivatives:
+ - order 1
+ - order 2
+ - derivatives of Jacobian/Hessian w.r. to parameters
+Processing outputs ...done
+Preprocessing completed.
+Starting MATLAB/Octave computing.
+
+STEADY-STATE RESULTS:
+
+K   		 3.66972
+tau 		 0
+a   		 0
+n   		 1
+c   		 1
+pie 		 1
+F   		 3.66972
+pst 		 1
+da  		 0
+cst 		 1
+rst 		 1.03093
+r   		 1.03093
+x   		 0
+
+EIGENVALUES:
+         Modulus             Real        Imaginary
+
+       5.015e-15       -5.015e-15                0
+             0.2              0.2                0
+             0.5              0.5                0
+            0.75             0.75                0
+           1.375            1.375                0
+             1.5              1.5                0
+       9.202e+14       -9.202e+14                0
+             Inf              Inf                0
+
+
+There are 4 eigenvalue(s) larger than 1 in modulus 
+for 4 forward-looking variable(s)
+
+The rank condition is verified.
+
+{Reference to non-existent field 'varobs'.
+
+Error in <a href="matlab:helpUtils.errorDocCallback('dynare_estimation_init', 'C:\dynare\4.4.1\matlab\dynare_estimation_init.m', 55)" style="font-weight:bold">dynare_estimation_init</a> (<a href="matlab: opentoline('C:\dynare\4.4.1\matlab\dynare_estimation_init.m',55,0)">line 55</a>)
+    tmp = strmatch(deblank(M_.endo_names(i,:)),options_.varobs,'exact');
+
+Error in <a href="matlab:helpUtils.errorDocCallback('dynare_identification', 'C:\dynare\4.4.1\matlab\dynare_identification.m', 131)" style="font-weight:bold">dynare_identification</a> (<a href="matlab: opentoline('C:\dynare\4.4.1\matlab\dynare_identification.m',131,0)">line 131</a>)
+[dataset_,xparam1,hh, M_, options_, oo_, estim_params_,bayestopt_]=dynare_estimation_init(M_.endo_names,fname_,1, M_, options_,
+oo_, estim_params_, bayestopt_);
+
+Error in <a href="matlab:helpUtils.errorDocCallback('cggnonlinear', 'E:\Dokumente\Work\SS2014\DSGE\Folien\Dynare\cgg\cggnonlinear.m', 193)" style="font-weight:bold">cggnonlinear</a> (<a href="matlab: opentoline('E:\Dokumente\Work\SS2014\DSGE\Folien\Dynare\cgg\cggnonlinear.m',193,0)">line 193</a>)
+dynare_identification(options_ident);
+
+Error in <a href="matlab:helpUtils.errorDocCallback('dynare', 'C:\dynare\4.4.1\matlab\dynare.m', 174)" style="font-weight:bold">dynare</a> (<a href="matlab: opentoline('C:\dynare\4.4.1\matlab\dynare.m',174,0)">line 174</a>)
+evalin('base',fname) ;
+} 
+dynare cggnonlinear
+
+Configuring Dynare ...
+[mex] Generalized QZ.
+[mex] Sylvester equation solution.
+[mex] Kronecker products.
+[mex] Sparse kronecker products.
+[mex] Local state space iteration (second order).
+[mex] Bytecode evaluation.
+[mex] k-order perturbation solver.
+[mex] k-order solution simulation.
+[mex] Quasi Monte-Carlo sequence (Sobol).
+[mex] Markov Switching SBVAR.
+
+Starting Dynare (version 4.4.1).
+Starting preprocessing of the model file ...
+ERROR: cggnonlinear.mod: line 26, cols 5-10: syntax error, unexpected VAREXO
+
+{Error using <a href="matlab:helpUtils.errorDocCallback('dynare', 'C:\dynare\4.4.1\matlab\dynare.m', 168)" style="font-weight:bold">dynare</a> (<a href="matlab: opentoline('C:\dynare\4.4.1\matlab\dynare.m',168,0)">line 168</a>)
+DYNARE: preprocessing failed
+} 
+dynare cggnonlinear
+
+Configuring Dynare ...
+[mex] Generalized QZ.
+[mex] Sylvester equation solution.
+[mex] Kronecker products.
+[mex] Sparse kronecker products.
+[mex] Local state space iteration (second order).
+[mex] Bytecode evaluation.
+[mex] k-order perturbation solver.
+[mex] k-order solution simulation.
+[mex] Quasi Monte-Carlo sequence (Sobol).
+[mex] Markov Switching SBVAR.
+
+Starting Dynare (version 4.4.1).
+Starting preprocessing of the model file ...
+Found 13 equation(s).
+Evaluating expressions...done
+Computing static model derivatives:
+ - order 1
+ - order 2
+ - derivatives of Jacobian/Hessian w.r. to parameters
+Computing dynamic model derivatives:
+ - order 1
+ - order 2
+ - derivatives of Jacobian/Hessian w.r. to parameters
+Processing outputs ...done
+Preprocessing completed.
+Starting MATLAB/Octave computing.
+
+
+STEADY-STATE RESULTS:
+
+K   		 3.66972
+tau 		 0
+a   		 0
+n   		 1
+c   		 1
+pie 		 1
+F   		 3.66972
+pst 		 1
+da  		 0
+cst 		 1
+rst 		 1.03093
+r   		 1.03093
+x   		 0
+
+EIGENVALUES:
+         Modulus             Real        Imaginary
+
+       5.015e-15       -5.015e-15                0
+             0.2              0.2                0
+             0.5              0.5                0
+            0.75             0.75                0
+           1.375            1.375                0
+             1.5              1.5                0
+       9.202e+14       -9.202e+14                0
+             Inf              Inf                0
+
+
+There are 4 eigenvalue(s) larger than 1 in modulus 
+for 4 forward-looking variable(s)
+
+The rank condition is verified.
+
+
+==== Identification analysis ====
+
+Testing current parameter values
+The number of moments with non-zero derivative is smaller than the number of parameters
+Try increasing ar = 2
+The number of moments with non-zero derivative is smaller than the number of parameters
+Try increasing ar = 3
+The number of moments with non-zero derivative is smaller than the number of parameters
+Try increasing ar = 4
+The number of moments with non-zero derivative is smaller than the number of parameters
+Try increasing ar = 5
+The number of moments with non-zero derivative is smaller than the number of parameters
+Try increasing ar = 6
+The number of moments with non-zero derivative is smaller than the number of parameters
+Try increasing ar = 7
+The number of moments with non-zero derivative is smaller than the number of parameters
+Try increasing ar = 8
+The number of moments with non-zero derivative is smaller than the number of parameters
+Try increasing ar = 9
+The number of moments with non-zero derivative is smaller than the number of parameters
+Try increasing ar = 10
+The number of moments with non-zero derivative is smaller than the number of parameters
+up to 10 lags: check your model
+Either further increase ar or reduce the list of estimated parameters
+{Error using <a href="matlab:helpUtils.errorDocCallback('identification_analysis', 'C:\dynare\4.4.1\matlab\identification_analysis.m', 102)" style="font-weight:bold">identification_analysis</a> (<a href="matlab: opentoline('C:\dynare\4.4.1\matlab\identification_analysis.m',102,0)">line 102</a>)
+IDETooManyParams
+
+Error in <a href="matlab:helpUtils.errorDocCallback('dynare_identification', 'C:\dynare\4.4.1\matlab\dynare_identification.m', 280)" style="font-weight:bold">dynare_identification</a> (<a href="matlab: opentoline('C:\dynare\4.4.1\matlab\dynare_identification.m',280,0)">line 280</a>)
+    [idehess_point, idemoments_point, idemodel_point, idelre_point, derivatives_info_point, info] = ...
+
+Error in <a href="matlab:helpUtils.errorDocCallback('cggnonlinear', 'E:\Dokumente\Work\SS2014\DSGE\Folien\Dynare\cgg\cggnonlinear.m', 197)" style="font-weight:bold">cggnonlinear</a> (<a href="matlab: opentoline('E:\Dokumente\Work\SS2014\DSGE\Folien\Dynare\cgg\cggnonlinear.m',197,0)">line 197</a>)
+dynare_identification(options_ident);
+
+Error in <a href="matlab:helpUtils.errorDocCallback('dynare', 'C:\dynare\4.4.1\matlab\dynare.m', 174)" style="font-weight:bold">dynare</a> (<a href="matlab: opentoline('C:\dynare\4.4.1\matlab\dynare.m',174,0)">line 174</a>)
+evalin('base',fname) ;
+} 

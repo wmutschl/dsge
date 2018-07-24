@@ -1,0 +1,27 @@
+%% Plots for stochastic model to technology shock
+t = 1:7;
+% additional variables
+a_eps_a = cumsum(da_eps_a);
+y_eps_a = cumsum(dy_eps_a);
+rr_eps_a = r_eps_a(1:end-1)-pie_eps_a(2:end);
+ystar_eps_a = y_eps_a-x_eps_a;
+
+infl          = pie_eps_a(t);
+output_gap    = x_eps_a(t);
+nat_nom_rate  = rstar_eps_a(t);
+act_nom_rate  = r_eps_a(t);
+nat_real_rate = rstar_eps_a(t);
+act_real_rate = rr_eps_a(t);
+technol       = a_eps_a(t);
+nat_y         = ystar_eps_a(t);
+act_y         = y_eps_a(t);
+
+
+% Dynamic response to shock
+figure('Name','STOCHASTIC MODEL')
+subplot(321),plot(t,infl),title('Inflation'),axis tight
+subplot(322),plot(t,output_gap),title('Ouput Gap'),axis tight
+subplot(323),plot(t,nat_nom_rate,t,act_nom_rate),legend('Natural Nominal Rate','Actual Nominal Rate','Location','SouthEast'),title('Nominal Rate'),axis tight
+subplot(324),plot(t,nat_real_rate,t,act_real_rate),legend('Natural','Actual','Location','SouthEast'),title('Real Rate'),axis tight
+subplot(325),plot(t,technol),title('log Technology'),axis tight
+subplot(326),plot(t,nat_y,t,act_y),legend('Natural Output','Actual Output','Location','SouthEast'),title('Output'),axis tight

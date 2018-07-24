@@ -1,0 +1,11 @@
+Model Comparison:  between estimation of the true model and the misspecified model
+(using euqal priors, the true parameter values)
+
+Model Comparison
+
+Model                          rbcestim     rbcexam  
+Priors                           0.500000    0.500000
+Log Marginal Density          -342.768462 -352.900747
+Bayes Ratio                      1.000000    0.000040
+Posterior Model Probability      0.999960    0.000040
+Total computing time : 0h00m01s

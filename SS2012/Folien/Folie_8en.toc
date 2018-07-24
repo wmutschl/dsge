@@ -1,0 +1,8 @@
+\beamer@endinputifotherversion {3.20pt}
+\select@language {ngerman}
+\beamer@sectionintoc {1}{Previously\dots }{3}{0}{1}
+\beamer@sectionintoc {2}{General form solution of a DSGE-model}{4}{0}{2}
+\beamer@sectionintoc {3}{Repetition: Exercise 1}{6}{0}{3}
+\beamer@sectionintoc {4}{Linear Solution Methods}{7}{0}{4}
+\beamer@subsectionintoc {4}{1}{The Sims (2001)-algorithm}{9}{0}{4}
+\beamer@subsectionintoc {4}{2}{Exercise 1: continued}{14}{0}{4}

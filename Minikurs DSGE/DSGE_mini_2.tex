@@ -1,0 +1,906 @@
+\documentclass[10pt]{beamer}  %%% F\"{U}R HANDOUT ALS PDF
+\usetheme{metropolis}
+\usepackage{iftex}
+\ifPDFTeX
+    \usepackage[T1]{fontenc}
+    \usepackage[utf8]{inputenc}
+\fi
+\ifXeTeX
+\fi
+\ifLuaTeX
+\fi
+\usepackage[ngerman]{babel}
+\usepackage{amsmath,amsfonts,amssymb}
+\usepackage{cancel}
+\usepackage[]{hyperref}
+\usepackage{xcolor,pstricks}
+\usepackage{appendixnumberbeamer}
+
+\title{DSGE Mini Kurs - Teil 2 (Beispielmodelle)}
+\author{Willi Mutschler}
+\date{Dezember 2015}
+
+
+\begin{document}
+
+
+\begin{frame}
+    \titlepage
+\end{frame}
+
+\begin{frame}\frametitle{Inhaltsverzeichnis}
+\setbeamertemplate{section in toc}[sections numbered]
+  \tableofcontents
+\end{frame}
+
+
+\section{An und Schorfheide (2007)}
+
+\begin{frame}
+\frametitle{An und Schorfheide (2007)}
+\begin{itemize}
+  \item Vereinfachtes Smets/Wouters (2007) Modell
+  \item \"{O}konomie besteht aus einem repr\"{a}sentativen Haushalt, einem Endprodukt- und einem Zwischeng\"{u}tersektor.
+  \item Repr\"{a}sentative Unternehmen des Endproduktsektors produziert ein Konsumgut $Y_t$, zu dessen Herstellung ein Kontinuum von Zwischenprodukten ben\"{o}tigt wird.
+  \item Ein Unternehmen $j \in [0,1]$ des Zwischeng\"{u}tersektors produziert genau ein Zwischenprodukt $Y_t^j$.
+  \item Endproduktsektor gilt vollst\"{a}ndige Konkurrenz, w\"{a}hrend im Zwischeng\"{u}tersektor die Unternehmen in monopolistischer Konkurrenz stehen und ihre Preise vorausschauend setzen.
+  \item Nominelle Preisrigidit\"{a}ten aufgrund quadratischer Preisanpassungskosten.
+  \item Die Fiskalpolitik folgt einem exogenen Prozess, die Geldpolitik einer Taylor (1993)-Regel.
+\end{itemize}
+\end{frame}
+
+
+\begin{frame}
+\frametitle{Repr\"{a}sentativer Haushalt: Nutzen}\small
+\begin{itemize}
+    \item maximiert intertemporale Nutzenfunktion \"{u}ber unendlichen Zeithorizont
+    \item In jeder Periode Sequenz von Entscheidungen \"{u}ber Konsum und finanzielles Verm\"{o}gen in Form von risikofreien Staatsanleihen oder Geld.
+    \item Gegenw\"{a}rtiger und zuk\"{u}nftig abdiskontierter erwarteter Nutzen
+    \begin{align}\label{ASHHZiel}
+        E_t \sum_{s=0}^\infty \beta^s U_{t+s} ~\text{ mit } \beta \text{ als Diskontfaktor}
+    \end{align}
+    \item Kontempor\"{a}re Nutzenfunktion $U_t$:
+    \begin{align*}
+    U_t = \frac{(C_t/A_t)^{1-\tau}-1}{1-\tau} + \chi_M \ln\left(\frac{M_t}{P_t}\right) - \chi_H H_{t+s} \quad \text{ wobei vereinfachend $\chi_H=1$}.
+    \end{align*}
+     \item Konsum $C_t$, Arbeit $H_t$, reale Geldhaltung $M_t/P_t$ und $P_t$ Preis des Endprodukts.
+     \item $\tau$ ist Ma{\ss} f\"{u}r relative Risikoaversion, $\chi_M$ und $\chi_H$ Skalierungsfaktoren
+     \item \"{U}bliche Konsumniveau (\emph{habit}), das annahmegem\"{a}{\ss} gleich dem Niveau des Technologieparameters $A_t$ ist.
+\end{itemize}
+\end{frame}
+\note{Dabei bezieht der Haushalt einen positiven Grenznutzen aus zus\"{a}tzlichen Konsumg\"{u}tern und zus\"{a}tzlicher Geldhaltung. Das Arbeitsangebot geht hingegen negativ in die
+Nutzenfunktion ein. Die Nutzenfunktion ist additiv-separabel in ihren Argumenten - Die Eigenschaft der additiven Separabilit\"{a}t erm\"{o}glicht es, die linear approximierte Euler-Gleichung als neukeynesianische IS-Kurve zu interpretieren.
+
+$\tau = - C_t \cdot U''/U'$ bzw. $1/\tau = d[\ln(C_{t+1}/C_{t})]/d[\ln(-dC_{t+1}/dC_{t})]$ misst die intertemporale Substitutionselastizit\"{a}t.
+
+Dies verbessert das Modell insofern, als die sogenannten \emph{hump-shaped}, also h\"{u}gelf\"{o}rmigen und verz\"{o}gerten, Reaktionsmuster des Einkommens und des Konsums auf diverse Schocks realit\"{a}tstreuer abgebildet werden k\"{o}nnen. Das dynamische Verhalten des Modells in der kurzen Frist wird sowohl qualitativ als auch statistisch exakter.}
+
+
+\begin{frame}
+\frametitle{Repr\"{a}sentativer Haushalt: Budgetrestriktion}\footnotesize
+\begin{align}\label{ASHHBudget}
+\underbrace{\overbrace{C_t}^\text{Konsum} + \overbrace{\frac{M_t}{P_t}}^\text{neues Geld} + \overbrace{\frac{B_t}{P_t}}^\text{neue Bonds}+\overbrace{\frac{T_t}{P_t}}^\text{Steuern}}_\text{Ausgaben}
+= \underbrace{\overbrace{W_t H_t}^\text{Lohn}+\overbrace{D_t}^\text{Gewinne}}_\text{Einkommen} + \underbrace{\overbrace{\frac{M_{t-1}}{P_t}}^\text{altes Geld} + \overbrace{R_{t-1}\frac{B_{t-1}}{P_t}}^\text{alte Bonds}}_\text{Verm\"{o}gen}.
+\end{align}
+\begin{itemize}
+  \item Verm\"{o}gen besteht aus
+  \begin{itemize}\scriptsize
+  \item gehaltenem Geld $M_{t-1}$ der Vorperiode
+  \item Ertrag risikofreier Staatsanleihe $B_{t-1}$ mit nominalen (Brutto-)Ertrag $R_{t-1} B_{t-1}$
+  \end{itemize}
+  \item Haushalt bietet dem Zwischeng\"{u}tersektor Arbeit $H_t$ an und erh\"{a}lt reales Arbeitseinkommen in H\"{o}he von $W_t H_t$ (Reallohn $W_t$ f\"{u}r Haushalt exogen).
+  \item Unternehmen des Zwischeng\"{u}tersektors geh\"{o}ren den Haushalten, diese erhalten die Gewinne $D_t$
+  \item Haushalte verwenden Einkommen und Verm\"{o}gen f\"{u}r
+  \begin{itemize}\scriptsize
+  \item Konsumg\"{u}ter $C_t$ vom Unternehmen des Endproduktsektors zum Preis $P_t$
+  \item Finanzierung weiterer Anleihen $B_t$
+  \item Halten von Geld $M_t$
+  \item Entrichtung einer pauschalen Steuer $T_t$
+  \end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}\label{OptimHH}
+\frametitle{Repr\"{a}sentativer Haushalt: Optimalit\"{a}t}\framesubtitle{}
+\begin{itemize}
+  \item Maximiere Zielfunktion \eqref{ASHHZiel} unter Beachtung der Budgetrestriktion \eqref{ASHHBudget}: \hyperlink{app:OptimHH}{\beamergotobutton{Details}}
+  \begin{scriptsize}
+\begin{align}
+  \underbrace{\left(\frac{C_{t}}{A_{t}}\right)^{-\tau} \frac{1}{A_{t}}}_{U_t^c} &=\beta E_t \left[ \frac{R_t}{\pi_{t+1}} \underbrace{\left(\frac{C_{t+1}}{A_{t+1}}\right)^{-\tau} \frac{1}{A_{t+1}}}_{U_{t+1}^c} \right],\label{ASEuler}\\
+  W_t &= \left(\frac{C_t}{A_t}\right)^\tau A_t \label{ASLohn} =\frac{U_t^H}{U_t^C}, \\
+  \chi_M \left(\frac{M_t}{P_t}\right)^{-1} &= \frac{(C_t/A_t)^{-\tau}}{A_t} \left(\frac{R_t-1}{P_t R_t}\right). \label{ASLM}
+\end{align}\end{scriptsize}
+\item Gleichung \eqref{ASEuler} ist Euler-Gleichung der intertemporalen Optimalit\"{a}t.
+\item Gleichung \eqref{ASLohn} intratemporale optimale Arbeitsangebot
+\item Gleichung \eqref{ASLM} intratemporale optimale realen Geldhaltung
+\end{itemize}
+\end{frame}
+\note{
+\begin{itemize}
+\item Euler: Trade-Off zwischen heutigem und morgigem Konsum: Gibt HH eine (marginale) Einheit Konsum heute auf, so erwirbt er damit (real) $R_t/\pi_{t+1}$ Einheiten Konsum morgen. Konsum heute liefert einen Grenznutzen von $U_t^c$, Konsum morgen einen erwarteten Grenznutzen von $E_t\left[U_{t+1}^c \right]$, der allerdings mit dem Faktor $\beta$ abdiskontiert werden muss. Im Optimum ist der Haushalt indifferent zwischen diesen beiden M\"{o}glichkeiten.
+\item Arbeitsangebot: Reallohn ist gleich der marginalen Grenzrate der Substitution zwischen Arbeitsleid und Konsum
+\item reale Geldnachfrage h\"{a}ngt positiv vom Konsum (relativ zum gewohnten Konsum) und negativ vom Nominalzins ab. Nominalzins ist Instrument der Geldpolitik. Zusammen mit additiv-separabler Nutzenfunktion spielt diese neukeynesianische LM-Kurve keine weitere Rolle in den Strukturgleichungen,  Geldnachfrage letztlich rekursiv herleitbar und daher im weiteren vernachl\"{a}ssigbar.
+\end{itemize}
+}
+
+
+
+
+\begin{frame}\label{OptimEPS}
+\frametitle{Endproduktsektor: Technologie und Kostenminimierung}\framesubtitle{}
+\begin{itemize}
+  \item Zur Herstellung des Endprodukts $Y_t$ werden die Zwischeng\"{u}ter $Y_t^j$ als Inputs ben\"{o}tigt, Aggregierung mit Technologie vom Typ Dixit und Stiglitz (1977):
+\begin{scriptsize}\begin{align}\label{ASFinalGoodTec}
+    Y_t = \left[\int\limits_0^1 (Y_t^j)^{1-v} ~ dj \right]^\frac{1}{1-v}.
+\end{align}
+\end{scriptsize}
+\item Sei $P_t^j$ Preis des Zwischenguts $Y_t^j$, dann folgt aus der Kostenminimierung die Nachfragefunktion nach Gut $Y_t^j$:\hyperlink{app:OptimEPS}{\beamergotobutton{Details}}
+\begin{scriptsize}\begin{align} \label{ASNachfrageytj}
+Y_t^j = \left(\frac{P_t^j}{P_t}\right)^\frac{-1}{v}Y_t.
+\end{align}
+\end{scriptsize}
+\item $\frac{1}{v}$ ist also die Nachfrageelastizit\"{a}t nach Gut $Y_t^j$ ist.
+\item Eingesetzt in \eqref{ASFinalGoodTec} ergibt:
+\begin{scriptsize}\begin{align}
+    P_t &= \left[\int\limits_0^1(P_t^j)^\frac{v-1}{v} ~ dj \right]^\frac{v}{v-1}. \label{ASPreisEndprodukt}
+\end{align}
+\end{scriptsize}
+\item Index $P_t$ ist somit als Preis des Endprodukts interpretierbar.
+\end{itemize}
+\end{frame}
+
+
+\begin{frame}
+\frametitle{Zwischeng\"{u}tersektor: Marktmacht und Preisrigidit\"{a}ten}\framesubtitle{}
+\begin{itemize}
+  \item Unternehmen verf\"{u}gen \"{u}ber Marktmacht f\"{u}r ihr hergestelltes Gut $Y_t^j$
+  \item Lineare Produktionsfunktion:
+\begin{align}\label{ASProdFktZG}
+    Y_t^j = A_t N_t^j,
+\end{align}
+wobei $A_t$ den exogenen Technologieparameter bezeichnet.
+\item Eingesetzte Arbeitsmenge $N_t^j$ wird mit Reallohn $W_t$, der sich exogen auf dem kompetitiven Arbeitsmarkt einstellt, entlohnt.
+\item Um rigide Nominalpreise zu modellieren, unterliegen Unternehmen quadratischen Anpassungskosten nach Rotemberg (1982):
+\begin{align*}
+    AC_t^j = \frac{\phi}{2} \left(\frac{P_t^j}{P_{t-1}^j} - \pi \right)^2 Y_t^j.
+\end{align*}
+\item $\pi\geq1$ ist gleichgewichtige Wachstumsrate des Endproduktpreises \eqref{ASPreisEndprodukt}, die von Zentralbank angestrebt wird.
+\item $\phi\geq0$ misst somit die Preisstarrheit in der \"{O}konomie.
+\end{itemize}
+\end{frame}
+\note{Indexiert das Unternehmen seinen Preis an die Inflationsrate $\pi$, so gibt es keine Anpassungskosten.}
+
+\begin{frame}
+\frametitle{Zwischeng\"{u}tersektor: Gewinnmaximierung}\framesubtitle{}
+\begin{itemize}
+  \item Reale Gewinn $D_{t+s}^j$ eines Unternehmens im Zwischeng\"{u}tersektor ist:
+\begin{eqnarray}\label{ASGewinnZG}
+    D_{t+s}^j = \underbrace{\beta^s Q_{t+s|t}}_{\text{Diskontfaktor}} \left(\underbrace{\frac{P_{t+s}^j}{P_{t+s}} Y_{t+s}^j}_\text{Umsatz} - \underbrace{W_{t+s}N_{t+s}^j}_\text{Lohnkosten}-\underbrace{\frac{\phi}{2} \left(\frac{P_{t+s}^j}{P_{t+s-1}^j} - \pi \right)^2 Y_{t+s}^j}_\text{Preisanpassungskosten}\right),
+\end{eqnarray}
+\item Diskontfaktor ber\"{u}cksichtigt, dass die Unternehmen den Haushalten geh\"{o}ren.
+\begin{itemize}
+\item Aus Sicht dieser ist $\beta^s Q_{t+s|t}$ Barwert einer Einheit Konsum in Periode $t+s$ bzw. der Grenznutzen einer zus\"{a}tzlichen Einheit Gewinns. Folglich gilt $Q_{t|t}=1$.
+\end{itemize}
+\item Jedes Unternehmen maximiert den Barwert zuk\"{u}nftiger erwarteter Gewinne \eqref{ASGewinnZG} durch die Wahl der Arbeitsmenge $N_t^j$ und des Preises $P_t^j$, wobei sie das Arbeitsangebot \eqref{ASLohn}, die Nachfrage des Endproduktsektors nach ihrem Gut \eqref{ASNachfrageytj} und die Produktionstechnologie \eqref{ASProdFktZG} ber\"{u}cksichtigen m\"{u}ssen.
+\end{itemize}
+\end{frame}
+
+\begin{frame}\label{OptimZGS}
+\frametitle{Zwischeng\"{u}tersektor: Optimalit\"{a}t}\framesubtitle{}
+\begin{itemize}
+\item Optimalit\"{a}t ist dann gegeben durch: \hyperlink{app:OptimZGS}{\beamergotobutton{Details}}
+\begin{scriptsize}\begin{multline}\label{ASFOCZG}
+\left(1-\frac{1}{v}\right)Y_t^j\frac{1}{P_t}
++\frac{1}{v} \left(\frac{C_t}{A_t}\right)^{\tau} Y_t^j\left(\frac{P_t^j}{P_{t}}\right)^{-1}\frac{1}{P_t}\\
+\left.-\phi\left(\frac{P_{t}^j}{P_{t-1}^j}-\pi\right)\frac{1}{P_{t-1}^j}Y_t^j
++\frac{\phi}{2v}\left(\frac{P_{t}^j}{P_{t-1}^j}-\pi\right)^2 Y_t^j\left(\frac{P_t^j}{P_t}\right)^{-1} \frac{1}{P_t}\right]\\
++ \phi \beta E_t
+Q_{t+1|t}\left[\left(\frac{P_{t+1}^j}{P_{t}^j}-\pi\right)\frac{P_{t+1}^j}{(P_t^j)^2}Y_{t+1}^j\right]=0.
+\end{multline}\end{scriptsize}
+\item Bei flexiblen Preisen ($\phi = 0$) vereinfacht sich dies zu:
+\begin{scriptsize}\begin{align}\label{ASFlexiblePreis}
+P_t^j= \frac{1}{1-v}
+P_t\left(\frac{C_t}{A_t}\right)^\tau \overset{\text{\eqref{ASLohn}}}{=} \frac{1}{1-v}P_t \frac{W_t }{A_t}.
+\end{align}\end{scriptsize}
+\item Ohne Preisanpassungskosten ist $P_t^j$ gleich einem Mark-Up $1/(1-v)$ auf die marginalen Kosten $W_t P_t /A_t$.
+\item Mit Preisanpassungskosten ist $P_t^j$ gleich einem Mark-Up auf die zuk\"{u}nftig erwarteten marginalen Kosten.
+\end{itemize}
+\end{frame}
+
+
+
+\begin{frame}\frametitle{Staatssektor}\framesubtitle{Geldpolitik}
+\begin{itemize}
+\item Nominalzins $R_t$ ist das Instrument der Geldpolitik und wird von der Zentralbank festgelegt. Dabei folgt sie einer
+modifizierten Output-Gap-Regel der Taylor(1993)-Form:
+\begin{align*}
+    R_t = R_t^{*^{1-\rho_R}} R_{t-1}^{\rho_R} e^{\epsilon_{R,t}}
+\end{align*}
+\item Zwei Spezifikationen f\"{u}r $R_t^*$:
+\begin{align}\label{ASMonPol}
+    R_t^* = \begin{cases}
+    r\pi^* \left(\frac{\pi_t}{\pi^*}\right)^{\psi_1} \left(\frac{Y_t}{Y_t^*}\right)^{\psi_2} & \text{(output-gap Regel)}\\
+    r\pi^* \left(\frac{\pi_t}{\pi^*}\right)^{\psi_1} \left(\frac{Y_t}{\gamma Y_{t-1}}\right)^{\psi_2} &\text{(output-growth Regel)}
+    \end{cases}
+\end{align}
+\item Zentralbank reagiert somit sowohl auf Abweichungen von angestrebter Inflationsrate als auch auf Abweichungen des Outputs vom Potenzialoutput bzw. gleichgewichtiger Wachstumsrate.
+\item Parameter $\psi_1$ und $\psi_2$ geben die jeweilige Gewichtung an, $\rho_R$ misst zeitliche Persistenz und $\epsilon_{R,t}$ ist ein seriell unkorrelierter, geldpolitischer Schock
+\end{itemize}
+\end{frame}
+\note{Nominale Leitzins $R_t^*$ setzt sich zusammen aus gleichgewichtigen Realzins $r$, Zielinflationsrate $\pi^*$ und zugeh\"{o}rigen Potenzialoutput $Y_t^*$, der sich bei Ausbleiben nominaler Preisrigidit\"{a}ten einstellen w\"{u}rde ($\phi=0$).}
+
+\begin{frame}\frametitle{Staatssektor}\framesubtitle{Fiskalpolitik}
+\begin{itemize}
+\item Regierung erhebt Steuern, emittiert neue Staatsanleihen und erh\"{a}lt Residualgewinn der Zentralbank.
+\item Einnahmen werden f\"{u}r Finanzierung von Staatsausgaben $P_t G_t$ verwendet.
+\item Staatliche Budgetrestriktion:
+\begin{align*}
+  \underbrace{P_t G_t}_\text{Staatsausgaben} = \underbrace{T_t}_\text{Steuern} + \underbrace{B_t - R_{t-1}B_{t-1}}_{\text{neue Staatsanleihen}}  + \underbrace{M_t - M_{t-1}}_{\text{Seignorage}}.
+\end{align*}
+\item Reale Staatsausgaben $G_t$ betragen einen Anteil $\zeta_t \in [0;1]$ des Outputs $Y_t$:
+\begin{align}
+  G_t = \zeta_t Y_t
+  \Leftrightarrow \frac{Y_t}{Y_t-G_t} = \frac{1}{1-\zeta_t} \equiv g_t. \label{ASStaatsausgaben}
+\end{align}
+\end{itemize}
+\end{frame}
+
+
+\begin{frame}
+\frametitle{Stochastische Prozesse}\framesubtitle{}
+\begin{itemize}
+  \item Aggregierte Produktivit\"{a}t $A_t$ ist treibende Faktor f\"{u}r den gleichgewichtigen Wachstumspfad der \"{O}konomie
+\begin{align}\label{ASSchockProductivity}
+  \ln A_t - \ln A_{t-1}= \ln \gamma  + \ln z_t, \quad \ln z_t = \rho_z \ln z_{t-1} + \epsilon_{z,t}, \quad \epsilon_{z,t} \sim \mathcal{N}(0, \sigma_{z}^2).
+\end{align}
+\item Logarithmus von $g_t$ folgt einem AR(1)-Prozess:
+\begin{align}\label{ASSchockGovt}
+\ln(g_t) = (1-\rho_g)\ln(g) + \rho_g \ln(g_{t-1}) + \epsilon_{g,t} \qquad \text{mit } \epsilon_{g,t} \sim \mathcal{N}(0,\sigma_g^2).
+\end{align}
+\item Geldpolitischer Schock
+\begin{align}
+  \epsilon_{R,t} \sim \mathcal{N}(0,\sigma_R^2)
+\end{align}
+\end{itemize}
+\end{frame}
+\note{Einheitswurzel-Prozess: Im Durchschnitt w\"{a}chst die Produktivit\"{a}t mit der Rate $\gamma$, w\"{a}hrend $z_t$ die Fluktuationen dieser Rate abbildet.
+}
+
+
+
+\begin{frame}
+\frametitle{Symmetrisches Gleichgewicht}\framesubtitle{}
+\begin{itemize}
+  \item Aufgrund der Symmetrie des Optimierungskalk\"{u}ls verhalten sich alle Unternehmen des Zwischeng\"{u}tersektors im Gleichgewicht identisch, also
+\begin{align*}
+Y_t^j=Y_t\quad N_t^j=N_t,\quad P_t^j=P_t,\quad  \pi_t = P_t/P_{t-1}.
+\end{align*}
+  \item F\"{u}r alle Perioden gelten die Marktr\"{a}umungsbedingungen $$H_t=N_t, B_t=0, M_t-M_{t-1}=0$$
+  \item Gleichung \eqref{ASGewinnZG} vereinfacht sich zu
+  \begin{align*}
+  D_t = Y_t -W_t H_t - \frac{\phi}{2}\left(\pi_t - \pi\right)^2 Y_t.
+\end{align*}
+\item Budgetrestriktion des Staates im Gleichgewicht: $G_t=\frac{T_t}{P_t}$
+\item Budgetrestriktion des Haushalts \eqref{ASHHBudget} im Gleichgewicht:
+\begin{eqnarray}
+  C_t + G_t= W_t H_t + D_t= Y_t - \frac{\phi}{2}\left(\pi_t - \pi\right)^2 Y_t \nonumber\\
+  \Leftrightarrow Y_t = C_t + G_t + \frac{\phi}{2} \left(\pi_t -\pi \right)^2 Y_t. \label{ASBudgetVereinfacht}
+\end{eqnarray}
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Symmetrisches Gleichgewicht}\framesubtitle{}
+\begin{itemize}
+\item Potenzialoutput $Y_t^*$ berechnet sich unter Annahme flexibler Preise $(\phi=0)$. Einsetzen von \eqref{ASFlexiblePreis} und \eqref{ASStaatsausgaben} in \eqref{ASBudgetVereinfacht} ergibt:
+\begin{scriptsize}\begin{eqnarray}
+  &P_t= \frac{1}{1-v} P_t\left(\frac{C_t}{A_t}\right)^\tau \Leftrightarrow C_t = (1-v)^{\frac{1}{\tau}} A_t\nonumber\\
+  &\Rightarrow Y_t = C_t + G_t = (1-v)^{\frac{1}{\tau}} A_t + \zeta_t Y_t \nonumber\\
+  &\Rightarrow Y_t^* = (1-v)^{\frac{1}{\tau}} A_t \frac{1}{1-\zeta_t} \overset{\eqref{ASStaatsausgaben}}{=} (1-v)^{\frac{1}{\tau}} A_t g_t.\label{ASPotentialOutput}
+\end{eqnarray}\end{scriptsize}
+\item Gleichung \eqref{ASFOCZG} des repr\"{a}sentativen Unternehmens des Zwischeng\"{u}tersektors vereinfacht sich zu:
+\begin{scriptsize}\begin{multline}\label{ASMarkUpPreis}
+  1 = \frac{1}{v}\left[1-\left(\frac{C_t}{A_t}\right)^{\tau}\right] + \phi (\pi_t-\pi)\left[\left(1-\frac{1}{2v}\right)\pi_t + \frac{\pi}{2v}\right] \\
+  -  \phi\beta E_t\left[ \left(\frac{C_{t+1}/A_{t+1}}{C_t/A_t}\right)^{-\tau} \frac{Y_{t+1}/A_{t+1}}{Y_t/A_t}  (\pi_{t+1}-\pi)\pi_{t+1}\right].
+\end{multline}\end{scriptsize}
+\item Dabei wird ausgenutzt, dass
+\begin{scriptsize}\begin{align}\label{TobinQ}
+  Q_{t+s|t} = \frac{U_{t+s}^C}{U_t^C}=\left(\frac{C_{t+s}}{C_t}\right)^{-\tau} \left(\frac{A_{t}}{A_{t+s}}\right)^{1-\tau}
+\end{align}\end{scriptsize}
+\end{itemize}
+\end{frame}
+\note{$U_{t+s}^C$ ist der Wert einer zus\"{a}tzlichen Einheit Gewinns in Periode $t+s$, w\"{a}hrend $U_t^C$ als Grenznutzen einer zus\"{a}tzlichen Einheit Konsums interpretiert werden kann. Gibt man also eine Einheit Konsum f\"{u}r zus\"{a}tzlichen Gewinn auf, so sind $U_t^C$ die Kosten dieser zus\"{a}tzlichen Einheit. Der Faktor $Q_{t+s|t}$ setzt dies ins Verh\"{a}ltnis. Genau dies ist die Definition des (marginalen) Tobin-Q's.
+}
+
+
+\begin{frame}
+\frametitle{Stationarisierung}\framesubtitle{}
+\begin{itemize}
+  \item Gleichungen \eqref{ASSchockProductivity}, \eqref{ASEuler}, \eqref{ASMonPol}, \eqref{ASSchockGovt},  \eqref{ASBudgetVereinfacht}, \eqref{ASMarkUpPreis} beschreiben optimale Verhalten der 4 endogenen ($Y_t, C_t, \pi_t, R_t$) und der 2 exogenen ($g_t$, $z_t$) Variablen
+  \item Die funktionale Form impliziert, dass im Gleichgewicht $Y_t$ und $C_t$ die Einheitswurzel des Prozesses $A_t$ aufweisen.
+  \item F\"{u}r die Analyse und die L\"{o}sungsverfahren wird aber die Stationarit\"{a}t der Variablen vorausgesetzt.
+  \item Deshalb werden f\"{u}r die weitere Analyse die um den stochastischen Trend bereinigten, station\"{a}ren Variablen $y_t = \frac{Y_t}{A_t}$ und $c_t = \frac{C_t}{A_t}$ betrachtet.
+  \item In Abwesenheit von Schocks konvergiert die \"{O}konomie gegen einen gleichgewichtigen Wachstumspfad, auf dem alle station\"{a}ren Variablen \"{u}ber die Zeit konstant sind.
+\end{itemize}
+\end{frame}
+
+
+\begin{frame}\frametitle{Steady-state}
+\begin{itemize}
+\item Der \emph{steady-state} wird dann beschrieben durch:
+\begin{align}\label{steadystate}
+ \gamma \overset{\eqref{ASSchockProductivity}}{=} \frac{A_{t+1}}{A_{t}},~
+  r \overset{\eqref{ASEuler}}{=} \frac{\gamma}{\beta},~
+ c \overset{\eqref{ASFlexiblePreis}}{=} (1-v)^{\frac{1}{\tau}},~
+ R \overset{\eqref{ASMonPol}}{=} r \pi,~
+ y \overset{\eqref{ASPotentialOutput}}{=} c\cdot g = (1-v)^{\frac{1}{\tau}}g.
+\end{align}
+\item Zus\"{a}tzlich wird angenommen, dass die Zielinflationsrate der Zentralbank der gleichgewichtigen Inflationsrate entspricht,
+$\pi=\pi^*$.
+\item \"{U}blich: Modellvariablen umzuschreiben in prozentuale Abweichungen von ihrem \emph{steady-state}, d.h.
+\begin{itemize}
+  \item $\widehat{c_t}=\ln(c_t/c)$, $\widehat{y_t} = \ln(y_t/y)$, $\widehat{g_t} = \ln(g_t/g)$, $\widehat{\pi_t} = \ln(\pi_t/\pi)$, $\widehat{R_t}=\ln(R_t/R)$ und $\widehat{z_t}=\ln(z_t/1)$.
+  \item Praktisch: Im langfristigen Gleichgewicht sind diese Variablen Null.
+  \item Beim Umschreiben wird ausgenutzt, dass $x_t=e^{\ln{x_t}-\ln{x}+\ln{x}}=x e^{\widehat{x}_t}$
+\end{itemize}
+\end{itemize}
+\end{frame}
+
+
+\begin{frame}\label{Struktur}
+\frametitle{Strukturelle Form}\framesubtitle{}
+\begin{itemize}
+\item Die Modellgleichungen lassen sich umformen zu: \hyperlink{app:Struktur}{\beamergotobutton{Details}}
+\begin{tiny}
+\begin{eqnarray}
+&1 = E_t \left[e^{-\tau \widehat{c}_{t+1} +\tau \widehat{c}_t+\widehat{R}_t - \widehat{z}_{t+1} - \widehat{\pi}_{t+1}}\right] \label{ASStrukturEuler}\\
+& \frac{1-v}{v \phi \pi^2 } \left(e^{\tau \widehat{c}_{t}}-1\right) =
+\left(e^{\widehat{\pi}_t}-1\right) \left[\left(1-\frac{1}{2v}\right)e^{\widehat{\pi}_t} + \frac{1}{2v}\right]
+- \beta E_t \left(e^{\widehat{\pi}_{t+1}}-1\right)e^{-\tau \widehat{c}_{t+1} + \tau \widehat{c}_t + \widehat{y}_{t+1} - \widehat{y}_t + \widehat{\pi}_{t+1}} \label{ASStrukturPreis}\\
+& e^{\widehat{c}_t-\widehat{y}_t} = e^{-\widehat{g}_t} -\frac{\phi \pi^2 g}{2} \left(e^{\widehat{\pi}_t}-1\right)^2\label{ASStrukturGueter}\\
+%& \widehat{R}_t = \rho_R \widehat{R}_{t-1} + (1-\rho_R)\psi_1 \widehat{\pi}_t + (1-\rho_R)\psi_2 \left(\widehat{y}_t-\widehat{g}_t\right) +\epsilon_{R,t}\label{ASStrukturZins}\\
+& \widehat{g}_t = \rho_g \widehat{g}_{t-1} + \epsilon_{g,t}\label{ASStrukturGovt}\\
+& \widehat{z}_t = \rho_z\widehat{z}_{t-1}+\epsilon_{z,t}\label{ASStrukturProd},
+\end{eqnarray}
+\begin{eqnarray}
+&\hat{R}_t = \begin{cases}
+    \rho_R \hat{R}_{t-1} + (1-\rho_R)\psi_1 \hat{\pi}_t + (1-\rho_R)\psi_2 \left(\hat{y}_t-\hat{g}_t\right) +\epsilon_{R,t} & \text{(Gap)}\\
+    \rho_R \hat{R}_{t-1} + (1-\rho_R)\psi_1 \hat{\pi}_t + (1-\rho_R)\psi_2 \left(\hat{y}_t-\hat{y}_{t-1} +\hat{z}_t\right) +\epsilon_{R,t} & \text{(Growth)}
+   \end{cases}\label{ASStrukturZins}
+\end{eqnarray}
+\end{tiny}
+\item Gleichungen \eqref{ASStrukturEuler} bis \eqref{ASStrukturProd} beschreiben das Modell in Form eines nichtlinearen Systems rationaler Erwartungen in den Variablen $\widehat{c}_t$, $\widehat{y}_t$, $\widehat{\pi}_t$, $\widehat{R}_t$,$\widehat{g}_t$ und $\widehat{z}_t$, das vom Vektor der Innovationen $\epsilon_t = (\epsilon_{R,t},\epsilon_{g,t},\epsilon_{z,t})'$ angetrieben wird.
+\end{itemize}
+\end{frame}
+
+
+
+
+\begin{frame}\frametitle{Messgleichungen}\label{Messgleichungen}
+\begin{itemize}
+\item Angenommen, es liegen Zeitreihen auf Quartalsebene zu folgenden Gr\"{o}{\ss}en (in \%) vor:
+\begin{itemize}
+\item Quartalswachstumsraten des pro-Kopf BIPs $(YGR_t)$
+\item annualisierte Inflationsraten $(INFL_t)$
+\item annualisierte Nominalzinss\"{a}tze $(INT_t)$.
+\end{itemize}
+\item Folgende Zusammenh\"{a}nge bestehen zwischen beobachtbaren Daten und Modellvariablen:
+\begin{align*}
+  YGR_t &= \gamma^{(Q)} + 100(\widehat{y}_t-\widehat{y}_{t-1}+\widehat{z}_t),\\
+  INFL_t &= \pi^{(A)} + 400 \widehat{\pi}_t,\\
+  INT_t &= \pi^{(A)} + r^{(A)} + 4 \gamma^{(Q)} + 400 \widehat{R}_t.
+\end{align*}
+\item Die Parameter $\gamma^{(Q)}, \pi^{(A)}$ und $r^{(A)}$ haben folgende Beziehung zu den \emph{steady-state} Werten:
+\begin{scriptsize}\begin{align}\label{steadystateparam}
+  \gamma = e^{\frac{\gamma_Q}{100}} \approx 1+\frac{\gamma^{(Q)}}{100}, ~ \beta=e^{-\frac{r^{(A)}}{400}} \approx \frac{1}{1+r^{(A)}/400}, ~ \pi = e^{\frac{\pi^{(A)}}{400}} \approx 1+\frac{\pi^{(A)}}{400}.
+\end{align}\end{scriptsize}
+\end{itemize}
+\end{frame}
+
+
+
+\begin{frame}\frametitle{Log-Linearisierung (I)}\label{Loglin}\small
+\begin{itemize}
+\item Log-Linearisierung ist eine Methode, das Modell direkt in logarithmierten Abweichungen zu formulieren und dieses anschlie{\ss}end
+durch eine Taylor-Erweiterung erster Ordnung in logs zu approximieren.
+\item Linearisierung der Gleichungen \eqref{ASStrukturEuler}, \eqref{ASStrukturPreis} und \eqref{ASStrukturGueter} der strukturellen Form
+um den \emph{steady-state} \hyperlink{app:Loglin}{\beamergotobutton{Details}} ergibt zusammen mit den Bewegungsgleichungen f\"{u}r den Zins, die
+Staatsausgaben und die Technologie folgendes reduziertes Modell:
+\begin{eqnarray*}
+  &\widehat{y}_t = E_t[\widehat{y}_{t+1}] + \widehat{g}_t - E_t[\widehat{g}_{t+1}] - \frac{1}{\tau} (\widehat{R}_t - E_t[\widehat{\pi}_{t+1}] - E_t[\widehat{z}_{t+1}]),\\
+  &\widehat{\pi}_t = \beta E_t[\widehat{\pi}_{t+1}]+\kappa(\widehat{y}_t-\widehat{g}_t),\\
+  &\widehat{c_t} = \widehat{y_t }- \widehat{g_t},\\
+&  \widehat{R}_{t+1} = \rho_R \widehat{R}_{t} + (1-\rho_R)\psi_1 \widehat{\pi}_{t+1} + (1-\rho_R)\psi_2 \left(\widehat{y}_{t+1}-\widehat{g}_{t+1}\right) + \epsilon_{R,t+1}\\
+& \widehat{g}_{t+1} = \rho_g \widehat{g}_{t} + \epsilon_{g,{t+1}},\\
+& \widehat{z}_{t+1} = \rho_z \widehat{z}_{t} + \epsilon_{z,{t+1}},\\
+&\text{mit~}\kappa = \tau \frac{1-v}{v \pi^2 \phi}.
+\end{eqnarray*}
+\end{itemize}
+\end{frame}
+
+\begin{frame}\frametitle{Log-Linearisierung (II)}\small
+\begin{itemize}
+\item Erste Gleichung setzt das aktuelle Output- bzw. Konsumwachstum in Relation zum Inflationsbereinigten Nominalzins, also dem Realzins unter Beachtung technologischer Schocks. Dies ist die Grundidee der sogenannten neukeynesianischen IS-Kurve.
+\item Zweite Gleichung hingegen spiegelt die neukeynesianische Phillips-Kurve wider, die - im Unterschied zu traditionellen Formulierungen - neben einem Ma{\ss} der Outputl\"{u}cke zus\"{a}tzlich die erwartete Inflationsrate ber\"{u}cksichtigt.
+    \begin{itemize}\footnotesize
+    \item Zuk\"{u}nftige Inflationserwartungen bestimmen aufgrund der Preisrigidit\"{a}ten die Inflation.
+    \item Preis eines Gutes wird nicht in jeder Periode angepasst, ein einmal festgelegter Preis bleibt f\"{u}r einige Zeit bestehen.
+    \item Unternehmen w\"{a}gen ab, ob bei zuk\"{u}nftig steigender Inflation ihr Gut relativ billiger wird und haben deshalb Anreiz, bereits in der aktuellen Periode den Preis zu erh\"{o}hen.
+    \end{itemize}
+\item Die dritte Gleichung ist ein Ma{\ss} f\"{u}r die Outputl\"{u}cke. Im Prinzip handelt es sich jedoch um eine Identit\"{a}tsgleichung, da $\widehat{c}_t$ eine Linearkombination aus $\widehat{y}_t$ und $\widehat{\pi}_t$ ist.
+\end{itemize}
+\end{frame}
+
+\begin{frame}\frametitle{Log-Linearisierung (III)}\small
+\begin{itemize}
+\item Dieses System l\"{a}sst sich kompakt darstellen als
+\begin{scriptsize}\begin{align*}
+\begin{split}
+&  \overbrace{\begin{bmatrix}
+  -1 &0                 & -\frac{1}{\tau}                  & 0 &  1 &     -\frac{1}{\tau}          \\
+  0            &0 &-\beta          &   0 & 0  &     0          \\
+    0&0&0&0&0&0\\
+  -(1-\rho_R)\psi_2 &0 & -(1-\rho_R)\psi_1 &  1 & (1-\rho_R)\psi_2 &0\\
+  0&0&0&0&1&0\\
+  0 & 0& 0&0&0&1
+  \end{bmatrix}}^{\Gamma_1}
+  E_t\begin{bmatrix}
+  \widehat{y}_{t+1}\\ \widehat{c}_{t+1}\\\widehat{\pi}_{t+1}\\\widehat{R}_{t+1}\\\widehat{g}_{t+1}\\ \widehat{z}_{t+1}
+  \end{bmatrix} =\\
+&  \underbrace{\begin{bmatrix}
+  -1   &0& 0 &  -\frac{1}{\tau} & 1  &     0          \\
+   \kappa &0 & -1 & 0 & -\kappa  &  0     \\
+  1   &-1 & 0 &  0 & -1 & 0   \\
+  0 &0 & 0 &  \rho_R &  0 &0 \\
+  0&0 & 0& 0&\rho_g&0\\
+  0&0&0&0&0&\rho_z
+  \end{bmatrix}}_{\Gamma_0}
+  \begin{bmatrix}
+  \widehat{y}_{t}\\ \widehat{c}_{t}\\ \widehat{\pi}_{t}\\ \widehat{R}_{t} \\ \widehat{g}_{t}\\ \widehat{z}_{t}
+  \end{bmatrix} +
+  \underbrace{\begin{bmatrix}
+    0&0&0\\
+    0&0&0\\
+    0&0&0\\
+    0&0&1\\
+    0&1&0\\
+    1&0&0
+  \end{bmatrix}}_{\Gamma_\varepsilon}
+  \underbrace{\begin{pmatrix}
+  \epsilon_{z,t+1}\\ \epsilon_{g,t+1}\\ \epsilon_{R,t+1}
+  \end{pmatrix}}_{\varepsilon_{t+1}}
+\end{split}
+\end{align*}\end{scriptsize}
+\item Die Matrizen $\Gamma_1$, $\Gamma_0$ und $\Gamma_\varepsilon$ sind Funktionen des strukturellen Parametervektors
+\begin{equation*}
+\theta=(\tau,\phi,\psi_1,\psi_2,\rho_R,\rho_g,\rho_z, r^{(A)},\pi^{(A)},\gamma^{(Q)},\sigma_R,\sigma_g,\sigma_z,\nu,g)'.
+\end{equation*}
+\item Dieses System gilt es zu l\"{o}sen.
+\end{itemize}
+\end{frame}
+
+\section{Ein einfaches RBC-Modell}
+
+
+\begin{frame}
+  \frametitle{Ein einfaches RBC-Modell: Haushalte (I)}
+Gegeben sei das folgende Modell
+\begin{itemize}
+\item Pr\"{a}ferenzen des repr\"{a}sentativen Agenten
+\begin{equation*}
+U=\sum_{t=1}^{\infty }\left( \frac{1}{1+\rho }\right) ^{t-1}E_{t}\left[ \log
+\left( C_{t}\right) -\frac{L_{t}^{1+\gamma }}{1+\gamma }\right] .
+\end{equation*}%
+Der Haushalt bietet Arbeit und Kapital an den Unternehmenssektor an.
+\begin{itemize}
+\item $L_{t}$ ist Arbeit, $C_{t}$ Konsum, $w_{t}$ bezeichnet den Reallohn, $r_{t}$ den Zins
+\item $\rho \in \left( 0,\infty \right)$ist ein Pr\"{a}ferenzparameter, $\gamma \in \left( 0,\infty \right) $ ein Arbeitsangebotsparameter.
+\end{itemize}
+\item Der Haushalt muss eine Sequenz von Budgetrestriktionen beachten
+\begin{equation*}
+K_t=K_{t-1}\left( 1-\delta \right) +w_{t}L_{t}+r_{t}K_{t-1}-C_{t},
+\end{equation*}%
+wobei
+\begin{itemize}
+\item $K_{t}$ Kapital am Ende der Periode und
+\item $\delta \in \left(
+0,1\right) $ die Abschreibungsrate bezeichnet.
+\end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}\frametitle{Ein einfaches RBC-Modell: Haushalte (II)}
+  \framesubtitle{Optimierungsproblem des Haushalts}
+  Lagrangefunktion
+\begin{multline*}
+L = \max_{C_t,L_t,K_t} \sum_{t=1}^\infty \left( \frac{1}{1+\rho }\right) ^{t-1}E_{t}\Big[ \log
+\left( C_{t}\right) -\frac{L_{t}^{1+\gamma }}{1+\gamma }\\
+-\mu_t\left(K_t-K_{t-1}\left( 1-\delta \right) -w_{t}L_{t}-r_{t}K_{t-1}+C_{t}\right)\Big].
+\end{multline*}
+Bedingungen erster Ordnung
+\begin{align*}
+  \frac{\partial L}{\partial C_t} &= \left( \frac{1}{1+\rho }\right) ^{t-1}\left(\frac{1}{C_t}-\mu_t\right) = 0,\\
+  \frac{\partial L}{\partial L_t} &= \left( \frac{1}{1+\rho }\right) ^{t-1}\left(L_t^\gamma-\mu_tw_t\right) = 0,\\
+  \frac{\partial L}{\partial K_t} &= -\left( \frac{1}{1+\rho }\right) ^{t-1}\mu_t+\left( \frac{1}{1+\rho }\right) ^tE_t\left(\mu_{t+1}(1-\delta+r_{t+1})\right) = 0.
+\end{align*}
+\end{frame}
+
+
+\begin{frame}  \frametitle{Ein einfaches RBC-Modell: Haushalte (III)} \framesubtitle{Bedingungen erster Ordnung}
+Eliminierung des Lagrangemultiplikators ergibt:
+\begin{align*}
+L_t^\gamma&=\frac{w_t}{C_t},\\
+\frac{1}{C_t}&=\frac{1}{1+\rho}E_t\left(\frac{1}{C_{t+1}}(r_{t+1}+1-\delta)\right).
+\end{align*}
+
+\end{frame}
+
+
+
+\begin{frame}
+  \frametitle{Ein einfaches RBC-Modell: Unternehmen (I)}
+\begin{itemize}
+\item Die Produktionsfunktion ist gegeben durch
+\begin{equation*}
+Y_{t}=A_{t}K_{t-1}^{\alpha }\left( \left( 1+g\right) ^{t}L_{t}\right) ^{1-\alpha},
+\end{equation*}%
+wobei $g\in \left( 0,\infty \right) $ eine Wachstumsrate und $\alpha $ und $%
+\beta $ Parameter sind.
+\item $A_{t}$ bezeichnet das Technologieniveau
+\end{itemize}
+\end{frame}
+
+
+
+\begin{frame}  \frametitle{Ein einfaches RBC-Modell: Unternehmen (II)}
+  \framesubtitle{Optimierungsproblem des Unternehmens}
+  \[
+  \max_{L_t,K_{t-1}} A_tK_{t-1}^\alpha\left( \left( 1+g\right) ^{t}L_t\right)^{1-\alpha}-r_tK_{t-1}-w_tL_t.
+  \]
+Bedingungen erster Ordnung:
+\begin{align*}
+  r_t &= \alpha A_tK_{t-1}^{\alpha-1}\left( \left( 1+g\right) ^{t}L_t\right)^{1-\alpha},\\
+  w_t &= (1-\alpha) A_tK_{t-1}^\alpha\left( \left( 1+g\right) ^{t}\right)^{1-\alpha}L_t^{-\alpha}.
+\end{align*}
+\end{frame}
+
+
+
+\begin{frame}
+  \frametitle{Ein einfaches RBC-Modell: Stochastische Prozesse}
+\begin{itemize}
+\item $A_{t}$ bezeichnet das Technologieniveau, welches sich nach folgendem Prozess entwickelt:
+\begin{equation*}
+A_{t}=A_{t-1}^{\lambda }\exp \left( e_{t}\right) ,
+\end{equation*}%
+wobei $e_{t}$ i.i.d. normalverteilt ist (Erwartungswert von Null, Standardabweichung von $\sigma$). $\lambda \in \left( 0,1\right) $ ist ein Parameter.
+\end{itemize}
+\end{frame}
+
+
+
+\begin{frame} \frametitle{Ein einfaches RBC-Modell}
+  \framesubtitle{Gleichgewicht auf dem G\"{u}termarkt}
+  \[
+  K_t+C_t = K_{t-1}(1-\delta)+\underbrace{A_tK_{t-1}^\alpha\left( \left( 1+g\right) ^{t}L_t\right)^{1-\alpha}}_{w_t L_t + r_t K_t}.
+  \]
+\end{frame}
+
+
+
+\begin{frame} \frametitle{Ein einfaches RBC-Modell}
+  \framesubtitle{Strukturelle Form}
+  \begin{align*}
+    \frac{1}{C_t}&=\frac{1}{1+\rho}E_t\left(\frac{1}{C_{t+1}}(r_{t+1}+1-\delta)\right),\\
+    L_t^\gamma&=\frac{w_t}{C_t},\\
+    r_t &= \alpha A_tK_{t-1}^{\alpha-1}\left( \left( 1+g\right) ^{t}L_t\right)^{1-\alpha},\\
+    w_t &= (1-\alpha) A_tK_{t-1}^\alpha\left( \left( 1+g\right) ^{t}\right)^{1-\alpha}L_t^{-\alpha},\\
+    K_t+C_t &= K_{t-1}(1-\delta)+A_tK_{t-1}^\alpha\left( \left( 1+g\right) ^{t}L_t\right)^{1-\alpha},\\
+        log(A_{t})&=\lambda log(A_{t-1}) + e_{t}.
+  \end{align*}
+\end{frame}
+
+
+\begin{frame}\frametitle{Ein einfaches RBC-Modell}
+  \framesubtitle{Existenz eines gleichgewichtigen Wachstumspfads}
+Gleichgewicht auf dem G\"{u}termarkt f\"{u}r jede Periode t: $ K_t+C_t = K_{t-1}(1-\delta)+A_tK_{t-1}^\alpha\left( \left( 1+g\right) ^{t}L_t\right)^{1-\alpha}$.\\
+Also muss es Wachstumsraten $g_c$ and $g_k$ derart geben, dass
+\begin{multline*}
+(1+g_k)^tK_1 + (1+g_c)^tC_1 =\\
+ \frac{(1+g_k)^t}{1+g_k}K_1(1-\delta) + A_t\left(\frac{(1+g_k)^t}{1+g_k}K_1\right)^\alpha\left( \left( 1+g\right) ^{t}L_t\right)^{1-\alpha}
+\end{multline*}
+\begin{multline*}
+\Leftrightarrow K_1 + \left(\frac{1+g_c}{1+g_k}\right)^tC_1 =\\
+ \underbrace{\frac{K_1}{1+g_k}}_{K_0} (1-\delta) + A_t\left(\frac{K_1}{1+g_k}\right)^\alpha\left( \left( \frac{1+g}{1+g_k}\right) ^{t}L_t\right)^{1-\alpha}.
+\end{multline*}
+
+Dies ist nur g\"{u}ltig, falls $\qquad\qquad g_c=g_k=g$.
+
+\end{frame}
+
+\begin{frame}\frametitle{Ein einfaches RBC-Modell}
+  \framesubtitle{Stationarisiertes Modell}
+  Definiere
+  \begin{align*}
+    \widehat{C}_t &= C_t/(1+g)^t,\\
+    \widehat{K}_t &= K_t/(1+g)^t,\\
+    \widehat{w}_t &= w_t/(1+g)^t.\\
+  \end{align*}
+\end{frame}
+
+\begin{frame}\frametitle{Ein einfaches RBC-Modell}
+  \framesubtitle{Stationarisiertes Modell (Fortsetzung)}
+  \begin{align*}
+    \frac{1}{\widehat{C}_t{\red(1+g)^t}}&=\frac{1}{1+\rho}E_t\left(\frac{1}{\widehat{C}_{t+1}(1+g){\red(1+g)^t}}(r_{t+1}+1-\delta)\right),\\
+    L_t^\gamma&=\frac{\widehat{w}_t{\red(1+g)^t}}{\widehat{C}_t{\red(1+g)^t}},\\
+    r_t &= \alpha A_t\left(\widehat{K}_{t-1}\frac{\red(1+g)^t}{1+g}\right)^{\alpha-1}\left( {\red\left( 1+g\right) ^{t}}L_t\right)^{1-\alpha},\\
+    \widehat{w}_t{\red(1+g)^t} &= (1-\alpha) A_t\left(\widehat{K}_{t-1}\frac{\red(1+g)^t}{1+g}\right)^\alpha\left( {\red\left( 1+g\right) ^{t}}\right)^{1-\alpha}L_t^{-\alpha},\\
+    \left(\widehat{K}_t+\widehat{C}_t\right){\red(1+g)^t} &= \widehat{K}_{t-1}\frac{\red(1+g)^t}{1+g}(1-\delta)\\
+&+A_t\left(\widehat{K}_{t-1}\frac{\red(1+g)^t}{1+g}\right)^\alpha\left( {\red\left( 1+g\right) ^{t}}L_t\right)^{1-\alpha}.
+  \end{align*}
+
+\end{frame}
+
+\begin{frame}\frametitle{Ein einfaches RBC-Modell}
+  \framesubtitle{Stationarisiertes Modell (Fortsetzung)}
+  \begin{align*}
+    \frac{1}{\widehat{C}_t}&=\frac{1}{1+\rho}E_t\left(\frac{1}{\widehat{C}_{t+1}(1+g)}(r_{t+1}+1-\delta)\right),\\
+    L_t^\gamma&=\frac{\widehat{w}_t}{\widehat{C}_t},\\
+    r_t &= \alpha A_t\left(\frac{\widehat{K}_{t-1}}{1+g}\right)^{\alpha-1}L_t^{1-\alpha},\\
+    \widehat{w}_t &= (1-\alpha) A_t\left(\frac{\widehat{K}_{t-1}}{1+g}\right)^\alpha L_t^{-\alpha},\\
+    \widehat{K}_t+\widehat{C}_t &= \frac{\widehat{K}_{t-1}}{1+g}(1-\delta)+A_t\left(\frac{\widehat{K}_{t-1}}{1+g}\right)^\alpha L_t^{1-\alpha},\\
+    log(A_{t})&=\lambda log(A_{t-1}) + e_{t}.
+  \end{align*}
+\end{frame}
+
+
+\begin{frame}\frametitle{Ein einfaches RBC-Modell}\framesubtitle{Steady-state}
+\begin{itemize}
+\item Der steady-state ist dann gegeben durch
+\begin{align*}
+  A &=1, \qquad \qquad\qquad\qquad \qquad\qquad r =(1+g)(1+\delta) + \delta -1\\
+  L &= \left(\frac{1-\alpha}{\frac{r}{\alpha}-\delta-g}\right) \left(\frac{r}{\alpha}\right),\qquad \qquad\qquad
+  K = (1+g)\left(\frac{r}{\alpha}\right)^{\frac{1}{\alpha-1}} L\\
+  C &= (1-\delta) \frac{K}{1+g} + \left(\frac{K}{1+g}\right)^\alpha L ^{1-\alpha} - K, \qquad \qquad\qquad
+  w = C
+\end{align*}
+\end{itemize}
+\end{frame}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\appendix
+\begin{frame}
+\centering \Huge
+  \textbf{Anhang}
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}\label{app:OptimHH}
+\frametitle{Optimierungskalk\"{u}l des repr\"{a}sentativen Haushalts (I)}\framesubtitle{An und Schorfheide (2007)}
+Mithilfe Lagrange-Ansatzes, wobei $\beta^s\lambda_{t+s}$ der Lagrange-Multiplikator ist:
+\small
+\begin{multline*}
+\mathcal{L} = E_t \sum_{s=0}^\infty \beta^s \left[\frac{\left(\frac{C_{t+s}}{A_{t+s}}\right)^{1-\tau}-1}{1-\tau} + \chi_M \ln\left(\frac{M_{t+s}}{P_{t+s}}\right) - H_{t+s}\right.\\
+\left. -\lambda_{t+s} \left(C_{t+s}+\frac{B_{t+s}}{P_{t+s}}-
+R_{t+s-1}\frac{B_{t+s-1}}{P_{t+s}}+\frac{M_{t+s}-M_{t+s-1}}{P_{t+s}}+T_{t+s}-W_{t+s}
+H_{t+s} - D_{t+s}\right) \right].
+\end{multline*}
+\hyperlink{OptimHH}{\beamerreturnbutton{Zur\"{u}ck}}
+\end{frame}
+
+\begin{frame}\frametitle{Optimierungskalk\"{u}l des repr\"{a}sentativen Haushalts (II)}\framesubtitle{An und Schorfheide (2007)}
+Die Ableitung nach $C_t$, $B_t$, $M_t$ und $H_t$ lauten:
+\begin{align}
+\frac{\partial\mathcal{L}}{\partial C_t} & =  \left(\frac{C_t}{A_t}\right)^{-\tau} \frac{1}{A_t} -\lambda_t = 0    &\Leftrightarrow~& \lambda_t = \left(\frac{C_t}{A_t}\right)^{-\tau} \frac{1}{A_t}=\frac{\partial U_t}{\partial C_t}\equiv U_t^C\label{ASFocC}\\
+\frac{\partial\mathcal{L}}{\partial B_t} & = -\lambda_t \frac{1}{P_t} + E_t\left[\beta  \lambda_{t+1} \frac{R_t}{P_{t+1}}\right]= 0 &\Leftrightarrow~& E_t\left[\beta\frac{\lambda_{t+1}}{\lambda_t} \frac{P_t}{P_{t+1}} R_t \right]=1\label{ASFocB}\\
+\frac{\partial\mathcal{L}}{\partial M_t} & = \chi_M \frac{1}{M_t} - \lambda_t \frac{1}{P_t} +  E_t \left[\beta\lambda_{t+1} \frac{1}{P_{t+1}}\right]= 0 &\Leftrightarrow~& \chi_M \frac{1}{M_t} = \frac{\lambda_t}{P_t} - \beta E_t \left[\frac{\lambda_{t+1}}{P_{t+1}}\right]\label{ASFocM}\\
+\frac{\partial\mathcal{L}}{\partial H_t} & = -1 + \lambda_t W_t = 0 &\Leftrightarrow~& W_t = \frac{1}{\lambda_t}= \frac{\partial U_t / \partial H_t}{\partial U_t/\partial C_t} \equiv \frac{U_t^H}{U_t^C}\label{ASFocH}.
+\end{align}
+\hyperlink{OptimHH}{\beamerreturnbutton{Zur\"{u}ck}}
+\end{frame}
+
+\begin{frame}\frametitle{Optimierungskalk\"{u}l des repr\"{a}sentativen Haushalts (III)}\framesubtitle{An und Schorfheide (2007)}
+Gleichung \eqref{ASFocB} ergibt zusammen mit \eqref{ASFocC} die
+intertemporale Optimalit\"{a}tsbedingung:
+\begin{eqnarray*}
+     &E_t \left[ \beta \frac{\lambda_{t+1}}{\lambda_t} \frac{P_t}{P_{t+1}} R_t \right] = E_t \left[ \beta \frac{U_{t+1}^C}{U_t^C}  \frac{R_t}{\pi_{t+1}} \right] = \beta E_t \left[\left(\frac{C_{t+1}/A_{t+1}}{C_t/A_t}\right)^{-\tau} \frac{A_t}{A_{t+1}} \frac{R_t}{\pi_{t+1}} \right] =1,
+\end{eqnarray*}
+wobei $\pi_{t+1}=P_{t+1}/P_t$.
+
+Die intratemporale Optimalit\"{a}t ergibt sich durch Einsetzen von Gleichungen
+\eqref{ASFocC} und \eqref{ASFocB} in \eqref{ASFocM}:
+\begin{align*}
+\chi_M \left(\frac{M_t}{P_t}\right)^{-1} = \frac{(C_t/A_t)^{-\tau}}{P_t A_t} \left(\frac{R_t-1}{R_t}\right).
+\end{align*}
+Und Gleichung \eqref{ASFocH} zusammen mit Gleichung \eqref{ASFocC}
+beschreiben die Bedingung f\"{u}r das optimale Arbeitsangebot:
+\begin{align*}
+  W_t = \frac{U_t^H}{U_t^C} = \left(\frac{C_t}{A_t}\right)^\tau A_t.
+\end{align*}
+\hyperlink{OptimHH}{\beamerreturnbutton{Zur\"{u}ck}}
+\end{frame}
+
+
+
+\begin{frame}\label{app:OptimEPS}\footnotesize
+\frametitle{Optimierungskalk\"{u}l des Endproduktsektors (I)}\framesubtitle{An und Schorfheide (2007)}
+\begin{itemize}
+  \item Bezeichne $P_t^j$ den Preis des Zwischenguts $Y_t^j$, dann minimiert das repr\"{a}sentative Unternehmen die Kosten $\int\limits_0^1 P_t^j Y_t^j ~dj$ einer bestimmten Inputkombination unter Ber\"{u}cksichtigung von \eqref{ASFinalGoodTec}.
+  \item Sei $P_t$ der Lagrange-Multiplikator und $\mathcal{L} = \int\limits_0^1 P_t^j Y_t^j ~dj + P_t \left(Y_t - \left[\int\limits_0^1 (Y_t^j) ^{1-v} ~ dj \right]^\frac{1}{1-v} \right)$
+\begin{scriptsize}\begin{align*}
+    \frac{\partial \mathcal{L}}{\partial Y_t^j} &= P_t^j - P_t \frac{1}{1-v} {\underbrace{\left[\int\limits_0^1 (Y_t^j)^{1-v} ~ dj \right]}_{Y_t^{1-v}}}^{\frac{1}{1-v}-1} (1-v) (Y_t^j)^{-v}  = 0
+\end{align*}
+\end{scriptsize}
+\item Umgeformt folgt daraus die Nachfragefunktion nach Gut $Y_t^j = \left(\frac{P_t^j}{P_t}\right)^\frac{-1}{v}Y_t$.
+\item Eingesetzt in \eqref{ASFinalGoodTec} ergibt:
+\begin{scriptsize}\begin{align*}
+    Y_t = \left[\int\limits_0^1 \left(\frac{P_t^j}{P_t} \right)^\frac{v-1}{v} Y_t^{1-v} ~dj\right]^\frac{1}{1-v}
+    \Leftrightarrow P_t = \left[\int\limits_0^1(P_t^j)^\frac{v-1}{v} ~ dj \right]^\frac{v}{v-1}.\hyperlink{OptimEPS}{\beamerreturnbutton{Zur\"{u}ck}}
+\end{align*}
+\end{scriptsize}
+\end{itemize}
+
+\end{frame}
+
+
+\begin{frame}\frametitle{Optimierungskalk\"{u}l des Zwischeng\"{u}tersektors (I)}\framesubtitle{An und Schorfheide (2007)}\label{app:OptimZGS}
+\begin{itemize}
+\item Lagrange-Ansatz nach Einsetzen der Nebenbedingungen lautet:
+\begin{scriptsize}\begin{multline}\label{ASLagrangeZG} \mathcal{L} = E_t
+\sum_{s=0}^\infty \beta^s
+Q_{t+s|t}\left[\underbrace{\left(\frac{P_{t+s}^j}{P_{t+s}}\right)^{\frac{-1}{v}+1}
+Y_{t+s}}_\text{Vgl. Bedingung \eqref{ASNachfrageytj}}
+-  \underbrace{\left(\frac{C_{t+s}}{A_{t+s}}\right)^\tau}_{\overset{\eqref{ASLohn}}{=}\frac{W_{t+s}}{A_{t+s}}}\underbrace{\left(\frac{P_{t+s}^j}{P_{t+s}}\right)^{\frac{-1}{v}} Y_{t+s}}_\text{Vgl. Bedingung \eqref{ASNachfrageytj} und \eqref{ASProdFktZG}}\right.\\
+\left.-\frac{\phi}{2}\left(\frac{P_{t+s}^j}{P_{t+s-1}^j}-\pi\right)^2
+\underbrace{\left(\frac{P_{t+s}^j}{P_{t+s}}\right)^{\frac{-1}{v}}Y_{t+s}}_\text{Vgl.
+Bedingung \eqref{ASNachfrageytj}} \right].
+\end{multline}\end{scriptsize}
+\end{itemize}
+\hyperlink{OptimZGS}{\beamerreturnbutton{Zur\"{u}ck}}
+\end{frame}
+
+\begin{frame}\frametitle{Optimierungskalk\"{u}l des Zwischeng\"{u}tersektors (II)}\framesubtitle{An und Schorfheide (2007)}
+\begin{itemize}
+\item Die Bedingung erster Ordnung ist folglich:
+\begin{scriptsize}\begin{multline*}
+\frac{\partial \mathcal{L}}{\partial P_t^j}= Q_{t|t}
+\left[\left(1-\frac{1}{v}\right)\underbrace{Y_t^j}_\eqref{ASNachfrageytj}\frac{1}{P_t}
++\frac{1}{v} \left(\frac{C_t}{A_t}\right)^{\tau} \underbrace{Y_t^j}_\eqref{ASNachfrageytj}\left(\frac{P_t^j}{P_{t}}\right)^{-1}\frac{1}{P_t}\right.\\
+\left.-\phi\left(\frac{P_{t}^j}{P_{t-1}^j}-\pi\right)\frac{1}{P_{t-1}^j}\underbrace{Y_t^j}_\eqref{ASNachfrageytj}
++\frac{\phi}{2v}\left(\frac{P_{t}^j}{P_{t-1}^j}-\pi\right)^2 \underbrace{Y_t^j}_\eqref{ASNachfrageytj}\left(\frac{P_t^j}{P_t}\right)^{-1} \frac{1}{P_t}\right]\\
++ \beta E_t
+Q_{t+1|t}\left[-\phi\left(\frac{P_{t+1}^j}{P_{t}^j}-\pi\right)\frac{-P_{t+1}^j}{(P_t^j)^2}\underbrace{Y_{t+1}^j}_\eqref{ASNachfrageytj}\right]
+=0,
+\end{multline*}\end{scriptsize}
+wobei im Gleichgewicht $Q_{t|t}=1$ ist, siehe Gleichung \eqref{TobinQ}.
+\end{itemize}
+\hyperlink{OptimZGS}{\beamerreturnbutton{Zur\"{u}ck}}
+\end{frame}
+
+
+\begin{frame}
+\frametitle{Herleitung der strukturellen Form (I)}\framesubtitle{An und Schorfheide (2007)}\label{app:Struktur}
+\begin{itemize}
+\item Herleitung der Gleichung \eqref{ASStrukturEuler}, Ausgangspunkt ist
+    Gleichung \eqref{ASEuler}:
+\begin{scriptsize}\begin{align*}
+1 &= E_t \left[\beta \left(\frac{c_{t+1}}{c_t}\right)^{-\tau} \frac{A_t}{A_{t+1}} \frac{R_t}{\pi_{t+1}}\right]\\
+ \Leftrightarrow 1 &= E_t ~exp\left\{\ln(\beta)-\tau\ln(c_{t+1})+\tau \ln{c_t} + \underbrace{\ln{A_t} - \ln{A_{t+1}}}_{\overset{\eqref{ASSchockProductivity}}{=}-\ln(\gamma) - \ln(z_{t+1})} + \ln(R_t) - \ln(\pi_{t+1})\right\}\\
+  \begin{split}
+ \Leftrightarrow   1 &= E_t ~exp\left\{-\tau\left[\ln(c_{t+1}) - \ln(c)\right] +\tau \left[\ln{c_t} - \ln(c)\right]  -  \left[\ln(z_{t+1}) - \underbrace{\ln(z)}_{=0}\right] + \left[\ln(R_t)  - \ln(R)\right]  \right.\\
+  &\qquad\qquad\qquad\qquad\qquad\qquad\qquad\qquad\qquad\qquad\qquad\qquad\left.- \ln(\pi_{t+1})   +\underbrace{\ln(R)   + \ln(\beta) - \ln(\gamma)}_{=\ln(\frac{R\beta}{\gamma})\overset{\eqref{steadystate}}{=}\ln{\pi}} \right\}
+  \end{split}\\
+ \Rightarrow 1 &= E_t ~e^{-\tau \widehat{c}_{t+1} + \tau \widehat{c}_t - \widehat{z}_{t+1} + \widehat{R}_t -\widehat{\pi}_{t+1}}.
+\end{align*}\end{scriptsize}
+\end{itemize}
+\hyperlink{Struktur}{\beamerreturnbutton{Zur\"{u}ck}}
+\end{frame}
+
+\begin{frame}
+\frametitle{Herleitung der strukturellen Form (II)}\framesubtitle{An und Schorfheide (2007)}
+\begin{itemize}
+\item Herleitung der Gleichung \eqref{ASStrukturPreis}, Ausgangspunkt ist Gleichung \eqref{ASMarkUpPreis}:
+\begin{tiny}\begin{align*}
+&    1 - \frac{1}{v}\left(1-c_t^{\tau}\right) = \phi (\pi_t-\pi)\left[\left(1-\frac{1}{2v}\right)\pi_t + \frac{\pi}{2v}\right]
+  -  \phi\beta E_t\left[ (\pi_{t+1}-\pi) \left(\frac{c_{t+1}}{c_t}\right)^{-\tau} \frac{y_{t+1}}{y_t} \pi_{t+1}\right]\\
+\begin{split}
+& \Leftrightarrow 1-\frac{1}{v}\left(1-\underbrace{c^\tau}_{\overset{\eqref{steadystate}}{=}1-v} e^{\tau\ln(c_t)-\tau\ln{c}}\right)=
+  \phi \left(\pi e^{\ln(\pi_t)-\ln(\pi)}-\pi\right) \left[\left(1-\frac{1}{2v}\right)\pi e^{\ln{\pi_t}-\ln{\pi}}+\frac{\pi}{2v}\right]\\
+&   -\phi \beta E_t\left[\left(\pi e^{\ln(\pi_{t+1})-\ln(\pi)} -\pi\right)\pi e^{-\tau \ln(c_{t+1}) + \tau \ln(c) + \tau \ln(c_{t})-\tau \ln(c) + \ln(y_{t+1}) - \ln(y) - \ln(y_{t}) + \ln(y) + \ln(\pi_{t+1})-\ln({\pi}) }\right]
+\end{split}\\
+& \Rightarrow \frac{1-v}{v \phi \pi^2 } \left(e^{\tau \widehat{c}_{t}}-1\right) = \left(e^{\widehat{\pi}_t}-1\right) \left[\left(1-\frac{1}{2v}\right)e^{\widehat{\pi}_t} + \frac{1}{2v}\right]
+- \beta E_t \left(e^{\widehat{\pi}_{t+1}}-1\right)e^{-\tau \widehat{c}_{t+1} + \tau \widehat{c}_t + \widehat{y}_{t+1} - \widehat{y}_t + \widehat{\pi}_{t+1}}.
+\end{align*}\end{tiny}
+\end{itemize}
+\hyperlink{Struktur}{\beamerreturnbutton{Zur\"{u}ck}}
+\end{frame}
+
+\begin{frame}
+\frametitle{Herleitung der strukturellen Form (III)}\framesubtitle{An und Schorfheide (2007)}
+\begin{itemize}
+\item Herleitung der Gleichung \eqref{ASStrukturGueter}, Ausgangspunkt ist Gleichung \eqref{ASBudgetVereinfacht}:
+\begin{scriptsize}
+\begin{align*}
+    Y_t &= C_t + G_t + \frac{\phi}{2} \left(\pi_t -\pi \right)^2 Y_t\\
+\Leftrightarrow  1 &= \frac{C_t/A_t}{Y_t/A_t} + \underbrace{\frac{G_t/A_t}{Y_t/A_t}}_{\zeta_t \overset{\eqref{ASStaatsausgaben}}{=}1-\frac{1}{g_t}} + \frac{\phi}{2}\left(\pi_t - \pi\right)^2\\
+\Leftrightarrow  0 &= \underbrace{\frac{c}{y}}_{\overset{\eqref{steadystate}}{=}\frac{1}{g}} e^{\ln(c_t)-\ln(c)-\ln(y_t)+\ln(y)} -\frac{1}{g}e^{-\ln(g_t)+\ln(g)} + \frac{\phi}{2}\left(\pi e^{\ln(\pi_t)-\ln(\pi)}-\pi\right)^2\\
+\Rightarrow  e^{\widehat{c}_t-\widehat{y}_t}& = e^{-\widehat{g}_t} -\frac{\phi \pi^2 g}{2} \left(e^{\widehat{\pi}_t}-1\right)^2.
+\end{align*}
+\end{scriptsize}
+\end{itemize}
+\hyperlink{Struktur}{\beamerreturnbutton{Zur\"{u}ck}}
+\end{frame}
+
+\begin{frame}
+\frametitle{Herleitung der strukturellen Form (IV)}\framesubtitle{An und Schorfheide (2007)}\small
+\begin{itemize}
+\item Herleitung der Gleichung \eqref{ASStrukturZins} f\"{u}r Output-Gap-Regel, Ausgangspunkt ist Gleichung \eqref{ASMonPol}:
+\begin{tiny}\begin{align*}
+  \ln{(R_t)} - \underbrace{\ln\left(\frac{r}{\pi}\right)}_{\overset{\eqref{steadystate}}{=}\ln(R)}= \rho_R  [\ln{\left(R_{t-1}\right)} - \underbrace{\ln\left(\frac{r}{\pi}\right)}_{\overset{\eqref{steadystate}}{=}\ln(R)} ]
+  + (1-\rho_R) \psi_1 [\ln{\left(\pi_t\right)}-\ln{\left(\pi\right)}] + (1-\rho_R)\psi_2 \ln{\left(\frac{Y_t/A_t}{Y_t^*/A_t}\right)}
+\end{align*}\end{tiny}
+F\"{u}r $\frac{Y_t/A_t}{Y_t^*/A_t}$ gilt aufgrund von \eqref{ASPotentialOutput}und \eqref{steadystate}:
+\begin{scriptsize}\begin{align*}
+  \frac{Y_t/A_t}{Y_t^*/A_t} = \frac{y_t}{\left(1-v\right)^{1/\tau} g_t} = \frac{y_t}{c g_t}
+\end{align*}\end{scriptsize}
+Damit ergibt sich:
+\begin{tiny}\begin{align*}
+\widehat{R}_t &= \rho_R \widehat{R}_{t-1} + (1-\rho_R)\psi_1 \widehat{\pi}_t + (1-\rho_R)\psi_2 \left(\ln(y_t) - \ln(y) -\ln(g_t) + \ln(g) + \underbrace{\ln(y) -\ln(g) - \ln(c)}_{\overset{\eqref{steadystate}}{=}0} \right)\\
+\Rightarrow  \widehat{R}_t &= \rho_R \widehat{R}_{t-1} + (1-\rho_R)\psi_1 \widehat{\pi}_t + (1-\rho_R)\psi_2
+\left(\widehat{y}_t-  \widehat{g}_t\right) + \epsilon_{R,t}.
+\end{align*}\end{tiny}
+\end{itemize}
+Analog f\"{u}r Output-Growth Regel.
+\hyperlink{Struktur}{\beamerreturnbutton{Zur\"{u}ck}}
+\end{frame}
+
+
+\begin{frame}\frametitle{Herleitung des log-linearisieren Modells (I)}\label{app:Loglin}
+\begin{itemize}
+\item Alle Variablen mit Dach sind im \emph{steady-state} gleich Null. Dann gilt folgende Taylor-Approximation erster Ordnung: $e^{\widehat{x_t}} \approx e^0 + (\widehat{x_t}-0)=1+\widehat{x_t}$.
+\item Linearisierung der Gleichung \eqref{ASStrukturGueter}:
+\begin{scriptsize}\begin{align*}
+    e^{\widehat{c}_t-\widehat{y}_t} &= e^{-\widehat{g}_t} -\frac{\phi \pi^2 g}{2} \left(e^{\widehat{\pi}_t}-1\right)^2\\
+    \Rightarrow e^0 + \left(\widehat{c}_t-\widehat{y}_t\right) &= e^0 - \widehat{g}_t - \frac{\phi \pi^2 g}{2}\left(e^0-1\right)^2 - \phi \pi^2 g \left(e^0-1\right)\left(e^0+\widehat{\pi}_t-1\right)\\
+    \Leftrightarrow \widehat{c}_t &= \widehat{y}_t -\widehat{g}_t.
+\end{align*}
+\end{scriptsize}
+\item Linearisierung der Gleichung \eqref{ASStrukturEuler}:
+\begin{scriptsize}\begin{align*}
+    1 &= E_t \left[e^{-\tau \widehat{c}_{t+1} +\tau \widehat{c}_t+\widehat{R}_t - \widehat{z}_{t+1} - \widehat{\pi}_{t+1}}\right]\approx 1 -\tau E_t\widehat{c}_{t+1} +\tau \widehat{c}_t+\widehat{R}_t - E_t\widehat{z}_{t+1} - E_t\widehat{\pi}_{t+1}\\
+    \Leftrightarrow  \widehat{c}_t &= E_t\widehat{c}_{t+1}  - \frac{1}{\tau}(\widehat{R}_t - E_t\widehat{z}_{t+1} - E_t\widehat{\pi}_{t+1})\\
+    \Rightarrow  \widehat{y}_t -\widehat{g}_t &= E_t\widehat{y}_{t+1} - E_t\widehat{g}_{t+1} - \frac{1}{\tau}(\widehat{R}_t - E_t\widehat{z}_{t+1} - E_t\widehat{\pi}_{t+1}).
+\end{align*}
+\end{scriptsize}
+\end{itemize}
+\hyperlink{Loglin}{\beamerreturnbutton{Zur\"{u}ck}}
+\end{frame}
+
+\begin{frame}\frametitle{Herleitung des log-linearisieren Modells (II)}
+\begin{itemize}
+\item Linearisierung der Gleichung \eqref{ASStrukturPreis}:
+\begin{tiny}\begin{align*}
+    \frac{1-v}{v \phi \pi^2 } \left(e^{\tau \widehat{c}_{t}}-1\right) = \left(e^{\widehat{\pi}_t}-1\right) \left[\left(1-\frac{1}{2v}\right)e^{\widehat{\pi}_t} + \frac{1}{2v}\right]
+- \beta E_t \left(e^{\widehat{\pi}_{t+1}}-1\right)e^{-\tau \widehat{c}_{t+1} + \tau \widehat{c}_t + \widehat{y}_{t+1} - \widehat{y}_t + \widehat{\pi}_{t+1}}
+\end{align*}
+\end{tiny}
+\begin{scriptsize}\begin{multline*}
+\Rightarrow \frac{1-v}{v \phi \pi^2} \left(e^0+\tau \widehat{c}_t -1\right) =\\ \left(e^0 + \widehat{\pi}_t -1\right) \left[\left(1-\frac{1}{2v}\right)e^0 + \frac{1}{2v}\right]
++\left(e^0-1\right) \left[\left(1-\frac{1}{2v}\right)\left(e^0+\widehat{\pi}_t\right)+\frac{1}{2v}\right]\\
+-\beta \left(e^0+E_t\widehat{\pi}_{t+1}-1\right)e^0
+- \beta \left(e^0-1\right)\left(e^0 - \tau E_t \widehat{c}_{t+1}+\tau \widehat{c}_t + E_t \widehat{y}_{t+1}- \widehat{y}_t + E_t \widehat{\pi}_{t+1}\right)
+\end{multline*}
+\end{scriptsize}
+\begin{scriptsize}\begin{align*}
+    \Leftrightarrow \underbrace{\frac{1-v}{v\phi \pi^2} \tau}_{\equiv \kappa} \widehat{c}_t = \widehat{\pi}_t - \beta E_t \widehat{\pi}_{t+1}\\
+    \Rightarrow \kappa \left(\widehat{y}_t -\widehat{g}_t\right) = \widehat{\pi}_t - \beta E_t \widehat{\pi}_{t+1}.
+\end{align*}
+\end{scriptsize}
+\end{itemize}
+\hyperlink{Loglin}{\beamerreturnbutton{Zur\"{u}ck}}
+\end{frame}
+
+
+
+\end{document}

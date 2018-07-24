@@ -1,0 +1,48 @@
+ 
+STEADY-STATE RESULTS:
+ 
+y 		 0.892083
+c 		 0.707986
+k 		 8.00423
+i 		 0.184097
+l 		 0.302733
+w 		 1.7769
+r 		 0.033101
+A 		 1
+ 
+EIGENVALUES:
+         Modulus             Real        Imaginary
+
+          0.9498           0.9498                0
+            0.95             0.95                0
+           1.071            1.071                0
+             Inf              Inf                0
+
+
+There are 2 eigenvalue(s) larger than 1 in modulus 
+for 2 forward-looking variable(s)
+ 
+The rank condition is verified.
+ 
+ 
+MODEL SUMMARY
+ 
+  Number of variables:         8
+  Number of stochastic shocks: 1
+  Number of state variables:   2
+  Number of jumpers:           2
+  Number of static variables:  4
+
+
+MATRIX OF COVARIANCE OF EXOGENOUS SHOCKS
+
+Variables       e    
+e            0.000100
+ 
+POLICY AND TRANSITION FUNCTIONS
+                                       y               c               k               i               l               w               r               A
+Constant                    0.892084        0.707986        8.004256        0.184098        0.302733        1.776903        0.033101        1.000000
+k(-1)                       0.018513        0.045723        0.949791       -0.027209       -0.009252        0.091178       -0.003448               0
+A(-1)                       1.258543        0.300502        0.958041        0.958041        0.208203        1.284779        0.046699        0.950000
+e                           1.324782        0.316317        1.008464        1.008464        0.219161        1.352399        0.049156        1.000000
+Total computing time : 0h00m15s

@@ -1,0 +1,305 @@
+\documentclass{beamer} %%% FÜR VORTRAG MIT PAUSEN
+%\documentclass[handout]{beamer}  %%% FÜR HANDOUT ALS PDF
+
+\setbeamertemplate{navigation symbols}{}
+\usetheme{Madrid}
+\usecolortheme{seagull}
+\beamersetuncovermixins{\opaqueness<1>{25}}{\opaqueness<2->{15}}
+\usepackage[T1]{fontenc}
+\usepackage{ae,aecompl}
+\usepackage[ansinew]{inputenc}
+\usepackage[ngerman]{babel}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage[babel,german=quotes]{csquotes} %im deutschen übliche Anführungszeichen
+\usepackage{verbatim}
+\newcounter{saveenumi}
+\newcommand{\seti}{\setcounter{saveenumi}{\value{enumi}}}
+\newcommand{\conti}{\setcounter{enumi}{\value{saveenumi}}}
+
+
+\begin{document}
+\author[Willi Mutschler]{Dr. Andrea Beccarini $\qquad$ Willi Mutschler, M.Sc.}
+\date{Summer 2012}
+\institute[Institute of Econometrics]{Institute of Econometrics and Economic
+Statistics\\University of Münster\\willi.mutschler@uni-muenster.de}
+\title{DSGE-Models}
+\subtitle{Linearization and Solution Methods}
+
+\begin{frame}
+\titlepage
+\end{frame}
+
+\begin{frame}\frametitle{Linearization and Solution Methods}
+\tableofcontents
+\end{frame}
+
+\section{Previously\dots}
+\begin{frame}\frametitle{Previously\dots}\framesubtitle{}
+
+\begin{itemize}
+  \item Theory and intuition behind the Smets/Wouters' model as a prototype of current DSGE-models.
+  \item Derivation of the structural form and log-linearization.
+\begin{block}{Insight} A DSGE-model consists of a set of expected, nonlinear optimality conditions and transition equations for stochastic processes, which one has to solve.
+\end{block}
+\item A DSGE-model can in general be written as:
+\begin{block}{General form}
+        \begin{equation}\label{AllgForm}
+            \boldsymbol{\Gamma}\left(E_t\mathbf{x_{t+1}}, \mathbf{x_t}, \boldsymbol{\upsilon_{t+1}}|\boldsymbol{\mu}\right)= \boldsymbol{\Gamma}\left(\mathbf{x_{t+1}}, \mathbf{x_t}, \boldsymbol{\upsilon_{t+1}},\boldsymbol{\eta_{t+1}}|\boldsymbol{\mu}\right)=0,
+      \end{equation}
+\end{block}
+with $\mathbf{x_{t}}$: $(n \times 1)$-vector of stationary variables,
+$\boldsymbol{\upsilon_t}$: ($m\times 1$)-vector of structural shocks,
+$\boldsymbol{\mu}$: $(k \times 1)$-vector of parameters.
+\end{itemize}
+\end{frame}
+
+\section{General form solution of a DSGE-model}
+\begin{frame}\frametitle{General Form}
+  \begin{itemize}
+    \item Rational Expectations: $\boldsymbol{\eta_{t+1}} =
+        E_t\mathbf{x_{t+1}} - \mathbf{x_{t+1}}$.
+    \item Non-predictable expectation error
+        $\boldsymbol{\eta_{t+1}}$ occurs due to the realization of structural shocks:
+        $\boldsymbol{\eta_t}=f(\boldsymbol{\upsilon_t})$.
+    \item $\mathbf{x_t}$ consist of $n_c$ control variables
+        and $n_s$ state variables.
+    \item Control variables are denoted by $\mathbf{c_t}$:
+        optimal behavior of the agents as a function of the current state of the economy.
+    \item State variables are denoted by $\mathbf{s_t}$. They consist of
+        exogenous - independent of the decisions of the agents - and endogenous state variables,
+        that can be influenced by the agents.
+    \item $\mathbf{s_t}$ is a function of previous states and current shocks.
+  \end{itemize}
+\end{frame}
+
+
+\begin{frame}\frametitle{Solution of a DSGE-model}\framesubtitle{}
+\begin{itemize}
+   \item To solve such a rational expectations model means to find so-called \emph{policy-functions} $c$ and $s$, that solve (at least approximately) the system of equations $\boldsymbol{\Gamma}$:
+\begin{block}{Policy-functions} \centering
+$\mathbf{c_t}=c(\mathbf{s_t}),\qquad \mathbf{s_t}=s(\mathbf{s_{t-1}},
+\boldsymbol{\upsilon_t})$.
+\end{block}
+   \item  DSGE-models can be interpreted as \emph{state-space-models}.
+   \item One distinguishes between linear and non-linear methods:
+    \begin{itemize}
+   \item Linear methods: Blanchard/Khan (1980), Binder and Pesaran
+       (1997), Christiano (2002), King and Watson (1998), Klein
+       (2000), Sims (2001) and Uhlig (1999).
+   \item Frequently used nonlinear method: Schmitt-Grohé/Uribe
+       (2004). Excellent overview: Heer and Maussner (2009).
+   \end{itemize}
+\end{itemize}
+\end{frame}
+
+\section{Repetition: Exercise 1}
+\begin{frame}\frametitle{Repetition: Exercise 1}
+Assume the following stochastic growth-model:
+\begin{align*}
+  \underset{c_t,k_{t+1}}{max} E_0 \sum_{t=0}^\infty \beta^t U(c_t) &\quad\text{with } U(c_t)=\frac{c_{t}^{1-\sigma}-1}{1-\sigma},\\
+  c_t + k_{t+1} = z_tf(k_t) +(1-\delta)k_t &\quad \text{with } f(k_t)=k_t^\alpha, ~k_o \text{ given},\\
+  log(z_t) = \rho log(z_{t-1}) + \varepsilon_{t} &\quad \text{with } \varepsilon_t \sim WN(0,\sigma_\varepsilon),~0<\rho<1.
+\end{align*}
+\begin{enumerate}[(a)]
+   \item What is the unconditional expectation of $log(z_t)$, what of $z_t$? Find an expression for the unconditional variance of $log(z_t)$?
+   \item Derive the first-order-conditions (FOC) by setting up the Bellman-equation and using methods of dynamic programming. What are state and control variables?
+      \item Derive the first-order-conditions (FOC) by maximizing the lagrangian.
+    \item Derive the \emph{steady-state} and linearize the
+        FOC.
+        \seti
+   \end{enumerate}
+\end{frame}
+
+\section{Linear Solution Methods}
+\begin{frame}\frametitle{Linear Solution Methods}%\framesubtitle{Einleitung}
+\textbf{Pros}:
+\begin{itemize}
+   \item Simple linear state-space representation of the model, which in many cases is sufficiently exact.
+   \item One can use the Kalman-filter to empirically evaluate the system.
+\end{itemize}
+\textbf{Cons}:
+\begin{itemize}
+   \item One looses important information during the linearization.
+   \item Higher moments play an important role for analyzing markets, risk, welfare, etc.
+   \item An approximation to, say, the second order can yield different results, because the variance of future shocks matters (risk premium).
+\end{itemize}
+\begin{block}{\emph{Certainty-equivalence-property}}
+       In stochastic rational expectations models agents take the effect of future shocks into account. For a linearization to the first-order these expectations are zero, thus, they don't matter for the decision rules.
+\end{block}
+
+\end{frame}
+
+\begin{frame}\frametitle{Linear Solution Methods}\framesubtitle{}
+\begin{itemize}
+   \item First linearize or log-linearize the general form \eqref{AllgForm} around the
+       deterministic \emph{steady-state}.
+   \item Together with the transition equation of the stochastic processes one gets the reduced-form model:
+\begin{align*}
+    \mathbf{A} \mathbf{x_{t+1}} =
+\mathbf{B} \mathbf{x_t} + \mathbf{C} \boldsymbol{\upsilon_{t+1}} + \mathbf{D}
+\boldsymbol{\eta_{t+1}} + \mathbf{E}.
+\end{align*}
+\item The matrices $\mathbf{A}, \mathbf{B}, \mathbf{C}$ and $\mathbf{D}$
+    are functions of the structural parameters
+    $\boldsymbol{\mu}$; $\mathbf{E}$ is a vector of constants (mostly
+    zero).
+\item The solution of this linear representation has a VAR(1)-form:
+\begin{align}\label{Linlsg}
+\mathbf{x_{t+1}} = \mathbf{F(\boldsymbol{\mu})} \mathbf{x_t} + \mathbf{G(\boldsymbol{\mu})} \boldsymbol{\upsilon_{t+1}},
+\end{align}
+with $\mathbf{F}$ and $\mathbf{G}$ being functions of the parameters
+$\boldsymbol{\mu}$.
+\item The motor of the model is the vector of exogenous shocks
+    $\boldsymbol{\upsilon_t}$.
+\item \eqref{Linlsg} describes thus, the fluctuations around the steady-state as well as the decision rules given the stochastic innovations.
+\end{itemize}
+\end{frame}
+
+\subsection{The Sims (2001)-algorithm}
+\begin{frame}\frametitle{The Sims (2001)-algorithm}\framesubtitle{Concepts}
+\begin{itemize}
+\begin{block}{Notation}
+Predetermined variables: $\qquad ~E_t X_{1,t+1}=X_{1,t+1}$,\\ Non-predetermined variables: $E_t X_{2,t+1}=E_t X_{2,t+1}$.
+\end{block}
+\begin{block}{Unitary matrices}
+    $\mathbf{M}'\mathbf{M}=\mathbf{M}\mathbf{M}'=\mathbf{I}$ are the complex analogous to orthogonal matrices. They are diagonalizable.
+\end{block}
+   \item The method of Sims (2001) begins with a
+       \emph{QZ-factorization} (General Schur decomposition), in which the matrices $\mathbf{A}$ and
+       $\mathbf{B}$ are transformed into unitary upper triangular matrices:
+\begin{align*}
+ \mathbf{A} = \mathbf{Q}' \boldsymbol{\Lambda} \mathbf{Z}' ,\qquad \mathbf{B} = \mathbf{Q}' \boldsymbol{\Omega} \mathbf{Z}'.
+\end{align*}
+\item $\boldsymbol{\Lambda}$ and $\boldsymbol{\Omega}$ are upper triangular matrices with the generalized Eigenvalues of
+    $\mathbf{A}$ and $\mathbf{B}$, and they are sorted in increasing order from left to right.
+\end{itemize}
+\end{frame}
+
+\begin{frame}\frametitle{The Sims (2001)-algorithm}\framesubtitle{}
+\begin{itemize}
+   \item The Eigenvalues determine if a system of equations converges or explodes.
+\begin{block}{Blanchard/Khan-conditions}
+The number of Eigenvalues, that are in absolute terms greater than 1, must be equal to the number of non-predetermined variables, in order to get a stable solution (saddle-path).
+\end{block}
+\item Let $\mathbf{z_{t+1}}=\mathbf{Z}'\mathbf{x_{t+1}}$, then the system can be divided into a non-explosive (upper) and an explosive part (lower):
+\begin{align}\label{sims}
+  \begin{bmatrix} \boldsymbol{\Lambda_{11}} & \boldsymbol{\Lambda_{12}}\\ \mathbf{0} & \boldsymbol{\Lambda_{22}} \end{bmatrix}
+  \begin{pmatrix} \mathbf{z_{1,t+1}} \\ \mathbf{z_{2,t+1}} \end{pmatrix}
+= \begin{bmatrix} \boldsymbol{\Omega_{11}}&\boldsymbol{\Omega_{12}}\\\mathbf{0}&\boldsymbol{\Omega_{22}}\end{bmatrix}
+  \begin{pmatrix} \mathbf{z_{1,t}} \\ \mathbf{z_{2,t}} \end{pmatrix}\\
++ \begin{pmatrix} \mathbf{Q_1 }\\ \mathbf{Q_2} \end{pmatrix}
+  \begin{bmatrix} \mathbf{E_1}+\mathbf{C_1}\boldsymbol{\upsilon_{1,t+1}} + \mathbf{D_1} \boldsymbol{\eta_{1,t+1}} \\ \mathbf{E_2}+\mathbf{C_2}\boldsymbol{\upsilon_{2,t+1}} +\mathbf{ D_2} \boldsymbol{\eta_{2,t+1}} \end{bmatrix}\nonumber.
+\end{align}
+
+\end{itemize}
+\end{frame}
+
+\begin{frame}\frametitle{The Sims (2001)-Algorithmus}\framesubtitle{}
+\begin{itemize}
+   \item The difference equations belonging to the Eigenvalues greater than 1 are solved forwards.
+   \item Remark: $\underset{t\rightarrow
+       \infty}{\lim}\left(\boldsymbol{\Omega_{22}}^{-1}
+       \boldsymbol{\Lambda_{22}}\right)^t \mathbf{z_{2,t}}=\mathbf{0}$
+       and for all $s>0: E_t \boldsymbol{\upsilon_{2,t+s}} = E_t
+\boldsymbol{\eta_{2,t+s}}=0$ (Expectations don't matter)
+\begin{align*}
+  \mathbf{z_{2,t}} & = \boldsymbol{\Omega_{22}}^{-1} \boldsymbol{\Lambda_{22}} \mathbf{z_{2,t+1}} - \boldsymbol{\Omega_{22}}^{-1}\mathbf{ Q_2} \left[\mathbf{E_2} + \mathbf{C_2} \boldsymbol{\upsilon_{2,t+1}} + \mathbf{D_2} \boldsymbol{\eta_{2,t+1}}\right]\\
+  & = -\sum_{i=0}^\infty \left(\boldsymbol{\Omega_{22}}^{-1} \boldsymbol{\Lambda_{22}}\right)^i \boldsymbol{\Omega_{22}}^{-1} \mathbf{Q_2 }\left[\mathbf{E_2} + \mathbf{C_2} \boldsymbol{\upsilon_{2,t+1+i}} + \mathbf{D_2} \boldsymbol{\eta_{2,t+1+i}}\right]\\
+  & = -\sum_{i=0}^\infty \left(\boldsymbol{\Omega_{22}}^{-1} \boldsymbol{\Lambda_{22}}\right)^i \boldsymbol{\Omega_{22}}^{-1} \mathbf{Q_2} \mathbf{E_2}\\
+  & = -\left[\mathbf{I}-\boldsymbol{\Omega_{22}}^{-1}\boldsymbol{\Lambda_{22}}\right]^{-1} \boldsymbol{\Omega_{22}}^{-1} \mathbf{Q_2} \mathbf{E_2}
+   = \left[\boldsymbol{\Lambda_{22}} - \boldsymbol{\Omega_{22}}\right]^{-1} \mathbf{Q_2} \mathbf{E_2}.
+\end{align*}
+\end{itemize}
+\end{frame}
+
+\begin{frame}\frametitle{The Sims (2001)-algorithm}\framesubtitle{}
+\begin{itemize}
+   \item The difference equations belonging to the Eigenvalues less or equal than 1 are solved backwards.
+   \item Remark: Systematical relationship betweend the expectation errors
+       $\boldsymbol{\eta_{1,t}} \& \boldsymbol{\eta_{2,t}}$.
+\begin{block}{Sufficient condition for a stable saddle-path}\centering $\mathbf{Q_1}\mathbf{D} =
+  \boldsymbol{\Phi} \mathbf{Q_2} \mathbf{D}$.
+\end{block}
+\item $\boldsymbol{\Phi}$ is of dimension $n_s \times n_c$ (with
+    $\mathbf{z_{1,t}}: n_s\times1$ and $\mathbf{z_{2,t}}: n_c \times 1$).
+\item \eqref{sims} can be rewritten as:
+\begin{multline*}
+\underbrace{\begin{bmatrix} \underset{n_s \times n_s}{\mathbf{I}} &
+\underset{n_s \times n_c}{-\boldsymbol{\Phi}}\end{bmatrix}}_{n_s \times
+(n_s+n_c)}
+  \begin{bmatrix}\boldsymbol{\Lambda_{11}} & \boldsymbol{\Lambda_{12}}\\\mathbf{0}&\boldsymbol{\Lambda_{22}}\end{bmatrix}
+  \begin{pmatrix} \mathbf{z_{1,t}} \\ \mathbf{z_{2,t}}\end{pmatrix} =\\
+  \begin{bmatrix} \mathbf{I} & -\boldsymbol{\Phi}\end{bmatrix} \begin{bmatrix} \boldsymbol{\Omega_{11}}&\boldsymbol{\Omega_{12}}\\\mathbf{0}&\boldsymbol{\Omega_{22}}\end{bmatrix}
+  \begin{pmatrix} \mathbf{z_{1,t-1}} \\ \mathbf{z_{2,t-1}} \end{pmatrix}
++ \begin{bmatrix} \mathbf{I} & -\boldsymbol{\Phi}\end{bmatrix}
+\begin{pmatrix} \mathbf{Q_1} \\ \mathbf{Q_2} \end{pmatrix}
+  \begin{bmatrix} \mathbf{E}+\mathbf{C}\boldsymbol{\upsilon_{t}} + \mathbf{D} \boldsymbol{\eta_{t}} \end{bmatrix}.
+\end{multline*}
+\end{itemize}
+\end{frame}
+
+\begin{frame}\frametitle{The Sims (2001)-algorithm}\framesubtitle{}
+\begin{multline*} \Leftrightarrow \begin{bmatrix}
+       \boldsymbol{\Lambda_{11}} &
+       \boldsymbol{\Lambda_{12}}-\boldsymbol{\Phi}
+       \boldsymbol{\Lambda_{22}} \end{bmatrix}
+  \begin{pmatrix} \mathbf{z_{1,t}} \\ \mathbf{z_{2,t}}\end{pmatrix} =
+  \begin{bmatrix} \boldsymbol{\Omega_{11}} & \boldsymbol{\Omega_{12}}-\boldsymbol{\Phi} \boldsymbol{\Omega_{22}} \end{bmatrix}
+  \begin{pmatrix} \mathbf{z_{1,t-1}} \\ \mathbf{z_{2,t-1}}\end{pmatrix}\\
++ \begin{bmatrix}\mathbf{ Q_1 }- \boldsymbol{\Phi} \mathbf{Q_2}
+\end{bmatrix}
+  \begin{bmatrix} \mathbf{E}+\mathbf{C}\boldsymbol{\upsilon_{t}} \end{bmatrix}
++ \underbrace{\begin{bmatrix} \left(\mathbf{Q_1} - \boldsymbol{\Phi}
+\mathbf{Q_2}\right) \mathbf{D}
+\boldsymbol{\eta_{t}}\end{bmatrix}}_{=\mathbf{0}}.
+\end{multline*}
+\begin{block}{The algorithm}\centering
+QZ-factorization: $\mathbf{A} = \mathbf{Q}' \boldsymbol{\Lambda} \mathbf{Z}'
+, \mathbf{B} = \mathbf{Q}' \boldsymbol{\Omega} \mathbf{Z}'$,
+$\mathbf{x_{t}}=\mathbf{Z}
+\begin{pmatrix}\mathbf{z_{1,t}}\\\mathbf{z_{2,t}}\end{pmatrix}$,
+\begin{align*}
+\begin{split}
+  \mathbf{z_{1,t} } =& - \boldsymbol{\Lambda_{11}}^{-1}\left(\boldsymbol{\Lambda_{12}}-\boldsymbol{\Phi} \boldsymbol{\Lambda_{22}}\right) \mathbf{z_{2,t}}
+  + \boldsymbol{\Lambda_{11}}^{-1}
+  \boldsymbol{\Omega_{11}}\mathbf{z_{1,t-1}} \\
+  &+\boldsymbol{\Lambda_{11}}^{-1}\left(\boldsymbol{\Omega_{12}}-\boldsymbol{\Phi}
+  \boldsymbol{\Omega_{22}}\right)\mathbf{z_{2,t-1}} +
+  \boldsymbol{\Lambda_{11}}^{-1} \left(\mathbf{Q_1} - \boldsymbol{\Phi}
+  \mathbf{Q_2}\right)\left(\mathbf{E}+\mathbf{C}
+  \boldsymbol{\upsilon_t}\right),
+\end{split}\\
+   \mathbf{ z_{2,t}} =& \left(\boldsymbol{\Lambda_{22}}-\boldsymbol{\Omega_{22}}\right)^{-1}\mathbf{Q_2} \mathbf{E}.
+\end{align*}
+\end{block}
+\end{frame}
+
+\subsection{Exercise 1: continued}
+\begin{frame}\frametitle{Exercise 1: continued}\framesubtitle{}
+The Sims (2001)-algorithm is available for different program packages, and it is implemented in Dynare.
+\begin{enumerate}[(a)]\conti
+   \item Rewrite the linearized model into the form $ \mathbf{A} \mathbf{x_{t+1}} =
+       \mathbf{B} \mathbf{x_t} + \mathbf{C}
+\boldsymbol{\upsilon_{t+1}} + \mathbf{D} \boldsymbol{\eta_{t+1}} +
+\mathbf{E} $
+\item Solve for the \emph{policy-function} by using the Sims (2001)-
+    Algorithm. Assume the following values for the parameters:
+    $\beta=0.99,\quad \alpha=0.36,\quad \sigma=2,\quad \delta
+    =0.025,\quad \rho=0.9$.
+\end{enumerate}
+\end{frame}
+
+\begin{frame}\frametitle{Homework}
+\begin{itemize}
+\item Install the newest version of Matlab.
+\item https://zivdav.uni-muenster.de/ddfs/Soft.ZIV/TheMathWorks/ .
+\item Because of license issues you have to be connected to the university either via WLAN or VPN.
+\item Download all files from
+    http://sims.princeton.edu/yftp/gensys/mfiles/ into a folder called gensys.
+    Make this folder available to Matlab (\texttt{File-SetPath-Add Folder}).
+\item Install the newest version of Dynare (http://www.dynare.org/). Make the Dynare folder $c:\backslash dynare  \backslash aktuelle~Version  \backslash matlab)$\\ available to Matlab (\texttt{File-SetPath-Add Folder}).
+\end{itemize}
+\end{frame}
+
+\end{document}

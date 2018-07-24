@@ -1,0 +1,148 @@
+Starting Dynare (version 4.4.3).
+Starting preprocessing of the model file ...
+Found 23 equation(s).
+Evaluating expressions...done
+Computing static model derivatives:
+ - order 1
+Computing dynamic model derivatives:
+ - order 1
+Processing outputs ...done
+Preprocessing completed.
+Starting MATLAB/Octave computing.
+
+STEADY-STATE RESULTS:
+
+tau_t    		 0.22
+C_t      		 0.677895
+N_t      		 0.333333
+r_t      		 0.0652921
+K_t      		 5.10526
+K_gov_t  		 1
+I_t      		 0.102105
+I_gov_t  		 0.02
+Y_t      		 1
+z_t      		 1.20802
+G_gov_t  		 0.2
+TR_t     		 0
+omega_t  		 2
+lamda_t  		 1.47516
+dC_t     		 0
+dY_t     		 0
+dI_t     		 0
+dN_t     		 0
+domega_t 		 0
+dr_t     		 0
+dTR_t    		 0
+dG_gov_t 		 0
+dI_gov_t 		 0
+
+EIGENVALUES:
+         Modulus             Real        Imaginary
+
+            0.75             0.75                0
+            0.75             0.75                0
+            0.75             0.75                0
+           0.927            0.927                0
+            0.98             0.98                0
+           1.142            1.142                0
+             Inf              Inf                0
+
+
+There are 2 eigenvalue(s) larger than 1 in modulus 
+for 2 forward-looking variable(s)
+
+The rank condition is verified.
+
+
+
+
+
+Residuals of the static equations:
+
+Equation number 1 : 0
+Equation number 2 : 0
+Equation number 3 : 0
+Equation number 4 : 0
+Equation number 5 : 0
+Equation number 6 : 0
+Equation number 7 : 0
+Equation number 8 : 0
+Equation number 9 : 0
+Equation number 10 : 0
+Equation number 11 : 0
+Equation number 12 : 0
+Equation number 13 : 0
+Equation number 14 : 0
+Equation number 15 : 0
+Equation number 16 : 0
+Equation number 17 : 0
+Equation number 18 : 0
+Equation number 19 : 0
+Equation number 20 : 0
+Equation number 21 : 0
+Equation number 22 : 0
+Equation number 23 : 0
+
+
+
+STEADY-STATE RESULTS:
+
+tau_t    		 0.22
+C_t      		 0.677895
+N_t      		 0.333333
+r_t      		 0.0652921
+K_t      		 5.10526
+K_gov_t  		 1
+I_t      		 0.102105
+I_gov_t  		 0.02
+Y_t      		 1
+z_t      		 1.20802
+G_gov_t  		 0.2
+TR_t     		 0
+omega_t  		 2
+lamda_t  		 1.47516
+dC_t     		 0
+dY_t     		 0
+dI_t     		 0
+dN_t     		 0
+domega_t 		 0
+dr_t     		 0
+dTR_t    		 0
+dG_gov_t 		 0
+dI_gov_t 		 0
+
+STEADY-STATE RESULTS:
+
+tau_t    		 0.229988
+C_t      		 0.667224
+N_t      		 0.331019
+r_t      		 0.066139
+K_t      		 4.97275
+K_gov_t  		 1
+I_t      		 0.099455
+I_gov_t  		 0.02
+Y_t      		 0.986679
+z_t      		 1.20802
+G_gov_t  		 0.2
+TR_t     		 0.00692428
+omega_t  		 1.98715
+lamda_t  		 1.49875
+dC_t     		 -1.57412
+dY_t     		 -1.33211
+dI_t     		 -2.59558
+dN_t     		 0.692428
+domega_t 		 -0.642316
+dr_t     		 0.0846916
+dTR_t    		 0.692428
+dG_gov_t 		 0.270019
+dI_gov_t 		 0.0270019
+-----------------------------------------------------
+MODEL SIMULATION:
+
+
+Simulation concluded successfully after 3 iterations.
+Total time of simulation        :      0.135
+Convergency obtained.
+-----------------------------------------------------
+
+Total computing time : 0h00m02s

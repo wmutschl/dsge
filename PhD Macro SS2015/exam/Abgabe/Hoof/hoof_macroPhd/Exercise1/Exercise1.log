@@ -1,0 +1,110 @@
+Starting Dynare (version 4.4.3).
+Starting preprocessing of the model file ...
+Found 13 equation(s).
+Evaluating expressions...done
+Computing static model derivatives:
+ - order 1
+Computing dynamic model derivatives:
+ - order 1
+Processing outputs ...done
+Preprocessing completed.
+Starting MATLAB/Octave computing.
+
+STEADY-STATE RESULTS:
+
+tau 		 0.22
+r   		 0.038591
+w   		 2
+z   		 1.01379
+C   		 0.607248
+G_b 		 0.2
+I   		 0.172752
+I_b 		 0.02
+K   		 8.63758
+K_b 		 1
+N   		 0.333333
+TR  		 0
+Y   		 1
+
+EIGENVALUES:
+         Modulus             Real        Imaginary
+
+            0.75             0.75                0
+            0.75             0.75                0
+            0.75             0.75                0
+            0.75             0.75                0
+          0.9571           0.9571                0
+            0.98             0.98                0
+           1.071            1.071                0
+       1.805e+18       -1.805e+18                0
+             Inf              Inf                0
+
+
+There are 3 eigenvalue(s) larger than 1 in modulus 
+for 3 forward-looking variable(s)
+
+The rank condition is verified.
+
+
+
+
+
+Residuals of the static equations:
+
+Equation number 1 : 0
+Equation number 2 : 0
+Equation number 3 : 0
+Equation number 4 : 0
+Equation number 5 : 0
+Equation number 6 : 0
+Equation number 7 : 0
+Equation number 8 : 0
+Equation number 9 : 0
+Equation number 10 : 0
+Equation number 11 : 0
+Equation number 12 : 0
+Equation number 13 : 0
+
+
+
+STEADY-STATE RESULTS:
+
+tau 		 0.22
+r   		 0.038591
+w   		 2
+z   		 1.01379
+C   		 0.607248
+G_b 		 0.2
+I   		 0.172752
+I_b 		 0.02
+K   		 8.63758
+K_b 		 1
+N   		 0.333333
+TR  		 0
+Y   		 1
+
+STEADY-STATE RESULTS:
+
+tau 		 0.23
+r   		 0.0390922
+w   		 1.98714
+z   		 1.01379
+C   		 0.59787
+G_b 		 0.2
+I   		 0.168153
+I_b 		 0.02
+K   		 8.40767
+K_b 		 1
+N   		 0.330802
+TR  		 0.00678525
+Y   		 0.986023
+-----------------------------------------------------
+MODEL SIMULATION:
+
+
+Simulation concluded successfully after 3 iterations.
+Total time of simulation        :      0.161
+Convergency obtained.
+-----------------------------------------------------
+
+Total computing time : 0h00m01s

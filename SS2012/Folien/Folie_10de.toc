@@ -1,0 +1,9 @@
+\beamer@endinputifotherversion {3.20pt}
+\select@language {ngerman}
+\beamer@sectionintoc {1}{\"Uberblick}{3}{0}{1}
+\beamer@sectionintoc {2}{General Method of Moments}{4}{0}{2}
+\beamer@subsectionintoc {2}{1}{Beispiel: Sch\"atzung der Eulergleichung mit GMM}{8}{0}{2}
+\beamer@sectionintoc {3}{Indirekte Inferenz}{9}{0}{3}
+\beamer@subsectionintoc {3}{1}{Impuls-Antwort-Matching}{12}{0}{3}
+\beamer@subsectionintoc {3}{2}{Beispiel: Sch\"atzung eines einfachen DSGE-Modells mit den Impuls-Antworten eines VAR(1)}{13}{0}{3}
+\beamer@sectionintoc {4}{Diskussion}{14}{0}{4}

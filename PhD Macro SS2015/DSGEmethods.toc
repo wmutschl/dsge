@@ -1,0 +1,47 @@
+\boolfalse {citerequest}\boolfalse {citetracker}\boolfalse {pagetracker}\boolfalse {backtracker}\relax 
+\defcounter {refsection}{0}\relax 
+\beamer@endinputifotherversion {3.20pt}
+\defcounter {refsection}{0}\relax 
+\select@language {english}
+\defcounter {refsection}{0}\relax 
+\beamer@sectionintoc {1}{General DSGE framework}{4}{0}{1}
+\defcounter {refsection}{0}\relax 
+\beamer@sectionintoc {2}{DSGE solution}{8}{0}{2}
+\defcounter {refsection}{0}\relax 
+\beamer@sectionintoc {3}{Overview Estimation-Methods}{24}{0}{3}
+\defcounter {refsection}{0}\relax 
+\beamer@sectionintoc {4}{Calibration}{25}{0}{4}
+\defcounter {refsection}{0}\relax 
+\beamer@subsectionintoc {4}{1}{Hints for calibrating a model}{26}{0}{4}
+\defcounter {refsection}{0}\relax 
+\beamer@sectionintoc {5}{Calibration - Pros \& Cons}{28}{0}{5}
+\defcounter {refsection}{0}\relax 
+\beamer@sectionintoc {6}{Kalman-filter}{32}{0}{6}
+\defcounter {refsection}{0}\relax 
+\beamer@subsectionintoc {6}{1}{Notation}{32}{0}{6}
+\defcounter {refsection}{0}\relax 
+\beamer@subsectionintoc {6}{2}{Initialization}{33}{0}{6}
+\defcounter {refsection}{0}\relax 
+\beamer@subsectionintoc {6}{3}{Recursion}{35}{0}{6}
+\defcounter {refsection}{0}\relax 
+\beamer@subsectionintoc {6}{4}{Summary and Likelihood}{37}{0}{6}
+\defcounter {refsection}{0}\relax 
+\beamer@sectionintoc {7}{Maximum-Likelihood}{39}{0}{7}
+\defcounter {refsection}{0}\relax 
+\beamer@subsectionintoc {7}{1}{Idea}{39}{0}{7}
+\defcounter {refsection}{0}\relax 
+\beamer@subsectionintoc {7}{2}{Idea}{40}{0}{7}
+\defcounter {refsection}{0}\relax 
+\beamer@sectionintoc {8}{Bayesian methods}{43}{0}{8}
+\defcounter {refsection}{0}\relax 
+\beamer@subsectionintoc {8}{1}{Metropolis-Hastings-algorithm}{46}{0}{8}
+\defcounter {refsection}{0}\relax 
+\beamer@subsectionintoc {8}{2}{Remarks}{51}{0}{8}
+\defcounter {refsection}{0}\relax 
+\beamer@subsectionintoc {8}{3}{Inference, forecast, model comparison and identification}{52}{0}{8}
+\defcounter {refsection}{0}\relax 
+\beamer@subsectionintoc {8}{4}{Exercise: Estimation with Bayesian methods}{54}{0}{8}
+\defcounter {refsection}{0}\relax 
+\beamer@sectionintoc {9}{Discussion}{55}{0}{9}
+\defcounter {refsection}{0}\relax 
+\beamer@sectionintoc {10}{References}{61}{0}{10}

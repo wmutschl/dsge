@@ -1,0 +1,8 @@
+\beamer@endinputifotherversion {3.20pt}
+\select@language {ngerman}
+\beamer@sectionintoc {1}{Was bisher geschah\dots }{3}{0}{1}
+\beamer@sectionintoc {2}{Allgemeine Form und L\"osung eines DSGE-Modells}{4}{0}{2}
+\beamer@sectionintoc {3}{Wiederholung: Aufgabe 1}{6}{0}{3}
+\beamer@sectionintoc {4}{Lineare L\"osungsverfahren}{7}{0}{4}
+\beamer@subsectionintoc {4}{1}{Der Sims (2001)-Algorithmus}{9}{0}{4}
+\beamer@subsectionintoc {4}{2}{Aufgabe 1: Fortsetzung}{14}{0}{4}

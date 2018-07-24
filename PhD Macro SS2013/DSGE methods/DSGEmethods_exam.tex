@@ -1,0 +1,145 @@
+\documentclass[10pt,a4paper]{article}
+\usepackage[english]{babel}
+\usepackage{csquotes}
+\usepackage{setspace}
+\onehalfspacing
+\usepackage[top=30mm,left=30mm,bottom=30mm]{geometry}
+\usepackage[automark]{scrpage2}
+
+\usepackage{hyperref}
+\hypersetup{
+	pdfauthor={Willi Mutschler},
+	pdftitle={},
+	pdfproducer={LaTeX}, % Software mit der das ganze Produziert wurde...
+	colorlinks=false,   % macht die Schrift von Hyperlinks rot (true), false = schwarze Schrift
+    pdfborder={0 0 0}, % keine Rechteckmarkierung um Links
+  %pdfpagemode=None,  % PDF-Viewer startet ohne Inhaltsverzeichnis et.al.
+  pdfstartview={FitH}, % PDF-Viewer benutzt beim Start bestimmte Seitenbreite
+  plainpages = false, % Damit auch zwischen r\"{o}mischen und arabischen Zahlen unterschieden werden kann
+}
+\usepackage{amssymb,amsmath}
+\usepackage{xcolor}
+\usepackage{enumerate}
+\usepackage[hyperref=true,style=authoryear, dashed=false, maxnames=3,backend=bibtex8,doi=false,isbn=false,backref=true]{biblatex}
+\usepackage[affil-it]{authblk}
+\makeatletter
+\def\@maketitle{%
+  \newpage
+  \null
+  \vskip 2em%
+  \begin{center}%
+  \let \footnote \thanks
+    {\Large\bfseries \@title \par}%
+    \vskip 1.5em%
+    {\normalsize
+      \lineskip .5em%
+      \begin{tabular}[t]{c}%
+        \@author
+      \end{tabular}\par}%
+    \vskip 1em%
+    {\normalsize \@date}%
+  \end{center}%
+  \par
+  \vskip 1.5em}
+\makeatother
+
+
+\begin{document}
+\title{PhD Macroeconomics -- DSGE methods\\ Summer 2013\\ Examination}
+\author{Willi Mutschler%
+  \thanks{Electronic address: \texttt{willi.mutschler@uni-muenster.de}}}
+\affil{Institute for Econometrics and Economic Statistics,\\ University of M\"unster, Germany}
+\date{Due date: August 31, 2013}
+\maketitle
+\thispagestyle{empty}
+
+\renewcommand\abstractname{~}
+\begin{abstract}~
+\begin{itemize}
+\item Answer \textbf{all} of the following three exercises.
+\item Hand in your solutions before August 31, 2012.
+\item Please e-mail the solutions to willi.mutschler@uni-muenster.de
+\item The solution files should contain your Dynare code and all
+additional files \newline
+(preferably \texttt{pdf}, not \texttt{doc} or \texttt{docx}).
+\item \textbf{Important}: Please indicate if you are a Master student or a
+PhD student. If you are a Master student, please also give your registration
+number.
+\item All students must work on their own.
+\item If there are any questions, contact Willi Mutschler in room 305 or via e-mail.
+\end{itemize}
+\end{abstract}
+
+\begin{center}\Huge{GOOD LUCK!}\end{center}\normalsize
+\newpage \setcounter{page}{1}
+\section{Dynare}
+Consider the Clarida-Gali-Gertler model from the lecture. (Hint: Use the cggexam.mod as starting point for your analysis)
+\begin{enumerate}
+  \item Replace the time series representation of $a_t$ with $$a_t = \rho a_{t-1} + \varepsilon_{t}^a$$ Consider the response of the economy to a technology shock $\varepsilon_t^a$. Does the economy over- or under-respond to the shock relative to its \emph{natural} response? How does this compare to the unit root case? Give also economic intuition for the response. Hint: Use the Matlab function plots.m to get some prettier plots (put everything in one folder and write plots as the last command of your mod-file).
+  \item Now assume that agents have advance information (news) about the future realization of the technology shock, i.e.
+  $$ a_t = \rho a_{t-1} + \xi_t^0 + \xi_{t-1}^1$$ where $\xi_t^0$ and $\xi_t^1$ are both iid. In economic terms agents see $\xi_t^0$ at time $t$ and they see $\xi_{t-1}^0$ at time $t-1$. Introduce this into your code and consider a news shock to $\xi_t^1$. What happens with inflation and the output gap? Provide intuition behind this apparently contradictory result.
+  \item What happens with the response of the economy due to a news shock relative to its natural response, if the natural rate of interest is introduced into the policy rule, i.e.
+   \begin{equation*} r_{t} = r_t^{\ast} + \alpha (r_{t-1}-r^\ast_{t-1})+(1-\alpha )\left[ \phi _{\pi }\pi _{t}+\phi _{x}x_{t}\right]\end{equation*}
+\end{enumerate}
+\newpage
+\section{Solution methods}
+Consider a simplified Asset-Pricing Model given by
+\begin{align*}
+u'(d_t) \cdot p_t &= \beta E_t \left[u'(d_{t+1})\cdot(p_{t+1}+d_{t+1})\right]\\
+d_{t+1} & = \rho d_t + e_{t+1}, \qquad e_{t+1} \sim N(0,\sigma_e^2)
+\end{align*}
+in which $u'(d_t)$ denotes the first order derivative of the utility function $u(d_t)$, $\beta$ the discount factor, $\rho$ a time persistence parameter, $p_t$ the price and $d_t$ the dividend of a single asset in the environment with steady states $\overline{p}$ and $\overline{d}$. $e_t$ is a gaussian random variable with zero mean and standard deviation $\sigma_e$. 
+\begin{enumerate}
+  \item In the notation of the lecture, which variable is the state $(x_t)$ and which the control $(y_t)$ variable?
+  \item Derive the decision rule for the state variable in the form of
+  \begin{align*}
+    x_{t+1} = \overline{x} + h(x_t,\sigma) + \sigma \varepsilon_{t+1}
+  \end{align*}
+  How would you set $\sigma$ in this case?
+  \item The decision rule for the control variable up to second order is of the form
+  \begin{align*}
+    y_{t+1} = \overline{y} + [g_x](x_t - \overline{x}) + [g_\sigma]\sigma + \frac{1}{2}[g_{xx}](x_t-\overline{x})^2 + \frac{1}{2}[g_{x\sigma}](x_t-\overline{x})\sigma + \frac{1}{2}[g_{\sigma x}] \sigma (x_t-\overline{x}) + \frac{1}{2}[g_{\sigma \sigma}] \sigma^2
+  \end{align*}
+  Derive the expressions for $\overline{y}, [g_x], [g_{xx}], [g_{x \sigma}], [g_{\sigma x}]$ analytically (you don't have to do it for $g_{\sigma\sigma}$). \\
+  \textbf{Hints:}
+  \begin{itemize}
+    \item Set up $F(x_t,\sigma)=0$ and differentiate with respect to $x_t$ and $\sigma$ twice, THEN take expectation of $F_{x}=0, F_\sigma=0, F_{xx}=0$ and evaluate at $(x_t,\sigma)=(\overline{x},0)$.
+    \item For $g_x$ and $g_{xx}$ you should get:
+  \begin{align*}
+  g_x &= \frac{-u''(\overline{d})\cdot\overline{y} + \beta \rho u''(\overline{d})\cdot(\overline{y}+\overline{x})+\beta\rho u'(\overline{d})}{u'(\overline{d})\cdot(1-\rho \beta)},\\
+  g_{xx} &= \frac{-u'''(\overline{d})\cdot \overline{y}-2 u''(\overline{d})\cdot g_x + \beta \rho^2 u'''(\overline{d})\cdot(\overline{y}+\overline{x})+2\beta\rho^2u''(\overline{d})\cdot(\overline{y}+1)}{u'(\overline{d})(1-\beta\rho^2)}
+  \end{align*}
+  \end{itemize}
+\end{enumerate}
+\newpage
+\section{Estimation methods}
+Consider the following simplified RBC-model (social planer problem);
+\begin{align*}
+  \underset{\{c_{t+j},l_{t+j},k_{t+j}\}_{j=0}^\infty}{max} W_t &= \sum_{j=0}^\infty \beta^j u(c_{t+j},l_{t+j})\\
+  s.t.\quad y_t &= c_t + i_t, & A_t &= A e^{a_t}, \\
+  y_t &= A_t f(k_{t-1},l_t), & a_t &= \rho a_{t-1} + \varepsilon_t,\\
+  k_t &= i_t +(1-\delta)k_{t-1}, &  \varepsilon_t &\sim N(0,\sigma_{\varepsilon}^2),
+\end{align*}
+where preferences and technology follow:
+\begin{align*}
+  u(c_t,l_t)= \frac{\left[c_t^\theta (1-l_t)^{1-\theta}\right]^{1-\tau}}{1-\tau}, \qquad f(k_{t-1},l_t)=\left[\alpha k_{t-1}^\psi + (1-\alpha)l_t^\psi\right]^{1/\psi}.
+\end{align*}
+Optimality is given by:
+\begin{eqnarray*}
+ &u_c(c_t,l_t) - \beta E_t \left\{u_c(c_{t+1},l_{t+1}) \left[A_{t+1} f_k(k_t, l_{t+1})+1-\delta \right]\right\} = 0,\\
+ & -\frac{u_l(c_t,l_t)}{u_c(c_t,l_t)}-A_t f_l(k_{t-1},l_t)=0,\\
+ & c_t + k_t -A_t f(k_{t-1},l_t) -(1-\delta)k_{t-1}=0.
+\end{eqnarray*}
+See rbcestim.mod for this model and the Bayesian estimation we did in the lecture. \textbf{RUN IT ONCE TO GET SIMULATED DATA AND ESTIMATION.}\\  Now we will use the same dataset to estimate the parameters of a misspecified model. We will use the same model, however, with a small difference, i.e. technology follows a Cobb-Douglas production function. See rbcexam.mod for the new model equations and steady-state block.
+\begin{enumerate}
+  \item Define priors for $\alpha,\theta$ and $\tau$. How many observable variables do you need? Choose an appropriate number of observables.
+  \item Estimate the posterior mode using the \texttt{estimation} command and a limited sample with 200 observations. Check the posterior mode using \texttt{mode\_check}. If you get errors due to a non-positive definite Hessian, try a different optimization algorithm or change the initial values.
+  \item If you are satisfied with the posterior mode, approximate the posterior distribution using the Metropolis-Hastings-Algorithm with $3\times 5000$ iterations. How large is your acceptance rate (change $jh\_scale$ if you're not satisified). Provide also the diagnostic plots. If the algorithm does not converge to the (ergodic) posterior-distribution, repeat the algorithm with 1000 more iterations without discarding the previous draws.
+  \item Take a stand on your Bayesian estimation. What is good, what can be improved and how? Compare the estimation of the common parameters of the true model with the misspecified model. 
+  \item Calculate the \emph{posterior-odds} and the \emph{posterior-model-probabilities} weighting each model by 0.5 a prior. Hint: Write a mod-file with the following code and execute it:
+\begin{verbatim}
+model_comparison rbcestim(0.5) rbcexam(0.5);
+\end{verbatim}
+\end{enumerate}
+
+\end{document}

@@ -1,0 +1,427 @@
+Starting Dynare (version 4.6-unstable).
+Starting preprocessing of the model file ...
+Found 12 equation(s).
+Evaluating expressions...done
+Computing static model derivatives:
+ - order 1
+Computing dynamic model derivatives:
+ - order 1
+ - order 2
+Processing outputs ...
+done
+Preprocessing completed.
+
+You did not declare endogenous variables after the estimation/calib_smoother command.
+Initial value of the log posterior (or likelihood): -444.7633
+ 
+ Iteration   Func-count     min f(x)         Procedure
+     0            1          444.763         
+     1            4          444.763         initial simplex
+     2            6          444.719         reflect
+     3            8          444.123         contract outside
+     4           10          444.123         contract inside
+     5           12          444.123         contract inside
+     6           14          444.123         contract inside
+     7           16          444.075         contract inside
+     8           18          444.062         contract inside
+     9           20          444.048         contract inside
+    10           22          444.048         contract inside
+    11           24          444.048         contract inside
+    12           26          444.046         contract inside
+    13           28          444.044         contract inside
+    14           30          444.031         expand
+    15           32          444.031         contract inside
+    16           34           444.02         expand
+    17           36          443.998         expand
+    18           38          443.974         expand
+    19           39          443.974         reflect
+    20           41          443.912         expand
+    21           42          443.912         reflect
+    22           44          443.902         expand
+    23           46          443.844         expand
+    24           48          443.842         reflect
+    25           50          443.842         contract inside
+    26           51          443.842         reflect
+    27           53          443.841         contract inside
+    28           55           443.84         contract inside
+    29           57          443.836         reflect
+    30           59          443.836         contract inside
+    31           61          443.833         reflect
+    32           63          443.833         contract inside
+    33           65           443.83         expand
+    34           67           443.83         contract inside
+    35           69          443.827         expand
+    36           71          443.827         reflect
+    37           72          443.827         reflect
+    38           74          443.827         contract outside
+    39           76          443.827         contract inside
+    40           77          443.827         reflect
+    41           79          443.826         contract inside
+    42           81          443.826         contract inside
+    43           83          443.826         contract inside
+    44           85          443.826         contract inside
+    45           87          443.826         reflect
+    46           89          443.826         reflect
+    47           91          443.826         contract inside
+    48           93          443.826         contract inside
+    49           95          443.826         contract inside
+    50           97          443.826         contract outside
+    51           99          443.826         contract inside
+    52          101          443.826         contract inside
+    53          102          443.826         reflect
+    54          104          443.826         contract inside
+    55          106          443.826         contract inside
+    56          108          443.826         contract outside
+    57          110          443.826         contract inside
+    58          112          443.826         contract inside
+    59          114          443.826         contract inside
+    60          116          443.826         contract outside
+    61          117          443.826         reflect
+    62          119          443.826         contract outside
+    63          121          443.826         contract inside
+    64          123          443.826         contract inside
+    65          125          443.826         contract inside
+    66          126          443.826         reflect
+    67          127          443.826         reflect
+    68          129          443.826         contract inside
+    69          130          443.826         reflect
+    70          131          443.826         reflect
+    71          133          443.826         contract inside
+    72          135          443.826         contract outside
+    73          137          443.826         contract inside
+    74          139          443.826         contract inside
+    75          141          443.826         contract outside
+    76          143          443.826         contract inside
+    77          145          443.826         contract inside
+    78          147          443.826         contract outside
+    79          149          443.826         reflect
+    80          150          443.826         reflect
+    81          152          443.826         contract inside
+    82          153          443.826         reflect
+    83          155          443.826         contract inside
+    84          157          443.826         contract inside
+    85          159          443.826         contract inside
+    86          161          443.826         contract inside
+    87          163          443.826         contract inside
+    88          164          443.826         reflect
+    89          165          443.826         reflect
+    90          167          443.826         contract inside
+    91          169          443.826         contract inside
+    92          171          443.826         contract inside
+    93          173          443.826         contract inside
+    94          175          443.826         contract outside
+    95          177          443.826         contract inside
+ 
+Optimization terminated:
+ the current x satisfies the termination criteria using OPTIONS.TolX of 1.000000e-06 
+ and F(X) satisfies the convergence criteria using OPTIONS.TolFun of 1.000000e-08 
+
+
+Final value of minus the log posterior (or likelihood):443.826349 
+
+MODE CHECK
+
+Fval obtained by the minimization routine (minus the posterior/likelihood)): 443.826349
+
+RESULTS FROM POSTERIOR ESTIMATION
+parameters
+    prior mean     mode    s.d. prior pstdev
+
+alpha   0.450   0.4408  0.0191 beta  0.0500 
+theta   0.350   0.3433  0.0475 beta  0.0500 
+tau     2.207   1.9669  0.4427 gamm  0.5000 
+
+
+Log data density [Laplace approximation] is -449.774127.
+
+
+STEADY-STATE RESULTS:
+
+k  		 17.0527
+y  		 1.48641
+l  		 0.307546
+c  		 1.14536
+A  		 1
+a  		 0
+i  		 0.341055
+uc 		 0.361834
+ul 		 -1.14488
+fk 		 0.030101
+fl 		 3.1641
+f  		 1.48641
+
+EIGENVALUES:
+         Modulus             Real        Imaginary
+
+             0.8              0.8                0
+          0.9668           0.9668                0
+           1.045            1.045                0
+        1.23e+17        -1.23e+17                0
+       1.014e+31        1.014e+31                0
+
+
+There are 3 eigenvalue(s) larger than 1 in modulus 
+for 3 forward-looking variable(s)
+
+The rank condition is verified.
+
+
+
+
+
+Residuals of the static equations:
+
+Equation number 1 : 0
+Equation number 2 : 0
+Equation number 3 : 0
+Equation number 4 : 0
+Equation number 5 : 0
+Equation number 6 : 0
+Equation number 7 : 0
+Equation number 8 : 0
+Equation number 9 : 0
+Equation number 10 : 0
+Equation number 11 : 0
+Equation number 12 : 0
+
+
+
+You did not declare endogenous variables after the estimation/calib_smoother command.
+
+Initial value of the log posterior (or likelihood): -443.8263
+
+MODE CHECK
+
+Fval obtained by the minimization routine (minus the posterior/likelihood)): 443.826349
+
+RESULTS FROM POSTERIOR ESTIMATION
+parameters
+    prior mean     mode    s.d. prior pstdev
+
+alpha   0.450   0.4408  0.0191 beta  0.0500 
+theta   0.350   0.3433  0.0475 beta  0.0500 
+tau     2.207   1.9669  0.4427 gamm  0.5000 
+
+
+Log data density [Laplace approximation] is -449.774127.
+
+Estimation::mcmc: Multiple chains mode.
+Estimation::mcmc: Old mh-files successfully erased!
+Estimation::mcmc: Old metropolis.log file successfully erased!
+Estimation::mcmc: Creation of a new metropolis.log file.
+Estimation::mcmc: Searching for initial values...
+Estimation::mcmc: Initial values found!
+
+Estimation::mcmc: Write details about the MCMC... Ok!
+Estimation::mcmc: Details about the MCMC are available in rbc/metropolis/rbc_mh_history_0.mat
+
+
+Estimation::mcmc: Number of mh files: 1 per block.
+Estimation::mcmc: Total number of generated files: 3.
+Estimation::mcmc: Total number of iterations: 5000.
+Estimation::mcmc: Current acceptance ratio per chain: 
+                                                       Chain  1: 24.62%
+                                                       Chain  2: 22.32%
+                                                       Chain  3: 22.48%
+Estimation::mcmc: Total number of MH draws per chain: 5000.
+Estimation::mcmc: Total number of generated MH files: 1.
+Estimation::mcmc: I'll use mh-files 1 to 1.
+Estimation::mcmc: In MH-file number 1 I'll start at line 2501.
+Estimation::mcmc: Finally I keep 2500 draws per chain.
+
+
+
+MCMC Inefficiency factors per block
+Parameter       Block 1     Block 2     Block 3
+alpha             6.038       9.949      12.114
+theta             4.578       9.002      14.273
+tau              25.263      12.724       6.953
+
+Estimation::mcmc::diagnostics: Univariate convergence diagnostic, Brooks and Gelman (1998):
+    Parameter 1...  Done! 
+    Parameter 2...  Done! 
+    Parameter 3...  Done! 
+
+Estimation::marginal density: I'm computing the posterior mean and covariance...  Done!
+Estimation::marginal density: I'm computing the posterior log marginal density (modified harmonic mean)... Done!
+
+
+ESTIMATION RESULTS
+
+Log data density is -449.794550.
+
+parameters
+        prior mean   post. mean        90% HPD interval    prior       pstdev
+
+alpha        0.450       0.4406      0.4102      0.4708   beta        0.0500
+theta        0.350       0.3516      0.2741      0.4257   beta        0.0500
+tau          2.207       2.1561      1.3992      2.8610   gamm        0.5000
+
+STEADY-STATE RESULTS:
+
+k  		 17.458
+y  		 1.52238
+l  		 0.315443
+c  		 1.17322
+A  		 1
+a  		 0
+i  		 0.34916
+uc 		 0.37314
+ul 		 -1.17921
+fk 		 0.030101
+fl 		 3.16025
+f  		 1.52238
+
+EIGENVALUES:
+         Modulus             Real        Imaginary
+
+             0.8              0.8                0
+          0.9684           0.9684                0
+           1.043            1.043                0
+       7.747e+16        7.747e+16                0
+             Inf              Inf                0
+
+
+There are 3 eigenvalue(s) larger than 1 in modulus 
+for 3 forward-looking variable(s)
+
+The rank condition is verified.
+
+
+
+
+
+Residuals of the static equations:
+
+Equation number 1 : 0
+Equation number 2 : 0
+Equation number 3 : 0
+Equation number 4 : 0
+Equation number 5 : 0
+Equation number 6 : 0
+Equation number 7 : 0
+Equation number 8 : 0
+Equation number 9 : 0
+Equation number 10 : 0
+Equation number 11 : 0
+Equation number 12 : 0
+
+
+
+You did not declare endogenous variables after the estimation/calib_smoother command.
+
+Initial value of the log posterior (or likelihood): -443.8263
+
+MODE CHECK
+
+Fval obtained by the minimization routine (minus the posterior/likelihood)): 443.826349
+
+RESULTS FROM POSTERIOR ESTIMATION
+parameters
+    prior mean     mode    s.d. prior pstdev
+
+alpha   0.450   0.4408  0.0191 beta  0.0500 
+theta   0.350   0.3433  0.0475 beta  0.0500 
+tau     2.207   1.9669  0.4427 gamm  0.5000 
+
+
+Log data density [Laplace approximation] is -449.774127.
+
+Estimation::mcmc: I am loading past Metropolis-Hastings simulations...
+Estimation::mcmc: Recovering the previous proposal density.
+Estimation::mcmc: I am writing a new mh-history file... Done.
+Estimation::mcmc: Ok. I have loaded 5000 simulations.
+
+
+Estimation::mcmc: Number of mh files: 1 per block.
+Estimation::mcmc: Total number of generated files: 3.
+Estimation::mcmc: Total number of iterations: 6000.
+Estimation::mcmc: Current acceptance ratio per chain: 
+                                                       Chain  1: 22.1%
+                                                       Chain  2: 23.9%
+                                                       Chain  3: 23.9%
+Estimation::mcmc: Total number of MH draws per chain: 6000.
+Estimation::mcmc: Total number of generated MH files: 1.
+Estimation::mcmc: I'll use mh-files 1 to 1.
+Estimation::mcmc: In MH-file number 1 I'll start at line 3001.
+Estimation::mcmc: Finally I keep 3000 draws per chain.
+
+
+
+MCMC Inefficiency factors per block
+Parameter       Block 1     Block 2     Block 3
+alpha             4.745       9.942      23.880
+theta             3.938       9.489      18.183
+tau               6.643       7.711       8.295
+
+Estimation::mcmc::diagnostics: Univariate convergence diagnostic, Brooks and Gelman (1998):
+    Parameter 1...  Done! 
+    Parameter 2...  Done! 
+    Parameter 3...  Done! 
+
+Estimation::marginal density: I'm computing the posterior mean and covariance...  Done!
+Estimation::marginal density: I'm computing the posterior log marginal density (modified harmonic mean)... Done!
+
+
+ESTIMATION RESULTS
+
+Log data density is -449.769554.
+
+parameters
+        prior mean   post. mean        90% HPD interval    prior       pstdev
+
+alpha        0.450       0.4400      0.4107      0.4708   beta        0.0500
+theta        0.350       0.3517      0.2746      0.4248   beta        0.0500
+tau          2.207       2.1482      1.3931      2.8332   gamm        0.5000
+
+STEADY-STATE RESULTS:
+
+k  		 17.3751
+y  		 1.51695
+l  		 0.315584
+c  		 1.16945
+A  		 1
+a  		 0
+i  		 0.347502
+uc 		 0.374397
+ul 		 -1.17918
+fk 		 0.030101
+fl 		 3.14954
+f  		 1.51695
+
+EIGENVALUES:
+         Modulus             Real        Imaginary
+
+             0.8              0.8                0
+          0.9683           0.9683                0
+           1.043            1.043                0
+       1.355e+16       -1.355e+16                0
+       4.056e+31        4.056e+31                0
+
+
+There are 3 eigenvalue(s) larger than 1 in modulus 
+for 3 forward-looking variable(s)
+
+The rank condition is verified.
+
+
+
+
+
+Residuals of the static equations:
+
+Equation number 1 : 0
+Equation number 2 : 0
+Equation number 3 : 0
+Equation number 4 : 0
+Equation number 5 : 0
+Equation number 6 : 0
+Equation number 7 : 0
+Equation number 8 : 0
+Equation number 9 : 0
+Equation number 10 : 0
+Equation number 11 : 0
+Equation number 12 : 0
+
+
+Total computing time : 0h01m54s

@@ -1,0 +1,169 @@
+\documentclass{beamer} %%% FÜR VORTRAG MIT PAUSEN
+%\documentclass[handout]{beamer}  %%% FÜR HANDOUT ALS PDF
+
+\setbeamertemplate{navigation symbols}{}
+\usetheme{Madrid}
+\usecolortheme{seagull}
+\beamersetuncovermixins{\opaqueness<1>{25}}{\opaqueness<2->{15}}
+\usepackage[T1]{fontenc}
+\usepackage{ae,aecompl}
+\usepackage[ansinew]{inputenc}
+\usepackage[ngerman]{babel}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage[babel,german=quotes]{csquotes} %im deutschen übliche Anführungszeichen
+\usepackage{verbatim}
+\newcounter{saveenumi}
+\newcommand{\seti}{\setcounter{saveenumi}{\value{enumi}}}
+\newcommand{\conti}{\setcounter{enumi}{\value{saveenumi}}}
+\usepackage{verbatim}
+
+\begin{document}
+\author[Willi Mutschler]{Willi Mutschler, M.Sc.}
+\date{Summer 2014}
+\institute[Institute of Econometrics]{Institute of Econometrics and Economic
+Statistics\\University of M�nster\\willi.mutschler@uni-muenster.de}
+\title{DSGE Methods}
+\subtitle{Calibration of DSGE models}
+
+\begin{frame}
+\titlepage
+\end{frame}
+
+\section{Overview Estimation-Methods}
+\begin{frame}\frametitle{Overview Estimation-Methods}\framesubtitle{}
+\begin{itemize}
+    \item Econometrically, a DSGE-Model is a state-space model of which
+        one has to determine the parameters.
+      \item Three concepts:
+      \begin{enumerate}
+        \item \textbf{Calibration}: The parameters are set in such a
+            way, that they closely correspond to some theoretical
+            moment or stylized fact of data.
+        \item \textbf{Methods of limited information} or weak
+            econometric interpretation: Minimize the distance between
+            theoretical and empirical moments, i.e.
+            \emph{General-Method-of-Moments} or \emph{Indirect
+            Inference}.
+        \item \textbf{Methods of full information} or strong
+            econometric interpretation: The goal is an exact
+            characterization of observed data, i.e.
+            \emph{Maximum-Likelihood} or \emph{Bayesian methods}.
+      \end{enumerate}
+\end{itemize}
+\end{frame}
+
+\section{Calibration}
+\begin{frame}\frametitle{Calibration}\framesubtitle{}
+\begin{itemize}
+   \item Goal: To answer a specific quantitative research question using
+       a structural model.
+   \item Construct and parameterize the model such, that it corresponds
+       to certain properties of the true economy.
+   \item Use steady-state-characteristics for choosing the parameters in
+       accordance with observed data.
+   \item Often: stable long-run averages (wages, working-hours, interest
+       rates, inflation, consumption-shares, government-spending-ratios,
+       etc.).
+   \item You can use micro-studies as well, however, one has to be
+       careful about the aggregation!
+\end{itemize}
+\end{frame}
+
+\subsection{Hints for calibrating a model}
+\begin{frame}\frametitle{Calibration}\framesubtitle{Hints for calibrating a model}
+
+\begin{itemize}
+   \item Use long-term averages of interest rates, inflation, average
+       growth of productivity, etc. for \emph{steady-state} values.
+   \item BUT: Weil (1989) shows, that in models with representative
+       agents there is an overestimation of \emph{steady-state} interest
+       rates (\emph{risk-free rate puzzle}). It is possible that you get
+       absurd constellation of parameters, like a discount-factor of
+       $\beta>1$.
+   \item Usual mark-up on prices is around 1.15 (Corsetti et al (2012)).
+   \item Intertemporal elasticity of substitution  $1/\sigma$ somewhere
+       between $\sigma=1$ and $\sigma=3$ (King, Plosser and Rebelo
+       (1988), Rotemberg and Woodford (1992), Lucas (2003)).
+\end{itemize}
+\end{frame}
+
+\begin{frame}\frametitle{Calibration}\framesubtitle{Hints for calibrating a model}
+\begin{itemize}
+   \item Rigidity of prices: For an average price adjustment of 12-15
+       months see Keen and Wang (2007).
+   \item Coefficients of monetary policy: Often Taylor-Rule, you can use
+       the relative coefficients to put more emphasize/weight on the
+       stability of prices or on smoothing the business cycle.
+   \item Parameters of stochastic processes: Often persistent, small
+       standard-deviations, otherwise you get high oscillations. You can
+       also estimate the production function via OLS (Solow-residual).
+   \item How to choose shocks: Look at similar studies: Christiano,
+       Eichenbaum and Evans (2005), Smets and Wouters (2003), etc..
+   \item Ultimately: Try \& Error!
+\end{itemize}
+\end{frame}
+
+
+\begin{frame}\frametitle{Exercise:}\framesubtitle{Calibration of a RBC-model with monopolistic competition}
+The structural form of a DSGE-model is given by the following equations
+       \begin{align}
+         \frac{1}{c_t} &= \beta E_t \left[\frac{1}{c_{t+1}} (1+r_{t+1}-\delta)\right]\\
+         w_t &= \psi \frac{c_t}{1-l_t}\\
+         y_t &= c_t + i_t\\
+         y_t &= A_t k_{t}^\alpha l_t^{1-\alpha}\\
+         w_t & = (1-\alpha) \frac{y_t}{l_t} \frac{\varepsilon -1}{\varepsilon}\\
+         r_t & = \alpha \frac{y_t}{k_t} \frac{\varepsilon -1}{\varepsilon}\\
+         i_t &= k_{t+1} - (1-\delta) k_t\\
+         log(A_t) &= \rho log(A_{t-1}) + \epsilon_t
+       \end{align}
+\end{frame}
+
+
+\begin{frame}\frametitle{Exercise:}\framesubtitle{Calibration of a RBC-model with monopolistic competition}
+\begin{enumerate}[(a)]
+   \item Interpret the equations. What are state variables, what are control variables, what are the parameters of the model?
+   \item Write a mod-file for the model and calibrate the vector of
+       parameters. Simulate the model for 1000 periods with Dynare. Plot the path of consumption for 100 periods.
+\end{enumerate}
+\end{frame}
+
+\section{Calibration - Pros \& Cons}
+\begin{frame}\frametitle{Calibration}\framesubtitle{Pros}
+\begin{itemize}
+   \item Calibration is commonly used in the literature. It gives a first
+       impression, a flavor of the strengths and weaknesses of a model.
+   \item A good calibration can provide a valuable and precise image of
+       data.
+   \item Using different calibrations, one can asses interesting
+       implications of different policies:
+       \begin{itemize}
+       \item How does the economy react, if the central bank focuses
+           more on smoothing the business cycle than on price
+           stability?
+           \item What happens to consumption, if the households have
+               a strong intertemporal elasticity of substitution?
+               What if it is low?
+       \end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}\frametitle{Calibration}\framesubtitle{Cons}
+\begin{itemize}
+   \item This Ad-hoc-approach is at the center of criticism of
+       DSGE-models.
+   \item There is no statistical foundation, it is based upon subjective
+       views, assessments and opinions.
+   \item Many parameter, such as those of the exogenous processes, leave
+       room for different values and interpretations (intertemporal
+       elasticity of substitution, monetary and fiscal parameters,
+       coefficients of rigidity, standard deviations, etc.).
+\end{itemize}
+\begin{block}{Prescott (1986, S.~10) regarding RBC-models:} The models constructed within this theoretical framework are
+necessarily \textbf{highly abstract}. Consequently, they are necessarily
+false, and statistical hypothesis testing will reject them. This does not
+imply, however, that nothing can be learned from such a \textbf{quantitative
+theoretical exercise}.\end{block}
+\end{frame}
+
+\end{document}

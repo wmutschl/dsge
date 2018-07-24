@@ -1,0 +1,392 @@
+ 
+STEADY-STATE RESULTS:
+ 
+l 		 0.331061
+c 		 0.710551
+k 		 5.69034
+y 		 0.824358
+A 		 1
+a 		 0
+ 
+EIGENVALUES:
+         Modulus             Real        Imaginary
+
+             0.8              0.8                0
+          0.9408           0.9408                0
+           1.074            1.074                0
+             Inf              Inf                0
+             Inf              Inf                0
+
+
+There are 3 eigenvalue(s) larger than 1 in modulus 
+for 3 forward-looking variable(s)
+ 
+The rank condition is verified.
+ 
+ 
+MODEL SUMMARY
+ 
+  Number of variables:         6
+  Number of stochastic shocks: 1
+  Number of state variables:   2
+  Number of jumpers:           3
+  Number of static variables:  1
+
+
+MATRIX OF COVARIANCE OF EXOGENOUS SHOCKS
+
+Variables       e    
+e            1.000000
+ 
+POLICY AND TRANSITION FUNCTIONS
+                                       l               c               k               y               A               a
+Constant                    0.331061        0.710551        5.690338        0.824358        1.000000               0
+k(-1)                      -0.009008        0.051515        0.940817        0.012332               0               0
+a(-1)                       0.190458        0.247225        0.787971        1.035196        0.800000        0.800000
+e                           0.238072        0.309032        0.984964        1.293995        1.000000        1.000000
+
+
+MOMENTS OF SIMULATED VARIABLES
+
+VARIABLE      MEAN      STD. DEV.   VARIANCE    SKEWNESS    KURTOSIS  
+l             0.330809    0.361655    0.130794    0.056331    0.038860
+c             0.704302    0.994844    0.989714   -0.040567   -0.041697
+k             5.597654   12.926911  167.105021   -0.042782   -0.091059
+y             0.817248    2.214697    4.904885    0.007966    0.009908
+A             0.995398    1.656494    2.743972    0.016691    0.012252
+a            -0.004602    1.656494    2.743972    0.016691    0.012252
+
+
+CORRELATION OF SIMULATED VARIABLES
+
+VARIABLE      l       c       k       y       A       a   
+l           1.0000  0.5808  0.2455  0.9350  0.9562  0.9562
+c           0.5808  1.0000  0.9317  0.8317  0.7936  0.7936
+k           0.2455  0.9317  1.0000  0.5733  0.5184  0.5184
+y           0.9350  0.8317  0.5733  1.0000  0.9979  0.9979
+A           0.9562  0.7936  0.5184  0.9979  1.0000  1.0000
+a           0.9562  0.7936  0.5184  0.9979  1.0000  1.0000
+
+
+AUTOCORRELATION OF SIMULATED VARIABLES
+
+VARIABLE      1       2       3       4       5   
+l           0.7477  0.5553  0.4044  0.2875  0.1945
+c           0.9499  0.9025  0.8565  0.8123  0.7695
+k           0.9933  0.9770  0.9535  0.9250  0.8929
+y           0.8091  0.6607  0.5417  0.4469  0.3691
+A           0.7947  0.6359  0.5094  0.4094  0.3280
+a           0.7947  0.6359  0.5094  0.4094  0.3280
+ 
+You did not declare endogenous variables after the estimation/calib_smoother command.
+[Warning: File 'rbcestim/prior' not found.] 
+[> In <a href="matlab: opentoline('C:\dynare\4.3.3\matlab\CheckPath.m',41,1)">CheckPath at 41</a>
+  In <a href="matlab: opentoline('C:\dynare\4.3.3\matlab\set_prior.m',264,1)">set_prior at 264</a>
+  In <a href="matlab: opentoline('C:\dynare\4.3.3\matlab\dynare_estimation_init.m',123,1)">dynare_estimation_init at 123</a>
+  In <a href="matlab: opentoline('C:\dynare\4.3.3\matlab\dynare_estimation_1.m',59,1)">dynare_estimation_1 at 59</a>
+  In <a href="matlab: opentoline('C:\dynare\4.3.3\matlab\dynare_estimation.m',70,1)">dynare_estimation at 70</a>
+  In <a href="matlab: opentoline('E:\Wuala\Work\SS2013\PhD Macroeconomics\DSGE methods\Exams\Geiecke, Friedrich\rbcestim.m',149,1)">rbcestim at 149</a>
+  In <a href="matlab: opentoline('C:\dynare\4.3.3\matlab\dynare.m',120,1)">dynare at 120</a>] 
+Loading 10000 observations from artificial_sample.mat
+
+Initial value of the log posterior (or likelihood): -337.7082
+-----------------
+-----------------
+f at the beginning of new iteration,       337.7081526830
+Predicted improvement:        0.180734607
+lambda =          1; f =          337.4697670
+Norm of dx  0.0060122
+----
+Improvement on iteration 1 =        0.238385692
+-----------------
+-----------------
+f at the beginning of new iteration,       337.4697669906
+Predicted improvement:        0.027650605
+lambda =          1; f =          337.4416139
+Norm of dx  0.0028565
+----
+Improvement on iteration 2 =        0.028153109
+-----------------
+-----------------
+f at the beginning of new iteration,       337.4416138814
+Predicted improvement:        0.000054799
+lambda =          1; f =          337.4415155
+lambda =     1.9332; f =          337.4414444
+lambda =     3.7372; f =          337.4413633
+Norm of dx 0.00011226
+----
+Improvement on iteration 3 =        0.000250607
+-----------------
+-----------------
+f at the beginning of new iteration,       337.4413632744
+Predicted improvement:        0.000209573
+lambda =          1; f =          337.4409656
+lambda =     1.9332; f =          337.4406337
+lambda =     3.7372; f =          337.4400991
+lambda =     7.2247; f =          337.4394662
+Norm of dx 0.00052915
+----
+Improvement on iteration 4 =        0.001897063
+-----------------
+-----------------
+f at the beginning of new iteration,       337.4394662110
+Predicted improvement:        0.001177776
+lambda =          1; f =          337.4376620
+lambda =     1.9332; f =          337.4369789
+Norm of dx  0.0032785
+----
+Improvement on iteration 5 =        0.002487309
+-----------------
+-----------------
+f at the beginning of new iteration,       337.4369789024
+Predicted improvement:        0.000302987
+lambda =          1; f =          337.4365232
+lambda =     1.9332; f =          337.4363680
+Norm of dx 0.00039793
+----
+Improvement on iteration 6 =        0.000610923
+-----------------
+-----------------
+f at the beginning of new iteration,       337.4363679792
+Predicted improvement:        0.000247627
+lambda =          1; f =          337.4358764
+lambda =     1.9332; f =          337.4354240
+lambda =     3.7372; f =          337.4345671
+lambda =     7.2247; f =          337.4329759
+lambda =     13.967; f =          337.4301450
+lambda =         27; f =          337.4255881
+lambda =     52.196; f =          337.4202054
+Norm of dx 0.00048737
+----
+Improvement on iteration 7 =        0.016162599
+-----------------
+-----------------
+f at the beginning of new iteration,       337.4202053806
+Predicted improvement:        0.014705750
+lambda =          1; f =          337.3946506
+lambda =     1.9332; f =          337.3780919
+lambda =     3.7372; f =          337.3680227
+Norm of dx   0.044357
+----
+Improvement on iteration 8 =        0.052182651
+-----------------
+-----------------
+f at the beginning of new iteration,       337.3680227299
+Predicted improvement:        0.008841195
+lambda =          1; f =          337.3573479
+Norm of dx  0.0069359
+----
+Improvement on iteration 9 =        0.010674786
+-----------------
+-----------------
+f at the beginning of new iteration,       337.3573479442
+Predicted improvement:        0.000515540
+lambda =          1; f =          337.3568366
+Norm of dx  0.0029172
+----
+Improvement on iteration 10 =        0.000511339
+-----------------
+-----------------
+f at the beginning of new iteration,       337.3568366057
+Predicted improvement:        0.000000850
+lambda =          1; f =          337.3568359
+Norm of dx 0.00062174
+----
+Improvement on iteration 11 =        0.000000747
+-----------------
+-----------------
+f at the beginning of new iteration,       337.3568358591
+Predicted improvement:        0.000000015
+lambda =          1; f =          337.3568358
+Norm of dx 7.6907e-05
+----
+Improvement on iteration 12 =        0.000000012
+improvement < crit termination
+Objective function at mode: 337.356836
+ 
+MODE CHECK
+ 
+Fval obtained by the minimization routine: 337.356836
+ 
+ 
+RESULTS FROM POSTERIOR MAXIMIZATION
+parameters
+    prior mean     mode    s.d. t-stat prior pstdev
+
+alpha   0.450   0.4565  0.0294 15.5291 beta  0.0500
+theta   0.350   0.3529  0.0435  8.1189 beta  0.0500
+tau     2.207   2.0094  0.4522  4.4437 gamm  0.5000
+ 
+Log data density [Laplace approximation] is -342.768462.
+ 
+ 
+STEADY-STATE RESULTS:
+ 
+l 		 0.333631
+c 		 0.731538
+k 		 5.92871
+y 		 0.850112
+A 		 1
+a 		 0
+ 
+EIGENVALUES:
+         Modulus             Real        Imaginary
+
+             0.8              0.8                0
+          0.9416           0.9416                0
+           1.073            1.073                0
+             Inf              Inf                0
+             Inf              Inf                0
+
+
+There are 3 eigenvalue(s) larger than 1 in modulus 
+for 3 forward-looking variable(s)
+ 
+The rank condition is verified.
+ 
+ 
+You did not declare endogenous variables after the estimation/calib_smoother command.
+Loading 10000 observations from artificial_sample.mat
+
+Initial value of the log posterior (or likelihood): -337.3568
+ 
+MODE CHECK
+ 
+Fval obtained by the minimization routine: 337.356836
+ 
+ 
+RESULTS FROM POSTERIOR MAXIMIZATION
+parameters
+    prior mean     mode    s.d. t-stat prior pstdev
+
+alpha   0.450   0.4565  0.0294 15.5291 beta  0.0500
+theta   0.350   0.3529  0.0435  8.1189 beta  0.0500
+tau     2.207   2.0094  0.4522  4.4437 gamm  0.5000
+ 
+Log data density [Laplace approximation] is -342.768462.
+ 
+[Warning: File 'rbcestim/metropolis' not found.] 
+[> In <a href="matlab: opentoline('C:\dynare\4.3.3\matlab\CheckPath.m',41,1)">CheckPath at 41</a>
+  In <a href="matlab: opentoline('C:\dynare\4.3.3\matlab\metropolis_hastings_initialization.m',62,1)">metropolis_hastings_initialization at 62</a>
+  In <a href="matlab: opentoline('C:\dynare\4.3.3\matlab\random_walk_metropolis_hastings.m',69,1)">random_walk_metropolis_hastings at 69</a>
+  In <a href="matlab: opentoline('C:\dynare\4.3.3\matlab\dynare_estimation_1.m',931,1)">dynare_estimation_1 at 931</a>
+  In <a href="matlab: opentoline('C:\dynare\4.3.3\matlab\dynare_estimation.m',70,1)">dynare_estimation at 70</a>
+  In <a href="matlab: opentoline('E:\Wuala\Work\SS2013\PhD Macroeconomics\DSGE methods\Exams\Geiecke, Friedrich\rbcestim.m',162,1)">rbcestim at 162</a>
+  In <a href="matlab: opentoline('C:\dynare\4.3.3\matlab\dynare.m',120,1)">dynare at 120</a>] 
+MH: Multiple chains mode.
+MH: Searching for initial values...
+MH: Initial values found!
+ 
+MH: Number of mh files                   : 1 per block.
+MH: Total number of generated files      : 3.
+MH: Total number of iterations           : 5000.
+MH: average acceptation rate per chain   : 
+   0.236152769446111   0.239152169566087   0.241951609678064
+
+ 
+MCMC Diagnostics: Univariate convergence diagnostic, Brooks and Gelman (1998):
+    Parameter 1...  Done! 
+    Parameter 2...  Done! 
+    Parameter 3...  Done! 
+ 
+MH: Total number of Mh draws: 5000.
+MH: Total number of generated Mh files: 1.
+MH: I'll use mh-files 1 to 1.
+MH: In mh-file number 1 i'll start at line 2500.
+MH: Finally I keep 2500 draws.
+ 
+MH: I'm computing the posterior mean and covariance...  Done!
+ 
+MH: I'm computing the posterior log marginale density (modified harmonic mean)... 
+MH: Modified harmonic mean estimator, done!
+ 
+ 
+ESTIMATION RESULTS
+ 
+Log data density is -342.777005.
+ 
+parameters
+        prior mean post. mean   conf. interval  prior     pstdev
+
+alpha      0.450     0.4557     0.4131   0.5084  beta      0.0500
+theta      0.350     0.3598     0.2902   0.4305  beta      0.0500
+tau        2.207     2.2278     1.4312   2.9702  gamma     0.5000
+ 
+You did not declare endogenous variables after the estimation/calib_smoother command.
+Loading 10000 observations from artificial_sample.mat
+
+Initial value of the log posterior (or likelihood): -337.3568
+ 
+MODE CHECK
+ 
+Fval obtained by the minimization routine: 337.356836
+ 
+ 
+RESULTS FROM POSTERIOR MAXIMIZATION
+parameters
+    prior mean     mode    s.d. t-stat prior pstdev
+
+alpha   0.450   0.4565  0.0294 15.5291 beta  0.0500
+theta   0.350   0.3529  0.0435  8.1189 beta  0.0500
+tau     2.207   2.0094  0.4522  4.4437 gamm  0.5000
+ 
+Log data density [Laplace approximation] is -342.768462.
+ 
+MH: I'm loading past metropolis-hastings simulations...
+MH: ... It's done. I've loaded 5000 simulations.
+ 
+MH: Number of mh files                   : 1 per block.
+MH: Total number of generated files      : 3.
+MH: Total number of iterations           : 6000.
+MH: average acceptation rate per chain   : 
+   0.219780219780220   0.249750249750250   0.246753246753247
+
+ 
+MH: Total number of Mh draws: 6000.
+MH: Total number of generated Mh files: 1.
+MH: I'll use mh-files 1 to 1.
+MH: In mh-file number 1 i'll start at line 3000.
+MH: Finally I keep 3000 draws.
+ 
+MH: I'm computing the posterior mean and covariance...  Done!
+ 
+MH: I'm computing the posterior log marginale density (modified harmonic mean)... 
+MH: Modified harmonic mean estimator, done!
+ 
+ 
+ESTIMATION RESULTS
+ 
+Log data density is -342.789956.
+ 
+parameters
+        prior mean post. mean   conf. interval  prior     pstdev
+
+alpha      0.450     0.4543     0.4057   0.5006  beta      0.0500
+theta      0.350     0.3607     0.2938   0.4311  beta      0.0500
+tau        2.207     2.2128     1.4678   2.9730  gamma     0.5000
+ 
+STEADY-STATE RESULTS:
+ 
+l 		 0.333631
+c 		 0.731538
+k 		 5.92871
+y 		 0.850112
+A 		 1
+a 		 0
+ 
+EIGENVALUES:
+         Modulus             Real        Imaginary
+
+             0.8              0.8                0
+          0.9416           0.9416                0
+           1.073            1.073                0
+             Inf              Inf                0
+             Inf              Inf                0
+
+
+There are 3 eigenvalue(s) larger than 1 in modulus 
+for 3 forward-looking variable(s)
+ 
+The rank condition is verified.
+ 
+Total computing time : 0h02m30s

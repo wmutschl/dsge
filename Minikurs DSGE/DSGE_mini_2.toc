@@ -1,0 +1,4 @@
+\beamer@endinputifotherversion {3.36pt}
+\select@language {ngerman}
+\beamer@sectionintoc {1}{An und Schorfheide (2007)}{3}{0}{1}
+\beamer@sectionintoc {2}{Ein einfaches RBC-Modell}{24}{0}{2}

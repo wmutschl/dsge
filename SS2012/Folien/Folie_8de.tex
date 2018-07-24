@@ -1,0 +1,351 @@
+%Erstellt mit WinEdt 6
+\documentclass{beamer} %%% FÜR VORTRAG MIT PAUSEN
+%\documentclass[handout]{beamer}  %%% FÜR HANDOUT ALS PDF
+
+\setbeamertemplate{navigation symbols}{}
+\usetheme{Madrid}
+\usecolortheme{seagull}
+\beamersetuncovermixins{\opaqueness<1>{25}}{\opaqueness<2->{15}}
+\usepackage[T1]{fontenc}
+\usepackage{ae,aecompl}
+\usepackage[ansinew]{inputenc}
+\usepackage[ngerman]{babel}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage[babel,german=quotes]{csquotes} %im deutschen übliche Anführungszeichen
+\usepackage{verbatim}
+\newcounter{saveenumi}
+\newcommand{\seti}{\setcounter{saveenumi}{\value{enumi}}}
+\newcommand{\conti}{\setcounter{enumi}{\value{saveenumi}}}
+
+
+\begin{document}
+\author[Willi Mutschler]{Dr. Andrea Beccarini $\qquad$ Willi Mutschler, M.Sc.}
+\date{Sommersemester 2012}
+\institute[Institut für Ökonometrie]{Institut für Ökonometrie und
+Wirtschaftsstatistik Münster\\willi.mutschler@uni-muenster.de}
+\title{DSGE-Modelle}
+\subtitle{Linearisierung und Lösung}
+
+\begin{frame}
+\titlepage
+\end{frame}
+
+\begin{frame}\frametitle{Linearisierung und Lösung}
+  \tableofcontents
+\end{frame}
+
+\section{Was bisher geschah\dots}
+\begin{frame}\frametitle{Was bisher geschah\dots}\framesubtitle{}
+
+\begin{itemize}
+  \item Theorie und Intuition des Smets/Wouters-Modells als Prototyp
+      aktueller DSGE-Modelle.
+  \item Herleitung der strukturellen Form und Log-Linearisierung.
+\begin{block}{Erkenntnis} Ein
+      DSGE-Modell besteht aus einer Menge von erwarteten, nichtlinearen
+      Optimalitätsbedingungen und Bewegungsgleichungen für stochastische
+      Prozesse, die es zu lösen gilt.
+\end{block}
+\item Ein DSGE-Modell lässt sich somit allgemein formulieren als:
+\begin{block}{Allgemeine Form}
+        \begin{equation}\label{AllgForm}
+            \boldsymbol{\Gamma}\left(E_t\mathbf{x_{t+1}}, \mathbf{x_t}, \boldsymbol{\upsilon_{t+1}}|\boldsymbol{\mu}\right)= \boldsymbol{\Gamma}\left(\mathbf{x_{t+1}}, \mathbf{x_t}, \boldsymbol{\upsilon_{t+1}},\boldsymbol{\eta_{t+1}}|\boldsymbol{\mu}\right)=0,
+      \end{equation}
+\end{block}
+wobei $\mathbf{x_{t}}$: $(n \times 1)$-Vektor stationärer Variablen,
+$\boldsymbol{\upsilon_t}$: ($m\times 1$)-Vektor struktureller Schocks,
+$\boldsymbol{\mu}$: $(k \times 1)$-Vektor von Parametern.
+\end{itemize}
+\end{frame}
+
+\section{Allgemeine Form und Lösung eines DSGE-Modells}
+\begin{frame}\frametitle{Allgemeine Form}
+  \begin{itemize}
+    \item Rationale Erwartungen: $\boldsymbol{\eta_{t+1}} =
+        E_t\mathbf{x_{t+1}} - \mathbf{x_{t+1}}$.
+    \item Nicht-prognostizierbarer Erwartungsfehler
+        $\boldsymbol{\eta_{t+1}}$ tritt aufgrund der Realisation der
+        strukturellen Schocks auf:
+        $\boldsymbol{\eta_t}=f(\boldsymbol{\upsilon_t})$.
+    \item $\mathbf{x_t}$ lässt sich zusätzlich in $n_c$ Kontrollvariablen
+        und $n_s$ Zustandsvariablen unterteilen.
+    \item Kontrollvariablen werden mit $\mathbf{c_t}$ bezeichnet:
+        optimale Verhalten der Akteure als Funktion des aktuellen
+        Zustands der Ökonomie.
+    \item Zustandsvariablen werden mit $\mathbf{s_t}$ bezeichnet und
+        unterteilen sich in exogene - sich von den Entscheidungen der
+        Akteure unabhängig entwickelnde - und endogene Zustandsvariablen,
+        die von den Entscheidungen beeinflusst werden können.
+    \item $\mathbf{s_t}$ ist eine Funktion vergangener Zustände und
+        aktueller Schocks.
+  \end{itemize}
+\end{frame}
+
+
+\begin{frame}\frametitle{Lösung eines DSGE-Modells}\framesubtitle{}
+\begin{itemize}
+   \item Ein solches Modell rationaler Erwartungen zu lösen bedeutet,
+       sogenannte \emph{policy-functions} $c$ und $s$ zu finden, die das
+       obige System $\boldsymbol{\Gamma}$ (approximativ) lösen:
+\begin{block}{Policy-functions} \centering
+$\mathbf{c_t}=c(\mathbf{s_t}),\qquad \mathbf{s_t}=s(\mathbf{s_{t-1}},
+\boldsymbol{\upsilon_t})$.
+\end{block}
+   \item  DSGE-Modelle lassen sich somit als \emph{state-space-Modelle}
+       interpretieren.
+   \item Es gibt lineare und nichtlineare Lösungsverfahren:
+    \begin{itemize}
+   \item Lineare Verfahren: Blanchard/Khan (1980), Binder und Pesaran
+       (1997), Christiano (2002), King und Watson (1998), Klein
+       (2000), Sims (2001) und Uhlig (1999).
+   \item Häufig verwendetes nichtlineare Verfahren: Schmitt-Grohé/Uribe
+       (2004). Guter Überblick: Heer und Maussner (2009).
+   \end{itemize}
+\end{itemize}
+\end{frame}
+
+\section{Wiederholung: Aufgabe 1}
+\begin{frame}\frametitle{Wiederholung: Aufgabe 1}
+Betrachten Sie das einfache stochastische Wachstumsmodell:
+\begin{align*}
+  \underset{c_t,k_{t+1}}{max} E_0 \sum_{t=0}^\infty \beta^t U(c_t) &\quad\text{mit } U(c_t)=\frac{c_{t}^{1-\sigma}-1}{1-\sigma},\\
+  c_t + k_{t+1} = z_tf(k_t) +(1-\delta)k_t &\quad \text{mit } f(k_t)=k_t^\alpha, ~k_o \text{ gegeben},\\
+  log(z_t) = \rho log(z_{t-1}) + \varepsilon_{t} &\quad \text{mit } \varepsilon_t \sim WN(0,\sigma_\varepsilon),~0<\rho<1.
+\end{align*}
+\begin{enumerate}[(a)]
+   \item Wie lautet der unbedingte Erwartungswert von $log(z_t)$, wie der
+       von $z_t$? Wie lautet die unbedingte Varianz von $log(z_t)$?
+   \item Finden Sie die Bedingungen erster Ordnung (FOC), indem Sie die
+       Bellman-Gleichung aufstellen und die Methoden der dynamischen
+       Programierung verwenden. Was sind Zustands-, was sind
+       Kontrollvariablen?
+      \item Finden Sie die Bedingungen erster Ordnung (FOC), indem Sie
+          die Lagrangefunktion maximieren.
+    \item Berechnen Sie den \emph{steady-state} und linearisieren Sie die
+        FOC.
+        \seti
+   \end{enumerate}
+\end{frame}
+
+\section{Lineare Lösungsverfahren}
+\begin{frame}\frametitle{Lineare Lösungsverfahren}%\framesubtitle{Einleitung}
+\textbf{Vorteile}:
+\begin{itemize}
+   \item Einfache lineare state-space Repräsentation des Modells, die für
+       viele Fragestellungen ausreichend exakt ist.
+   \item Kalman-Filter ermöglicht es, das System empirisch zu
+       analysieren.
+\end{itemize}
+\textbf{Nachteile}:
+\begin{itemize}
+   \item Wichtige Informationen gehen bei der Linearisierung verloren.
+   \item Höhere Momente spielen bei Markt- und Risikostrukturen, sowie
+       Wohlfahrtsimplikationen eine wichtige Rolle.
+   \item Schon eine Linearisierung zweiter Ordnung kann hier zu
+       unterschiedlichen Resultaten führen, da die Varianz der
+       zukünftigen Schocks im Erwartungswert nicht Null ist.
+\end{itemize}
+\begin{block}{\emph{Certainty-equivalence-property}}
+       In stochastischen Modellen rationaler Erwartungen berücksichtigen
+       die Akteure bei ihren Entscheidungen die Auswirkungen zukünftiger
+       Schocks. Bei einer Linearisierung erster Ordnung sind diese im
+       Erwartungswert gleich Null, so dass sie keine Rolle bei der
+       Entscheidung spielen.
+\end{block}
+
+\end{frame}
+
+\begin{frame}\frametitle{Lineare Lösungsverfahren}\framesubtitle{}
+\begin{itemize}
+   \item Zunächst wird die allgemeine Form \eqref{AllgForm} um den
+       \emph{steady-state} linearisiert bzw. log-linearisiert.
+   \item Zusammen mit den Bewegungsgleichungen für die stochastischen
+       Prozesse, ergibt sich das reduzierte Modell:
+\begin{align*}
+    \mathbf{A} \mathbf{x_{t+1}} =
+\mathbf{B} \mathbf{x_t} + \mathbf{C} \boldsymbol{\upsilon_{t+1}} + \mathbf{D}
+\boldsymbol{\eta_{t+1}} + \mathbf{E}.
+\end{align*}
+\item Die Matrizen $\mathbf{A}, \mathbf{B}, \mathbf{C}$ und $\mathbf{D}$
+    sind dabei Funktionen des strukturellen Parametervektors
+    $\boldsymbol{\mu}$; $\mathbf{E}$ ist ein Vektor von Konstanten (oft
+    Null).
+\item Die Lösung dieser linearen Repräsentation besitzt eine
+    VAR(1)-Form:
+\begin{align}\label{Linlsg}
+\mathbf{x_{t+1}} = \mathbf{F(\boldsymbol{\mu})} \mathbf{x_t} + \mathbf{G(\boldsymbol{\mu})} \boldsymbol{\upsilon_{t+1}},
+\end{align}
+wobei $\mathbf{F}$ und $\mathbf{G}$ Funktionen des Parametervektors
+$\boldsymbol{\mu}$ bezeichnen.
+\item Die treibende Kraft des Modells sind hierbei die exogenen Schocks
+    $\boldsymbol{\upsilon_t}$.
+\item \eqref{Linlsg} beschreibt somit die Fluktuationen um den
+    \emph{steady-state}, sowie das Modellverhalten als Antwort auf die
+    stochastischen Innovationen.
+\end{itemize}
+\end{frame}
+
+\subsection{Der Sims (2001)-Algorithmus}
+\begin{frame}\frametitle{Der Sims (2001)-Algorithmus}\framesubtitle{Konzepte}
+\begin{itemize}
+\begin{block}{Notation}
+Im Voraus bestimmte Variablen: $\qquad ~E_t X_{1,t+1}=X_{1,t+1}$,\\ Im
+    Voraus nicht bestimmte Variablen: $E_t X_{2,t+1}=E_t X_{2,t+1}$.
+\end{block}
+\begin{block}{Unitäre Matrizen}
+    $\mathbf{M}'\mathbf{M}=\mathbf{M}\mathbf{M}'=\mathbf{I}$ sind das
+    komplexe Analogon zu orthogonalen Matrizen. Sie sind zudem
+    diagonalisierbar.
+\end{block}
+   \item Die Methode von Sims (2001) beginnt mit einer
+       \emph{QZ-Faktorisierung} (Verallgemeinerte Schur Dekomposition), bei der die Matrizen $\mathbf{A}$ und
+       $\mathbf{B}$ in unitäre obere Dreiecksmatrizen transformiert
+       werden:
+\begin{align*}
+ \mathbf{A} = \mathbf{Q}' \boldsymbol{\Lambda} \mathbf{Z}' ,\qquad \mathbf{B} = \mathbf{Q}' \boldsymbol{\Omega} \mathbf{Z}'.
+\end{align*}
+\item $\boldsymbol{\Lambda}$ und $\boldsymbol{\Omega}$ sind hier obere
+    Dreiecksmatrizen mit den verallgemeinerten Eigenwerten von
+    $\mathbf{A}$ und $\mathbf{B}$, und werden in aufsteigender
+    Reihenfolge von links nach rechts sortiert.
+\end{itemize}
+\end{frame}
+
+\begin{frame}\frametitle{Der Sims (2001)-Algorithmus}\framesubtitle{}
+\begin{itemize}
+   \item Die Eigenwerte sind entscheidend dafür, ob ein Teilsystem
+       konvergiert oder explodiert.
+\begin{block}{Blanchard/Khan-Bedingungen}
+Die Anzahl der Eigenwerte, die betragsmäßig größer gleich 1 sind, muss
+    gleich der Anzahl der im Voraus unbestimmten Variablen sein, damit
+    ein stabiler Sattelpfad existiert.
+\end{block}
+\item Bezeichne $\mathbf{z_{t+1}}=\mathbf{Z}'\mathbf{x_{t+1}}$, dann wird
+    das System in einen nicht-explosiven Teil (oben) und einen explosiven
+    Teil (unten) aufgeteilt:
+\begin{align}\label{sims}
+  \begin{bmatrix} \boldsymbol{\Lambda_{11}} & \boldsymbol{\Lambda_{12}}\\ \mathbf{0} & \boldsymbol{\Lambda_{22}} \end{bmatrix}
+  \begin{pmatrix} \mathbf{z_{1,t+1}} \\ \mathbf{z_{2,t+1}} \end{pmatrix}
+= \begin{bmatrix} \boldsymbol{\Omega_{11}}&\boldsymbol{\Omega_{12}}\\\mathbf{0}&\boldsymbol{\Omega_{22}}\end{bmatrix}
+  \begin{pmatrix} \mathbf{z_{1,t}} \\ \mathbf{z_{2,t}} \end{pmatrix}\\
++ \begin{pmatrix} \mathbf{Q_1 }\\ \mathbf{Q_2} \end{pmatrix}
+  \begin{bmatrix} \mathbf{E_1}+\mathbf{C_1}\boldsymbol{\upsilon_{1,t+1}} + \mathbf{D_1} \boldsymbol{\eta_{1,t+1}} \\ \mathbf{E_2}+\mathbf{C_2}\boldsymbol{\upsilon_{2,t+1}} +\mathbf{ D_2} \boldsymbol{\eta_{2,t+1}} \end{bmatrix}\nonumber.
+\end{align}
+
+\end{itemize}
+\end{frame}
+
+\begin{frame}\frametitle{Der Sims (2001)-Algorithmus}\framesubtitle{}
+\begin{itemize}
+   \item Die Differenzengleichungen zu den Eigenwerten größer als eins
+       werden vorwärts gelöst.
+   \item Beachte: $\underset{t\rightarrow
+       \infty}{\lim}\left(\boldsymbol{\Omega_{22}}^{-1}
+       \boldsymbol{\Lambda_{22}}\right)^t \mathbf{z_{2,t}}=\mathbf{0}$
+       und für alle $s>0: E_t \boldsymbol{\upsilon_{2,t+s}} = E_t
+\boldsymbol{\eta_{2,t+s}}=0$ (Erwartungsfehler spielen keine Rolle)
+\begin{align*}
+  \mathbf{z_{2,t}} & = \boldsymbol{\Omega_{22}}^{-1} \boldsymbol{\Lambda_{22}} \mathbf{z_{2,t+1}} - \boldsymbol{\Omega_{22}}^{-1}\mathbf{ Q_2} \left[\mathbf{E_2} + \mathbf{C_2} \boldsymbol{\upsilon_{2,t+1}} + \mathbf{D_2} \boldsymbol{\eta_{2,t+1}}\right]\\
+  & = -\sum_{i=0}^\infty \left(\boldsymbol{\Omega_{22}}^{-1} \boldsymbol{\Lambda_{22}}\right)^i \boldsymbol{\Omega_{22}}^{-1} \mathbf{Q_2 }\left[\mathbf{E_2} + \mathbf{C_2} \boldsymbol{\upsilon_{2,t+1+i}} + \mathbf{D_2} \boldsymbol{\eta_{2,t+1+i}}\right]\\
+  & = -\sum_{i=0}^\infty \left(\boldsymbol{\Omega_{22}}^{-1} \boldsymbol{\Lambda_{22}}\right)^i \boldsymbol{\Omega_{22}}^{-1} \mathbf{Q_2} \mathbf{E_2}\\
+  & = -\left[\mathbf{I}-\boldsymbol{\Omega_{22}}^{-1}\boldsymbol{\Lambda_{22}}\right]^{-1} \boldsymbol{\Omega_{22}}^{-1} \mathbf{Q_2} \mathbf{E_2}
+   = \left[\boldsymbol{\Lambda_{22}} - \boldsymbol{\Omega_{22}}\right]^{-1} \mathbf{Q_2} \mathbf{E_2}.
+\end{align*}
+\end{itemize}
+\end{frame}
+
+\begin{frame}\frametitle{Der Sims (2001)-Algorithmus}\framesubtitle{}
+\begin{itemize}
+   \item Die Differenzengleichungen zu den Eigenwerten kleiner als eins
+       werden rückwärts gelöst.
+   \item Beachte: Systematische Verknüpfung der Erwartungsfehler
+       $\boldsymbol{\eta_{1,t}} \& \boldsymbol{\eta_{2,t}}$.
+\begin{block}{Hinreichende Bedingung für stabilen Sattelpfad}\centering $\mathbf{Q_1}\mathbf{D} =
+  \boldsymbol{\Phi} \mathbf{Q_2} \mathbf{D}$.
+\end{block}
+\item $\boldsymbol{\Phi}$ hat Dimension $n_s \times n_c$ (mit
+    $\mathbf{z_{1,t}}: n_s\times1$ und $\mathbf{z_{2,t}}: n_c \times 1$).
+\item Damit lässt sich \eqref{sims} umformen zu:
+\begin{multline*}
+\underbrace{\begin{bmatrix} \underset{n_s \times n_s}{\mathbf{I}} &
+\underset{n_s \times n_c}{-\boldsymbol{\Phi}}\end{bmatrix}}_{n_s \times
+(n_s+n_c)}
+  \begin{bmatrix}\boldsymbol{\Lambda_{11}} & \boldsymbol{\Lambda_{12}}\\\mathbf{0}&\boldsymbol{\Lambda_{22}}\end{bmatrix}
+  \begin{pmatrix} \mathbf{z_{1,t}} \\ \mathbf{z_{2,t}}\end{pmatrix} =\\
+  \begin{bmatrix} \mathbf{I} & -\boldsymbol{\Phi}\end{bmatrix} \begin{bmatrix} \boldsymbol{\Omega_{11}}&\boldsymbol{\Omega_{12}}\\\mathbf{0}&\boldsymbol{\Omega_{22}}\end{bmatrix}
+  \begin{pmatrix} \mathbf{z_{1,t-1}} \\ \mathbf{z_{2,t-1}} \end{pmatrix}
++ \begin{bmatrix} \mathbf{I} & -\boldsymbol{\Phi}\end{bmatrix}
+\begin{pmatrix} \mathbf{Q_1} \\ \mathbf{Q_2} \end{pmatrix}
+  \begin{bmatrix} \mathbf{E}+\mathbf{C}\boldsymbol{\upsilon_{t}} + \mathbf{D} \boldsymbol{\eta_{t}} \end{bmatrix}.
+\end{multline*}
+\end{itemize}
+\end{frame}
+
+\begin{frame}\frametitle{Der Sims (2001)-Algorithmus}\framesubtitle{}
+\begin{multline*} \Leftrightarrow \begin{bmatrix}
+       \boldsymbol{\Lambda_{11}} &
+       \boldsymbol{\Lambda_{12}}-\boldsymbol{\Phi}
+       \boldsymbol{\Lambda_{22}} \end{bmatrix}
+  \begin{pmatrix} \mathbf{z_{1,t}} \\ \mathbf{z_{2,t}}\end{pmatrix} =
+  \begin{bmatrix} \boldsymbol{\Omega_{11}} & \boldsymbol{\Omega_{12}}-\boldsymbol{\Phi} \boldsymbol{\Omega_{22}} \end{bmatrix}
+  \begin{pmatrix} \mathbf{z_{1,t-1}} \\ \mathbf{z_{2,t-1}}\end{pmatrix}\\
++ \begin{bmatrix}\mathbf{ Q_1 }- \boldsymbol{\Phi} \mathbf{Q_2}
+\end{bmatrix}
+  \begin{bmatrix} \mathbf{E}+\mathbf{C}\boldsymbol{\upsilon_{t}} \end{bmatrix}
++ \underbrace{\begin{bmatrix} \left(\mathbf{Q_1} - \boldsymbol{\Phi}
+\mathbf{Q_2}\right) \mathbf{D}
+\boldsymbol{\eta_{t}}\end{bmatrix}}_{=\mathbf{0}}.
+\end{multline*}
+\begin{block}{Der Algorithmus}\centering
+QZ-Faktorisierung: $\mathbf{A} = \mathbf{Q}' \boldsymbol{\Lambda} \mathbf{Z}'
+, \mathbf{B} = \mathbf{Q}' \boldsymbol{\Omega} \mathbf{Z}'$,
+$\mathbf{x_{t}}=\mathbf{Z}
+\begin{pmatrix}\mathbf{z_{1,t}}\\\mathbf{z_{2,t}}\end{pmatrix}$,
+\begin{align*}
+\begin{split}
+  \mathbf{z_{1,t} } =& - \boldsymbol{\Lambda_{11}}^{-1}\left(\boldsymbol{\Lambda_{12}}-\boldsymbol{\Phi} \boldsymbol{\Lambda_{22}}\right) \mathbf{z_{2,t}}
+  + \boldsymbol{\Lambda_{11}}^{-1}
+  \boldsymbol{\Omega_{11}}\mathbf{z_{1,t-1}} \\
+  &+\boldsymbol{\Lambda_{11}}^{-1}\left(\boldsymbol{\Omega_{12}}-\boldsymbol{\Phi}
+  \boldsymbol{\Omega_{22}}\right)\mathbf{z_{2,t-1}} +
+  \boldsymbol{\Lambda_{11}}^{-1} \left(\mathbf{Q_1} - \boldsymbol{\Phi}
+  \mathbf{Q_2}\right)\left(\mathbf{E}+\mathbf{C}
+  \boldsymbol{\upsilon_t}\right),
+\end{split}\\
+   \mathbf{ z_{2,t}} =& \left(\boldsymbol{\Lambda_{22}}-\boldsymbol{\Omega_{22}}\right)^{-1}\mathbf{Q_2} \mathbf{E}.
+\end{align*}
+\end{block}
+\end{frame}
+
+\subsection{Aufgabe 1: Fortsetzung}
+\begin{frame}\frametitle{Aufgabe 1: Fortsetzung}\framesubtitle{}
+Der Sims (2001)-Algorithmus ist für verschiedene Programmpakete
+    vorprogrammiert, sowie in Dynare implementiert.
+\begin{enumerate}[(a)]\conti
+   \item Bringen Sie das linearisierte Modell in die Form $ \mathbf{A} \mathbf{x_{t+1}} =
+       \mathbf{B} \mathbf{x_t} + \mathbf{C}
+\boldsymbol{\upsilon_{t+1}} + \mathbf{D} \boldsymbol{\eta_{t+1}} +
+\mathbf{E} $
+\item Berechnen Sie die \emph{policy-function} mithilfe des Sims (2001)-
+    Algorithmus, nehmen Sie dafür folgende Parameterwerte an:
+    $\beta=0.99,\quad \alpha=0.36,\quad \sigma=2,\quad \delta
+    =0.025,\quad \rho=0.9$.
+\end{enumerate}
+\end{frame}
+
+\begin{frame}\frametitle{Hausaufgabe}
+\begin{itemize}
+\item Installieren Sie die aktuelle Version von Matlab.
+\item https://zivdav.uni-muenster.de/ddfs/Soft.ZIV/TheMathWorks/ .
+\item Für die Lizenz müssen Sie im Universitätsnetz per Wlan bzw. per VPN verbunden sein.
+\item Laden Sie alle Dateien von
+    http://sims.princeton.edu/yftp/gensys/mfiles/ in einen Ordnern gensys.
+    Binden Sie diesen in Matlab ein (\texttt{File-SetPath-Add Folder}).
+\item Installieren Sie die aktuelle Version von Dynare (http://www.dynare.org/). Binden
+    Sie den Dynare Ordner $c:\backslash dynare  \backslash aktuelle~Version  \backslash matlab)$\\ in Matlab
+    ein (\texttt{File-SetPath-Add Folder}).
+\end{itemize}
+\end{frame}
+
+\end{document}

@@ -1,0 +1,8 @@
+\beamer@endinputifotherversion {3.20pt}
+\select@language {ngerman}
+\beamer@sectionintoc {1}{\"Uberblick Sch\"atzverfahren}{3}{0}{1}
+\beamer@sectionintoc {2}{Kalibrierung}{4}{0}{2}
+\beamer@subsectionintoc {2}{1}{M\"ogliche Ans\"atze f\"ur die Kalibrierung eines Modells}{5}{0}{2}
+\beamer@sectionintoc {3}{Aufgabe 2: Kalibrierung eines RBC-Modells mit monopolistischer Konkurrenz}{7}{0}{3}
+\beamer@sectionintoc {4}{Kalibrierung - Vorteile \& Nachteile}{11}{0}{4}
+\beamer@sectionintoc {5}{Aufgabe 3: Ein einfaches RBC-Modell - \"Ubung mit Dynare}{13}{0}{5}

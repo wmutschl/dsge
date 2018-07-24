@@ -1,0 +1,176 @@
+\documentclass{article}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage{amsfonts}
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage[top=1in, bottom=1.25in, left=1.25in, right=1.25in]{geometry}
+
+
+
+\begin{document}
+\title{PhD Macroeconomics - DSGE methods}
+\author{Prof. Dr. Bernd Kempa\\Dr. Jana Riedel\\ Willi Mutschler, M.Sc.}
+\date{Summer 2015}
+\maketitle
+
+\begin{itemize}
+\item Answer \textbf{all} of the following two exercises.
+
+\item Hand in your solutions before September 07, 2015 12:00.
+
+\item Please zip and e-mail the solutions to willi.mutschler@wiwi.uni-muenster.de
+
+\item The solution files should contain your executable and \textbf{commented} DYNARE mod file(s) and
+additional files (preferably \texttt{pdf}, not \texttt{doc} or \texttt{docx}).
+
+\item \textbf{Important}: Please indicate if you are a Master student or a
+PhD student. If you are a Master student, please also give your registration
+number.
+
+\item All students must work on their own.
+
+\end{itemize}
+\bigskip \bigskip\bigskip\bigskip\bigskip\bigskip\bigskip\bigskip\bigskip
+\bigskip \bigskip\bigskip\bigskip\bigskip\bigskip\bigskip\bigskip\bigskip
+\section*{References}
+An, Sungbae and Schorfheide, Frank (2007) - Bayesian Analysis of DSGE Models, Econometric Reviews, Vol. 26, No. 2-4.\\
+Baxter, Marianne and King, Robert G. (1993) - Fiscal Policy in General Equilibrium, American Economic Review, Vol. 83, No. 3.
+
+\newpage
+\section*{Exercise 1: Baxter and King (1993)}
+\subsection*{Model description}
+Consider a version of the Baxter and King (1993) model.
+\paragraph*{Households}
+Let $C_t$ denote real consumption, $N_t$ real labor supply and $K_t$ private capital. The representative household maximizes its expected life-time utility
+\begin{align*}
+  \max_{C_t,N_t,K_{t-1}} E_t \sum_{t=0}^\infty \beta^t \left[log(C_t)+\theta_l log(1-N_t) + \Gamma(G_t^B,I_t^B)\right]
+\end{align*}
+subject to
+\begin{align*}
+  C_t + I_t = (1-\tau_t)(w_t N_t+r_t K_{t-1}) + {TR}_t
+\end{align*}
+where $\beta$ denotes the discount rate, $\theta_l$ the Frisch elasticity of labor, $w_t$ the real wage, $r_t$ the real interest rate and $TR_t$ real lump-sum transfers. $\Gamma(G_t^B,I_t^B)$ is a general function of public consumption $G_t^B$ and public investment $I_t^B$ such that it is nondecreasing in each of its arguments. Optimality is given by the consumption-leisure choice
+\begin{align}
+  (1-\tau_t) w_t = \theta_l \frac{C_t}{1-N_t}
+\end{align}
+and the savings decision
+\begin{align}
+  \lambda_t = \beta E_t \left\{\lambda_{t+1}\left[(1-\delta) + (1-\tau_{t+1})r_{t+1}\right]\right\}
+\end{align}
+where
+\begin{align}
+  \lambda_t = \frac{1}{C_t}
+\end{align}
+denotes marginal utility of consumption.
+The private and public capital stocks evolve according to
+\begin{align}
+  K_{t} &= (1-\delta)K_{t-1} + I_t\\
+  K_{t}^B &= (1-\delta)K_{t-1}^B + I_t^B
+\end{align}
+with $\delta$ denoting the depreciation rate.
+\paragraph*{Firms}
+Firms maximize profits by choosing factor inputs according to
+\begin{align*}
+  \max_{N_t,K_{t-1}} Y_t - w_t N_t - r_t K_{t-1}
+\end{align*}
+subject to
+\begin{align}
+  Y_t = z_t (K_{t-1}^B)^\eta (K_{t-1})^\alpha (N_t)^{1-\alpha}
+\end{align}
+where $\eta$ denotes productivity of public capital and $\alpha$ the share of capital in production. Taking factor prices as given, factor demand is determined by
+\begin{align}
+  w_t N_t &= (1-\alpha) Y_t\\
+  r_t K_{t-1}&= \alpha Y_t
+\end{align}
+Productivity evolves according to
+\begin{align}
+  \log\left(\frac{z_t}{\bar{z}}\right) = \rho_z \log\left(\frac{z_{t-1}}{\bar{z}}\right) +   \varepsilon_t^z
+\end{align}
+where $\rho_z$ is a smoothing parameter and $\varepsilon_t^{z}\overset{iid}{\sim} N(0,\sigma_{z}^2)$.
+
+\paragraph*{Fiscal authority}
+The fiscal authority faces the budget constraint
+\begin{align}
+  G_t^B + I_t^B + TR_t = \tau_t(w_t N_t + r_t K_{t-1})
+\end{align}
+and its behavior is described by exogenous AR(1) processes
+\begin{align}
+  G^B_t-\bar{G^B} &= \rho_{G^B} \left({G^B}_{t-1} - \bar{G^B}\right) +  \varepsilon_t^{G^B}\\
+  I^B_t-\bar{I^B} &= \rho_{I^B} \left({I^B}_{t-1} - \bar{I^B}\right) +  \varepsilon_t^{I^B}\\
+  \log\left(\frac{\tau_t}{\bar{\tau}}\right) &= \rho_\tau \log\left(\frac{\tau_{t-1}}{\bar{\tau}}\right) +  \varepsilon_t^\tau
+\end{align}
+where $\rho_{G^B}, \rho_{I^B}, \rho_{\tau}$ are smoothing parameters and
+\begin{align*}
+\varepsilon_t^{G^B}\overset{iid}{\sim} N(0,\sigma_{G^B}^2), \qquad
+\varepsilon_t^{I^B}\overset{iid}{\sim} N(0,\sigma_{I^B}^2), \qquad
+\varepsilon_t^\tau\overset{iid}{\sim} N(0,\sigma_{\tau}^2)
+\end{align*}
+Notice that the inclusion of $TR_t$ implies a balanced budget rule, i.e. there is no debt in the model.
+\paragraph*{Market clearing}
+Market clearing implies that whatever is consumed by households must be produced
+\begin{align}
+  Y_t = C_t + I_t + G_t^B + I_t^B
+\end{align}
+\paragraph{Observables}
+For reporting issues, we will focus on $Y_t,C_t,I_t, w_t$ as percentage deviations from steady-state and for $N_t,r_t,TR_t,G^B_t/Y_t,I^B_t/Y_t$ as percentage point deviations. That is,
+\begin{align}
+dY_{t}&=100\frac{\left(Y_{t}-\bar{Y}\right)}{\bar{Y}}\\
+dC_{t}&=100\frac{\left(C_{t}-\bar{C}\right)}{\bar{C}}\\
+dI_{t}&=100\frac{\left(I_{t}-\bar{I}\right)}{\bar{I}}\\
+dN_{t}&=100\left(N_{t}-\bar{N}\right)\\
+dw_{t}&=100\frac{\left(w_{t}-\bar{w}\right)}{\bar{w}}\\
+dr_{t}&=100\left(r_{t}-\bar{r}\right)\\
+dTR_{t}&=100\left(TR_{t}-\bar{TR}\right)\\
+dG^B_{t}&=100\left(\frac{G^B_{t}}{Y_{t}}-\frac{\bar{G^B}}{\bar{Y}}\right)\\
+dI^B_{t}&=100\left(\frac{I^B_{t}}{Y_{t}}-\frac{\bar{I^B}}{\bar{Y}}\right)
+\end{align}
+\paragraph{Summary}
+Overall, the Baxter and King (1993) model can be summarized through equations (1)-(23).
+
+\newpage
+\subsection*{Exercises}
+Willi, a fellow student, wants to assess how changes in fiscal policy (taxation \& spending) affect the real economy.
+
+\begin{enumerate}
+  \item From his class on introductory macroeconomics Willi remembers that as a first step it is always important to distinguish between endogenous and exogenous variables as well as model parameters. Can you help him with that?
+  \item Willi is quite clever about calibrating the model parameters. In particular, he is interested in targeting steady-state values of the model:
+      \begin{center}
+       \begin{tabular}{lcc}
+         % after \\: \hline or \cline{col1-col2} \cline{col3-col4} ...
+         Target & Symbol & Value \\\hline
+         steady-state output level          & $\bar{Y}$ & 1 \\
+         steady-state public consumption    & $\bar{G^B}$ & 0.2$\bar{Y}$ \\
+         steady-state public investment     & $\bar{I^B}$ & 0.02$\bar{Y}$ \\
+         steady-state transfers             & $\bar{TR}$ & 0 \\
+         steady-state real wage             & $\bar{w}$ & 2\\
+         steady-state labor supply          & $\bar{N}$ & 1/3\\
+         \hline
+       \end{tabular}
+        \end{center}
+
+       Furthermore, he thinks that public-capital productivity should be \textbf{lower} than the capital share in production. Regarding the exogenous processes he would like mild persistence ($\rho$'s equal to 0.75) and small shock standard errors of 1\%. Can you provide a calibration for all model parameters meeting his targets and economic intuition?\\
+       \emph{Hint: First, set some reasonable values for $\beta,\delta$ and $\eta$. Then begin with the target values and try to derive the steady-states of all other endogenous variables and the implied parameter values.}
+  \item Willi is not sure if he wants to simulate the deterministic or stochastic model. Can you provide some guidance when to use which one? Since Willi is impatient, please be brief and try to explain it in a maximum of 10 sentences.
+  \item Willi has heard of the powerful toolbox DYNARE, so he asks you to help him set up this model in DYNARE. Write a DYNARE mod-file for this model, commenting each step such that Willi clearly understands each block.
+  \item How does (i) an unexpected temporary public consumption and (ii) an unexpected temporary public investment shock (of the same size) feed through the model? Simulate these two shocks and compare the reactions of the observables. Does it affect the real economy? Try to provide economic intuition behind the results. How do your results change if the productivity of public capital increases?
+  \item How does a permanent increase in the tax rate of 1 percentage point affect the long-run equilibrium of the economy? Compute the new steady-state and compare it with the old one. Also, show the transition path from the old to the new steady state. Try to provide economic intuition.
+  \item Willi argues that fiscal policy cannot boost the economy due to the implied crowding-out of private consumption and private investment. Do you agree given your results above? Also explain, in economic terms, the difference between private and government capital.
+\end{enumerate}
+
+\newpage
+
+\section*{Exercise 2: An and Schorfheide (2007)}
+Consider a version of the An and Schorfheide (2007) model. The mod-file AnScho.mod contains (incomplete) code to estimate the An and Schorfheide model with Bayesian methods.
+\begin{enumerate}
+  \item How many observable variables do you need for a Bayesian estimation? Include \texttt{varobs} into the mod file.
+  \item Simulate data for your observable variables and save these into a matfile called \texttt{simdat.mat}.
+  \item Briefly explain the intuition behind prior information in a Bayesian estimation (maximum 10 sentences).
+  \item Estimate the model with your simulated data and Bayesian methods.\\ \emph{Hint: Use the following command:}
+  \begin{verbatim}
+  estimation(order=1,datafile=simdat,first_obs=401,nobs=200,
+             mh_replic=2500,mh_nblocks=3,mh_jscale=0.65); \end{verbatim}
+  Depending on your computer this may take a little while.
+  \item Consider the figure \emph{Priors and Posteriors} (ignore the other output). How would you assess the quality of this estimation exercise?
+\end{enumerate}
+
+\end{document}

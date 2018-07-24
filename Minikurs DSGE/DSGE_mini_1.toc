@@ -1,0 +1,7 @@
+\beamer@endinputifotherversion {3.36pt}
+\select@language {ngerman}
+\beamer@sectionintoc {1}{Was sind Dynamic Stochastic General Equilibrium Modelle?}{3}{0}{1}
+\beamer@sectionintoc {2}{Wof\"{u}r sind DSGE Modelle n\"{u}tzlich?}{5}{0}{2}
+\beamer@sectionintoc {3}{Grunds\"{a}tzliche Struktur von DSGE Modellen}{7}{0}{3}
+\beamer@sectionintoc {4}{Deterministische vs. Stochastische Modelle}{10}{0}{4}
+\beamer@sectionintoc {5}{Arbeitspferde}{12}{0}{5}

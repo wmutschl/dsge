@@ -1,0 +1,1122 @@
+\documentclass{beamer}
+\usepackage{times,graphicx,pstricks,beamerprosper}
+\usepackage[T1]{fontenc}
+\title{DYNARE SUMMER SCHOOL}
+\subtitle{Introduction to Dynare and local approximation.}
+\date{June 18, 2012}
+\author{Michel Juillard}
+%\usetheme{Antibes}
+%\useoutertheme[]{miniframes}%avoid horrors
+
+%define custom colors
+%\xdefinecolor{blob3}{rgb}{.3,.553,.753}
+%\usecolortheme[named=blob3]{structure}
+
+%\setbeamertemplate{navigation symbols}{}%remove navigation symbols
+
+
+\begin{document}
+
+\begin{frame}
+  \titlepage
+\end{frame}
+
+\part<presentation>{Main talk}
+\section[introduction]{Introduction}
+  \begin{frame}
+    \frametitle{Summer School website}
+    \begin{center}
+      http://www.dynare.org/summerschool/2012
+    \end{center}
+  \end{frame}
+
+
+
+\begin{slide}{DYNARE}
+  \begin{enumerate}
+  \item computes the solution of deterministic models (arbitrary accuracy),
+  \item computes first and second order approximation to solution of stochastic models,
+  \item estimates (maximum likelihood or Bayesian approach) parameters of DSGE models,
+  \item computes optimal policy,
+  \item performs global sensitivity analysis of a model,
+  \item solves problems under partial information,
+  \item estimates BVAR and Markov-Switching Baysian VAR models.
+  \end{enumerate}
+\end{slide}
+
+\section[Deterministic models]{Deterministic and stochastic models}
+\begin{slide}{The general problem}
+Deterministic, perfect foresight, case:
+\[
+f(y_{t+1},y_t,y_{t-1},u_t)=0
+\]
+Stochastic case:
+\[
+E_t\left\{f(y_{t+1},y_t,y_{t-1},u_t)\right\}=0
+\]
+\begin{description}
+  \item[$y$]: vector of endogenous variables
+  \item[$u$]: vector of exogenous shocks
+\end{description}
+\end{slide}
+
+
+\begin{slide}{Solution methods}
+\begin{itemize}
+\item For a deterministic, perfect foresight, it is possible to compute
+numerical trajectories for the endogenous variables
+\item In a a stochastic framework, the unknowns are the decision functions:
+\[
+y_t = g(y_{t-1},u_t)
+\]
+\end{itemize}
+For a large class of DSGE models, DYNARE computes approximated decision rules and transition equations by a perturbation method.
+\end{slide}
+
+\section[Introduction]{Introduction}
+\begin{frame}
+  \frametitle{Computation of first order approximation}
+
+  \begin{itemize}
+  \item Perturbation approach: recovering a Taylor expansion of the solution function from a Taylor expansion of the original model.
+  \item A first order approximation is nothing else than a standard solution thru linearization.
+  \item A first order approximation in terms of the logarithm of the variables provides standard log-linearization.
+  \end{itemize}
+\end{frame}
+
+\section[A general model]{A general model}
+\begin{frame}
+\frametitle{General model}
+\[
+E_t\left\{f(y_{t+1},y_t,y_{t-1},u_t)\right\}=0
+\]
+\begin{eqnarray*}
+E(u_t) &=& 0\\
+E(u_tu_t') &=& \Sigma_u\\
+E(u_tu_\tau') &=& 0\;\;\;\;t\ne\tau
+\end{eqnarray*}
+
+\begin{description}
+  \item[$y$]: vector of endogenous variables
+  \item[$u$]: vector of exogenous stochastic shocks
+\end{description}
+\end{frame}
+
+\begin{frame} \frametitle{Timing assumptions}
+  \[
+  E_t\left\{f(y_{t+1},y_t,y_{t-1},u_t)\right\}=0
+  \]
+  \begin{itemize}
+  \item shocks $u_t$ are observed at the beginning of period $t$,
+  \item decisions affecting the current value of the variables $y_t$, are function of
+    \begin{itemize}
+    \item the previous state of the system, $y_{t-1}$,
+    \item the shocks $u_t$.
+    \end{itemize}
+  \end{itemize}
+\end{frame}
+
+\begin{frame} \frametitle{The stochastic scale variable}
+\[
+E_t\left\{f(y_{t+1},y_t,y_{t-1},u_t)\right\}=0
+\]
+\begin{itemize}
+\item At period $t$, the only unknown stochastic variable is $y_{t+1}$, and, implicitly, $u_{t+1}$.
+\item We introduce the \emph{stochastic scale variable}, $\sigma$ and the auxiliary random variable, $\epsilon_t$, such that
+\[
+u_{t+1} = \sigma\epsilon_{t+1}
+\]
+\end{itemize}
+\end{frame}
+
+\begin{frame} \frametitle{The stochastic scale variable (continued)}
+\begin{align}
+E(\epsilon_t) &= 0\\
+E(\epsilon_t\epsilon_t') &= \Sigma_\epsilon\\
+E(\epsilon_t\epsilon_\tau') &= 0\;\;\;\;t\ne\tau  
+\end{align}
+and
+\[
+\Sigma_u = \sigma^2\Sigma_\epsilon
+\]
+\end{frame}
+
+
+\begin{slide}{Remarks}
+\[
+E_t\left\{f(y_{t+1},y_t,y_{t-1},u_t)\right\}=0
+\]
+  \begin{itemize}
+  \item The exogenous shocks may appear only at the current period
+  \item There is no deterministic exogenous variables
+  \item Not all variables are necessarily present with a lead and a lag
+  \item Generalization to leads and lags on more than one period (2nd order approximation requires a more complicated algorithm)
+  \end{itemize}
+\end{slide}
+
+\section[The solution function]{The solution function}
+\begin{slide}{Solution function}
+\[
+y_t = g(y_{t-1},u_t,\sigma)
+\]
+where $\sigma$ is the stochastic scale of the model. If $\sigma = 0$, the model is deterministic. For $\sigma > 0$, the model is stochastic.
+
+Under some conditions, the existence of $g()$ function is proven via an implicit function theorem. See H. Jin and K. Judd ``Solving Dynamic Stochastic Models'' {\tiny (\url{http://bucky.stanford.edu/papers/PerturbationMethodRatEx.pdf})}
+\end{slide}
+
+\begin{slide}{Solution function (continued)}
+Then,
+{
+\begin{eqnarray*}
+  y_{t+1} &=& g(y_t,u_{t+1},\sigma)\\
+  &=& g(g(y_{t-1},u_t,\sigma),u_{t+1},\sigma)\\
+\lefteqn{F(y_{t-1},u_t,\epsilon_{t+1},\sigma)}\\
+ &=& f(g(g(y_{t-1},u_t,\sigma),\sigma\epsilon_{t+1},\sigma),g(y_{t-1},u_t,\sigma),y_{t-1},u_t)
+\end{eqnarray*}
+}
+\[
+  E_t\left\{F(y_{t-1},u_t,{\red \epsilon_{t+1}},\sigma)\right\} = 0
+\]
+  
+\end{slide}
+
+\begin{frame} \frametitle{The perturbation approach}
+  \begin{itemize}
+  \item Obtain a Taylor expansion of the unkown solution function in the neighborhood of a problem that we know how to solve.
+  \item The problem that we know how to solve is the deterministic steady state.
+  \item One obtains the Taylor expansion of the solution for the Taylor expansion of the original problem.
+  \item One consider two different perturbations:
+    \begin{enumerate}
+    \item points in the neighborhood from the steady sate,
+    \item from a deterministic model towards a stochastic one (by increasing $\sigma$ from a zero value).
+    \end{enumerate}
+  \end{itemize}
+\end{frame}
+
+\begin{frame} \frametitle{The perturbation approach (continued)}
+\begin{itemize}
+  \item The Taylor approximation is taken with respect to $y_{t-1}$, $u_t$ and $\sigma$, the arguments of the solution function
+    \[
+    y_t = g(y_{t-1},u_t,\sigma).
+    \]
+  \item At the deterministic steady state, all derivatives are deterministic as well.
+  \end{itemize}
+\end{frame}
+
+\section[The steady state]{The steady state}
+\begin{slide}{Steady state}
+A deterministic steady state, $\bar y$, for the model satisfies
+\[
+f(\bar y, \bar y, \bar y, 0) = 0
+\]
+A model can have several steady states, but only one of them will be used for approximation.
+
+Furthermore,
+\[
+\bar y = g(\bar y, 0, 0)
+\]
+\end{slide}
+
+
+\section[First order approximation]{First order approximation}
+\begin{slide}{First order approximation}
+Around $\bar y$:
+\begin{eqnarray*}
+   \lefteqn{E_t\left\{F^{(1)}(y_{t-1},u_t,{\red \epsilon_{t+1}},\sigma)\right\} =}\\
+&& E_t\Big\{f(\bar y, \bar y, \bar y, 0)+f_{y_+}\left(g_y\left(g_y\hat y+g_uu+g_\sigma\sigma\right)+g_u\sigma{\red \epsilon'}+g_\sigma\sigma\right)\\
+&& + f_{y_0}\left(g_y\hat y+g_uu+g_\sigma\sigma\right)+f_{y_-}\hat y+f_u u\Big\}\\
+&=& 0
+\end{eqnarray*}
+with $\hat y = y_{t-1} - \bar y$, $u=u_t$, $\epsilon'=\epsilon_{t+1}$, $f_{y_+}=\frac{\partial f}{\partial y_{t+1}}$, $f_{y_0}=\frac{\partial f}{\partial y_t}$, $f_{y_-}=\frac{\partial f}{\partial y_{t-1}}$, $f_{u}=\frac{\partial f}{\partial u_t}$, $g_y=\frac{\partial g}{\partial y_{t-1}}$, $g_u=\frac{\partial g}{\partial u_t}$, $g_\sigma=\frac{\partial g}{\partial \sigma}$.
+\end{slide}
+
+\begin{slide}{Taking the expectation}
+\begin{eqnarray*}
+   \lefteqn{E_t\left\{F^{(1)}(y_{t-1},u_t,{\red \epsilon_{t+1}},\sigma)\right\} =}\\
+&& f(\bar y, \bar y, \bar y, 0)+f_{y_+}\left(g_y\left(g_y\hat y+g_uu+g_\sigma\sigma\right)+g_\sigma\sigma\right)\\
+&& + f_{y_0}\left(g_y\hat y+g_uu+g_\sigma\sigma\right)+f_{y_-}\hat y+f_u u\Big\}\\
+&=& \left(f_{y_+}g_yg_y+f_{y_0}g_y+f_{y_-}\right)\hat y+\left(f_{y_+}g_yg_u+f_{y_0}g_u+f_{u}\right)u\\
+&& +\left(f_{y_+}g_yg_\sigma+f_{y_0}g_\sigma\right)\sigma\\
+&=& 0\\
+\end{eqnarray*}
+  
+\end{slide}
+
+\subsection[Recovering $g_y$]{Recovering $g_y$}
+\begin{slide}{Recovering $g_y$}
+\[
+\left(f_{y_+}{\red g_yg_y}+f_{y_0}{\red g_y}+f_{y_-}\right)\hat y= 0
+\]
+Structural state space representation:
+\begin{eqnarray*}
+\left[\begin{array}{cc}
+    0 & f_{y_+} \\ I & 0 
+  \end{array}\right]
+\left[\begin{array}{c}
+    I \\ {\red g_y}
+  \end{array}\right]{\red g_y} \hat y
+&=&
+\left[\begin{array}{cc}
+    -f_{y_-} & -f_{y_0} \\ 0 & I 
+  \end{array}\right]
+\left[\begin{array}{c}
+    I \\ {\red g_y}
+  \end{array}\right]\hat y
+\end{eqnarray*}
+or
+\begin{eqnarray*}
+\left[\begin{array}{cc}
+    0 & f_{y_+} \\ I & 0 
+  \end{array}\right]
+\left[\begin{array}{c}
+    y_t-\bar y \\ y_{t+1}-\bar y
+  \end{array}\right]
+&=&
+\left[\begin{array}{cc}
+    -f_{y_-} & -f_{y_0} \\ 0 & I 
+  \end{array}\right]
+\left[\begin{array}{c}
+    y_{t-1}-\bar y \\ y_t-\bar y
+  \end{array}\right]
+\end{eqnarray*}
+\end{slide}
+
+\begin{slide}{Structural state space representation}
+\[
+Dx_{t+1} = Ex_t
+\]
+with
+\[
+x_{t+1} = \left[\begin{array}{c}
+    y_t-\bar y \\ y_{t+1}-\bar y
+  \end{array}\right]
+\hspace{10mm}
+x_t = \left[\begin{array}{c}
+    y_{t-1}-\bar y \\ y_t-\bar y
+  \end{array}\right]
+\]
+\begin{itemize}
+\item There are multiple solutions but we want a unique stable one.\\
+\item Problem when $D$ is singular.
+\end{itemize}
+\end{slide}
+
+\subsubsection[Real generalized Schur decomposition]{Real generalized Schur decomposition}
+\begin{slide}{Real generalized Schur decomposition}
+Taking the real generalized Schur decomposition of the pencil $<E,D>$:
+\begin{eqnarray*}
+D&=&QTZ\\
+E&=&QSZ
+\end{eqnarray*}
+with $T$, upper triangular, $S$ quasi-upper triangular, $Q'Q=I$ and $Z'Z=I$.
+\end{slide}
+
+\subsubsection[Generalized eigenvalues]{Generalized eigenvalues}
+\begin{slide}{Generalized eigenvalues}
+
+$\lambda_i$ solves
+\[
+\lambda_iDx_i = E x_i
+\]
+
+For diagonal blocks on $S$ of dimension 1 x 1:
+\begin{itemize}
+\item $T_{ii} \ne 0$: $\lambda_i = \frac{S_{ii}}{T_{ii}}$
+\item $T_{ii} = 0$, $S_{ii} > 0$: $\lambda_i = +\infty$
+\item $T_{ii} = 0$, $S_{ii} < 0$: $\lambda_i = -\infty$
+\item $T_{ii} = 0$, $S_{ii} = 0$: $\lambda_i \in \mathcal{C}$
+\end{itemize}
+
+\end{slide}
+
+\begin{frame}
+\frametitle{A pair of complex eigenvalues}
+When a diagonal block of matrix $S$ is a 2x2 matrix of the form 
+$\left[
+\begin{array}{cc}
+S_{ii} & S_{i,i+1}\\
+S_{i+1,i} & S_{i+1,i+1}
+\end{array}\right]$,
+\begin{itemize}
+\item the corresponding block of matrix $T$ is a diagonal matrix,
+\item $\left(S_{i,i}T_{i+1,i+1}+S_{i+1,i+1}T_{i,i}\right)^2<-4S_{i+1,i}S_{i+1,i}T_{i,i}T_{i+1,i+1}$,
+\item there is a pair of conjugate eigenvalues
+\end{itemize}
+{\footnotesize
+\begin{multline*}
+\lambda_i, \lambda_{i+1} =\\
+\frac{S_{ii}T_{i+1,i+1}+S_{i+1,i+1}T_{i,i}\pm\sqrt{\left(S_{i,i}T_{i+1,i+1}-S_{i+1,i+1}T_{i,i}\right)^2+4S_{i+1,i}S_{i+1,i}T_{i,i}T_{i+1,i+1}}}{2T_{i,i}T_{i+1,i+1}}  
+\end{multline*}
+}
+\end{frame}
+
+\begin{slide}{Applying the decomposition}
+\begin{eqnarray*}
+D\left[\begin{array}{c} I\\{\red g_y}\end{array}\right]{\red g_y}\hat y
+&=&
+E\left[\begin{array}{c} I\\{\red g_y}\end{array}\right]\hat y\\
+\lefteqn{\left[\begin{array}{cc}T_{11} & T_{12}\\0 & T_{22}\end{array}\right]
+\left[\begin{array}{cc}Z_{11} & Z_{12}\\Z_{21} & Z_{22}\end{array}\right]
+\left[\begin{array}{c} I\\{\red g_y}\end{array}\right]{\red g_y}\hat y}\hspace{40mm}\\
+&=&
+\left[\begin{array}{cc}S_{11} & S_{12}\\0 & S_{22}\end{array}\right]
+\left[\begin{array}{cc}Z_{11} & Z_{12}\\Z_{21} & Z_{22}\end{array}\right]
+\left[\begin{array}{c} I\\{\red g_y}\end{array}\right]\hat y
+\end{eqnarray*}
+\end{slide}
+
+\begin{slide}{Selecting the stable trajectory}
+To exclude explosive trajectories, one imposes
+\[
+Z_{21}+Z_{22}{\red g_y}=0
+\]
+\[
+{\red g_y}=-Z_{22}^{-1}Z_{21}
+\]
+A unique stable trajectory exists if $Z_{22}$ is non-singular: there are as many roots larger than one in modulus as there are forward--looking variables in the model (Blanchard and Kahn condition) and the rank condition is satisfied.
+\end{slide}
+
+\subsection[Recovering $g_u$]{Recovering $g_u$}
+\begin{slide}{Recovering $g_u$}
+\[
+f_{y_+}g_y{\red g_u}+f_{y_0}{\red g_u}+f_{u}=0
+\]
+\[
+{\red g_u} = -\left(f_{y_+}g_y+f_{y_0}\right)^{-1}f_u
+\]
+
+{\footnotesize Hong Lan \& Alexander Meyer-Gohde,
+2012. "\href{http://sfb649.wiwi.hu-berlin.de/papers/pdf/SFB649DP2012-015.pdf}{\blue
+  Existence and Uniqueness of
+Perturbation Solutions to DSGE Models}," SFB 649 Discussion Papers,
+Humboldt University, show that $f_{y_+}g_y+f_{y_0}$ is an invertible
+matrix under standard regularity and saddle stability assumptions.}
+\end{slide}
+
+\subsection[Recovering $g_\sigma$]{Recovering $g_\sigma$}
+\begin{slide}{Recovering $g_\sigma$}
+\[
+f_{y_+}g_y{\red g_\sigma}+f_{y_0}{\red g_\sigma} = 0
+\]
+\[
+{\red g_\sigma} = 0
+\]
+Yet another manifestation of the certainty equivalence property of first order approximation.
+\end{slide}
+
+\subsection[First order approximated decision function]{First order approximated decision function}
+\begin{slide}{First order approximated decision function}
+\[
+y_t = \bar y+g_y\hat y+g_uu
+\]
+\begin{eqnarray*}
+  E\left\{y_t\right\} &=& \bar y\\
+  \Sigma_y &=& g_y \Sigma_y g_y'+\sigma^2g_u\Sigma_\epsilon g_u'
+\end{eqnarray*}
+The variance is solved for with an algorithm for Lyapunov equations.
+\end{slide}
+
+\section[Example]{Example}
+\begin{frame}
+  \frametitle{A simple RBC model}
+  Consider the following model of an economy.
+\begin{itemize}
+
+\item Representative agent preferences
+\begin{equation*}
+U=\sum_{t=1}^{\infty }\left( \frac{1}{1+\rho }\right) ^{t-1}E_{t}\left[ \log
+\left( C_{t}\right) -\frac{L_{t}^{1+\gamma }}{1+\gamma }\right] .
+\end{equation*}%
+The household supplies labor and rents capital to the corporate sector. 
+\begin{itemize}
+\item $L_{t}$ is labor services
+\item $\rho \in \left( 0,\infty \right) $
+is the rate of time preference
+\item $\gamma \in \left( 0,\infty \right) $ is a
+labor supply parameter. 
+\item $C_{t}$ is consumption,
+\item $w_{t}$ is the real wage,
+\item $r_{t}$ is the real rental rate
+\end{itemize}
+\end{itemize}
+\end{frame}
+
+
+\begin{frame}
+\frametitle{RBC Model (continued)}
+\begin{itemize}
+\item The household faces the sequence of budget constraints
+
+\begin{equation*}
+K_t=K_{t-1}\left( 1-\delta \right) +w_{t}L_{t}+r_{t}K_{t-1}-C_{t},
+\end{equation*}%
+where 
+\begin{itemize}
+\item $K_{t}$ is capital at the end of period
+\item $\delta \in \left(
+0,1\right) $ is the rate of depreciation
+\end{itemize}
+\item The production function is given by the expression%
+\begin{equation*}
+Y_{t}=A_{t}K_{t-1}^{\alpha }\left( \left( 1+g\right) ^{t}L_{t}\right) ^{1-\alpha}
+\end{equation*}%
+where $g\in \left( 0,\infty \right) $ is the growth rate and $\alpha $ and $%
+\beta $ are parameters. 
+\item $A_{t}$ is a technology shock that follows the
+process%
+\begin{equation*}
+A_{t}=A_{t-1}^{\lambda }\exp \left( e_{t}\right) ,
+\end{equation*}%
+where $e_{t}$ is an i.i.d. zero mean normally distributed error with
+standard deviation $\sigma _{1}$ and $\lambda \in \left( 0,1\right) $ is a
+parameter.
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{The household problem}
+  Lagrangian
+\begin{multline*}
+L = \max_{C_t,L_t,K_t} \sum_{t=1}^\infty \left( \frac{1}{1+\rho }\right) ^{t-1}E_{t}\Big[ \log
+\left( C_{t}\right) -\frac{L_{t}^{1+\gamma }}{1+\gamma }\\
+-\mu_t\left(K_t-K_{t-1}\left( 1-\delta \right) -w_{t}L_{t}-r_{t}K_{t-1}+C_{t}\right)\Big]
+\end{multline*}
+First order conditions
+\begin{align*}
+  \frac{\partial L}{\partial C_t} &= \left( \frac{1}{1+\rho }\right) ^{t-1}\left(\frac{1}{C_t}-\mu_t\right) = 0\\
+  \frac{\partial L}{\partial L_t} &= \left( \frac{1}{1+\rho }\right) ^{t-1}\left(L_t^\gamma-\mu_tw_t\right) = 0\\
+  \frac{\partial L}{\partial K_t} &= -\left( \frac{1}{1+\rho }\right) ^{t-1}\mu_t+\left( \frac{1}{1+\rho }\right) ^tE_t\left(\mu_{t+1}(1-\delta+r_t)\right) = 0
+\end{align*}
+\end{frame}
+
+\begin{frame}{First order conditions}
+Eliminating the Lagrange multiplier, one obtains
+\begin{align*}
+L_t^\gamma&=\frac{w_t}{C_t}\\
+\frac{1}{C_t}&=\frac{1}{1+\rho}E_t\left(\frac{1}{C_{t+1}}(r_{t+1}+1-\delta)\right)
+\end{align*}
+
+\end{frame}
+
+\begin{frame}
+  \frametitle{The firm problem}
+  \[
+  \max_{L_t,K_{t-1}} A_tK_{t-1}^\alpha\left( \left( 1+g\right) ^{t}L_t\right)^{1-\alpha}-r_tK_{t-1}-w_tL_t
+  \]
+First order conditions:
+\begin{align*}
+  r_t &= \alpha A_tK_{t-1}^{\alpha-1}\left( \left( 1+g\right) ^{t}L_t\right)^{1-\alpha}\\
+  w_t &= (1-\alpha) A_tK_{t-1}^\alpha\left( \left( 1+g\right) ^{t}\right)^{1-\alpha}L_t^{-\alpha}
+\end{align*}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Goods market equilibrium}
+  \[
+  K_t+C_t = K_{t-1}(1-\delta)+A_tK_{t-1}^\alpha\left( \left( 1+g\right) ^{t}L_t\right)^{1-\alpha}
+  \]
+\end{frame}
+
+\begin{frame}
+  \frametitle{Dynamic Equilibrium}
+  \begin{align*}
+    \frac{1}{C_t}&=\frac{1}{1+\rho}E_t\left(\frac{1}{C_{t+1}}(r_{t+1}+1-\delta)\right)\\
+    L_t^\gamma&=\frac{w_t}{C_t}\\
+    r_t &= \alpha A_tK_{t-1}^{\alpha-1}\left( \left( 1+g\right) ^{t}L_t\right)^{1-\alpha}\\
+    w_t &= (1-\alpha) A_tK_{t-1}^\alpha\left( \left( 1+g\right) ^{t}\right)^{1-\alpha}L_t^{-\alpha}\\
+    K_t+C_t &= K_{t-1}(1-\delta)+A_tK_{t-1}^\alpha\left( \left( 1+g\right) ^{t}L_t\right)^{1-\alpha}
+  \end{align*}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Existence of a balanced growth path}
+  There must exist a growth rates $g_c$ and $g_k$ so that
+\begin{multline*}
+(1+g_k)^tK_1 + (1+g_c)^tC_1 =\\
+ \frac{(1+g_k)^t}{1+g_K}K_1(1-\delta) + A\left(\frac{(1+g_k)^t}{1+g_k}K_1\right)^\alpha\left( \left( 1+g\right) ^{t}L_t\right)^{1-\alpha}
+\end{multline*}
+So,
+\[
+g_c=g_c=g
+\]
+\end{frame}
+
+\begin{frame}
+  \frametitle{Stationarized model}
+  Let's define
+  \begin{align*}
+    \widehat{C}_t &= C_t/(1+g)^t\\
+    \widehat{K}_t &= K_t/(1+g)^t\\
+    \widehat{w}_t &= w_t/(1+g)^t\\
+  \end{align*}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Stationarized model (continued)}
+  \begin{align*}
+    \frac{1}{\widehat{C}_t{\red(1+g)^t}}&=\frac{1}{1+\rho}E_t\left(\frac{1}{\widehat{C}_{t+1}(1+g){\red(1+g)^t}}(r_{t+1}+1-\delta)\right)\\
+    L_t^\gamma&=\frac{\widehat{w}_t{\red(1+g)^t}}{\widehat{C}_t{\red(1+g)^t}}\\
+    r_t &= \alpha A_t\left(\widehat{K}_{t-1}\frac{\red(1+g)^t}{1+g}\right)^{\alpha-1}\left( {\red\left( 1+g\right) ^{t}}L_t\right)^{1-\alpha}\\
+    \widehat{w}_t{\red(1+g)^t} &= (1-\alpha) A_t\left(\widehat{K}_{t-1}\frac{\red(1+g)^t}{1+g}\right)^\alpha\left( {\red\left( 1+g\right) ^{t}}\right)^{1-\alpha}L_t^{-\alpha}\\
+    \left(\widehat{K}_t+\widehat{C}_t\right){\red(1+g)^t} &= \widehat{K}_{t-1}\frac{\red(1+g)^t}{1+g}(1-\delta)\\
+&+A_t\left(\widehat{K}_{t-1}\frac{\red(1+g)^t}{1+g}\right)^\alpha\left( {\red\left( 1+g\right) ^{t}}L_t\right)^{1-\alpha}
+  \end{align*}
+    
+\end{frame}
+
+\begin{frame}
+  \frametitle{Stationarized model (continued)}
+  \begin{align*}
+    \frac{1}{\widehat{C}_t}&=\frac{1}{1+\rho}E_t\left(\frac{1}{\widehat{C}_{t+1}(1+g)}(r_{t+1}+1-\delta)\right)\\
+    L_t^\gamma&=\frac{\widehat{w}_t}{\widehat{C}_t}\\
+    r_t &= \alpha A_t\left(\frac{\widehat{K}_{t-1}}{1+g}\right)^{\alpha-1}L_t^{1-\alpha}\\
+    \widehat{w}_t &= (1-\alpha) A_t\left(\frac{\widehat{K}_{t-1}}{1+g}\right)^\alpha L_t^{-\alpha}\\
+    \widehat{K}_t+\widehat{C}_t &= \frac{\widehat{K}_{t-1}}{1+g}(1-\delta)+A_t\left(\frac{\widehat{K}_{t-1}}{1+g}\right)^\alpha L_t^{1-\alpha}
+  \end{align*}    
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{Dynare implementation}
+\begin{verbatim}
+ var C K L w r A;
+ varexo e;
+
+ parameters rho delta gamma alpha lambda g;
+
+ alpha = 0.33;
+ delta = 0.1;
+ rho = 0.03;
+ lambda = 0.97;
+ gamma = 0;
+ g = 0.015;
+\end{verbatim}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Dynare implementation (continued)}
+\begin{verbatim}
+ model;
+ 1/C=1/(1+rho)*(1/(C(+1)*(1+g)))*(r(+1)+1-delta);
+ L^gamma = w/C;
+ r = alpha*A*(K(-1)/(1+g))^(alpha-1)*L^(1-alpha);
+ w = (1-alpha)*A*(K(-1)/(1+g))^alpha*L^(-alpha);
+ K+C = (K(-1)/(1+g))*(1-delta)
+      +A*(K(-1)/(1+g))^alpha*L^(1-alpha);
+ log(A) = lambda*log(A(-1))+e;
+ end;
+\end{verbatim}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Dynare implementation (continued)}
+\begin{verbatim}
+ steady_state_model;
+ A = 1;
+ r = (1+g)*(1+rho)+delta-1;
+ L = ((1-alpha)/(r/alpha-delta-g))*r/alpha;
+ K = (1+g)*(r/alpha)^(1/(alpha-1))*L;
+ C = (1-delta)*K/(1+g)
+      +(K/(1+g))^alpha*L^(1-alpha)-K;
+ w = C;
+ end;
+
+ steady;
+\end{verbatim}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Dynare implementation (continued)}
+\begin{verbatim}
+ shocks;
+ var e; stderr 0.01;
+ end;
+
+ check;
+
+ stoch_simul(order=1);
+\end{verbatim}
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{Decision and transition functions}
+Dynare output:
+{\tiny
+\begin{verbatim}
+POLICY AND TRANSITION FUNCTIONS
+               C           K           L          w           r           A
+Constant   1.003043    3.125296    0.906526    1.003043    0.145450    1.000000
+K(-1)      0.144433    0.779746   -0.105500    0.144433   -0.042523           0
+A(-1)      0.757723    1.149948    0.589451    0.757723    0.204452    0.970000
+e          0.781158    1.185514    0.607681    0.781158    0.210776    1.000000
+\end{verbatim}
+}
+\[
+C_t = 1.003 + 0.144\left(K_{t-1}-\bar K\right)+0.758
+\left(A_{t-1}-\bar A\right) + 0.781 e_t
+\]
+\end{frame}
+
+\section[Dating variables in Dynare]{Dating variables in Dynare}
+\begin{frame}
+  \frametitle{Dating variables in Dynare}
+Dynare will automatically recognize predetermined and non--predetermined variables, but you must observe a few rules:
+\begin{itemize}
+\item period $t$ variables are set during period $t$ on the basis of the state of the system at period $t-1$ and shocks observed at the beginning of period $t$.
+\item therefore, stock variables must be on an end--of--period basis: investment of period $t$ determines the capital stock at the end of period $t$.
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Log--linearization}
+\begin{itemize}
+\item Taking a log--linear approximation of a model is equivalent to take a linear approximation of a model with respect to the logarithm of the variables.
+\item In practice, it is sufficient to replace all occurences of variable $X$ with $exp(LX)$ where $LX=\log X$.
+\item It is possible to make the substitution for some variables and not anothers. You wouldn't want to take a log approximation of a variable whose steady state value is negative \ldots
+\item There is no evidence that log--linearization is more accurate than simple linearization. In a growth model, it is often more natural to do a log--linearization.
+\end{itemize}
+\end{frame}
+
+\section[The Dynare preprocessor]{The Dynare preprocessor}
+\begin{frame}
+  \frametitle{The role of the Dynare preprocessor}
+
+  \begin{itemize}
+  \item the Dynare toolbox solves generic problems
+  \item the parser reads your *.mod file and translates it in specific Matlab files
+  \item \emph{filename}{\rm.m}: main Matlab script for your model
+  \item \emph{filename}{\rm\_static.m}: static model
+  \item \emph{filename}{\rm\_dynamic.m}: dynamic model
+  \item \emph{filename}{\rm\_steadystate2.m}: steady state function
+  \item \emph{filename}{\rm\_set\_auxiliary\_variables.m}: auxiliary
+    variables function
+  \end{itemize}
+\end{frame}
+
+\section[Approximated model]{Approximated model}
+\begin{slide}{Second order approximation of the model}
+{\tiny
+\begin{eqnarray*}
+   \lefteqn{E_t\left\{F^{(2)}(y_{t-1},u_t,{\red \epsilon_{t+1}},\sigma)\right\} =}\\
+&& E_t\Big\{F^{(1)}(y_{t-1},u_t,{\red u_{t+1}},\sigma)\\
+&&+0.5\Big(F_{y_-y_-}(\hat y\otimes \hat y)+F_{uu}(u\otimes u)+F_{u'u'}{\red \sigma^2}({\red \epsilon'}\otimes {\red \epsilon'})+F_{\sigma\sigma}\sigma^2\Big)\\
+&&+F_{y_-u}(\hat y \otimes u)+F_{y_-u'}(\hat y\otimes {\red \sigma\epsilon'})+F_{y_-\sigma}\hat y\sigma+F_{uu'}(u\otimes {\red \sigma\epsilon'})+F_{u\sigma}u\sigma+F_{u'\sigma}{\red \sigma\epsilon'}\sigma\Big\}\\
+&=& E_t\Big\{F^{(1)}(y_{t-1},u_t,{\red \epsilon_{t+1}},\sigma)\Big\}\\
+&&+0.5\Big(F_{y_-y_-}(\hat y\otimes \hat y)+F_{uu}(u\otimes u)+F_{u'u'}({\red \sigma^2\vec\Sigma_\epsilon})+F_{\sigma\sigma}\sigma^2\Big)\\
+&&+F_{y_-u}(\hat y \otimes u)+F_{y_-\sigma}\hat y\sigma+F_{u\sigma}u\sigma\\
+&=& 0
+\end{eqnarray*}
+}
+\end{slide}
+
+\subsection[]{}
+\begin{slide}{Representing the second order derivatives}
+The second order derivatives of a vector of multivariate functions is a three dimensional object. We use the following notation
+\[
+\frac{\partial^2 F}{\partial x \partial x} = \left[\begin{array}{cccccc}
+\frac{\partial^2 F_1}{\partial x_1\partial x_1} & \frac{\partial^2 F_1}{\partial x_1\partial x_2} & \ldots & \frac{\partial^2 F_1}{\partial x_2\partial x_1} & \ldots & \frac{\partial^2 F_1}{\partial x_n\partial x_n} \\
+\rule{0pt}{15pt}\frac{\partial^2 F_2}{\partial x_1\partial x_1} & \frac{\partial^2 F_2}{\partial x_1\partial x_2} & \ldots & \frac{\partial^2 F_2}{\partial x_2\partial x_1} & \ldots & \frac{\partial^2 F_2}{\partial x_n\partial x_n} \\
+\vdots & \vdots \ddots & \vdots & \ddots & \vdots\\
+\frac{\partial^2 F_m}{\partial x_1\partial x_1} & \frac{\partial^2 F_m}{\partial x_1\partial x_2} & \ldots & \frac{\partial^2 F_m}{\partial x_2\partial x_1} & \ldots & \frac{\partial^2 F_m}{\partial x_n\partial x_n}
+\end{array}\right]
+\]
+\end{slide}
+
+\subsection[]{}
+\begin{slide}{Composition of two functions}
+Let
+  \begin{eqnarray*}
+    y &=& g(s)\\
+    f(y)&=& f(g(s))
+  \end{eqnarray*}
+then,
+\[
+\frac{\partial^2 f}{\partial s\partial s}=\frac{\partial f}{\partial y}\frac{\partial^2 g}{\partial s\partial s}+\frac{\partial^2 f}{\partial y\partial y}\left(\frac{\partial g}{\partial s}\otimes\frac{\partial g}{\partial s}\right)
+\]
+\end{slide}
+
+
+\begin{slide}{Recovering $g_{yy}$}
+  \begin{eqnarray*}
+    F_{y_-y_-} &=& f_{y_+}\left({\red g_{yy}}(g_y\otimes g_y)+g_y{\red g_{yy}}\right)+f_{y_0}{\red g_{yy}}+B\\
+&=&0 
+  \end{eqnarray*}
+where $B$ is a term that doesn't contain second order derivatives of $g()$.
+
+The equation can be rearranged:
+\[
+\left(f_{y_+}g_y+f_{y_0}\right){\red g_{yy}}+f_{y_+}{\red g_{yy}}(g_y\otimes g_y)=-B
+\]
+This is a Sylvester type of equation and must be solved with an appropriate algorithm.
+\end{slide}
+
+\subsection[]{}
+\begin{slide}{Recovering $g_{yu}$}
+  \begin{eqnarray*}
+    F_{y_-u} &=& f_{y_+}\left(g_{yy}(g_y\otimes g_u)+g_y{\red g_{yu}}\right)+f_{y_0}{\red g_{yu}}+B\\
+&=&0 
+  \end{eqnarray*}
+where $B$ is a term that doesn't contain second order derivatives of $g()$.
+
+This is a standard linear problem:
+\[
+{\red g_{yu}}=-\left(f_{y_+}g_y+f_{y_0}\right)^{-1}\left(B+f_{y_+}g_{yy}(g_y\otimes g_u)\right)
+\]
+\end{slide}
+
+
+\subsection[]{}
+\begin{slide}{Recovering $g_{uu}$}
+  \begin{eqnarray*}
+    F_{uu} &=& f_{y_+}\left(g_{yy}(g_u\otimes g_u)+g_y{\red g_{uu}}\right)+f_{y_0}{\red g_{uu}}+B\\
+&=&0 
+  \end{eqnarray*}
+where $B$ is a term that doesn't contain second order derivatives of $g()$.
+
+This is a standard linear problem:
+\[
+{\red g_{uu}}=-\left(f_{y_+}g_y+f_{y_0}\right)^{-1}\left(B+f_{y_+}g_{yy}(g_u\otimes g_u)\right)
+\]
+\end{slide}
+
+\subsection[]{}
+\begin{slide}{Recovering $g_{y\sigma}$, $g_{u\sigma}$}
+  \begin{eqnarray*}
+    F_{y\sigma} &=& f_{y_+}g_y{\red g_{y\sigma}}+f_{y_0}{\red g_{y\sigma}}\\
+&=&0 \\
+    F_{u\sigma} &=& f_{y_+}g_y{\red g_{u\sigma}}+f_{y_0}{\red g_{u\sigma}}\\
+&=&0 
+  \end{eqnarray*}
+as $g_\sigma=0$. Then
+\[
+g_{y\sigma}=g_{u\sigma}=0
+\]
+\end{slide}
+
+\subsection[]{}
+\begin{slide}{Recovering $g_{\sigma\sigma}$}
+  \begin{eqnarray*}
+    F_{\sigma\sigma}+F_{u'u'}\Sigma_\epsilon &=& f_{y_+}\left({\red g_{\sigma\sigma}}+g_y{\red g_{\sigma\sigma}}\right)+f_{y_0}{\red g_{\sigma\sigma}}\\
+&&+\left(f_{y_+y_+}(g_u\otimes g_u)+f_{y_+}g_{uu}\right)\vec\Sigma_\epsilon\\
+&=&0 
+  \end{eqnarray*}
+taking into account $g_\sigma=0$.
+
+This is a standard linear problem:
+\[
+{\red g_{\sigma\sigma}}=-\left(f_{y_+}(I+g_y)+f_{y_0}\right)^{-1}\left(f_{y_+y_+}(g_u\otimes g_u)+f_{y_+}g_{uu}\right)\vec\Sigma_\epsilon
+\]
+\end{slide}
+
+\section[Approximated decision function]{Approximated decision function}
+\begin{slide}{Second order decision functions}
+{\tiny
+\[
+y_t = \bar y+{\red 0.5g_{\sigma\sigma}\sigma^2}+g_y\hat y+g_uu+0.5\left(g_{yy}(\hat y\otimes \hat y)+g_{uu}(u \otimes u)\right)+g_{yu}(\hat y \otimes u) 
+\]
+}
+We can fix $\sigma=1$.
+\bigskip
+
+Second order accurate moments:
+\begin{eqnarray*}
+  \Sigma_y &=& g_y \Sigma_y g_y'+\sigma^2g_u\Sigma_\epsilon g_u'\\
+  E\left\{y_t\right\} &=& \bar y+\left(I-g_y\right)^{-1}\left(0.5\left(g_{\sigma\sigma}+g_{yy}\vec\Sigma_y+g_{uu}\vec\Sigma_\epsilon\right)\right)
+\end{eqnarray*}
+\end{slide}
+
+\subsection[]{}
+\begin{slide}{Three different concepts}
+  \begin{enumerate}
+  \item (deterministic) steady state
+  \item risky steady state
+  \item unconditional expectation
+  \end{enumerate}
+\end{slide}
+
+\subsection[]{}
+\begin{slide}{Deterministic steady state}
+{\tiny
+A linearized decision rule cuts the main diagonal at the deterministic steady state ($K_{ss}$).
+  }
+\begin{center}
+\includegraphics[width=60mm]{sss1.eps}  
+\end{center}
+\end{slide}
+
+\subsection[]{}
+\begin{slide}{Quadratic decision rule}
+{\tiny
+In general, the decision is shifted at the deterministic steady state: agents don't decide to stay at the deterministic steady state.
+}
+\begin{center}
+\includegraphics[width=60mm]{sss2.eps}  
+\end{center}
+\end{slide}
+ 
+\subsection[]{}
+\begin{slide}{Quadratic decision rule}
+{\tiny
+The distance between A and B is $g_{\sigma\sigma}/2$
+}  
+\begin{center}
+\includegraphics[width=60mm]{sss3.eps}  
+\end{center}
+\end{slide}
+
+\subsection[]{}
+\begin{slide}{Risky steady state}
+{\tiny
+The risky steady state, $K_{sss}$, describes the point where agents decide to stay in absence of shocks this period, but taking into account the distibution of shocks in the future.
+}
+\begin{center}
+\includegraphics[width=60mm]{sss4.eps}  
+\end{center}
+\end{slide}
+
+\subsection[]{}
+\begin{slide}{Unconditional expectation}
+{\tiny
+Because of Jensen inequality, the unconditional expectation, $E(K)$, is somewhere below the quadratic decision rule, but not on it. In absence of shocks, agents don't decide to go to the unconditional expectation.
+}
+\begin{center}
+\includegraphics[width=60mm]{sss4.eps}  
+\end{center}
+\end{slide}
+
+\begin{frame}
+  \frametitle{Higher order approximation (I)}
+  The Fa di Bruno formula for the $k$th derivative of the composition
+  of two functions, $f(z(s))$:
+\[
+\left[F^i_{s^j}\right]_{\alpha_1\ldots\alpha_j} =
+\sum_{l=1}^j\left[f^i_{z^l}\right]_{\beta_1\ldots\beta_l}\sum_{c \in{\mathcal
+M}_{l,j}}\prod_{m=1}^l\left[z_{s^{|c_m|}}\right]^{\beta_m}_{\boldsymbol{\alpha}(c_m)}
+\]
+where ${\mathcal M}_{l,j}$ is the set of all partitions of the set of
+$j$ indices with $l$ classes, $|.|$ is the cardinality of a set, $c_m$
+is $m$-th class of partition $c$, and {\boldmath $\alpha$}$(c_m)$ is a
+sequence of $\alpha$'s indexed by $c_m$.  Note that ${\mathcal
+  M}_{1,j} = \{\{1,\ldots,j\}\}$ and ${\mathcal M}_{j,j} = \{\{1\},
+\{2\}, \ldots, \{j\}\}$.  In order to keep the formulas compact, we
+use {\boldmath $\alpha$}$_n$ for $\alpha_1\ldots\alpha_n$.
+
+\end{frame}
+
+\begin{frame}
+  \frametitle{Higher order approximation (II)}
+  In order to recover the $k$th
+order derivatives of the decision function, $g_{y^k}$, it is necessary
+to solve the following equation:
+\[
+\left(f_{y_+}g_y+f_{y_0}\right)g_{y^k}+f_{y_+}g_{y^k}g_y^{\otimes
+  k}=-B
+\]
+where $g_y^{\otimes k}$ is the $k$th Kronecker power of matrix $g_y$
+and $B$ is a term that doesn't contain the unknown $k$-order
+derivatives of function $g()$, but only lower order derivatives of
+$g()$ and first to $k$-order derivatives of $f()$.
+\end{frame}
+
+\section[Further issues]{Further issues}
+\begin{slide}{Further issues}
+  \begin{itemize}
+  \item Impulse response functions depend of state at time of shocks and history of future shocks.
+  \item For large shocks second order approximation simulation may explode
+    \begin{itemize}
+    \item pruning algorithm (Sims)
+    \item truncate normal distribution (Judd)
+    \end{itemize}
+  \end{itemize}
+\end{slide}
+
+\section[Example]{Example}
+\begin{slide}{An asset pricing model}
+Urban Jermann (1998) ``Asset pricing in production economies'' \emph{Journal of Monetary Economics}, \emph{41}, 257--275.
+
+\begin{itemize}
+\item real business cycle model
+\item consumption habits
+\item investment adjustment costs
+\item compares return on several securities
+\item log--linearizes RBC model + log normal formulas for asset pricing
+\end{itemize}
+\end{slide}
+
+\subsection[]{}
+
+\begin{slide}{Firms}
+{\small
+The representative firm maximizes its value:
+\[
+{\mathcal E}_t\sum_{t+k}^\infty \beta^k\frac{\mu_{t+k}}{\mu_t}D_t
+\]
+with
+\begin{eqnarray*}
+  Y_t &=& A_tK_{t-1}^\alpha\left(X_tN_t\right)^{1-\alpha}\\
+D_t &=& Y_t - W_tNt-I_t\\
+K_t &=& (1-\delta)K_{t-1}+\left(\frac{a_1}{1-\xi}\left(\frac{I_t}{K_{t-1}}\right)^{1-\frac{1}{x}}+a_2\right)K_{t-1}\\
+\log A_t &=& \rho \log A_{t-1}+e_t\\
+X_t &=& (1+g)X_{t-1}
+\end{eqnarray*}
+}
+\end{slide}
+
+\subsection[]{}
+\begin{slide}{Households}
+The representative households maximizes current value of future utility:
+\[
+{\mathcal E}_t \sum_{k=0}^\infty\beta^k\frac{\left(C_t-\chi C_{t-1}\right)^{1-\tau}}{1-\tau}
+\]
+subject to the following budget constraint:
+\[
+W_tN_t+D_t = C_t
+\]
+and with $N_t=1$.
+Good market equilibrium imposes
+\[
+Y_t = C_t+I_t
+\]
+\end{slide}
+
+\subsection[]{}
+\begin{slide}{Interest rate}
+Risk free interest rate:
+\[
+r_f = \frac{1}{{\mathcal E}_t\left\{\beta g^{-\tau}\frac{\mu_{t+1}}{\mu_t}\right\}}
+\]
+where $\mu_t$ is the utility of a marginal unit of consumption in period $t$.
+\[
+\mu_t = \left(c_t-\chi c_{t-1}/g\right)^{-\tau}-\chi \beta\left(g c_{t+1}-\chi c_t\right)^{-\tau}
+\]
+\end{slide}
+
+\subsection[]{}
+\begin{slide}{Rate of return}
+Rate of return of firms
+\begin{eqnarray*}
+r_t  &=& {\mathcal E}_t\Bigg\{a_1\left(\frac{g i_t}{k_{t-1}}\right)^{-\frac{1}{\xi}}\Bigg(\alpha z_{t+1}g^{1-\alpha}k_t^{\alpha-1}\\
+&&+\frac{1-\delta+\frac{a_1}{1-\frac{1}{\xi}}\left(\frac{g i_{t+1}}{k_t}\right)^{1-\frac{1}{\xi}}+a_2}{a_1\left(\frac{g i_{t+1}}{k_t}\right)^{-\frac{1}{\xi}}}-\frac{g i_{t+1}}{k_t}\Bigg)\Bigg\}
+\end{eqnarray*}
+\end{slide}
+
+\subsection[]{}
+\begin{slide}{jermann98.mod}
+{\tiny\begin{verbatim}
+//---------------------------------------------------------------------
+// 1. Variable declaration
+//---------------------------------------------------------------------
+
+var c, d, erp1, i, k, r1, rf1, w, y, z, mu; 
+varexo ez;                          
+
+\end{verbatim}
+ } 
+\end{slide}
+
+\subsection[]{}
+\begin{slide}{(continued)}
+{\tiny\begin{verbatim}
+  //---------------------------------------------------------------------
+// 2. Parameter declaration and calibration
+//---------------------------------------------------------------------
+
+parameters alf, chihab, xi, delt, tau, g, rho, a1, a2, betstar, bet;
+
+alf        = 0.36;    // capital share in production function
+chihab     = 0.819;   // habit formation parameter
+xi         = 1/4.3;   // capital adjustment cost parameter
+delt       = 0.025;   // quarterly deprecition rate
+g          = 1.005;   //quarterly growth rate (note zero growth =>g=1)
+tau        = 5;       // curvature parameter with respect to c
+rho        = 0.95;    // AR(1) parameter for technology shock
+
+a1         = (g-1+delt)^(1/xi);             
+a2         = (g-1+delt)-(((g-1+delt)^(1/xi))/(1-(1/xi)))*
+             ((g-1+delt)^(1-(1/xi))); 
+betstar    = g/1.011138;
+bet        = betstar/(g^(1-tau));             
+\end{verbatim}
+}
+\end{slide}
+
+\subsection[]{}
+\begin{slide}{(continued)}
+{\tiny\begin{verbatim}
+//---------------------------------------------------------------------
+// 3. Model declaration
+//---------------------------------------------------------------------
+
+model;  
+g*k  = (1-delt)*k(-1) + ((a1/(1-1/xi))*(g*i/k(-1))^(1-1/xi)+a2)*k(-1);
+d    = y - w - i; 
+w    = (1-alf)*y;
+y    = z*g^(-alf)*k(-1)^alf;
+c    = w + d; 
+mu   = (c-chihab*c(-1)/g)^(-tau)-chihab*bet*(c(+1)*g-chihab*c)^(-tau);
+mu   = (betstar/g)*mu(+1)*(a1*(g*i/k(-1))^(-1/xi))*(alf*z(+1)*g^(1-alf)*
+       (k^(alf-1))+((1-delt+(a1/(1-1/xi))*(g*i(+1)/k)^(1-1/xi)+a2))/
+       (a1*(g*i(+1)/k)^(-1/xi))-g*i(+1)/k);
+log(z) = rho*log(z(-1)) + ez;
+\end{verbatim}
+}
+\end{slide}
+
+\subsection[]{}
+\begin{slide}{(continued)}
+{\tiny\begin{verbatim}
+rf1  = 1/expecation(0)(betstar/g)*mu(+1)/mu);
+r1   = (a1*(g*i/k(-1))^(-1/xi))*(alf*z(+1)*g^(1-alf)*(k^(alf-1))+
+       (1-delt+(a1/(1-1/xi))*(g*i(+1)/k)^(1-1/xi)+a2)/
+       (a1*(g*i(+1)/k)^(-1/xi))-g*i(+1)/k);
+erp1 = r1 - rf1;
+
+end;
+\end{verbatim}
+}
+\end{slide}
+
+\subsection[]{}
+\begin{slide}{(continued)}
+{\tiny\begin{verbatim}
+steady_state_model;
+rf1    = (g/betstar);
+r1     = (g/betstar);
+erp1   = r1-rf1;
+z      = 1;
+k      = (((g/betstar)-(1-delt))/(alf*g^(1-alf)))^(1/(alf-1));
+y      = (g^(1-alf))*k^alf;
+w      = (1-alf)*y;
+i      = (1-(1/g)*(1-delt))*k;
+d      = y - w - i;
+c      = w + d;
+mu     = ((c-(chihab*c/g))^(-tau))-chihab*bet*((c*g-chihab*c)^(-tau));
+ez     = 0;
+end;
+\end{verbatim}
+}
+\end{slide}
+
+\subsection[]{}
+\begin{slide}{(continued)}
+{\tiny
+\begin{verbatim}
+steady;                      
+
+shocks;
+var ez; stderr 0.01;  
+end;
+
+stoch_simul (order=2) rf1, r1, erp1, y, z, c, d, mu, k;
+\end{verbatim}
+}
+\end{slide}
+
+\begin{frame}
+  \frametitle{3rd order approximation}
+  \begin{itemize}
+  \item same principle of derivation as 2nd order
+  \item Don't forget options periods= in order to compute empirical moments
+  \item No pruning at 3rd order
+  \end{itemize}
+\end{frame}
+\end{document}

@@ -1,0 +1,261 @@
+\documentclass{beamer} %%% FÜR VORTRAG MIT PAUSEN
+%\documentclass[handout]{beamer}  %%% FÜR HANDOUT ALS PDF
+
+\setbeamertemplate{navigation symbols}{}
+\usetheme{Madrid}
+\usecolortheme{seagull}
+\beamersetuncovermixins{\opaqueness<1>{25}}{\opaqueness<2->{15}}
+\usepackage[T1]{fontenc}
+\usepackage{ae,aecompl}
+\usepackage[ansinew]{inputenc}
+\usepackage[ngerman]{babel}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage[babel,german=quotes]{csquotes} %im deutschen übliche Anführungszeichen
+\usepackage{verbatim}
+\newcounter{saveenumi}
+\newcommand{\seti}{\setcounter{saveenumi}{\value{enumi}}}
+\newcommand{\conti}{\setcounter{enumi}{\value{saveenumi}}}
+\usepackage{verbatim}
+
+\begin{document}
+\author[Willi Mutschler]{Willi Mutschler, M.Sc.}
+\date{Summer 2014}
+\institute[Institute of Econometrics]{Institute of Econometrics and Economic
+Statistics\\University of M�nster\\willi.mutschler@wiwi.uni-muenster.de}
+\title{DSGE Methods}
+\subtitle{Estimation of DSGE models: GMM and Indirect Inference}
+
+\begin{frame}
+\titlepage
+\end{frame}
+
+\section{Overview}
+\begin{frame}\frametitle{Limited Information Estimation}\framesubtitle{}
+\begin{itemize}
+   \item Estimating the parameters of a DSGE-models one has to cope with
+       several difficulties: Expectations about future variables,
+       non-linearities, stochastic processes\dots
+   \item For such cases there exist very general econometric methods like
+       the \emph{General Method of Moments (GMM)} and the method of
+       \emph{Indirect Inference}.
+   \item \emph{Limited-information-estimators}, since there is no
+       likelihood, but only specific moments of interest that are
+       adjusted to data \emph{(Matching-Moments)}.
+\end{itemize}
+\end{frame}
+
+\section{General Method of Moments}
+
+\begin{frame}\frametitle{General Method of Moments}\framesubtitle{}
+\begin{itemize}
+   \item Developed by Hansen (1982), first to use it for DSGE-models were
+       Christiano and Eichenbaum (1992) and Burnside, Eichenbaum and
+       Rebelo (1993).
+   \item Idea: Represent DSGE-model as \emph{moment-} or
+       \emph{orthogonality-conditions}:
+\begin{align*}
+E\left[f(\underset{k \times 1}{\boldsymbol{\theta}},\underset{a \times 1}{\boldsymbol{\Upsilon_t}})\right]
+= E\begin{bmatrix} \mathfrak{f_1}(\underset{d\times1}{\mathbf{w_t}},\underset{k\times1}{\boldsymbol{\mu}})\underset{l\times1}{\mathbf{u_t}}\\
+\vdots\\
+\mathfrak{f_m}\left(\mathbf{w_t},\boldsymbol{\mu}\right)\mathbf{u_t}
+ \end{bmatrix}=\mathbf{0},
+\end{align*}
+\item $\boldsymbol{\theta}$ is the true vector of parameters, $\mathbf{w_t}$
+    a matrix of exogenous variables, $\mathbf{u_t}$ a matrix of
+    instruments and
+    $\boldsymbol{\Upsilon_t}=(\mathbf{w_t}',\mathbf{u_t}')'$.
+\item Vector-valued functions: $\mathfrak{f}: r\times 1$ and
+    $\mathfrak{f_i} :l\times 1$.
+\item Number of orthogonality-conditions is equal to $r=ml$.
+\end{itemize}
+\end{frame}
+
+
+\begin{frame}\frametitle{General Method of Moments}\framesubtitle{}
+\begin{itemize}
+   \item Orthogonality-conditions are derived from the
+       first-order-conditions, the \emph{steady-state} relations and the
+       properties of the stochastic processes.
+   \item Find the estimator $\boldsymbol{\widehat{\mu}_G}$, that solves
+       the empirical analogous of the orthogonality-conditions as
+       \enquote{close} as possible, with the weight-matrix
+       $\boldsymbol{\Omega}$ defining, what \enquote{close} means.
+       \begin{block}{GMM-estimator}
+\begin{align*}
+  \boldsymbol{\theta{\mu}_G} = \underset{\theta}{\text{argmin}} \left\{\left(\frac{1}{T} \sum_{t=0}^T f(\boldsymbol{\theta},\boldsymbol{\Upsilon})\right)'\times \boldsymbol{\Omega} \times \left(\frac{1}{T} \sum_{t=0}^T f(\boldsymbol{\theta},\boldsymbol{\Upsilon})\right) \right\}.
+\end{align*}
+\end{block}
+\end{itemize}
+\end{frame}
+
+\begin{frame}\frametitle{General Method of Moments}\framesubtitle{}
+\begin{itemize}
+   \item If $r<k$, then the model is under-identified $\Rightarrow$ find
+       additional instruments: lagged variables or use the fact that the
+       shocks are not correlated.
+   \item If $r=k$, then the model is exactly-identified: The
+       weight-matrix does not play any role, since there is a unique
+       solution to the quadratic form.
+   \item If $r>k$, then the model is over-identified $\Rightarrow$
+       several solutions that can be derived either analytically or
+       numerically. The weight-matrix picks those moment-conditions that
+       lead to a more precise estimation.
+\begin{itemize}
+   \item Hansen (1982) shows, that the optimal weight matrix is given
+       by the inverse of the variance-covariance-matrix of the
+       empirical analogous.
+   \item Given some regularity conditions one can show that
+       $\sqrt{T}(\widehat{\boldsymbol{\mu}}-\boldsymbol{\mu})$ is
+       gaussian.
+   \item In the over-identified case this enables one to formally
+       test the hypothesis, that the model is able to describe the
+       data generating process (\emph{J-Test}).
+\end{itemize}
+\end{itemize}
+\end{frame}
+
+\subsection{Example: Estimating the Euler-equation with GMM}
+\begin{frame}\frametitle{General Method of Moments}\framesubtitle{Example: Estimating the Euler-equation with GMM}
+Simple Euler-equation:
+\begin{align*}
+\beta E_t \left[c_{t+1}^{-\tau} (1+r_{t+1}-\delta)\right] &= c_t^{-\tau}\\
+\Leftrightarrow E_t\left[ \beta \left(\frac{c_{t+1}}{c_{t}}\right)^{-\tau} (1+r_{t+1}-\delta)\right] &=1\\
+\Leftrightarrow E_t\left[ \beta \left(\frac{c_{t+1}}{c_{t}}\right)^{-\tau} (1+r_{t+1}-\delta)-1\right] &= 0\\
+ \Rightarrow E_t\left\{ \left[ \beta \left(\frac{c_{t+1}}{c_{t}}\right)^{-\tau} (1+r_{t+1}-\delta)-1\right]\begin{pmatrix}1 \\\frac{c_{t}}{c_{t-1}}\\r_t \end{pmatrix} \right\}&= \mathbf{0}\\
+\end{align*}
+with $\boldsymbol{\theta} = (\beta,\delta,\tau)'$ parameters to be estimated, exogenous variables (data) $\mathbf{w_t}=\left(\frac{c_{t+1}}{c_{t}}, r_{t+1}\right)'$ and instruments e.g. $\mathbf{u_t}=(1,\frac{c_{t}}{c_{t-1}},r_t)'$.
+\end{frame}
+
+\begin{frame}\frametitle{Indirect Inference}\framesubtitle{}
+\begin{itemize}
+   \item Introduced to econometrics by Gourieroux, Monfort and Renault
+       (1993) and Smith (1993) for nonlinear time-series models.
+   \item Indirect: estimation is based on the simulation of data.
+   \item Important requirement: One has to be able to simulate data with
+       the model for different values of the parameters.
+   \item These simulated datasets are estimated by an auxiliary model and
+       compared to an estimation of the true data.
+   \item Idea of \emph{Indirect Inference}: Estimate the true dataset
+       with the auxiliary model. Simulate data using your DSGE-model for
+       different values of the parameters. Estimate these simulated
+       datasets with the auxiliary model and compare the estimators to
+       the ones obtained with the true dataset until you find estimators
+       that are \emph{almost} the same. Choose the parameters that
+       generated that dataset.
+\end{itemize}
+\end{frame}
+
+\begin{frame}\frametitle{Indirect Inference}\framesubtitle{}
+\begin{itemize}
+      \item In practice one often uses VAR-models.
+       \item Great empirical forecast-performance
+           (\enquote{\emph{work-horse}}).
+   \item The solution of a DSGE-model in its state-space form corresponds
+       closely to a VAR-model.
+   \item Generally two possible methods of estimation:
+       \begin{enumerate}
+       \item Parameters of the VAR-model: Ruge-Marcia (2007).
+       \item Impulse-Response-Matching: Christiano, Eichenbaum and
+           Evans (2005).
+       \end{enumerate}
+   \item Very similar: Impulse-responses are functions of the parameters.
+   \item The second method enables one to incorporate the dynamic
+       properties of the VAR-model into the DSGE-model.
+   \item However, identification issues: different combinations of
+       parameters can generate the same impulse-responses.
+\end{itemize}
+\end{frame}
+
+\subsection{Impulse-Response-Matching}
+\begin{frame}\frametitle{Indirect Inference}\framesubtitle{Impulse-Response-Matching}
+\begin{itemize}
+   \item
+\begin{block}{Indirect Inference Estimator}
+\begin{align*}
+  \boldsymbol{\widehat{\theta}_{I}} = \underset{\theta}{\text{argmin}} \left\{ (\boldsymbol{\Xi}-\boldsymbol{\Xi}(\boldsymbol{\theta}))'\times \boldsymbol{\Omega}\times (\boldsymbol{\Xi}-\boldsymbol{\Xi}(\boldsymbol{\theta}))\right\}.
+\end{align*}
+\end{block}
+$\boldsymbol{\Xi}$: impulse-responses of the estimated VAR using the true
+dataset, $\boldsymbol{\Xi}(\boldsymbol{\theta})$ the analogous with the
+simulated datasets, $\boldsymbol{\Omega}$ a weight-matrix.
+\item Smith (1993) shows, that using the inverse of the
+    variance-covariance-matrix of $\boldsymbol{\Xi}$ for the weighting matrix,
+    $\sqrt{T}(\boldsymbol{\widehat{\theta}}-\boldsymbol{\theta})$ is gaussian.
+\item \emph{Method-of-Moments} interpretation, since the
+    impulse-responses are functions of the covariances and
+    autocovariances of the variables of the VAR-model.
+\item \emph{Indirect Inference} interpretation, since the auxiliary model
+    is a misspecified version of the true state-space representation.
+\end{itemize}
+\end{frame}
+
+
+\section{Discussion}
+
+\begin{frame}\frametitle{Limited Information Estimation}\framesubtitle{Discussion}
+\begin{itemize}
+   \item Methods are useful if the derivation of a specific criteria,
+       like the likelihood, is analytically not possible or the
+       evaluation too difficult.
+   \item You only need a few assumptions about the first and second
+       moments of the shocks (no distribution).
+   \item Great advantage compared to calibration: Standard errors
+       $\Rightarrow$ statistical inference is possible!
+   \item Limiting to only relevant characteristics (distance function
+       between theoretical and empirical moment) leads to robust
+       estimators.
+   \item J-Test of overidentification is a formal statistical test of the
+       validity of your model.
+   \item Rejection of the null, however, gives no hint on what is wrong
+       with the model.
+\end{itemize}
+\end{frame}
+
+
+\begin{frame}\frametitle{Limited Information Estimation}\framesubtitle{Discussion}
+\begin{itemize}
+\item GMM is robust towards misspecification, especially if you restrict
+    to only a few conditions.
+\item There is no need for an explicit solution or approximation of the
+    DSGE-model.
+\item GMM-estimators are reliable, however less efficient than the
+    estimators you obtain using methods of full information.
+\item Often one losses efficiency and there are identification issues, if
+    one tries to exploit interdependencies between the blocks.
+\item Choosing the right moment-conditions, instruments and algorithms
+    for calculating the weight-matrix and numerical optimization are a
+    very complex branch of research.
+\end{itemize}
+\end{frame}
+
+\begin{frame}\frametitle{Limited Information Estimation}\framesubtitle{Discussion}
+\begin{itemize}
+\item \emph{Small-Sample-Bias}: Favorable properties of \emph{GMM} are
+    only valid asymptotically.
+\item Monte-Carlo-experiments show that for DSGE-models you need at least
+    $T=300$ observations for the asymptotics to kick in.
+\item For quarterly data that means about 75 years of data!
+\item The relevant data for DSGE-models includes only the last 30-40
+    years.
+\item Further issue: How to find good and \textbf{time-homogenous} data
+    for output-gap, technology, \dots?
+\end{itemize}
+\end{frame}
+
+\begin{frame}\frametitle{Limited Information Estimation}\framesubtitle{Discussion}
+\begin{itemize}
+   \item Pros and cons of \emph{GMM} are also true for
+       \emph{impulse-response-matching}.
+   \item Main advantage of this form of \emph{Indirect Inference}:
+       Limitation to only a few time-series.
+   \item Further advantages: Auxiliary model needs not to be specified
+       correctly.
+   \item Opposed to GMM the DSGE-model needs to be solved explicitly,
+       since otherwise one is not able to simulate data and
+       impulse-responses from the model.
+\end{itemize}
+\end{frame}
+
+
+\end{document}

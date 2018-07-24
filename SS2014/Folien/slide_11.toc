@@ -1,0 +1,12 @@
+\beamer@endinputifotherversion {3.33pt}
+\select@language {ngerman}
+\beamer@sectionintoc {1}{Identification}{2}{0}{1}
+\beamer@subsectionintoc {1}{1}{Basic Idea}{4}{0}{1}
+\beamer@subsectionintoc {1}{2}{Iskrev's approach}{7}{0}{1}
+\beamer@subsectionintoc {1}{3}{Komunjer and Ng's approach}{11}{0}{1}
+\beamer@subsectionintoc {1}{4}{Qu and Tkachenko's approach}{20}{0}{1}
+\beamer@sectionintoc {2}{Exercise: Identification of An and Schorfheide (2007)}{24}{0}{2}
+\beamer@sectionintoc {3}{Bayesian identification criteria}{26}{0}{3}
+\beamer@subsectionintoc {3}{1}{Koop, Pesaran, and Smith (2013)'s approach}{27}{0}{3}
+\beamer@sectionintoc {4}{Comparison}{29}{0}{4}
+\beamer@subsectionintoc {4}{1}{Identification criteria}{30}{0}{4}

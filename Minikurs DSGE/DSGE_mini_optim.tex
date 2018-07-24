@@ -1,0 +1,196 @@
+\documentclass[smaller,compress]{beamer}  %%% F\"{U}R HANDOUT ALS PDF
+%\setbeameroption{show notes}
+%\setbeamertemplate{note page}[plain]
+\beamertemplatenavigationsymbolsempty
+\useoutertheme{smoothbars}
+\usecolortheme{dolphin}
+\usefonttheme{structuresmallcapsserif}
+
+\beamersetuncovermixins{\opaqueness<1>{0}}{\opaqueness<2->{15}}
+\setbeamertemplate{footline}[text line]{%
+  \parbox{\linewidth}{\vspace*{-8pt}~\insertshortauthor\hfill\inserttitle\hfill\insertframenumber / \inserttotalframenumber}}
+
+\usepackage[english]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage{amssymb,amsmath}
+
+\begin{document}
+\author[Willi Mutschler]{Willi Mutschler}
+\date{December 10, 2015}
+\subject{Dynamic Optimization}
+\title{DSGE Models: Dynamic Optimization and Solution Methods}
+\subtitle{}
+
+\begin{frame}
+\titlepage
+\end{frame}
+
+\begin{frame}
+  \begin{itemize}
+    \item A DSGE model consists of optimality equations, dynamic choice is use of ressources in different time periods
+    \item There are 2 approaches to get these optimality conditions
+    \begin{enumerate}
+      \item Dynamic programming: Bellman equation and principle of optimality
+      \item Lagrange method: Pontryagin's maximum principle and Lagrange multiplies
+    \end{enumerate}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \begin{itemize}
+    \item Maximiere Zielfunktion über drei Perioden $(t=0,1,2)$
+    \begin{align}
+      \underset{\{c_t\}_{t=0}^3}{max}\left\{\sum_{t=0}^2 \beta^t u(x_t,y_t) \right\}
+    \end{align}
+    unter der Nebenbedingung
+    \begin{align}
+      x_{t+1} = f(x_t,y_t) + \varepsilon_{t+1}
+    \end{align}
+    mit $\beta$ Diskontfaktor, $u(x_t,y_t)$ Nutzen für Periode t, der abhängen kann vom $n_x\times 1$ Vektor $x_t$ von Zustandsvariablen und $n_y$ Vektor $y_t$ von Kontrollvariablen; f ist eine $n_x$ vektorwertige Funktion und $\varepsilon_t$ ein vektor mit zufälligen Schocks.
+    \item Zunächst: Behandle $\varepsilon_{t+1}$ bekannt zum zeitpunkt $t$ und konstant (deterministischer Optimierungsproblem)
+    \item Assume: u and f differenzierbar und konkav, wir betrachten nur innere Lösungen
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  Mit Lagrange multiplikatoren
+  \begin{itemize}
+    \item Definiere $n_x \times 1$ Vektoren $\lambda_1$ und $\lambda_2$ von Lagrange Multiplikatoren und forme den Lagrengean
+    \begin{multline}
+      \mathcal{L} = u(x_0,y_0) + \beta u(x_1,y_1) + \beta^2 u(x_2,y_2) \\
+      - \beta \lambda_1'\left[x_1 - f(x_0,y_0)-\varepsilon_1\right] - \beta^2 \lambda_2'\left[x_2 - f(x_1,y_1)-\varepsilon_2\right]
+    \end{multline}
+    wobei $x_0$ als gegeben und Unbekannte: $y_0,y_1,y_2,x_1,x_2$.
+    \item Differenziere $\mathcal{L}$ mit Respekt zu jedem $y_t$ und jedem $x_t$ ergibt:
+    \begin{align}
+      \beta^{-2}\frac{\partial \mathcal{L}}{\partial y_2} &= \frac{\partial}{\partial y_2} u(x_2,y_2) = 0\label{eq:L1}\\
+      \beta^{-1}\frac{\partial \mathcal{L}}{\partial y_1} &= \frac{\partial}{\partial y_1} u(x_1,y_1) + \beta \frac{\partial}{\partial y_1} f'(x_1,y_1)\lambda_2 = 0\label{eq:L2}\\
+      \frac{\partial \mathcal{L}}{\partial y_0} &= \frac{\partial}{\partial y_0} u(x_0,y_0) + \beta \frac{\partial}{\partial y_0} f'(x_0,y_0)\lambda_1 = 0\label{eq:L3}\\
+      \beta^{-2}\frac{\partial \mathcal{L}}{\partial x_2} &= \frac{\partial}{\partial x_2} u(x_2,y_2) - \lambda_2 = 0\label{eq:L4}\\
+      \beta^{-1}\frac{\partial \mathcal{L}}{\partial x_1} &= -\lambda_1 + \frac{\partial}{\partial x_1} u(x_1,y_1) + \beta \frac{\partial}{\partial x_1} f'(x_1,y_1)\lambda_2 = 0\label{eq:L5}
+    \end{align}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \begin{itemize}
+    \item Mit backward induction können diese Gleichungen rückwärts in der Zeit gelöst werden.
+    \item Die Lösung zu Gleichung \eqref{eq:L1} gibt eine optimal feedback control function $y_2 = g_2(x_2)$ (gegeben wir haben eine innere Lösung)
+    \item Gleichung \eqref{eq:L3} mit $y_2 = g_2(x_2)$ gibt $\lambda_2(x_2) = \frac{\partial u(x_2 g_2(x_2))}{\partial x_2}$
+    \item Mithilfe von $y_2$ und $\lambda_2$ können wir Gleichung \eqref{eq:L2} für $y_1(x_1)$ lösen und Gleichung \eqref{eq:L5} für $\lambda_1(x_1)$.
+    \item $y_0(x_0)$ lässt sich durch \eqref{eq:L3} berechnen
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  Dynamische Programmierung
+  \begin{itemize}
+    \item Zunächst löse das Problem der letzten Periode 2: Maximiere $u(x_2,y_2)$ nach $y_2$, d.h. optimal feedback control function
+    $y_2=g_2(x_2)$.
+    \item Substiutiere $y_2=g_2(x_2)$ in Nutzenfunktion der Periode 2, dann erhalten wir die Value function
+    \begin{align}
+      V_2(x_2) = u(x_2,g(x_2))
+    \end{align}
+    \item Löse Problem für Perioden 2 und 1, d.h. gesucht wird die Value function $V_1(x_1)$ derart:
+    \begin{align}
+      V_1(x_1) = \overset{y_1}{max}\left\{u(x_1,y_1)+\beta V_2(x_2)\right\}
+    \end{align}
+    einzige Kontrollvariable ist nur noch $y_1$ da $y_2$ bereits optimal
+    \item Zu Beginn der Periode 1 wird der Ausdruck in geschweiften Klammern maximiert um eine optimale contrl function $y_1 = g_1(x_1)$ zu erhalten.
+    \item Annahme: Differenzierbares $u$ und $V_2$ und innere Lösung
+    \begin{align}
+      \frac{\partial\{\}}{\partial y_1} = \frac{\partial}{\partial y_1} u(x_1,y_1) + \beta \frac{\partial}{\partial y_1} f'(x_1,y_1)\frac{\partial}{\partial x_2}V_2(x_2) = 0 \label{eq:B1}
+    \end{align}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}\small
+  \begin{itemize}
+    \item Lösen nach $y_1$ gibt optimales $y_1=g_1(x_1)$, einsetzen ergibt Value function der Periode 1
+    \begin{align}
+      V_1(x_1) = u(x_1,g_1(x_1))+\beta V_2\left(f(x_1,g_1(x_1))+\varepsilon_2\right) \label{eq:B2}
+    \end{align}
+    \item Wir haben somit ein Problem thas zhwei Vektorvariablen $y_1$ und $y_2$ reduziert auf zwei Probleme mit je einer Variablen
+    \item Anstatt $y_1$ und $y_2$ gleichzweitig zu finden, finde erst $y_2$ und danach $y_1$
+    \item Nun können wir auch das drei Perioden Problem lösen, wir suchen also
+    \begin{align}
+      V_0(x_0) = \overset{y_0}{max}\left\{u(x_0,y_0)+\beta V_1(x_1)\right\}
+    \end{align}
+    \item Im Allgemeinen: betrachte $x_t$ als gegeben und bereits gefundene optimale $y_{t+1}, y_{t+2},\dots$ und zugehöriger Value functions $V_{t+1}(x_{t+1})$, löse
+    \begin{align}
+      V_t(x_t) = \overset{y_t}{max}\left\{u(x_t,y_t)+\beta V_{t+1}(x_{t+1})\right\}
+    \end{align}
+    Dies ist die Bellman Gleichung
+    \item Prinzip der Optimalität: Benutze diese Gleichung und beginne in der letzten Periode, gibt die optimale Lösung for alle Perioden.
+    \item Intuitiv: egal welche Anfangsbedingung wir unterstellen in jeder periode ist, die Lösung $y_t=g_t(x_t)$ ist immer optimal, da lle vorherigen Kontrollvariablen optima lsind
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \begin{itemize}
+    \item Gegeben $V_2(x_2)$ dynamische Progrmmierung empfiehlt Gleichungen \eqref{eq:B1} und \eqref{eq:B2} für $y_1=g_1(x_1)$ und $V_1(x_1)$ zu lösen
+    \item Gegeben $\lambda_2(x_2)$ methode Lagrange Multiplikatoren empfiehlt Gleichungen \eqref{eq:L2} und \eqref{eq:L5} für $g_1(x_1)$ und $\lambda_1(x_1)$ zu lösen.
+    \item Da \eqref{eq:B1} identisch mit \eqref{eq:L2}, liegt Unterschied zwischen \eqref{eq:B2} und \eqref{eq:L5}
+    \item \eqref{eq:L5} kann über differenzierung von \eqref{eq:B2} erlangt werden w.r.t. $x_1$
+    \item Value function Berechnungen sind aber oft umständlicher
+    \item Außerdem: nachdem man optimierungsproblem mit Lagrange gelöst hat, kann man die Value functions erhalten, indem man die optimal control functionkne ins dynamische Modell substitutirt oder integrieren der Lagrange Funktion (im skalaren Fall: Wenn Value function quadratisch, dann ist die Ableitung (und somit der Lagrangean) linear)
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  Ein Standard Dynamische Optimierungs Probelm
+  \begin{align}
+    \underset{\{y_t\}_{t=0}^\infty}{max} E_0 \left[\sum_{t=0}^\infty\beta^t u(x_t,y_t)\right]
+  \end{align}
+  subject to
+  \begin{align}
+    x_{t+1} = f(x_t,y_t) + \varepsilon_{t+1}
+  \end{align}
+  $E_0$ ist Erwartungsoperator gegeben Information zum Zeitpunkt 0 und $\varepsilon_{t+1} \sim iid(0,\Sigma)$. Lösung mithilfe $n_x$ Vektor Lagrange multiplikatoren $\lambda_t$ und Langrangean
+  \begin{align}
+    \mathcal{L} = E_0 \left[\sum_{t=0}^\infty \left\{ \beta^t u(x_t,y_t) - \beta^{t+1} \lambda_{t+1}'\left[x_{t+1}-f(x_t,y_t)-\varepsilon_{t+1}\right]\right\}\right] \label{eq:Lagr}
+  \end{align}
+  Ableiten mit Respekt zu $y_t (t=0,1,\dots)$ und $x_t (t=1,2,\dots)$. BEO:
+  \begin{align}
+    \frac{\partial}{\partial y_t} u(x_t,y_t) + \beta \frac{\partial}{\partial y_t} f'(x_t,y_t)E_t \lambda_{t+1} = 0\\
+    \lambda_t = \frac{\partial}{\partial x_t} u(x_t,y_t) + \beta \frac{\partial}{\partial x_t} f'(x_t,y_t) E_t \lambda_{t+1}
+  \end{align}
+\end{frame}
+
+\begin{frame}
+  \begin{itemize}
+    \item Man beachte $E_t$ anstelle $E_0$
+    \item Wir wählen nicht $u_0,u_1,\dots$ gleichzeitig, sondern sequentiell gegeben der information $x_t$ zum Zeitpunkt $t$ in einer closed-loop policy. Da $x_t$ im Informationsset liegt, wenn $u_t$ bestimmt wird, ist der bedingte Erwartungswert auf Periode t zu betrachten und nicht in Periode 0.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  hinreichende Bedingungen
+  \begin{itemize}
+    \item Wann bekommt die Lagrange Funkion \eqref{eq:Lagr} ein Maximum an
+    \item Zunächst: betrachte nicht-stochastische Variante, also ohne Erwartungswert, definiere
+    \begin{align*}
+      \mathcal{L}_t(x_t,y_t,x_{t+1}) \equiv \beta^t u(x_t,y_t) - \beta^{t+1} \lambda_{t+1}'\left[x_{t+1}-f(x_t,y_t)\right]
+    \end{align*}
+    so dass, das Optimierungsproblem nun folgende Gestalt hat
+    \begin{align*}
+      \underset{\{y_t,x_{t+1}\}_{t=0}^\infty}{max} \mathcal{L} = \sum_{t=0}\infty \mathcal{L}_t(x_t,y_t,x_{t+1})
+    \end{align*}
+    \item BEO ergeben sich durch Maximierung von $\mathcal{L}_t + \beta \mathcal{L}_{t+1}$ w.r.t $y_t$ und $x_{t+1}$ (gegeben $x_t,y_{t+1},x_{t+2}$), also
+    \begin{align*}
+      \underset{y_t,x_{t+1}}{max} \beta^{-t}\left(\mathcal{L}_t+\beta \mathcal{L}_{t+1}\right) = u(x_t,y_t) - \beta \lambda_{t+1}'\left[x_{t+1}-f(x_t,y_t)\right] + \beta u(x_{t+1},y_{t+1})  - \beta^2 \lambda_{t+2}'\left[x_{t+2}-f(x_{t+1},y_{t+1})\right]
+    \end{align*}
+    \item Differenzieren ergibt
+    \begin{align}
+    \frac{\partial}{\partial y_t} u(x_t,y_t) + \beta \frac{\partial}{\partial y_t} f'(x_t,y_t) \lambda_{t+1} = 0\\
+    -\beta \lambda_{t+1} + \beta \frac{\partial}{\partial x_{t+1}} u(x_{t+1},y_{t+1}) + \beta^2 \frac{\partial}{\partial x_{t+1}} f'(x_{t+1},y_{t+1})  \lambda_{t+2} = 0
+  \end{align}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+\begin{itemize}
+  \item Sei 
+\end{itemize}
+\end{frame}
+\end{document} 
